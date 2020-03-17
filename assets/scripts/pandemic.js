@@ -115,7 +115,7 @@ $(document).ready(function(){
         div: '#map',
         lat: 56.946618,
         lng: 24.097274,
-        zoom: 8,
+        zoom: 9,
         styles: [
             {
                 "featureType": "all",
