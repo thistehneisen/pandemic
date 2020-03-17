@@ -437,7 +437,7 @@ body {
   border: 2px solid #edeef0;
 }
 .input-hover-focus {
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -631,7 +631,7 @@ ol {
 .bodytext p b,
 .bodytext ul b,
 .bodytext ol b {
-  color: #3c3c3c;
+  color: #fff;
 }
 .bodytext a {
   color: #972727;
@@ -645,7 +645,7 @@ ol {
 .table-ct table {
   width: 100%;
   text-align: left;
-  color: #3c3c3c;
+  color: #fff;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
@@ -814,7 +814,7 @@ header.header .container nav a {
   padding-bottom: 0.5em;
   line-height: 3.3rem;
   height: 3.3rem;
-  color: #3c3c3c;
+  color: #fff;
   margin-top: -3px;
   letter-spacing: 0.1em;
   background: rgba(255, 192, 0, 0);
@@ -841,7 +841,7 @@ header.header .container nav a svg {
 }
 header.header .container nav a svg * {
   transition: all 0.3s ease;
-  fill: #3c3c3c;
+  fill: #fff;
 }
 header.header .container nav a:hover {
   text-decoration: none;
@@ -1030,7 +1030,7 @@ header.header .container nav .social:active svg {
   font-size: 2.4rem;
   margin: 0;
   line-height: 1.25em;
-  color: #3c3c3c;
+  color: #fff;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
@@ -1116,7 +1116,7 @@ header.header .container nav .social:active svg {
 }
 .page .content .pagination .next a svg g,
 .page .content .pagination .prev a svg g {
-  stroke: #3c3c3c;
+  stroke: #fff;
   transition: all 0.1s ease;
 }
 .page .content img {
@@ -1217,14 +1217,14 @@ header.header .container nav .social:active svg {
   padding-left: 2em;
   padding-right: 2em;
   font-size: 1.5em;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.2em;
   line-height: 1em;
 }
 .page .content a {
   text-decoration: none;
   border-bottom: 0.2em solid rgba(255, 210, 0, 0.6);
-  color: #3c3c3c;
+  color: #fff;
   transition: all 0.1s ease;
   padding-bottom: 0.05em;
   -webkit-transition: all 0.1s ease;
@@ -1288,7 +1288,7 @@ a.btn {
   position: relative;
   color: #edeef0;
   transition: all 0.1s ease;
-  background: #3c3c3c;
+  background: #fff;
   border: none !important;
   height: 4.2rem;
   margin-top: 3.5rem;
@@ -1451,7 +1451,7 @@ button[type="submit"]:active {
   background: #29cc5a;
 }
 .button.filled.disabled {
-  background: #3c3c3c;
+  background: #fff;
   pointer-events: none;
   color: #727273;
 }
@@ -1779,7 +1779,7 @@ input.input-error {
   background: #FFF;
   letter-spacing: 0.04em;
   border: 2px solid #edeef0;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -1885,7 +1885,7 @@ input.input-error {
   height: auto;
   display: block;
   border: 2px solid #edeef0;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -1946,7 +1946,7 @@ input.input-error {
   position: relative;
   letter-spacing: 0.04em;
   background: #FFF;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -2217,7 +2217,7 @@ input.input-error {
   border: 2px solid #edeef0;
   padding: 0;
   transition: all 0.2s ease;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0;
@@ -2773,7 +2773,7 @@ input.tag-input {
   outline: 0;
   padding: 0.3em 0 0.3em 0.75em;
   margin: 3px 6px 4px 0;
-  color: #3c3c3c;
+  color: #fff;
   line-height: 1.5em;
 }
 .tag {
@@ -3107,7 +3107,7 @@ input.tag-input {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.1rem;
-  background: #3c3c3c;
+  background: #fff;
   border-radius: 0.2rem;
   top: 4.2rem;
   text-align: center;
@@ -3127,7 +3127,7 @@ input.tag-input {
   margin-left: -0.5rem;
   overflow: hidden;
   border: 0.5rem solid transparent;
-  border-bottom-color: #3c3c3c;
+  border-bottom-color: #fff;
   cursor: pointer;
 }
 .irs-grid-pol {
@@ -3155,7 +3155,7 @@ input.tag-input {
   float: left;
   font-weight: 500;
   line-height: 2.5rem;
-  color: #3c3c3c;
+  color: #fff;
   padding-top: 0.2rem;
   margin-right: 1rem;
   font-size: 1.5rem;
@@ -3169,7 +3169,7 @@ input.tag-input {
   margin-left: 1.5rem;
   color: #FFF;
   background: #edeef0;
-  color: #3c3c3c;
+  color: #fff;
   border-radius: 0.3rem;
   font-size: 1.2rem;
   padding-top: 0.2rem;
@@ -3181,7 +3181,7 @@ input.tag-input {
   background: #a62f2e;
 }
 .list-filter a.active {
-  background: #3c3c3c;
+  background: #fff;
   color: #FFF;
 }
 .tabs {
@@ -3263,7 +3263,7 @@ input.tag-input {
 .table-list table thead tr:hover td,
 .table-list table tbody tr:hover th,
 .table-list table thead tr:hover th {
-  color: #3c3c3c;
+  color: #fff;
 }
 .table-list table tbody tr td,
 .table-list table thead tr td,
@@ -3576,7 +3576,7 @@ td.preview .preview_btn span {
   cursor: default;
   padding-right: 0;
   font-weight: 500;
-  color: #3c3c3c;
+  color: #fff;
 }
 .table-list-filter a.sort {
   padding-right: 3rem !important;
@@ -4076,7 +4076,7 @@ td.preview .preview_btn span {
 }
 .login-options .lg-1-4 a .ico svg *,
 .login-options .lg-1-3 a .ico svg * {
-  fill: #3c3c3c;
+  fill: #fff;
   transition: all 0.3s ease;
 }
 .alert {
@@ -4174,7 +4174,7 @@ td.preview .preview_btn span {
   padding-bottom: 0.75em !important;
   padding-top: 0.75em !important;
   transition: all 0.2s ease;
-  color: #3c3c3c;
+  color: #fff;
   padding-left: 4.5rem;
 }
 .collapse-list a.collapse-toggle:hover {
@@ -4367,7 +4367,7 @@ td.preview .preview_btn span {
   position: absolute;
   left: 0.5rem;
   top: 0rem;
-  border: solid 2px #3c3c3c;
+  border: solid 2px #fff;
   border-radius: 2.5rem;
   transform: rotate(0deg);
   transition: transform 0.55s ease, left 0.3s ease;
@@ -4386,7 +4386,7 @@ td.preview .preview_btn span {
   width: 1rem;
   height: 2px;
   display: block;
-  background: #3c3c3c;
+  background: #fff;
   border-radius: 3rem;
   z-index: 0;
   transition: transform 0.5s ease;
@@ -4399,7 +4399,7 @@ td.preview .preview_btn span {
   position: relative;
 }
 .treeview li.items-expanded:hover > span {
-  color: #3c3c3c;
+  color: #fff;
 }
 .treeview li.items-expanded:before {
   transform: scaleY(1);
@@ -4532,7 +4532,7 @@ td.preview .preview_btn span {
 }
 .treeview.users .user-profile .desc .name {
   font-weight: 500;
-  color: #3c3c3c;
+  color: #fff;
   line-height: 2rem;
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -4561,7 +4561,7 @@ td.preview .preview_btn span {
 .treeview.users .user-profile .desc .ico .tip {
   visibility: hidden;
   opacity: 0;
-  background: #3c3c3c;
+  background: #fff;
   color: #FFF;
   font-size: 1.2rem;
   font-weight: 400;
@@ -4586,7 +4586,7 @@ td.preview .preview_btn span {
   width: 0;
   height: 0;
   border-right: 10px solid transparent;
-  border-top: 10px solid #3c3c3c;
+  border-top: 10px solid #fff;
 }
 .treeview.users .user-profile .desc .ico svg {
   display: block;
@@ -5118,7 +5118,7 @@ footer .copyr p {
   font-weight: 900;
   line-height: 1.5em;
   margin: 0;
-  color: #3c3c3c;
+  color: #fff;
 }
 .user-profile p {
   font-size: 1.2rem;
@@ -5223,7 +5223,7 @@ p.sum th,
 p.sum p,
 .sum p {
   font-weight: 500;
-  color: #3c3c3c;
+  color: #fff;
   font-size: 1.6rem;
   line-height: 1.5em !important;
   margin-bottom: 0;
@@ -5339,12 +5339,12 @@ p.sum b span,
   background: transparent;
 }
 .dashboard-item-table table thead {
-  border-bottom: solid 3px #3c3c3c;
+  border-bottom: solid 3px #fff;
 }
 .dashboard-item-table table thead th {
   width: 25%;
   vertical-align: bottom;
-  color: #3c3c3c;
+  color: #fff;
   font-weight: 900;
   letter-spacing: 0.06em;
   font-size: 1rem;
@@ -5404,7 +5404,7 @@ p.sum b span,
 .dashboard-item-table table h3 {
   font-size: 2rem;
   font-weight: 900;
-  color: #3c3c3c;
+  color: #fff;
   text-align: left;
   margin: 0;
   letter-spacing: 0.04rem;
@@ -5434,12 +5434,12 @@ p.sum b span,
   opacity: 1;
 }
 #messages .list .unread .collapse-toggle .name {
-  color: #3c3c3c;
+  color: #fff;
   font-weight: 500;
 }
 #messages .list .unread .collapse-toggle .subject {
   font-weight: 500;
-  color: #3c3c3c;
+  color: #fff;
 }
 #messages .list .collapse-toggle {
   padding-right: 1.5rem;
@@ -5590,7 +5590,7 @@ p.sum b span,
   line-height: 1.5em;
   font-weight: 900;
   font-size: 3rem;
-  color: #3c3c3c;
+  color: #fff;
 }
 .info-block .content p {
   font-weight: 500;
@@ -5689,10 +5689,10 @@ p.sum b span,
 #isotope-container .item .txt_ad_ct .txt_ad_headline {
   font-size: 2.7em;
   font-weight: 900;
-  border-bottom: solid 0.2em #3c3c3c;
+  border-bottom: solid 0.2em #fff;
   padding-left: 0.5em;
   padding-right: 0.5em;
-  color: #3c3c3c;
+  color: #fff;
   display: inline-block;
   line-height: 1.25em;
   margin-bottom: 0.25em;
