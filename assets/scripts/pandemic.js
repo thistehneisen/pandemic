@@ -426,6 +426,24 @@ $(document).ready(function(){
         allMarkers = map.addMarkers(markers_data);
     }, 'json');
 
+    $.get('json_data.php', function (results) {
+        const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
+        console.log(randomDisplacement());
+        const markers = results.map(item => ({
+            id: item.id,
+            lat: item.selfCooLat * 1 + randomDisplacement(),
+            lng: item.selfCooLng * 1 + randomDisplacement(),
+            title: item.origin,
+            icon: markerIcon,
+            description: item.descriptionTitle,
+            price: undefined,
+            gallery: undefined,
+            subtitle: item.label,
+            url: fullAddress + '?id=' + item.id
+        }));
+        allMarkers = map.addMarkers(markers);
+    }, 'json');
+
     map.on('marker_added', function (marker) {
         /*
         Marker created for location setting purposes
