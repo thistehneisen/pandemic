@@ -17,8 +17,8 @@ $settings = array(
     ),
     'facebook' => array(
         'app' => array(
-            'id' => '620722948120913',
-            'secret' => 'af7bd39f4ae68d35c3aba8d9258affa2'
+            'id' => '1978506749088526',
+            'secret' => '2f77eaedb349d0e9010b193e5325b0f3'
         )
     ),
     'categories' => array(
