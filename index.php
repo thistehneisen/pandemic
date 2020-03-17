@@ -262,5 +262,5 @@ Write us on info@pandemic.lv and become one of our team.
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
-<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/kengurs_new.js"></script>
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
 </html>
