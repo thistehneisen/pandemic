@@ -29,14 +29,14 @@ Write us on info@pandemic.lv and become one of our team.
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic.lv — Quality information from neighbors.">
 	<meta property="og:description" content="Find information about the pandemic situation, around you, from the people — besides you.">
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/facebook.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
 	if (!empty($image)) {
 ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($classified['id'])?>">
 <?php } else { ?>
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/facebook.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } ?>
 	<meta property="og:title" content="<?php print(htmlspecialchars($classified['title']))?>">
 	<meta property="og:description" content="<?php print(htmlspecialchars($classified['description']))?>">
