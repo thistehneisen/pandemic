@@ -16,5 +16,6 @@ if (!isset($_GET['action']) && empty($_GET['action'])) {
     $contents = file_get_contents('https://pomber.github.io/covid19/timeseries.json');
     $contents = json_decode($contents, true);
     $contents = $contents['Latvia'];
-    var_dump(end($contents));
+    $latest = end($contents);
+    echo json_encode($latest);
 }
