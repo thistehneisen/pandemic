@@ -17,5 +17,5 @@ if (!isset($_GET['action']) && empty($_GET['action'])) {
     $contents = json_decode($contents, true);
     $contents = $contents['Latvia'];
     $latest = end($contents);
-    echo json_encode($latest);
+    echo json_encode($contents);
 }
