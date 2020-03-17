@@ -510,7 +510,7 @@ $(document).ready(function(){
                     top: '-33px'
                 },
                 content: '<div><strong>'+strip(marker.title)+'</strong></div>' +
-                '<div>'+strip(marker.description)+'</div>',
+                '<div>'+strip(marker.subtitle)+'</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
