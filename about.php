@@ -7,6 +7,6 @@ $contents = $contents['Latvia'];
 ?>
 <p><strong>Statistics:</strong><br/>
 <ol>
-<?php foreach ($contents as $entry) { print('<li>Date: ' . $entry['date'] . '<br/>Confirmed: ' . $entry['confirmed'] . '<br/>Deaths: ' . $entry['deaths'] . '<br/>Recovered: ' . $entry['recovered'] . '</li>'); } ?>
+<?php foreach ($contents as $entry) { print('<li><strong>' . $entry['date'] . '</strong>, ' . $entry['confirmed'] . ' confirmed with ' . $entry['deaths'] . ' deaths and ' . $entry['recovered'] . ' recoveries</li>'); } ?>
 </ol>
 </p>
