@@ -130,7 +130,7 @@ Write us on info@pandemic.lv and become one of our team.
 			<div class="modal-container">
 				<div class="modal-wrapper">
 					<div class="modal-header">
-						<span>Add classified</span>
+						<span>Add an area</span>
 						<a href="#" class="modal_close close-modal">×</a>
 					</div>
 					<div class="modal-content bodytext">
@@ -164,12 +164,12 @@ Write us on info@pandemic.lv and become one of our team.
 
 							<div class="input-row">
 
-							<div class="input-col lg-3-12">
+								<?php /*<div class="input-col lg-3-12">
 									<div class="text">
 										<label for="price">Price</label>
 										<input type="number" id="price" name="price" min="0" step="1.00" placeholder="Price" value="0.00" required="">
 									</div>
-								</div>
+								</div>*/ ?>
 
 								<div class="input-col lg-4-12">
 									<div class="text">
