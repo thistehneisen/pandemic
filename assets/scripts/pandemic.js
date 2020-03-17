@@ -481,7 +481,7 @@ $(document).ready(function(){
                     top: '-33px'
                 },
                 content: '<div><strong>'+strip(marker.title)+'</strong></div>' +
-                '<div>'+marker.price+'</div>',
+                '<div>2 minutes ago</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
