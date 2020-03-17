@@ -676,7 +676,7 @@ function makeLocation(claddid) {
             $('#save-location').data('lat', lat);
             $('#save-location').data('lng', lng);
         },
-        title: 'Click & drag, to confirm the location of classified!'
+        title: 'Click & drag, to confirm the location of your area!'
     });
 
     classifiedmarker.setZIndex(999999);
