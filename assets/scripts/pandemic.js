@@ -397,6 +397,16 @@ $(document).ready(function(){
         anchor: new google.maps.Point(12, 24)
     };
 
+    var quarantineIcon = {
+        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+        fillColor: '#222',
+        fillOpacity: 0.95,
+        scale: 1.5,
+        strokeColor: '#972727',
+        strokeWeight: 2,
+        anchor: new google.maps.Point(12, 24)
+    };
+
     $.post('library/ajax.php', {
         action: 'retrieve',
         category: category
@@ -434,7 +444,7 @@ $(document).ready(function(){
             lat: item.selfCooLat * 1 + randomDisplacement(),
             lng: item.selfCooLng * 1 + randomDisplacement(),
             title: item.origin,
-            icon: markerIcon,
+            icon: quarantineIcon,
             description: item.descriptionTitle,
             price: undefined,
             gallery: undefined,
