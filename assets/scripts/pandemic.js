@@ -599,11 +599,11 @@ GMaps.geolocate({
         map.setCenter(position.coords.latitude, position.coords.longitude);
     },
     error: function(error){
-        map.setZoom(2);
+        map.setZoom(9);
     },
     not_supported: function(){
         alert("Your browser doesn't support this function.");
-        map.setZoom(2);
+        map.setZoom(9);
     }
 });
 

@@ -70,7 +70,7 @@ if (!empty($_POST)) {
                 'title' => $classified['title'],
                 'description' => nl2br(htmlspecialchars($classified['description'])).$delete,
                 'price' => $classified['price'],
-                'subtitle' => 'Price: '.$classified['price'].'<br/>E-mail: <a href="mailto:'.$classified['email'].'">'.$classified['email'].'</a>'.(!empty($classified['phone']) ? '<br/>Phone: '.$classified['phone'] : ''),
+                'subtitle' => 'E-mail: <a href="mailto:'.$classified['email'].'">'.$classified['email'].'</a>'.(!empty($classified['phone']) ? '<br/>Phone: '.$classified['phone'] : ''),
                 'gallery' => join("", $gallery),
                 'icon' => $classified['icon'],
                 'latitude' => $classified['latitude'],
