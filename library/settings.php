@@ -22,14 +22,10 @@ $settings = array(
         )
     ),
     'categories' => array(
-        'work' => 'Work',
-        'vehicles' => 'Vehicles',
-        'electronics' => 'Electronics',
-        'estate' => 'Real Estate',
-        'clothing' => 'Clothing',
-        'kids' => 'Kids',
-        'animals' => 'Animals',
-        'hobbies' => 'Leisure & Hobbies',
+        'quarantine' => 'Quarantine',
+        'isolating' => 'Isolation',
+        'volunteer' => 'Volunteering',
+        'services' => 'Services',
         'other' => 'Other'
     )
 );
