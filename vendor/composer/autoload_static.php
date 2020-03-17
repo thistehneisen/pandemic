@@ -10,12 +10,17 @@ class ComposerStaticInit95e271faca629807143e319cbee3f02f
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
+        '9e4824c5afbdc1482b6025ce3d4dfde8' => __DIR__ . '/..' . '/league/csv/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
+        ),
+        'L' => 
+        array (
+            'League\\Csv\\' => 11,
         ),
         'I' => 
         array (
@@ -35,6 +40,10 @@ class ComposerStaticInit95e271faca629807143e319cbee3f02f
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'League\\Csv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/csv/src',
         ),
         'Intervention\\Image\\' => 
         array (

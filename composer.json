@@ -1,6 +1,7 @@
 {
     "require": {
         "facebook/graph-sdk": "^5.4",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "league/csv": "^9.6"
     }
 }
