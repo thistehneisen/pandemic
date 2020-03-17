@@ -451,7 +451,7 @@ $(document).ready(function(){
             subtitle: item.label,
             url: fullAddress + '?id=' + item.id
         }));
-        allMarkers = map.addMarkers(markers);
+        allMarkers = allMarkers.concat(map.addMarkers(markers));
     }, 'json');
 
     map.on('marker_added', function (marker) {
