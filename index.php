@@ -20,15 +20,15 @@ Write us on info@pandemic.lv and become one of our team.
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<title>Pandemic.lv — </title>
+	<title>Pandemic.lv — Quality information from neighbors.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid">
-	<meta name="description" content="Sell and find classifieds, based on your location.">
+	<meta name="description" content="Find information about the pandemic situation, around you, from the people — besides you.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
-	<meta property="og:title" content="Ķengurs — classifieds for neighbors">
-	<meta property="og:description" content="Sell and find classifieds, based on your location.">
+	<meta property="og:title" content="Pandemic.lv — Quality information from neighbors.">
+	<meta property="og:description" content="Find information about the pandemic situation, around you, from the people — besides you.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/facebook.png">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
@@ -61,9 +61,6 @@ Write us on info@pandemic.lv and become one of our team.
 <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 </head>
 <body>
-	<?php /* Google Tag Manager */ ?>
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K9HWHJN"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
 		window.fbAsyncInit = function() {
@@ -97,7 +94,7 @@ Write us on info@pandemic.lv and become one of our team.
 			<div class="custom-body">{{{body}}}</div>
 			<div class="gallery">{{{gallery}}}</div>
 			<div class="unique-url text">
-				<h5>Classified URL:</h5>
+				<h5>URL:</h5>
 				<input type="text" value="{{url}}" />
 			</div>
 		</section>
@@ -106,7 +103,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<header class="header">
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
-				<?php include('https://upload.wikimedia.org/wikipedia/commons/2/26/COVID-19_Outbreak_World_Map.svg'); ?>
+				<?php print(file_get_contents('https://upload.wikimedia.org/wikipedia/commons/2/26/COVID-19_Outbreak_World_Map.svg')); ?>
 				<span>pandemic.lv</span>
 			</a>
 			<nav>
