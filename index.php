@@ -58,7 +58,7 @@ Write us on info@pandemic.lv and become one of our team.
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K9HWHJN');</script>
 
-<link rel="icon" type="image/png" href="assets/images/favicon.png" />
+<link rel="icon" type="image/png" href="assets/images/icon.png" />
 </head>
 <body>
 	<?php /* Facebook JS Connection */ ?>
@@ -103,7 +103,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<header class="header">
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
-				<?php print(file_get_contents('https://upload.wikimedia.org/wikipedia/commons/2/26/COVID-19_Outbreak_World_Map.svg')); ?>
+				<?php include('assets/images/corona.svg'); ?>
 				<span>pandemic.lv</span>
 			</a>
 			<nav>
