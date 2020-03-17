@@ -407,6 +407,8 @@ $(document).ready(function(){
         anchor: new google.maps.Point(12, 24)
     };
 
+    var allMarkers = [];
+
     $.post('library/ajax.php', {
         action: 'retrieve',
         category: category
@@ -438,7 +440,6 @@ $(document).ready(function(){
 
     $.get('json_data.php', function (results) {
         const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
-        console.log(randomDisplacement());
         const markers = results.map(item => ({
             id: item.id,
             lat: item.selfCooLat * 1 + randomDisplacement(),
