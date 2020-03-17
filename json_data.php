@@ -14,5 +14,7 @@ if (!isset($_GET['action']) && empty($_GET['action'])) {
     echo json_encode($csv, JSON_PRETTY_PRINT);
 } else if ($_GET['action'] == 'stats') {
     $contents = file_get_contents('https://pomber.github.io/covid19/timeseries.json');
+    $contents = json_decode($contents, true);
+    $contents = $contents['Latvia'];
     print($contents);
 }
