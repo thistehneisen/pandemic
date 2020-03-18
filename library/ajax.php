@@ -154,6 +154,21 @@ if (!empty($_POST)) {
                 ], true);
 
                 break;
+
+            case 'chat_items':
+
+                // chat_items
+                $response = ['status' => 1];
+
+                $channel = 'default';
+
+                if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
+                    $channel = $_POST['channel'];
+                }
+
+                $response['items'] = $db->getRows("SELECT * FROM %s WHERE channel = '%s'", $db->messages);
+
+                break;
             
             default:
                 $response = array('errors' => 'Unknown action');
