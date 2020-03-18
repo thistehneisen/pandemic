@@ -31,14 +31,24 @@ var map;
 $(document).ready(function(){
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
+        var elem = $(this);
+
         /* ENTER PRESSED */
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === undefined) {
                 alert('Log in first.');
+                return false;
             }
             else {
-                alert('Message will be sent.');
+                if (elem.val().length() > 0) {
+                    alert('Message will be sent.');
+                    return true;
+                }
+                else {
+                    alert('Please enter your message.');
+                    return true;
+                }
             }
         }
     });
