@@ -13,11 +13,12 @@ if (!empty($_GET['id']) && is_numeric($_GET['id']))
 if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
     $jscategory = $_GET['category'];
 ?>
+<!DOCTYPE html>
+<html>
 <!--
 Interested in the code?
 Write us on info@pandemic.lv and become one of our team.
 -->
-<html>
 <head>
 	<meta charset="UTF-8" />
 	<title>Pandemic.lv — Quality information from neighbors.</title>
