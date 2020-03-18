@@ -33,7 +33,7 @@ Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
     // Snakeoil
-    $('.noty_bar').each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); $(this).parent().on('click', function(){ $(this).remove(); })});
+    $(document).on('click','.noty_bar',function(){$(this).remove();});
 
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
