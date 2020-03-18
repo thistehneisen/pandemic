@@ -679,7 +679,8 @@ GMaps.geolocate({
     not_supported: function(){
         alert("Your browser doesn't support this function.");
         map.setZoom(9);
-    }
+    },
+    options: {enableHighAccuracy:true}
 });
 
 $('.login-fb').on('click', function(e){
