@@ -37,11 +37,18 @@ $(document).ready(function(){
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
-                new Noty({
-                    text: 'To use chatting features and see channels, please authorise with Facebook.',
-                    type: 'warning',
-                    layout: 'bottomLeft'
-                }).show();
+                var n = new Noty({
+                    text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now? <input id="example" type="text">',
+                    buttons: [
+                      Noty.button('Authorise me', 'btn btn-success login-fb', function () {
+                      }, {id: 'button1', 'data-status': 'ok'}),
+                  
+                      Noty.button('Cancel', 'btn btn-error', function () {
+                          n.close();
+                      })
+                    ]
+                  });
+                  n.show();
                 return false;
             }
             else {
