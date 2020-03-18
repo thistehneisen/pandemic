@@ -34,7 +34,10 @@ $(document).ready(function(){
         /* ENTER PRESSED */
         if (e.keyCode == 13) {
             e.preventDefault();
-            alert('Gotcha.');
+            if (typeof fbId === undefined)
+                alert('Log in first.');
+            else
+                alert('Message will be sent.');
         }
     });
 
