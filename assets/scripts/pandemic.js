@@ -14,7 +14,7 @@ Noty.overrideDefaults({
         close: 'animated fadeOutRight'
     },
     callbacks: {
-        onShow: function(e){$(e.barDom).find('.noty_bar').each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); $(this).parent().on('click', function(){ $(this).remove(); })});}
+        onShow: function(){$(e.barDom).find('.noty_bar').each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); $(this).parent().on('click', function(){ $(this).remove(); })});}
     }
 });
 
