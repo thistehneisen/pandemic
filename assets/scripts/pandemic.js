@@ -742,7 +742,7 @@ GMaps.geolocate({
     options: {enableHighAccuracy:true}
 });
 
-$('.login-fb').on('click', function(e){
+$(document).on('click', '.login-fb', function(e){
     e.preventDefault();
     FB.login(function(response) {
         if (response.status === 'connected') {
@@ -753,7 +753,7 @@ $('.login-fb').on('click', function(e){
             alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
         }
     }, {scope: 'email,public_profile'});
-});
+    });
 });
 
 $('#post-the-ad').on('click', function(e){

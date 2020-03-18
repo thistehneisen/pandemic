@@ -1287,7 +1287,7 @@ a.btn {
   margin-right: 0.25em;
   border-radius: 0.3rem;
   position: relative;
-  color: #edeef0;
+  color: #000;
   transition: all 0.1s ease;
   background: #fff;
   border: none !important;
@@ -1304,6 +1304,9 @@ button:active,
 a.btn:active {
   color: #FFF;
   background: #972727;
+}
+a.btn-success{
+  background: #00ff54;
 }
 button[type="submit"] {
   background: #a62f2e;
