@@ -44,9 +44,12 @@ Write us on info@pandemic.lv and become one of our team.
 <?php } ?>
 	<meta property="fb:app_id" content="<?php print($settings['facebook']['app']['id'])?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="msapplication-TileColor" content="#a62f2e">
+    <meta name="theme-color" content="#a62f2e">
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -249,6 +252,25 @@ Write us on info@pandemic.lv and become one of our team.
 	</div>
 <a class="button filled green" href="#" style="display: none;" id="save-location"><span>Ready!</span></a>
 <div class="mask">&nbsp;</div>
+
+<div class="center input-wrapper">
+    <div class="input-field">
+        <input placeholder="Type your message" id="input" type="text" maxlength="101">
+    </div>
+</div>
+
+<div class="fixed-action-btn btn-send">
+    <a id="send-button" class="btn-floating btn-large waves-effect waves-light blue">
+        <i class="large mdi-content-send"></i>
+    </a>
+</div>
+
+<div class="fixed-action-btn btn-clear">
+    <a id="clear-button" class="btn-floating btn-large waves-effect waves-light red"
+            onclick="clearMessageFromMap()">
+        <i class="large mdi-content-clear"></i>
+    </a>
+</div>
 </body>
 <?php /* Settings */ ?>
 <script type="text/javascript">
@@ -256,6 +278,10 @@ Write us on info@pandemic.lv and become one of our team.
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vertx/2.0.0/vertxbus.js"></script>
+
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
@@ -263,4 +289,7 @@ Write us on info@pandemic.lv and become one of our team.
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
+<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/modernizr.custom.js"></script>
+<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/html-sanitizer-minified.js"></script>
+<script src="<?php print($settings['fullAddress'])?>assets/scripts/main.js"></script>
 </html>
