@@ -43,7 +43,23 @@ if (!empty($_POST)) {
         } else {
             die(json_encode(array('errors' => $errors)));
         }
-
+    } else if ($action == 'userlocations') {
+        $output = array();
+        $locations = $db->getRows("SELECT * FROM %s", $db->locations);
+        foreach ((array)$locations as $location) {
+            $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
+            $output[] = [
+                'id' => $location['fbid'],
+                'lat' => $location['latitude'],
+                'lng' => $location['longitude'],
+                'img' => $userdata['picture'],
+                'name' => $userdata['name'],
+                'status' => 'No status available.',
+                'category' => 'isolating'
+            ];
+        }
+        
+        die(json_encode(array('locations' => $output)));
     } else if ($action == 'retrieve') {
         $output = array();
         $classifieds = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->classifieds);

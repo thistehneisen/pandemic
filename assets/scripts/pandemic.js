@@ -410,6 +410,34 @@ $(document).ready(function(){
     var allMarkers = [];
 
     $.post('library/ajax.php', {
+        action: 'userlocations',
+        category: category
+    }, function(results) {
+        var items = [], markers_data = [];
+        if (results.locations.length > 0) {
+            items = results.locations;
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+
+                if (item.latitude != undefined && item.longitude != undefined) {
+                    markers_data.push({
+                        id : item.id,
+                        lat : item.latitude,
+                        lng : item.longitude,
+                        img : item.img,
+                        icon : markerIcon,
+                        name : item.name,
+                        status : item.status,
+                        category : item.category,
+                        url : fullAddress + '?user=' + item.id
+                    });
+                }
+            }
+        }
+        allMarkers = map.addMarkers(markers_data);
+    }, 'json');
+
+    $.post('library/ajax.php', {
         action: 'retrieve',
         category: category
     }, function(results) {
