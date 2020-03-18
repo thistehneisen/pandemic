@@ -41,6 +41,7 @@ $(document).ready(function(){
         action: 'chat_items',
         channel: userChannel 
     }, function(results) {
+        console.log('got items');
         for (var i = results.items.length - 1; i >= 0; i--) {
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
         };

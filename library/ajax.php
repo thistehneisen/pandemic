@@ -166,7 +166,7 @@ if (!empty($_POST)) {
                     $channel = $_POST['channel'];
                 }
 
-                $response['items'] = $db->getRows("SELECT * FROM %s WHERE channel = '%s'", $db->messages);
+                $response['items'] = $db->getRows("SELECT * FROM %s WHERE channel = '%s'", "messages" , $channel);
 
                 break;
             
