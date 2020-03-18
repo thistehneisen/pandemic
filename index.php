@@ -45,11 +45,11 @@ Write us on info@pandemic.lv and become one of our team.
 	<meta property="fb:app_id" content="<?php print($settings['facebook']['app']['id'])?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-TileColor" content="#a62f2e">
-    <meta name="theme-color" content="#a62f2e">
+	<meta name="theme-color" content="#a62f2e">
+	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
-	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -251,8 +251,12 @@ Write us on info@pandemic.lv and become one of our team.
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
+	new Noty({
+    	text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
+	}).show();
 </script>
 
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
