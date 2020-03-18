@@ -8,7 +8,8 @@ Noty.overrideDefaults({
     layout   : 'bottomRight',
     theme    : 'sunset',
     closeWith: ['click', 'button'],
-    modal: true,
+    force: true,
+    visibilityControl: true,
     animation: {
         open : 'animated fadeInRight',
         close: 'animated fadeOutRight'
