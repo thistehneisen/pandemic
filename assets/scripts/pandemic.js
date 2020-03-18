@@ -37,12 +37,16 @@ $(document).ready(function(){
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
+
                 var n = new Noty({
                     layout: 'center',
                     type: 'info',
                     text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now?',
                     buttons: [
                       Noty.button('Authorise me', 'btn login-fb', function () {
+
+                        console.log('ir kontakts');
+
                       }, {id: 'button1', 'data-status': 'ok'}),
                       Noty.button('Cancel', 'btn btn-error', function () {
                           n.close();
@@ -50,6 +54,17 @@ $(document).ready(function(){
                     ]
                   });
                   n.show();
+
+                setTimeout(function(){
+                    //govnakod
+                    $('.btn-error').on( "click", function() {
+                        console.log('there is a click');
+                        $('#noty_layout__center').remove();
+                        $('.btn-error').unbind();
+                    });
+                } , 500 );
+
+
                 return false;
             }
             else {
