@@ -32,6 +32,17 @@ setTimeout(function(){
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
+
+
+    $.post('library/ajax.php', {
+        action: 'chat_items',
+        channel: userChannel 
+    }, function(results) {
+        for (var i = results.items.length - 1; i >= 0; i--) {
+            $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
+        };
+    } 'json');
+
     // Snakeoil
     $(document).on('click','.noty_bar',function(){$(this).remove();});
 
