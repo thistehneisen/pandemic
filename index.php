@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 require_once 'library/init.php';
 cleanImages();
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
