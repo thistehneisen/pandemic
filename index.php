@@ -53,6 +53,7 @@ Write us on info@pandemic.lv and become one of our team.
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
 
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
 </head>
@@ -256,7 +257,6 @@ Write us on info@pandemic.lv and become one of our team.
 	}).show();
 </script>
 
-<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>

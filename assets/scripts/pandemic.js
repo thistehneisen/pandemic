@@ -4,6 +4,16 @@ window.addEventListener('load', function() {
 }, false);
 document.addEventListener("touchstart", function(){}, true);
 
+Noty.overrideDefaults({
+    layout   : 'bottomRight',
+    theme    : 'mint',
+    closeWith: ['click', 'button'],
+    animation: {
+        open : 'animated fadeInRight',
+        close: 'animated fadeOutRight'
+    }
+});
+
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
