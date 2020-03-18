@@ -14,6 +14,10 @@ Noty.overrideDefaults({
     }
 });
 
+new Noty({
+    text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
+}).show();
+
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
