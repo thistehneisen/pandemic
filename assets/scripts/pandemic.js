@@ -8,6 +8,7 @@ Noty.overrideDefaults({
     layout   : 'bottomRight',
     theme    : 'sunset',
     closeWith: ['click', 'button'],
+    timeout: 10000,
     animation: {
         open : 'animated fadeInRight',
         close: 'animated fadeOutRight'
