@@ -6,7 +6,7 @@ document.addEventListener("touchstart", function(){}, true);
 
 Noty.overrideDefaults({
     layout   : 'bottomRight',
-    theme    : 'mint',
+    theme    : 'sunset',
     closeWith: ['click', 'button'],
     animation: {
         open : 'animated fadeInRight',
