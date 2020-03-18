@@ -48,6 +48,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<meta name="msapplication-TileColor" content="#a62f2e">
 	<meta name="theme-color" content="#a62f2e">
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
+	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/.js/chart.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
