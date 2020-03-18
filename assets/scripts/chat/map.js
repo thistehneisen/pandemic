@@ -27,14 +27,11 @@ var entityMap = {
     "#": "&#35;",
     "'": '&#39;',
     "/": '&#x2F;',
-    "卐": 'I am a dick ',
-    "卍": 'I am a dick '
+    "卐": 'I am a ...',
+    "卍": 'I am a ...'
 };
 
 function initialize() {
-
-    var defaultLatLng = new google.maps.LatLng(32.078043, 34.774177); // Add the coordinates
-
     markerImage = {
         url: '/assets/images/blue_marker.png',
         scaledSize: new google.maps.Size(30, 30)
@@ -44,27 +41,6 @@ function initialize() {
         url: '/assets/images/grey_marker.png',
         scaledSize: new google.maps.Size(30, 30)
     };
-
-
-    var mapOptions = {
-        center: defaultLatLng,
-        zoom: defaultZoom, // The initial zoom level when your map loads (0-20)
-        minZoom: minZoom, // Minimum zoom level allowed (0-20)
-        maxZoom: 18, // Maximum soom level allowed (0-20)
-        zoomControl:false, // Set to true if using zoomControlOptions below, or false to remove all zoom controls.
-        mapTypeId: google.maps.MapTypeId.ROADMAP, // Set the type of Map
-        scrollwheel: true, // Enable Mouse Scroll zooming
-
-        // All of the below are set to true by default, so simply remove if set to true:
-        panControl:false, // Set to false to disable
-        mapTypeControl:false, // Disable Map/Satellite switch
-        scaleControl:false, // Set to false to hide scale
-        streetViewControl:false, // Set to disable to hide street view
-        overviewMapControl:false, // Set to false to remove overview control
-        rotateControl:false // Set to false to disable rotate control
-    };
-    var mapDiv = document.getElementById('map');
-    map = new google.maps.Map(mapDiv, mapOptions);
 
     navigator.geolocation.getCurrentPosition(onFirstPosition, onPositionError, locationOptions);
 }
