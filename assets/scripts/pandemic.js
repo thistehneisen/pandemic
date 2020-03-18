@@ -33,6 +33,9 @@ Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
 
+    if (typeof userChannel == 'undefined'){
+        userChannel = 'default';
+    }
 
     $.post('library/ajax.php', {
         action: 'chat_items',
