@@ -289,7 +289,7 @@ Write us on info@pandemic.lv and become one of our team.
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/modernizr.custom.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/html-sanitizer-minified.js"></script>
-<script src="<?php print($settings['fullAddress'])?>assets/scripts/main.js"></script>
+<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/modernizr.custom.js"></script>
+<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/html-sanitizer-minified.js"></script>
+<script src="<?php print($settings['fullAddress'])?>assets/scripts/chat/main.js"></script>
 </html>
