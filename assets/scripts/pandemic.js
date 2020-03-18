@@ -422,6 +422,9 @@ $(document).ready(function(){
                 if (item.latitude != undefined && item.longitude != undefined) {
                     markers_data.push({
                         id : item.id,
+                        title : item.name,
+                        subtitle : item.status,
+                        description : item.img,
                         lat : item.latitude,
                         lng : item.longitude,
                         img : item.img,
