@@ -1305,9 +1305,6 @@ a.btn:active {
   color: #FFF;
   background: #972727;
 }
-a.btn-success{
-  background: #00ff54;
-}
 button[type="submit"] {
   background: #a62f2e;
   font-size: 1.4em;

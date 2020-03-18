@@ -42,9 +42,8 @@ $(document).ready(function(){
                     type: 'info',
                     text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now?',
                     buttons: [
-                      Noty.button('Authorise me', 'btn btn-success login-fb', function () {
+                      Noty.button('Authorise me', 'btn login-fb', function () {
                       }, {id: 'button1', 'data-status': 'ok'}),
-                  
                       Noty.button('Cancel', 'btn btn-error', function () {
                           n.close();
                       })
