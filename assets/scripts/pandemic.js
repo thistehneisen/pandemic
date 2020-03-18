@@ -625,20 +625,12 @@ map.addControl({
 
 GMaps.geolocate({
     success: function(position){
-            map.setCenter(position.coords.latitude, position.coords.longitude);
-            $.post('library/ajax.php', {
-                action:'newlocation',
-                lat:position.coords.latitude,
-                lng:position.coords.longitude
-            });
-        }, function(response){
-            if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
-                $('#post-the-ad span').text('Create without errors');
-                alert('Whoops: '+response.errors[0]);
-            } else {
-                makeLocation(response.id);
-            }
-        }, 'json');
+        map.setCenter(position.coords.latitude, position.coords.longitude);
+        $.post('library/ajax.php', {
+            action:'newlocation',
+            lat:position.coords.latitude,
+            lng:position.coords.longitude
+        });
     },
     error: function(error){
         map.setZoom(9);
