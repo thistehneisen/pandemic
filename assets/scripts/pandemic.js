@@ -41,7 +41,7 @@ $(document).ready(function(){
                 return false;
             }
             else {
-                if ($(elem).val().length() > 0) {
+                if (elem.val().length > 0) {
                     alert('Message will be sent.');
                     return true;
                 }
