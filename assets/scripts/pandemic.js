@@ -29,6 +29,15 @@ setTimeout(function(){
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
+    // Chatbox
+    $('input#chatbox').on("keypress", function(e) {
+        /* ENTER PRESSED */
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            alert('Gotcha.');
+        }
+    });
+
     // IMG UPLOAD
     $("#img-upload").dropzone({
         paramName: "file",
