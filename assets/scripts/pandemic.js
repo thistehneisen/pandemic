@@ -41,7 +41,7 @@ $(document).ready(function(){
         for (var i = results.items.length - 1; i >= 0; i--) {
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
         };
-    } 'json');
+    },  'json');
 
     // Snakeoil
     $(document).on('click','.noty_bar',function(){$(this).remove();});
