@@ -6768,6 +6768,7 @@ p.sum b span,
 
 footer #chatbox {
   width: 25%;
+  color: #000;
   border: #c2c2c2 1px solid;
   height: 50px;
   position: fixed;
