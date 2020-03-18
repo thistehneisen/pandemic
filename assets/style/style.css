@@ -11,6 +11,7 @@ html {
  */
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 /* HTML5 display definitions
    ========================================================================== */
@@ -6770,7 +6771,7 @@ footer #chatbox {
   border: #c2c2c2 1px solid;
   height: 50px;
   position: absolute;
-  bottom: 20px;
+  bottom: 10%;
   left: 20px;
   padding: 20px;
 }
