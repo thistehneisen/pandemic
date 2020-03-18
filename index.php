@@ -125,6 +125,10 @@ Write us on info@pandemic.lv and become one of our team.
 		</div>
 	</header>
 
+	<div id="chat_holder">
+		<span class="chat_item">Corona</span>
+	</div>
+
 	<div id="modals">
 		<div class="lean-modal modal-sm" id="add-ad">
 			<div class="modal-container">
