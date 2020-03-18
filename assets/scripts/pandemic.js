@@ -37,17 +37,21 @@ $(document).ready(function(){
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
-                alert('Log in first.');
+                new Noty({
+                    text: 'To use chatting features and see channels, please authorise with Facebook.',
+                    type: 'warning',
+                    layout: 'bottomLeft'
+                }).show();
                 return false;
             }
             else {
                 if (elem.val().length > 0) {
-                    alert('Message will be sent.');
-                    return true;
-                }
-                else {
-                    alert('Please enter your message.');
-                    return true;
+                    $.post('library/ajax.php', {
+                        action: 'chat',
+                        channel: userChannel
+                    }, function(results) {
+                        console.log(results);
+                    });
                 }
             }
         }
