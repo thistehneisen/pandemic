@@ -246,7 +246,7 @@ Write us on info@pandemic.lv and become one of our team.
 <a class="button filled green" href="#" style="display: none;" id="save-location"><span>Ready!</span></a>
 <div class="mask">&nbsp;</div>
 <footer>
-	<input type="text" placeholder="Enter your message…" style="max-width: 25%; border: #fff 1px solid; height: 50px;" />
+	<input type="text" id="chatbox" placeholder="Enter your message…" />
 </footer>
 </body>
 <?php /* Settings */ ?>
