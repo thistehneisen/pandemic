@@ -3,8 +3,9 @@
 <h2>Our idea</h2>
 <p>
     We want to create a platform that solve most common issues for most people in crisis.<br/>
-    The main possibility in the platform is communication — communicating with neighbors and others, helping them out, or just having a conversation for the sake of not being bored.<br/>
-    Services, in the meanwhile can create their areas of functioning. Whether those are fresh fruits or teaching to play a guitar via Skype — all of these features can be added to the map, by anyone.
+    The main possibility in the platform is communication — with neighbors, your city, your country and worldwide. This is solved by geolocation, and channels that anyone can join or create.<br/>
+    Meanwhile, businesses can create their pin at any location on the map. Whether they are providing with fresh food, medical supplies or virtual guitar lessons — anyone can promote their business in the platform. This is extra good for small businesses like caffeterias that are currently searching any way possible to pay their employees.<br/>
+    Last, but not least — the filtered information. The platform itself automatically updates the oficially approved information and publishes it. Meanwhile, the platform users can share their information regionally. Therefore, a city, or a neighbor, can talk only in the depth of their town or street.
 </p>
 
 <?php
