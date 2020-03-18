@@ -24,7 +24,7 @@ new Noty({
 
 setTimeout(function(){
     new Noty({
-        text: 'Please authorise with your Facebook profile to use your profile and access all of the platforms features.',
+        text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
         type: 'info'
     }).show();
 },3500);
@@ -47,9 +47,9 @@ $(document).ready(function(){
                 var n = new Noty({
                     layout: 'center',
                     type: 'info',
-                    text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now?',
+                    text: 'To use the chat and see available channels, you need to authorize. Do you want to do so right now?',
                     buttons: [
-                      Noty.button('Authorise me', 'btn login-fb', function () {
+                      Noty.button('Authorize me', 'btn login-fb', function () {
 
                         console.log('ir kontakts');
 
