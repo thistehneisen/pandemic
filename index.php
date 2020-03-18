@@ -254,7 +254,7 @@ Write us on info@pandemic.lv and become one of our team.
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
-	fbId = <?php print($_SESSION['facebook']['id'])?>;
+	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
