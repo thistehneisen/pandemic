@@ -15,8 +15,6 @@ Noty.overrideDefaults({
     }
 });
 
-$('.noty_bar').each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); $(this).parent().on('click', function(){ $(this).remove(); })});
-
 new Noty({
     text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
 }).show();
@@ -31,6 +29,9 @@ setTimeout(function(){
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
+    // Snakeoil
+    $('.noty_bar').each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); $(this).parent().on('click', function(){ $(this).remove(); })});
+
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
