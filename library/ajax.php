@@ -63,7 +63,7 @@ if (!empty($_POST)) {
             }
 
             if ($classified['user'] == $_SESSION['facebook']['id'])
-            $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$classified['id'].'" onclick="return confirm(\'Are you sure you want to remove this classified? This action cannot be undone..\');" style="color: red;">Delete classified</a></p>';
+            $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$classified['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
 
             $output[] = array(
                 'id' => $classified['id'],
@@ -106,6 +106,12 @@ if (!empty($_POST)) {
         } else {
             die(json_encode(array('errors' => $errors)));
         }
+    } else if ($action == 'newlocation') {
+        $db->insert('locations', [
+            'fbid' => $_SESSION['facebook']['id'],
+            'latitude' => $_POST['lat'],
+            'longitude' => $_POST['lng']
+        ], true);
     } else {
         die(json_encode(array('errors' => 'Unknown action')));
     }
