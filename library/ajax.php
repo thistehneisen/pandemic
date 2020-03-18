@@ -47,6 +47,9 @@ if (!empty($_POST)) {
         $output = array();
         $locations = $db->getRows("SELECT * FROM %s", $db->locations);
         foreach ((array)$locations as $location) {
+            if (empty($location['fbid']))
+                continue;
+            
             $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
             $output[] = [
                 'id' => $location['fbid'],
