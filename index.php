@@ -250,7 +250,6 @@ Write us on info@pandemic.lv and become one of our team.
 <footer>
 	<input type="text" id="chatbox" placeholder="Enter your message…" />
 </footer>
-</body>
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
@@ -266,4 +265,5 @@ Write us on info@pandemic.lv and become one of our team.
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
+</body>
 </html>
