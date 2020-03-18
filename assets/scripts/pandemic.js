@@ -34,10 +34,12 @@ $(document).ready(function(){
         /* ENTER PRESSED */
         if (e.keyCode == 13) {
             e.preventDefault();
-            if (typeof fbId === undefined)
+            if (typeof fbId === undefined) {
                 alert('Log in first.');
-            else
+            }
+            else {
                 alert('Message will be sent.');
+            }
         }
     });
 
