@@ -50,15 +50,15 @@ if (!empty($_POST)) {
             $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
             $output[] = [
                 'id' => $location['fbid'],
-                'lat' => $location['latitude'],
-                'lng' => $location['longitude'],
+                'latitude' => $location['latitude'],
+                'longitude' => $location['longitude'],
                 'img' => $userdata['picture'],
                 'name' => $userdata['name'],
                 'status' => 'No status available.',
                 'category' => 'isolating'
             ];
         }
-        
+
         die(json_encode(array('locations' => $output)));
     } else if ($action == 'retrieve') {
         $output = array();
