@@ -1,5 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 require_once 'library/init.php';
 cleanImages();
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
@@ -55,14 +54,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
-	<?php /* Google Tag Manager */ ?>
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K9HWHJN');</script>
-
-<link rel="icon" type="image/png" href="assets/images/icon.png" />
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
 </head>
 <body>
 	<?php /* Facebook JS Connection */ ?>
@@ -253,25 +245,6 @@ Write us on info@pandemic.lv and become one of our team.
 	</div>
 <a class="button filled green" href="#" style="display: none;" id="save-location"><span>Ready!</span></a>
 <div class="mask">&nbsp;</div>
-
-<div class="center input-wrapper">
-    <div class="input-field">
-        <input placeholder="Type your message" id="input" type="text" maxlength="101">
-    </div>
-</div>
-
-<div class="fixed-action-btn btn-send">
-    <a id="send-button" class="btn-floating btn-large waves-effect waves-light blue">
-        <i class="large mdi-content-send"></i>
-    </a>
-</div>
-
-<div class="fixed-action-btn btn-clear">
-    <a id="clear-button" class="btn-floating btn-large waves-effect waves-light red"
-            onclick="clearMessageFromMap()">
-        <i class="large mdi-content-clear"></i>
-    </a>
-</div>
 </body>
 <?php /* Settings */ ?>
 <script type="text/javascript">
@@ -279,9 +252,6 @@ Write us on info@pandemic.lv and become one of our team.
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-<script src="https://cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vertx/2.0.0/vertxbus.js"></script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.js"></script>
@@ -290,8 +260,4 @@ Write us on info@pandemic.lv and become one of our team.
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/modernizr.custom.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/html-sanitizer-minified.js"></script>
-<script src="<?php print($settings['fullAddress'])?>assets/scripts/chat/main.js"></script>
-<script src="<?php print($settings['fullAddress'])?>assets/scripts/chat/map.js"></script>
 </html>
