@@ -74,13 +74,20 @@ $(document).ready(function(){
                 return false;
             }
             else {
+
                 if (elem.val().length > 0) {
+
+                    if (typeof userChannel == 'undefined'){
+                        userChannel = 'default';
+                    }
+
                     $.post('library/ajax.php', {
                         action: 'chat',
                         channel: userChannel ,
                         message: elem.val()
 
                     }, function(results) {
+                        elem.val('');
                         console.log(results);
                     });
                 }
