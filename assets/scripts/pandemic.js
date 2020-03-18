@@ -12,6 +12,9 @@ Noty.overrideDefaults({
     animation: {
         open : 'animated fadeInRight',
         close: 'animated fadeOutRight'
+    },
+    callbacks: {
+        onShow: function(){var that=this;setTimeout(function(){$(that.barDom).each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); });},100);}
     }
 });
 
