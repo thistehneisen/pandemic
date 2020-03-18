@@ -6770,8 +6770,8 @@ footer #chatbox {
   width: 25%;
   border: #c2c2c2 1px solid;
   height: 50px;
-  position: absolute;
-  bottom: 10%;
+  position: fixed;
+  bottom: 20px;
   left: 20px;
   padding: 20px;
 }
