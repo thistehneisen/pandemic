@@ -132,6 +132,35 @@ if (!empty($_POST)) {
             'longitude' => $_POST['lng']
         ], true);
     } else {
-        die(json_encode(array('errors' => 'Unknown action')));
+
+        //my small world seperated from all other stuff
+        $response = array();
+
+        switch ($action) {
+            case 'chat':
+                
+                $response = ['status' => 1];
+
+                $channel = 'default';
+
+                if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
+                    $channel = $_POST['channel'];
+                }
+
+                $db->insert('messages', [
+                    'fbid' => $_SESSION['facebook']['id'],
+                    'message' => $_REQUEST['message'],
+                    'channel' => $channel
+                ], true);
+
+                break;
+            
+            default:
+                $response = array('errors' => 'Unknown action');
+                break;
+        }
+
+
+        die(json_encode($response));
     }
 }

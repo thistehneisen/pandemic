@@ -77,7 +77,9 @@ $(document).ready(function(){
                 if (elem.val().length > 0) {
                     $.post('library/ajax.php', {
                         action: 'chat',
-                        channel: userChannel
+                        channel: userChannel ,
+                        message: elem.val()
+
                     }, function(results) {
                         console.log(results);
                     });
