@@ -24,7 +24,7 @@ new Noty({
 
 setTimeout(function(){
     new Noty({
-        text: 'Please authorise with your Facebook profile to use your profile and access all of the platforms features.',
+        text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
         type: 'info'
     }).show();
 },3500);
@@ -47,9 +47,9 @@ $(document).ready(function(){
                 var n = new Noty({
                     layout: 'center',
                     type: 'info',
-                    text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now?',
+                    text: 'To use the chat and see available channels, you need to authorize. Do you want to do so right now?',
                     buttons: [
-                      Noty.button('Authorise me', 'btn login-fb', function () {
+                      Noty.button('Authorize me', 'btn login-fb', function () {
 
                         console.log('ir kontakts');
 
@@ -480,10 +480,10 @@ $(document).ready(function(){
 
     var markerIcon = {
         path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-        fillColor: '#222',
+        fillColor: '#0600ff',
         fillOpacity: 0.95,
         scale: 1.5,
-        strokeColor: '#fff',
+        strokeColor: '#222',
         strokeWeight: 2,
         anchor: new google.maps.Point(12, 24)
     };
