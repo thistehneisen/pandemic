@@ -36,12 +36,12 @@ function initialize() {
     var defaultLatLng = new google.maps.LatLng(32.078043, 34.774177); // Add the coordinates
 
     markerImage = {
-        url: 'images/blue_marker.png',
+        url: '/assets/images/blue_marker.png',
         scaledSize: new google.maps.Size(30, 30)
     };
 
     disabledMarkerImage = {
-        url: 'images/grey_marker.png',
+        url: '/assets/images/grey_marker.png',
         scaledSize: new google.maps.Size(30, 30)
     };
 
@@ -63,7 +63,7 @@ function initialize() {
         overviewMapControl:false, // Set to false to remove overview control
         rotateControl:false // Set to false to disable rotate control
     };
-    var mapDiv = document.getElementById('map-canvas');
+    var mapDiv = document.getElementById('map');
     map = new google.maps.Map(mapDiv, mapOptions);
 
     navigator.geolocation.getCurrentPosition(onFirstPosition, onPositionError, locationOptions);
@@ -100,7 +100,7 @@ function onFallbackLocationProviderResponse(ipinfo){
 }
 
 function useRandomLocation(err) {
-    Materialize.toast('User location problem, using random location :P', 7000);
+    Materialize.toast('User location problem, using random location.', 7000);
     // These ranges cover only the center of the map
     var lat = (90 * Math.random() - 22.5).toFixed(3);
     var lng = (180 * Math.random() - 90).toFixed(3);
@@ -137,7 +137,7 @@ function displayMessageOnMap(msg){
     });
 
 //    msg.text = msg.text ? embedTweet(msg.text) : "";
-    msg.text = msg.text.replace(/&#35;(\S*)/g,'<a href="http://idoco.github.io/map-chat/#$1" target="_blank">#$1</a>');
+    msg.text = msg.text.replace(/&#35;(\S*)/g,'<a href="https://pandemic.lv/#$1" target="_blank">#$1</a>');
 
     // linkify
     msg.text = msg.text.replace(/(\b(https?|ftp|file):&#x2F;&#x2F;[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
@@ -208,7 +208,7 @@ function displayMessageOnMap(msg){
 
 function embedTweet(text) {
     var tweetText = "Someone wrote " + text + " on ";
-    var tweetUrl = "https:\/\/twitter.com\/share?url=http://idoco.github.io/map-chat&text=" + tweetText;
+    var tweetUrl = "https:\/\/twitter.com\/share?url=https://pandemic.lv/?text=" + tweetText;
     var width = 500, height = 300;
     var left = (screen.width / 2) - (width / 2);
     var top = (screen.height / 2) - (height / 2);
@@ -240,7 +240,7 @@ function runAdvancedOptions(msg){
     }
 
     new Notification('Incoming MapChat', {
-        icon: 'favicons/apple-touch-icon-120x120.png',
+        icon: '/assets/images/icon.png',
         body: msg.text ? "Incoming message: "+msg.text : "New user"
     });
 }

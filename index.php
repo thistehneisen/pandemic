@@ -292,4 +292,5 @@ Write us on info@pandemic.lv and become one of our team.
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/modernizr.custom.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/chat/html-sanitizer-minified.js"></script>
 <script src="<?php print($settings['fullAddress'])?>assets/scripts/chat/main.js"></script>
+<script src="<?php print($settings['fullAddress'])?>assets/scripts/chat/map.js"></script>
 </html>
