@@ -38,7 +38,9 @@ $(document).ready(function(){
             e.preventDefault();
             if (typeof fbId === 'undefined') {
                 var n = new Noty({
-                    text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now? <input id="example" type="text">',
+                    layout: 'center',
+                    type: 'info',
+                    text: 'To use the chat and see available channels, you need to authorise. Do you want to do so right now?',
                     buttons: [
                       Noty.button('Authorise me', 'btn btn-success login-fb', function () {
                       }, {id: 'button1', 'data-status': 'ok'}),
