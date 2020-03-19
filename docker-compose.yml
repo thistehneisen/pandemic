@@ -1,0 +1,9 @@
+version: '2'
+services:
+    web:
+        image: shivergard/docker-webserver
+        ports:
+            - 80:80
+            - 86:86
+        volumes:
+            - ./:/var/www/public
