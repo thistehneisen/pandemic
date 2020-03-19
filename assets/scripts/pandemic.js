@@ -41,7 +41,6 @@ $(document).ready(function(){
         action: 'chat_items',
         channel: userChannel 
     }, function(results) {
-        console.log('got items');
         for (var i = results.items.length - 1; i >= 0; i--) {
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
         };
@@ -65,9 +64,6 @@ $(document).ready(function(){
                     text: 'To use the chat and see available channels, you need to authorize. Do you want to do so right now?',
                     buttons: [
                       Noty.button('Authorize me', 'btn login-fb', function () {
-
-                        console.log('ir kontakts');
-
                       }, {id: 'button1', 'data-status': 'ok'}),
                       Noty.button('Cancel', 'btn btn-error', function () {
                           n.close();
@@ -79,7 +75,6 @@ $(document).ready(function(){
                 setTimeout(function(){
                     //govnakod
                     $('.btn-error').on( "click", function() {
-                        console.log('there is a click');
                         $('#noty_layout__center').remove();
                         $('.btn-error').unbind();
                     });
@@ -103,7 +98,6 @@ $(document).ready(function(){
 
                     }, function(results) {
                         elem.val('');
-                        console.log(results);
                     });
                 }
             }
@@ -520,7 +514,7 @@ $(document).ready(function(){
         anchor: new google.maps.Point(12, 24)
     };
 
-    var allMarkers = [];
+    allMarkers = [];
 
     $.post('library/ajax.php', {
         action: 'userlocations',
