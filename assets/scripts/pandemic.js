@@ -885,9 +885,12 @@ $('#save-location').on('click', function(e){
 
 /* Custom functions */
 function clearOverlays() {
-    for (var i = 0; i < allMarkers.length; i++)
-    allMarkers[i].setMap(null);
-    allMarkers.length = 0;
+    if (typeof allMarkers != 'undefined'){
+        for (var i = 0; i < allMarkers.length; i++)
+        allMarkers[i].setMap(null);
+        allMarkers.length = 0;        
+    }
+
 }
 
 function strip(html) {
