@@ -18,16 +18,17 @@ Noty.overrideDefaults({
     }
 });
 
-new Noty({
-    text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
-}).show();
-
-setTimeout(function(){
+if (typeof fbId === 'undefined') {
     new Noty({
-        text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
-        type: 'info'
+        text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
     }).show();
-},3500);
+    setTimeout(function(){
+        new Noty({
+            text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
+            type: 'info'
+        }).show();
+    },3500);
+}
 
 Dropzone.autoDiscover = false;
 var map;
