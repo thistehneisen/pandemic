@@ -520,7 +520,7 @@ $(document).ready(function(){
         anchor: new google.maps.Point(12, 24)
     };
 
-    var allMarkers = [];
+    allMarkers = [];
 
     $.post('library/ajax.php', {
         action: 'userlocations',
