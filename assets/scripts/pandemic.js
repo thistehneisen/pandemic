@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 document.addEventListener("touchstart", function() {}, true);
 
 toastr.options = {
-    "closeButton": true,
+    "closeButton": false,
     "debug": false,
     "newestOnTop": true,
     "progressBar": false,
@@ -14,7 +14,7 @@ toastr.options = {
     "onclick": null,
     "showDuration": "300",
     "hideDuration": "1000",
-    "timeOut": "8000",
+    "timeOut": "20000",
     "extendedTimeOut": "1000",
     "showEasing": "swing",
     "hideEasing": "linear",
