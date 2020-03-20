@@ -124,9 +124,11 @@ Write us on info@pandemic.lv and become one of our team.
 				<?php include('assets/images/corona.svg'); ?>
 				<span><?php print($settings['host'])?></span>
 			</a>
-			| <small><a href="#" title="Switch to Pandemics Lithuania">Lithuania</a></small>
 			<nav>
-				<?php if (!empty($_SESSION['facebook']['id'])) { ?><span><a rel="leanModal" href="#add-ad">Add your service</a></span><?php } ?>
+				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
+					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
+					<span><a rel="leanModal" href="#profile">Your profile</a></span>
+				<?php } ?>
 				<span><a rel="leanModal" href="#about">About project</a></span>
                 <span class="dd">
                     <a href="#">Categories</a>
@@ -149,7 +151,7 @@ Write us on info@pandemic.lv and become one of our team.
 			<div class="modal-container">
 				<div class="modal-wrapper">
 					<div class="modal-header">
-						<span>Add an area</span>
+						<span>Add an service</span>
 						<a href="#" class="modal_close close-modal">×</a>
 					</div>
 					<div class="modal-content bodytext">
@@ -183,13 +185,6 @@ Write us on info@pandemic.lv and become one of our team.
 
 							<div class="input-row">
 
-								<?php /*<div class="input-col lg-3-12">
-									<div class="text">
-										<label for="price">Price</label>
-										<input type="number" id="price" name="price" min="0" step="1.00" placeholder="Price" value="0.00" required="">
-									</div>
-								</div>*/ ?>
-
 								<div class="input-col lg-4-12">
 									<div class="text">
 										<label for="phone">Phone</label>
@@ -221,6 +216,64 @@ Write us on info@pandemic.lv and become one of our team.
 							</div>
 							<div class="input-col lg-1-2">
 								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="lean-modal modal-sm" id="profile">
+			<div class="modal-container">
+				<div class="modal-wrapper">
+					<div class="modal-header">
+						<span><?php var_dump($_SESSION['facebook'])?> profile</span>
+						<a href="#" class="modal_close close-modal">×</a>
+					</div>
+					<div class="modal-content bodytext">
+						<div class="form">
+							<div class="text">
+								<label for="nickname">Nickname <span>(max. 12 symbols)</span></label>
+								<input type="text" id="nickname" name="nickname" placeholder="Nickname" maxlength="12" value="" required="">
+							</div>
+
+							<div class="text">
+								<label for="status">Status message <span>(max. 40 symbols)</span></label>
+								<input type="text" id="status" name="status" placeholder="status" maxlength="40" value="" required="">
+							</div>
+
+                            <div class="select">
+								<label for="category">Category</label>
+                                <select name="category" id="category">
+                                    <option>Choose one</option>
+                                    <?php foreach ($settings['categories'] as $key => $category) { ?><option value="<?php print($key)?>"><?php print($category)?></option><?php } ?>
+                                </select>
+							</div>
+
+							<div class="input textarea">
+								<label for="description">Description <span>(max. 360 symbols)</span></label>
+								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="360"></textarea>
+							</div>
+
+							<div class="img-upload">
+								<label>Choose images</label>
+								<form id="img-upload" action="library/upload.php" class="dropzone" enctype="multipart/form-data">
+									<div class="fallback file">
+										<input name="file" type="file" />
+									</div>
+								</form>
+							</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="input-row">
+							<div class="input-col lg-1-2">
+								<a class="button outline gray lg-1-1 close-modal" href="#"><span>Cancel</span></a>
+							</div>
+							<div class="input-col lg-1-2">
+								<a class="button filled blue disabled confirm lg-1-1" id="save-profile" href="#"><span>Save profile</span></a>
 							</div>
 						</div>
 					</div>
