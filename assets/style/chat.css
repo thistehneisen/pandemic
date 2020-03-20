@@ -90,8 +90,8 @@
   margin: 0;
 }
 .contacts:hover {
-  -webkit-transform: translate(-32rem, -50%);
-          transform: translate(-32rem, -50%);
+  -webkit-transform: translate(-30rem, -50%);
+          transform: translate(-30rem, -50%);
 }
 
 .chat {
