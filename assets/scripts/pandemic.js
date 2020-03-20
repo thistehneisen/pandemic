@@ -295,9 +295,9 @@ $(document).ready(function() {
                 if (item.latitude != undefined && item.longitude != undefined) {
                     markers_data.push({
                         id: item.id,
-                        title: '<img src="'+item.img+'" alt="'+strip(item.name)+'" class="pImg">' + item.name,
+                        title: strip(item.name),
                         subtitle: item.status,
-                        description: item.img,
+                        description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" class="pImg">',
                         lat: item.latitude,
                         lng: item.longitude,
                         img: item.img,
