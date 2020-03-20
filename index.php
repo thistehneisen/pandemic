@@ -21,15 +21,15 @@ Write us on info@pandemic.lv and become one of our team.
 -->
 <head>
 	<meta charset="UTF-8" />
-	<title>Pandemic.lv — Quality information from neighbors.</title>
+	<title>Pandemic Baltics — In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and businesses.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid">
-	<meta name="description" content="Find information about the pandemic situation, around you, from the people — besides you.">
+	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
+	<meta name="description" content="In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and businesses.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
-	<meta property="og:title" content="Pandemic.lv — Quality information from neighbors.">
-	<meta property="og:description" content="Find information about the pandemic situation, around you, from the people — besides you.">
+	<meta property="og:title" content="Pandemic Baltics — In the time of crisis, you're not alone.">
+	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Giving you the official information about the state of pandemics, in Baltics.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
@@ -47,13 +47,11 @@ Write us on info@pandemic.lv and become one of our team.
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-TileColor" content="#00aeef">
 	<meta name="theme-color" content="#00aeef">
-	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
-	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/.js/chart.js"></script>
-	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.css" />
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -62,6 +60,25 @@ Write us on info@pandemic.lv and become one of our team.
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
 </head>
 <body>
+	<div id="preloader">
+		<h1>Pandemic Baltics</h1>
+		<div class="cube-wrapper">
+			
+		<div class="cube-folding">
+			<span class="leaf1"></span>
+			<span class="leaf2"></span>
+			<span class="leaf3"></span>
+			<span class="leaf4"></span>
+		</div>
+
+		<span class="loading" data-name="Loading">Hold on, fetching the data…</span>
+		</div>
+
+		<div class="made-with-love">
+			In the time of crisis, you're not alone. We're the proof.<br/>
+			Platform is secured by <a href="https://seq.science/">Digital Security Alliance</a>
+		</div> 
+	</div>
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
 		window.fbAsyncInit = function() {
@@ -105,7 +122,7 @@ Write us on info@pandemic.lv and become one of our team.
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
 				<?php include('assets/images/corona.svg'); ?>
-				<span>pandemic.lv</span>
+				<span>pandemic baltics</span>
 			</a>
 			<nav>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?><span><a rel="leanModal" href="#add-ad">Add your area</a></span><?php } ?>
@@ -372,6 +389,8 @@ Write us on info@pandemic.lv and become one of our team.
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/.js/chart.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
