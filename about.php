@@ -1,5 +1,5 @@
-<h2>About PANDEMIC.LV</h2>
-<p>In the time of crisis, information overflow is inevitable. We're fixing the problem by accessing and sharing information based on regions.</p>
+<h2>About Pandemic Baltics</h2>
+<p>In the time of crisis, information overflow is inevitable. We're fixing the problem by accessing and sharing information based on regions and official sources.</p>
 <h2>Our idea</h2>
 <p>
 We want to create a platform that solves the most common issues for people in crisis situations.<br/>
@@ -11,9 +11,9 @@ Last, but not least: the filtered information. The platform itself automatically
 <?php
 $contents = file_get_contents('https://pomber.github.io/covid19/timeseries.json');
 $contents = json_decode($contents, true);
-$contents = array_reverse($contents['Latvia']);
+$contents = array_reverse($contents[$settings['country']]);
 ?>
-<strong>Statistics:</strong><br/>
+<h2>Statistics: (<em><?php print($settings['country'])?></em>)</h2><br/>
 
 <canvas id="mainChart"></canvas>
 
