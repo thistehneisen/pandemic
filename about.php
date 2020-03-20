@@ -13,10 +13,9 @@ $contents = file_get_contents('https://pomber.github.io/covid19/timeseries.json'
 $contents = json_decode($contents, true);
 $contents = array_reverse($contents[$settings['country']]);
 ?>
-<h2>Statistics:
-<?php
+<h2>Statistics: <?php
 print('(<em>'.$settings['country'].'</em>) <small>');
-foreach ($hosts as $host => $country) {
+foreach ($settings['hosts'] as $host => $country) {
   if ($country === $settings['country'])
     continue;
   print('<a href="https://'.$host.'/#about" title="Pandemics '.$country.'">'.$country.'</a> ');
