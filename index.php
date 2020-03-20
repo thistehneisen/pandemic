@@ -1,5 +1,6 @@
 <?php
 require_once 'library/init.php';
+require_once 'compressor.php';
 cleanImages();
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_GET['delete']);

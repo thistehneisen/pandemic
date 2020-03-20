@@ -494,7 +494,7 @@ $(document).ready(function() {
             map.setZoom(9);
         },
         not_supported: function() {
-            alert("Your browser doesn't support this function.");
+            toastr.error('Your browser doesn\'t support this function.', 'GeoLocation');
             map.setZoom(9);
         },
         options: {
@@ -508,9 +508,9 @@ $(document).ready(function() {
             if (response.status === 'connected') {
                 window.location.reload();
             } else if (response.status === 'not_authorized') {
-                alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
+                toastr.error(('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
             } else {
-                alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
+                toastr.error(('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
             }
         }, {
             scope: 'email,public_profile'
