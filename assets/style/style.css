@@ -792,7 +792,7 @@ header.header .container nav span ul.dropdown li {
   width: 100%;
   height: auto;
   border-bottom: solid 1px #0199d2;
-  background: #ee2a7b;
+  background: #00aeef;
 }
 header.header .container nav span ul.dropdown li a {
   display: block;
@@ -808,7 +808,7 @@ header.header .container nav span ul.dropdown li a {
   background: rgba(15, 15, 15, 0);
 }
 header.header .container nav span ul.dropdown li a:hover {
-  background: #0199d2;
+  background: #ee2a7b;
 }
 header.header .container nav span ul.dropdown li a span {
   float: none;
