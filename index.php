@@ -122,8 +122,9 @@ Write us on info@pandemic.lv and become one of our team.
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
 				<?php include('assets/images/corona.svg'); ?>
-				<span><?php print($settings['host'])?></span> | <small><a href="#" title="Switch to Pandemics Lithuania">Lithuania</a></small>
+				<span><?php print($settings['host'])?></span>
 			</a>
+			| <small><a href="#" title="Switch to Pandemics Lithuania">Lithuania</a></small>
 			<nav>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?><span><a rel="leanModal" href="#add-ad">Add your service</a></span><?php } ?>
 				<span><a rel="leanModal" href="#about">About project</a></span>
