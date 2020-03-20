@@ -140,7 +140,7 @@ Write us on info@pandemic.lv and become one of our team.
                     <a href="#">Settings</a>
                     <ul class="dropdown">
 						<li><a href="#" onclick="return false;"><span><strong>&#10004;</strong> Show people</span></a></li>
-						<li><a href="#" onclick="return false;"><span><strong>&#10004;</strong> Show businesses</span></a></li>
+						<li><a href="#" onclick="return false;"><span><strong>&#10060;</strong> Show businesses</span></a></li>
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
