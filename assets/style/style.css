@@ -240,7 +240,7 @@ body {
 }
 
 #preloader h1 {
-  font-size: 40px;
+  font-size: 35px;
   display: block;
   text-align: center;
   color: #fff;
@@ -254,7 +254,7 @@ body {
   width: 100%;
   bottom: 20px;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   z-index: 9999;
   font-family: arial;
   color: #fff;
