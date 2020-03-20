@@ -60,7 +60,7 @@ if (!empty($_POST)) {
                 'longitude' => $location['longitude'],
                 'img' => $userdata['picture'],
                 'name' => $namePut,
-                'status' => 'undefined',
+                'status' => NULL,
                 'category' => 'isolating'
             ];
         }
