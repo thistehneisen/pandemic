@@ -104,6 +104,7 @@ Write us on info@pandemic.lv and become one of our team.
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<script id="marker-content-template" type="text/x-handlebars-template">
+		<div class="custom-img" style="background-image: url({{{img}}})"></div>
 		<section class="custom-content">
 			<h1 class="custom-header">
 				{{title}}
