@@ -154,7 +154,7 @@ body {
   top: 50%;
   margin-top: -50px;
   margin-left: -50px;
-  width: 100px;
+  width: 200px;
   height: 100px;
   text-align: center;
 }
@@ -239,7 +239,7 @@ body {
   padding: 0;
 }
 
-h1 {
+#preloader h1 {
   font-size: 26px;
   display: block;
   text-align: center;
