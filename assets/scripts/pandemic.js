@@ -199,8 +199,8 @@ $(document).ready(function(){
     /* Map */
     map = new GMaps({
         div: '#map',
-        lat: 56.946618,
-        lng: 24.097274,
+        lat: latitude,
+        lng: longitude,
         zoom: 9,
         styles: [
             {
@@ -514,7 +514,7 @@ $(document).ready(function(){
         }
     
     setTimeout(function(){
-        map.setCenter({lat: 56.946618, lng: 24.097274});
+        map.setCenter({lat: latitude, lng: longitude});
         $('#preloader').fadeOut();
         $('.preload-hide').show();
         $('#map').css({'width':'100%','height':'100%'});
@@ -611,8 +611,8 @@ function makeLocation(claddid) {
     clearOverlays();
 
     classifiedmarker = map.addMarker({
-        lat: 56.946618,
-        lng: 24.097274,
+        lat: latitude,
+        lng: longitude,
         icon: addmarkerIcon,
         draggable: true,
         setlocation: true,
