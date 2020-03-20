@@ -325,7 +325,7 @@ $(document).ready(function(){
         fillColor: '#ff0000',
         fillOpacity: 0.95,
         scale: 1.5,
-        strokeColor: '#9f0000',
+        strokeColor: '#222',
         strokeWeight: 2,
         anchor: new google.maps.Point(12, 24)
     };
