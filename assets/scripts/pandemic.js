@@ -575,6 +575,9 @@ map.addControl({
             });
         }
     }
+
+    $('#preloader').fadeOut();
+    $('.preloader-hide').fadeIn();
 });
 
 GMaps.geolocate({
