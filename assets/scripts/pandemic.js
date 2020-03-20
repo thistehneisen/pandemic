@@ -22,7 +22,7 @@ if (typeof fbId === 'undefined') {
     new Noty({
         text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
     }).show();
-    
+
     setTimeout(function(){
         new Noty({
             text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
@@ -47,6 +47,10 @@ $(document).ready(function(){
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
         };
     },  'json');
+
+    // Chat
+    var chat = document.getElementById('chat');
+    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 
     // Snakeoil
     $(document).on('click','.noty_bar',function(){$(this).remove();});
