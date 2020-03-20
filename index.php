@@ -439,6 +439,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.min.js"></script>
@@ -446,7 +447,6 @@ Write us on info@pandemic.lv and become one of our team.
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
-<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
 </body>
 </html>
