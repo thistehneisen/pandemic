@@ -530,7 +530,7 @@ $(document).ready(function(){
         }
 
     $('#preloader').fadeOut();
-    $('.preloader-hide').fadeIn();
+    $('.preload-hide').fadeIn();
 });
 // End of document ready
 
