@@ -296,7 +296,7 @@ $(document).ready(function() {
                     markers_data.push({
                         id: item.id,
                         title: strip(item.name),
-                        subtitle: item.status ? item.status : undefined,
+                        subtitle : item.status ? item.status : '',
                         description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
                         lat: item.latitude,
                         lng: item.longitude,
