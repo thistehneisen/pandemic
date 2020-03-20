@@ -60,8 +60,8 @@
   left: 0;
   -webkit-transform: translate(-6rem, -50%);
           transform: translate(-6rem, -50%);
-  width: 32rem;
-  height: 48rem;
+  width: 20%;
+  height: 20%;
   padding: 1rem 2rem 1rem 1rem;
   box-sizing: border-box;
   border-radius: 1rem 0 0 1rem;
@@ -103,8 +103,8 @@
           flex-direction: column;
   -webkit-box-pack: justify;
           justify-content: space-between;
-  width: 32rem;
-  height: 48rem;
+  width: 30%;
+  height: 30%;
   z-index: 2;
   box-sizing: border-box;
   border-radius: 1rem;
