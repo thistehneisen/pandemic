@@ -227,7 +227,7 @@ Write us on info@pandemic.lv and become one of our team.
 			<div class="modal-container">
 				<div class="modal-wrapper">
 					<div class="modal-header">
-						<span><?php var_dump($_SESSION['facebook'])?> profile</span>
+						<span>Your profile</span>
 						<a href="#" class="modal_close close-modal">×</a>
 					</div>
 					<div class="modal-content bodytext">
