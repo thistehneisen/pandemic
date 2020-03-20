@@ -349,12 +349,12 @@ $(document).ready(function() {
             id: item.id,
             lat: item.selfCooLat * 1 + randomDisplacement(),
             lng: item.selfCooLng * 1 + randomDisplacement(),
-            title: item.origin + ', ' + item.dateOfFirstContactWithLatvia,
+            title: item.label,
             icon: quarantineIcon,
             description: '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
             price: undefined,
             gallery: undefined,
-            subtitle: item.label,
+            subtitle: item.origin,
             url: fullAddress + '?case=' + item.id
         }));
 
