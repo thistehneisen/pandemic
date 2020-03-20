@@ -1,3 +1,7 @@
+.preload-hide {
+  display: none;
+}
+
 html {
   font-family: sans-serif;
   /* 1 */

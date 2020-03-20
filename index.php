@@ -118,7 +118,7 @@ Write us on info@pandemic.lv and become one of our team.
 		</section>
 	</script>
 
-	<header class="header" style="display: none;">
+	<header class="header" class="preload-hide">
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
 				<?php include('assets/images/corona.svg'); ?>
@@ -260,8 +260,8 @@ Write us on info@pandemic.lv and become one of our team.
 
 		<div id="lean-mask"></div>
 	</div>
-	<div class="map-ct" style="display: none;">
-	<div id="map" style="display: none;">
+	<div class="map-ct" class="preload-hide">
+	<div id="map" class="preload-hide">
 		&nbsp;
 	</div>
 	</div>
@@ -378,7 +378,7 @@ Write us on info@pandemic.lv and become one of our team.
 	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 </script>
 <?php } ?>
-<footer>
+<footer class="preload-hide">
 	<input type="text" id="chatbox" placeholder="Enter your message…" />
 </footer>
 <?php /* Settings */ ?>
