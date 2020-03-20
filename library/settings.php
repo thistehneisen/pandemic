@@ -47,4 +47,3 @@ if (!isset($host) || !in_array($host, array_keys($settings['hosts']))) {
         $settings['longitude'] = '24.17143171484375';
     }
 }
-die(print($settings['country']));
