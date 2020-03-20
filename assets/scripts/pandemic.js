@@ -2,24 +2,24 @@
 window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
-document.addEventListener("touchstart", function(){}, true);
+document.addEventListener("touchstart", function() {}, true);
 
 Dropzone.autoDiscover = false;
 var map;
-$(document).ready(function(){
+$(document).ready(function() {
 
-    if (typeof userChannel == 'undefined'){
+    if (typeof userChannel == 'undefined') {
         userChannel = 'default';
     }
 
     $.post('library/ajax.php', {
         action: 'chat_items',
-        channel: userChannel 
+        channel: userChannel
     }, function(results) {
         for (var i = results.items.length - 1; i >= 0; i--) {
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
         };
-    },  'json');
+    }, 'json');
 
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
@@ -29,20 +29,19 @@ $(document).ready(function(){
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
-                  toastr.error('To use the chat and see available channels, you need to authorize with Facebook.');
+                toastr.error('To use the chat and see available channels, you need to authorize with Facebook.');
                 return false;
-            }
-            else {
+            } else {
 
                 if (elem.val().length > 0) {
 
-                    if (typeof userChannel == 'undefined'){
+                    if (typeof userChannel == 'undefined') {
                         userChannel = 'default';
                     }
 
                     $.post('library/ajax.php', {
                         action: 'chat',
-                        channel: userChannel ,
+                        channel: userChannel,
                         message: elem.val()
 
                     }, function(results) {
@@ -85,16 +84,15 @@ $(document).ready(function(){
             window.onhashchange = function(e) {
                 if (window.location.hash) {
                     close_all_modals();
-                    if (window.location.hash && $(window.location.hash+'.lean-modal').length) {
+                    if (window.location.hash && $(window.location.hash + '.lean-modal').length) {
                         open_modal(window.location.hash);
                     }
-                }
-                else {
+                } else {
                     close_all_modals();
                 }
             }
             return this.each(function() {
-                if (window.location.hash && $(window.location.hash+'.lean-modal').length) {
+                if (window.location.hash && $(window.location.hash + '.lean-modal').length) {
                     open_modal(window.location.hash);
                 }
                 $(this).click(function() {
@@ -107,6 +105,7 @@ $(document).ready(function(){
                     event.preventDefault();
                 });
             });
+
             function open_modal(modal_id) {
                 $(document.body).addClass('noscroll');
                 container.addClass('show-modals');
@@ -115,6 +114,7 @@ $(document).ready(function(){
                     $('.lean-modal').removeClass('in');
                 }, 600);
             }
+
             function close_modal(modal_id) {
                 $(document.body).removeClass('noscroll');
                 container.removeClass('show-modals');
@@ -123,6 +123,7 @@ $(document).ready(function(){
                     $('.lean-modal').removeClass('out');
                 }, 600);
             }
+
             function close_all_modals() {
                 close_modal();
                 $('.show-modal').addClass('out').removeClass('show-modal in');
@@ -140,7 +141,7 @@ $(document).ready(function(){
         document.getElementById("signup-agree").checked = false;
         $('.button.confirm').addClass('disabled');
     });
-    $('#signup-agree').change(function(){
+    $('#signup-agree').change(function() {
         this.checked ? $('.button.confirm').removeClass('disabled') : $('.button.confirm').addClass('disabled');
     });
 
@@ -162,39 +163,31 @@ $(document).ready(function(){
         lat: latitude,
         lng: longitude,
         zoom: 9,
-        styles: [
-            {
+        styles: [{
                 "featureType": "administrative",
                 "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#444444"
-                    }
-                ]
+                "stylers": [{
+                    "color": "#444444"
+                }]
             },
             {
                 "featureType": "landscape",
                 "elementType": "all",
-                "stylers": [
-                    {
-                        "color": "#f2f2f2"
-                    }
-                ]
+                "stylers": [{
+                    "color": "#f2f2f2"
+                }]
             },
             {
                 "featureType": "poi",
                 "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
+                "stylers": [{
+                    "visibility": "off"
+                }]
             },
             {
                 "featureType": "road",
                 "elementType": "all",
-                "stylers": [
-                    {
+                "stylers": [{
                         "saturation": -100
                     },
                     {
@@ -205,35 +198,28 @@ $(document).ready(function(){
             {
                 "featureType": "road.highway",
                 "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "simplified"
-                    }
-                ]
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
             },
             {
                 "featureType": "road.arterial",
                 "elementType": "labels.icon",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
+                "stylers": [{
+                    "visibility": "off"
+                }]
             },
             {
                 "featureType": "transit",
                 "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
+                "stylers": [{
+                    "visibility": "off"
+                }]
             },
             {
                 "featureType": "water",
                 "elementType": "all",
-                "stylers": [
-                    {
+                "stylers": [{
                         "color": "#46bcec"
                     },
                     {
@@ -280,7 +266,8 @@ $(document).ready(function(){
         action: 'userlocations',
         category: category
     }, function(results) {
-        var items = [], markers_data = [];
+        var items = [],
+            markers_data = [];
         if (results.locations.length > 0) {
             items = results.locations;
             for (var i = 0; i < items.length; i++) {
@@ -288,18 +275,18 @@ $(document).ready(function(){
 
                 if (item.latitude != undefined && item.longitude != undefined) {
                     markers_data.push({
-                        id : item.id,
-                        title : item.name,
-                        subtitle : item.status,
-                        description : item.img,
-                        lat : item.latitude,
-                        lng : item.longitude,
-                        img : item.img,
-                        icon : activeIcon,
-                        name : item.name,
-                        status : item.status,
-                        category : item.category,
-                        url : fullAddress + '?user=' + item.id
+                        id: item.id,
+                        title: item.name,
+                        subtitle: item.status,
+                        description: item.img,
+                        lat: item.latitude,
+                        lng: item.longitude,
+                        img: item.img,
+                        icon: activeIcon,
+                        name: item.name,
+                        status: item.status,
+                        category: item.category,
+                        url: fullAddress + '?user=' + item.id
                     });
                 }
             }
@@ -311,7 +298,8 @@ $(document).ready(function(){
         action: 'retrieve',
         category: category
     }, function(results) {
-        var items = [], markers_data = [];
+        var items = [],
+            markers_data = [];
         if (results.classifieds.length > 0) {
             items = results.classifieds;
             for (var i = 0; i < items.length; i++) {
@@ -319,16 +307,16 @@ $(document).ready(function(){
 
                 if (item.latitude != undefined && item.longitude != undefined) {
                     markers_data.push({
-                        id : item.id,
-                        lat : item.latitude,
-                        lng : item.longitude,
-                        title : item.title,
-                        icon : markerIcon,
-                        description : item.description,
-                        price : item.price,
-                        gallery : item.gallery,
-                        subtitle : item.subtitle,
-                        url : fullAddress + '?id=' + item.id
+                        id: item.id,
+                        lat: item.latitude,
+                        lng: item.longitude,
+                        title: item.title,
+                        icon: markerIcon,
+                        description: item.description,
+                        price: item.price,
+                        gallery: item.gallery,
+                        subtitle: item.subtitle,
+                        url: fullAddress + '?id=' + item.id
                     });
                 }
             }
@@ -336,7 +324,7 @@ $(document).ready(function(){
         allMarkers = map.addMarkers(markers_data);
     }, 'json');
 
-    $.get('json_data.php', function (results) {
+    $.get('json_data.php', function(results) {
         const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
         const markers = results.map(item => ({
             id: item.id,
@@ -353,7 +341,7 @@ $(document).ready(function(){
         allMarkers = allMarkers.concat(map.addMarkers(markers));
     }, 'json');
 
-    map.on('marker_added', function (marker) {
+    map.on('marker_added', function(marker) {
         /*
         Marker created for location setting purposes
         */
@@ -375,7 +363,7 @@ $(document).ready(function(){
                 offset: {
                     top: '-55px'
                 },
-                content: '<div>'+marker.title+'</div>',
+                content: '<div>' + marker.title + '</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '7px 12px',
@@ -388,8 +376,7 @@ $(document).ready(function(){
             });
             info.open();
             return false;
-        }
-        else { // Marker coming from database
+        } else { // Marker coming from database
             var index = map.markers.indexOf(marker);
             // Set up a close delay for CSS animations
             var info = null;
@@ -407,8 +394,8 @@ $(document).ready(function(){
                 offset: {
                     top: '-33px'
                 },
-                content: '<div><strong>'+strip(marker.title)+'</strong></div>' +
-                '<div>'+marker.subtitle+'</div>',
+                content: '<div><strong>' + strip(marker.title) + '</strong></div>' +
+                    '<div>' + marker.subtitle + '</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
@@ -472,74 +459,83 @@ $(document).ready(function(){
                 info.open();
             }
         }
-    
-    setTimeout(function(){
-        map.setCenter({lat: latitude, lng: longitude});
+    });
+
+    GMaps.geolocate({
+        success: function(position) {
+            map.setCenter(position.coords.latitude, position.coords.longitude);
+            $.post('library/ajax.php', {
+                action: 'newlocation',
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        },
+        error: function(error) {
+            map.setZoom(9);
+        },
+        not_supported: function() {
+            alert("Your browser doesn't support this function.");
+            map.setZoom(9);
+        },
+        options: {
+            enableHighAccuracy: true
+        }
+    });
+
+    $(document).on('click', '.login-fb', function(e) {
+        e.preventDefault();
+        FB.login(function(response) {
+            if (response.status === 'connected') {
+                window.location.reload();
+            } else if (response.status === 'not_authorized') {
+                alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
+            } else {
+                alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
+            }
+        }, {
+            scope: 'email,public_profile'
+        });
+    });
+
+    setTimeout(function() {
+        map.setCenter({
+            lat: latitude,
+            lng: longitude
+        });
         $('#preloader').fadeOut();
         $('.preload-hide').show();
-        $('#map').css({'width':'100%','height':'100%'});
+        $('#map').css({
+            'width': '100%',
+            'height': '100%'
+        });
 
         if (typeof fbId === 'undefined') {
             toastr.info('Welcome to Pandemic Baltics — in the time of crisis, you\'re not alone. We\'re the proof.');
-        
-            setTimeout(function(){
+
+            setTimeout(function() {
                 toastr.warning('Please authorize with Facebook & allow location access to access all of the platforms features.');
-            },3500);
+            }, 3500);
         }
     }, 1000);
 });
-// End of document ready
 
-GMaps.geolocate({
-    success: function(position){
-        map.setCenter(position.coords.latitude, position.coords.longitude);
-        $.post('library/ajax.php', {
-            action:'newlocation',
-            lat:position.coords.latitude,
-            lng:position.coords.longitude
-        });
-    },
-    error: function(error){
-        map.setZoom(9);
-    },
-    not_supported: function(){
-        alert("Your browser doesn't support this function.");
-        map.setZoom(9);
-    },
-    options: {enableHighAccuracy:true}
-});
-
-$(document).on('click', '.login-fb', function(e){
-    e.preventDefault();
-    FB.login(function(response) {
-        if (response.status === 'connected') {
-            window.location.reload();
-        } else if (response.status === 'not_authorized') {
-            alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
-        } else {
-            alert('We had an error authorising you. If the problem persists, contact us via info@pandemic.lv');
-        }
-    }, {scope: 'email,public_profile'});
-    });
-});
-
-$('#post-the-ad').on('click', function(e){
+$('#post-the-ad').on('click', function(e) {
     e.preventDefault();
 
     $('#post-the-ad span').text('Adding…');
 
     $.post('library/ajax.php', {
-        action:'add',
-        title:$('#title').val(),
-        description:$('#description').val(),
-        price:$('#price').val(),
-        category:$('#category').val(),
-        phone:$('#phone').val(),
-        email:$('#email').val()
-    }, function(response){
+        action: 'add',
+        title: $('#title').val(),
+        description: $('#description').val(),
+        price: $('#price').val(),
+        category: $('#category').val(),
+        phone: $('#phone').val(),
+        email: $('#email').val()
+    }, function(response) {
         if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
             $('#post-the-ad span').text('Create without errors');
-            alert('Whoops: '+response.errors[0]);
+            alert('Whoops: ' + response.errors[0]);
         } else {
             makeLocation(response.id);
         }
@@ -547,7 +543,9 @@ $('#post-the-ad').on('click', function(e){
 });
 
 /* Facebook */
-function statusChangeCallback(response) { /* do nothing */ }
+function statusChangeCallback(response) {
+    /* do nothing */
+}
 
 /* Location creation */
 var addmarkerIcon = {
@@ -559,6 +557,7 @@ var addmarkerIcon = {
     strokeWeight: 2,
     anchor: new google.maps.Point(12, 24)
 };
+
 function makeLocation(claddid) {
     $('#save-location').data('classified', claddid);
 
@@ -592,14 +591,14 @@ function makeLocation(claddid) {
     }, 600);
     map.panTo(classifiedmarker.getPosition());
 }
-$('#save-location').on('click', function(e){
+$('#save-location').on('click', function(e) {
     e.preventDefault();
     $.post('library/ajax.php', {
         action: 'location',
         classified: $(this).data('classified'),
         lat: $(this).data('lat'),
         lng: $(this).data('lng')
-    }, function(response){
+    }, function(response) {
         if (response.result == 'success') {
             window.location.href = fullAddress;
         }
@@ -608,16 +607,15 @@ $('#save-location').on('click', function(e){
 
 /* Custom functions */
 function clearOverlays() {
-    if (typeof allMarkers != 'undefined'){
+    if (typeof allMarkers != 'undefined') {
         for (var i = 0; i < allMarkers.length; i++)
-        allMarkers[i].setMap(null);
-        allMarkers.length = 0;        
+            allMarkers[i].setMap(null);
+        allMarkers.length = 0;
     }
-
 }
 
 function strip(html) {
-   var tmp = document.createElement("DIV");
-   tmp.innerHTML = html;
-   return tmp.textContent || tmp.innerText || "";
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
 }
