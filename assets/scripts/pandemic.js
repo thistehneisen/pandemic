@@ -297,7 +297,7 @@ $(document).ready(function() {
                         id: item.id,
                         title: strip(item.name),
                         subtitle: item.status,
-                        description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" class="pImg">',
+                        description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
                         lat: item.latitude,
                         lng: item.longitude,
                         img: item.img,
