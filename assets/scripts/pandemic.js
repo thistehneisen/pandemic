@@ -4,6 +4,24 @@ window.addEventListener('load', function() {
 }, false);
 document.addEventListener("touchstart", function() {}, true);
 
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "8000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function() {
