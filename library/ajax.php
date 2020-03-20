@@ -74,7 +74,8 @@ if (!empty($_POST)) {
 
         foreach ((array)$classifieds as $classified) {
             if (!empty($category) && $category != $classified['category'])
-            continue;
+                continue;
+            
             $gallery = array();
             $delete = '';
             $classified['photos'] = json_decode($classified['photos']);
@@ -85,7 +86,7 @@ if (!empty($_POST)) {
             }
 
             if ($classified['user'] == $_SESSION['facebook']['id'])
-            $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$classified['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
+                $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$classified['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
 
             $output[] = array(
                 'id' => $classified['id'],

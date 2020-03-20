@@ -21,14 +21,14 @@ Write us on info@pandemic.lv and become one of our team.
 -->
 <head>
 	<meta charset="UTF-8" />
-	<title>Pandemic Baltics — In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and businesses.</title>
+	<title>Pandemic Baltics (<?php print($settings['country']))?>) — Connecting you with neighbors, volunteers, businesses and information.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
 	<meta name="description" content="In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and businesses.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
-	<meta property="og:title" content="Pandemic Baltics — In the time of crisis, you're not alone.">
+	<meta property="og:title" content="Pandemic Baltics (<?php print($settings['country']))?>) — In the time of crisis, you're not alone.">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Giving you the official information about the state of pandemics, in Baltics.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } else {
@@ -122,10 +122,10 @@ Write us on info@pandemic.lv and become one of our team.
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
 				<?php include('assets/images/corona.svg'); ?>
-				<span>pandemic baltics</span>
+				<span><?php print($settings['host'])?></span>
 			</a>
 			<nav>
-				<?php if (!empty($_SESSION['facebook']['id'])) { ?><span><a rel="leanModal" href="#add-ad">Add your area</a></span><?php } ?>
+				<?php if (!empty($_SESSION['facebook']['id'])) { ?><span><a rel="leanModal" href="#add-ad">Add your service</a></span><?php } ?>
 				<span><a rel="leanModal" href="#about">About project</a></span>
                 <span class="dd">
                     <a href="#">Categories</a>
