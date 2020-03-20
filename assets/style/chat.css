@@ -18,7 +18,7 @@
   position: relative;
   margin-bottom: 1rem;
   padding-left: 5rem;
-  height: 6.5rem;
+  height: 4.5rem;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -60,8 +60,8 @@
   left: 0;
   -webkit-transform: translate(-6rem, -50%);
           transform: translate(-6rem, -50%);
-  width: 24rem;
-  height: 32rem;
+  width: 32rem;
+  height: 48rem;
   padding: 1rem 2rem 1rem 1rem;
   box-sizing: border-box;
   border-radius: 1rem 0 0 1rem;
@@ -103,8 +103,8 @@
           flex-direction: column;
   -webkit-box-pack: justify;
           justify-content: space-between;
-  width: 24rem;
-  height: 38rem;
+  width: 32rem;
+  height: 48rem;
   z-index: 2;
   box-sizing: border-box;
   border-radius: 1rem;
