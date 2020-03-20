@@ -299,8 +299,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						<?php include('terms.php'); ?>
 					</div>
 					<div class="modal-footer">
-						<a class="button filled blue agree" rel="leanModal" href="#add-ad"><span>Agree</span></a>
-						<a class="button outline gray disagree" rel="leanModal" href="#add-ad"><span>Disagree</span></a>
+						<a class="button filled blue agree" rel="leanModal" href="#add-ad"><span>Accepting fully</span></a>
+						<a class="button outline gray disagree" onclick="alert('Unfortunately, we have to seperate our ways, but we just want to let you know…'); return true;" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><span>Disagree</span></a>
 					</div>
 				</div>
 			</div>
