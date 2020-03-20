@@ -2,8 +2,6 @@
   position: absolute;
   bottom: 20px;
   left: calc(20px + 12rem);
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
 }
 
 .pic {
