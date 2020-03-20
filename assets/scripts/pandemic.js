@@ -4,20 +4,6 @@ window.addEventListener('load', function() {
 }, false);
 document.addEventListener("touchstart", function(){}, true);
 
-Noty.overrideDefaults({
-    layout   : 'bottomRight',
-    theme    : 'sunset',
-    closeWith: ['click', 'button'],
-    visibilityControl: true,
-    animation: {
-        open : 'animated fadeInRight',
-        close: 'animated fadeOutRight'
-    },
-    callbacks: {
-        onShow: function(){var that=this;setTimeout(function(){$(that.barDom).each(function(){this.parentNode.replaceChild(this.cloneNode(true), this); });},100);}
-    }
-});
-
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function(){
@@ -35,9 +21,6 @@ $(document).ready(function(){
         };
     },  'json');
 
-    // Snakeoil
-    $(document).on('click','.noty_bar',function(){$(this).remove();});
-
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
@@ -46,30 +29,7 @@ $(document).ready(function(){
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
-
-                var n = new Noty({
-                    layout: 'center',
-                    type: 'info',
-                    text: 'To use the chat and see available channels, you need to authorize. Do you want to do so right now?',
-                    buttons: [
-                      Noty.button('Authorize me', 'btn login-fb', function () {
-                      }, {id: 'button1', 'data-status': 'ok'}),
-                      Noty.button('Cancel', 'btn btn-error', function () {
-                          n.close();
-                      })
-                    ]
-                  });
-                  n.show();
-
-                setTimeout(function(){
-                    //govnakod
-                    $('.btn-error').on( "click", function() {
-                        $('#noty_layout__center').remove();
-                        $('.btn-error').unbind();
-                    });
-                } , 500 );
-
-
+                  toastr.error('To use the chat and see available channels, you need to authorize with Facebook.');
                 return false;
             }
             else {
@@ -518,20 +478,15 @@ $(document).ready(function(){
         $('#preloader').fadeOut();
         $('.preload-hide').show();
         $('#map').css({'width':'100%','height':'100%'});
-    }, 1000);
 
-    if (typeof fbId === 'undefined') {
-        new Noty({
-            text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
-        }).show();
-    
-        setTimeout(function(){
-            new Noty({
-                text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
-                type: 'info'
-            }).show();
-        },3500);
-    }
+        if (typeof fbId === 'undefined') {
+            toastr.info('Welcome to Pandemic Baltics — in the time of crisis, you\'re not alone. We\'re the proof.');
+        
+            setTimeout(function(){
+                toastr.warning('Please authorize with Facebook & allow location access to access all of the platforms features.');
+            },3500);
+        }
+    }, 1000);
 });
 // End of document ready
 
