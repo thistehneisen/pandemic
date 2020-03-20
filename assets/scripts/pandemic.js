@@ -349,14 +349,15 @@ $(document).ready(function() {
             id: item.id,
             lat: item.selfCooLat * 1 + randomDisplacement(),
             lng: item.selfCooLng * 1 + randomDisplacement(),
-            title: item.origin,
+            title: item.origin + ', ' + item.dateOfFirstContactWithLatvia,
             icon: quarantineIcon,
-            description: item.descriptionTitle,
+            description: item.descriptionTitle + '<br/>First contact in Latvia: '+item.dateOfFirstContactWithLatvia+'<br/>Broadcasted: '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'">'+item.link+'</a></li></ol>',
             price: undefined,
             gallery: undefined,
             subtitle: item.label,
-            url: fullAddress + '?id=' + item.id
+            url: fullAddress + '?case=' + item.id
         }));
+
         allMarkers = allMarkers.concat(map.addMarkers(markers));
     }, 'json');
 
