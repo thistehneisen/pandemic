@@ -528,57 +528,11 @@ $(document).ready(function(){
                 info.open();
             }
         }
-    });
-
-    /*map.setContextMenu({
-    control: 'map',
-    options: [{
-    title: 'Pievienot sludinājumu',
-    name: 'add_marker',
-    action: function(e) {
-    this.addMarker({
-    lat: e.latLng.lat(),
-    lng: e.latLng.lng(),
-    title: 'Jauns sludinājums'
-});
-}
-}, {
-title: 'Centrēt šeit',
-name: 'center_here',
-action: function(e) {
-this.setCenter(e.latLng.lat(), e.latLng.lng());
-}
-}]
-});*/
-
-map.addControl({
-    position: 'top_right',
-    content: 'My location',
-    style: {
-        margin: '5px',
-        padding: '1px 6px',
-        border: 'solid 1px #717B87',
-        background: '#fff'
-    },
-    events: {
-        click: function(){
-            GMaps.geolocate({
-                success: function(position){
-                    map.setCenter(position.coords.latitude, position.coords.longitude);
-                },
-                error: function(error){
-                    alert('Error: ' + error.message);
-                },
-                not_supported: function(){
-                    alert("Your browser doesn't support this function.");
-                }
-            });
-        }
-    }
 
     $('#preloader').fadeOut();
     $('.preloader-hide').fadeIn();
 });
+// End of document ready
 
 GMaps.geolocate({
     success: function(position){
