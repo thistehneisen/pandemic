@@ -1,7 +1,19 @@
-.bottom-left-chat {
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap");
+body, html {
+  font-family: Red hat Display, sans-serif;
+  font-weight: 400;
+  line-height: 1.25em;
+  letter-spacing: 0.025em;
+  color: #333;
+  background: #F7F7F7;
+}
+
+.center {
   position: absolute;
-  bottom: 20px;
-  left: calc(20px + 12rem);
+  top: 50%;
+  left: calc(50% + 12rem);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .pic {
