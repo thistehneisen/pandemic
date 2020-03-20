@@ -263,8 +263,6 @@ Write us on info@pandemic.lv and become one of our team.
 									</div>
 								</form>
 							</div>
-
-							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
