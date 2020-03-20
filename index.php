@@ -17,7 +17,7 @@ if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($setting
 <html>
 <!--
 Interested in the code?
-Write us on info@pandemic.lv and become one of our team.
+Write us on info@<?php print($settings['host'])?> and become one of our team.
 -->
 <head>
 	<meta charset="UTF-8" />
@@ -426,9 +426,11 @@ Write us on info@pandemic.lv and become one of our team.
 	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 </script>
 <?php } ?>
+
 <footer class="preload-hide">
 	<input type="text" id="chatbox" placeholder="Enter your message…" />
 </footer>
+
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
@@ -445,7 +447,6 @@ Write us on info@pandemic.lv and become one of our team.
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
-<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/fastclick.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
 </body>

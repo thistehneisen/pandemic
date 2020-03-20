@@ -1,8 +1,7 @@
-// - - - - - - - - - - -  Fastclick  - - - - - - - - - - -
-window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-}, false);
-document.addEventListener("touchstart", function() {}, true);
+/*
+Interested in the code? We're open for co-operations.
+info@pandemic.lv
+*/
 
 toastr.options = {
     "closeButton": false,
