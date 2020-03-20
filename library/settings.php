@@ -49,4 +49,4 @@ if (!isset($host) || !in_array($host, array_keys($settings['hosts']))) {
         }
     }
 }
-die(print($settings['latitude']));
+die(print($settings['host']));
