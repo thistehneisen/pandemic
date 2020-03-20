@@ -51,7 +51,6 @@ if (!empty($_POST)) {
                 continue;
             
             $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
-
             $nameDetails = explode(" ", trim($userdata['name']));
             $namePut = $nameDetails[0].' '.substr($nameDetails[1], 0, 1).'.';
 
@@ -65,6 +64,7 @@ if (!empty($_POST)) {
                 'category' => 'isolating'
             ];
         }
+        var_dump($output);
 
         die(json_encode(array('locations' => $output)));
     } else if ($action == 'retrieve') {
