@@ -118,7 +118,7 @@ Write us on info@pandemic.lv and become one of our team.
 		</section>
 	</script>
 
-	<header class="header">
+	<header class="header" style="display: none;">
 		<div class="container">
 			<a class="logo" href="<?php print($settings['fullAddress'])?>">
 				<?php include('assets/images/corona.svg'); ?>
@@ -260,8 +260,8 @@ Write us on info@pandemic.lv and become one of our team.
 
 		<div id="lean-mask"></div>
 	</div>
-	<div class="map-ct">
-	<div id="map">
+	<div class="map-ct" style="display: none;">
+	<div id="map" style="display: none;">
 		&nbsp;
 	</div>
 	</div>
