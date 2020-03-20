@@ -21,15 +21,15 @@ Write us on info@pandemic.lv and become one of our team.
 -->
 <head>
 	<meta charset="UTF-8" />
-	<title>Pandemic Baltics (<?php print($settings['country'])?>) — Connecting you with neighbors, volunteers, businesses and information.</title>
+	<title>Pandemic Baltics (<?php print($settings['country'])?>) — Connecting you with neighbors, volunteers and information.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
-	<meta name="description" content="In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and businesses.">
+	<meta name="description" content="In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and information.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic Baltics (<?php print($settings['country'])?>) — In the time of crisis, you're not alone.">
-	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Giving you the official information about the state of pandemics, in Baltics.">
+	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Providing you with the official information about the state of pandemics, Baltic-wise.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
@@ -61,7 +61,7 @@ Write us on info@pandemic.lv and become one of our team.
 </head>
 <body>
 	<div id="preloader">
-		<h1>Pandemic Baltics</h1>
+		<h1>Pandemic Baltics (<em><?php print($settings['country'])?></em>)</h1>
 		<div class="cube-wrapper">
 			
 		<div class="cube-folding">
