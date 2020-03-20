@@ -45,8 +45,8 @@ Write us on info@pandemic.lv and become one of our team.
 <?php } ?>
 	<meta property="fb:app_id" content="<?php print($settings['facebook']['app']['id'])?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="msapplication-TileColor" content="#a62f2e">
-	<meta name="theme-color" content="#a62f2e">
+	<meta name="msapplication-TileColor" content="#00aeef">
+	<meta name="theme-color" content="#00aeef">
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/.js/chart.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>vendor/needim/noty/lib/noty.css" />

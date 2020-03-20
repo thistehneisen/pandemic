@@ -514,7 +514,7 @@ $(document).ready(function(){
         fillColor: '#222',
         fillOpacity: 0.95,
         scale: 1.5,
-        strokeColor: '#972727',
+        strokeColor: '#0199d2',
         strokeWeight: 2,
         anchor: new google.maps.Point(12, 24)
     };
