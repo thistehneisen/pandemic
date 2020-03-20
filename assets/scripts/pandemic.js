@@ -518,20 +518,20 @@ $(document).ready(function(){
         $('#preloader').fadeOut();
         $('.preload-hide').show();
         $('#map').css({'width':'100%','height':'100%'});
-
-        if (typeof fbId === 'undefined') {
-            new Noty({
-                text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
-            }).show();
-        
-            setTimeout(function(){
-                new Noty({
-                    text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
-                    type: 'info'
-                }).show();
-            },3500);
-        }
     }, 1000);
+
+    if (typeof fbId === 'undefined') {
+        new Noty({
+            text: 'Welcome to Pandemic.lv — in the time of crisis, you\'re not alone. We\'re the proof.',
+        }).show();
+    
+        setTimeout(function(){
+            new Noty({
+                text: 'Please authorize with your Facebook profile to use your profile and access all of the platforms features.',
+                type: 'info'
+            }).show();
+        },3500);
+    }
 });
 // End of document ready
 
