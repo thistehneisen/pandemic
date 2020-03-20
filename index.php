@@ -251,7 +251,7 @@ Write us on info@pandemic.lv and become one of our team.
 <a class="button filled green" href="#" style="display: none;" id="save-location"><span>Ready!</span></a>
 <div class="mask">&nbsp;</div>
 <?php if (isset($_GET['chat'])) { ?>
-	<div class="center">
+	<div class="bottom-left-chat">
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
     <h2>
