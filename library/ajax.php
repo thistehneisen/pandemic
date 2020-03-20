@@ -51,12 +51,17 @@ if (!empty($_POST)) {
                 continue;
             
             $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
+
+            $nameDetails = explode(" ", trim($userdata['name']));
+
+            $namePut = $nameDetails[0].' '.substr($nameDetails[0], 0, 1).'.';
+
             $output[] = [
                 'id' => $location['fbid'],
                 'latitude' => $location['latitude'],
                 'longitude' => $location['longitude'],
                 'img' => $userdata['picture'],
-                'name' => $userdata['name'],
+                'name' => $namePut,
                 'status' => 'No status available.',
                 'category' => 'isolating'
             ];
