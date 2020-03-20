@@ -198,9 +198,7 @@ Write us on info@pandemic.lv and become one of our team.
 										<input type="text" id="email" name="email" placeholder="E-mail" value="" required="">
 									</div>
 								</div>
-
 							</div>
-
 
 							<div class="checkbox">
 								<div>
@@ -239,7 +237,7 @@ Write us on info@pandemic.lv and become one of our team.
 
 							<div class="text">
 								<label for="status">Status message <span>(max. 40 symbols)</span></label>
-								<input type="text" id="status" name="status" placeholder="status" maxlength="40" value="" required="">
+								<input type="text" id="status" name="status" placeholder="Let us know…" maxlength="40" value="" required="">
 							</div>
 
                             <div class="select">
