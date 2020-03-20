@@ -504,17 +504,21 @@ $(document).ready(function() {
 
     $(document).on('click', '.login-fb', function(e) {
         e.preventDefault();
-        FB.login(function(response) {
-            if (response.status === 'connected') {
-                window.location.reload();
-            } else if (response.status === 'not_authorized') {
-                toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
-            } else {
-                toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
-            }
-        }, {
-            scope: 'email,public_profile'
-        });
+        try {
+            FB.login(function(response) {
+                if (response.status === 'connected') {
+                    window.location.reload();
+                } else if (response.status === 'not_authorized') {
+                    toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
+                } else {
+                    toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
+                }
+            }, {
+                scope: 'email,public_profile'
+            });
+        } catch(e) {
+            toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
+        }
     });
 
     setTimeout(function() {
