@@ -38,7 +38,7 @@ if (!isset($host) || !in_array($host, array_keys($settings['hosts']))) {
 } else {
     $settings['host'] = $host;
     $settings['fullAddress'] = 'https://'.$host.'/';
-    $settings['country'] = $config['hosts'][$host];
+    $settings['country'] = $settings['hosts'][$host];
     if ($settings['country'] == 'Latvia') {
         $settings['latitude'] = '56.946618';
         $settings['longitude'] = '24.097274';
