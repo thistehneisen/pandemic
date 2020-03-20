@@ -24,20 +24,20 @@ Write us on info@pandemic.lv and become one of our team.
 	<title>Pandemic Baltics (<?php print($settings['country'])?>) — Connecting you with neighbors, volunteers and information.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
-	<meta name="description" content="In the time of crisis, you're not alone. Connecting you with neighbors, volunteers and information.">
+	<meta name="description" content="In the time of crisis, you're not alone. Pandemic Baltics is connecting you with neighbors, volunteers and information.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic Baltics (<?php print($settings['country'])?>) — In the time of crisis, you're not alone.">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Providing you with the official information about the state of pandemics, Baltic-wise.">
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
 	if (!empty($image)) {
 ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($classified['id'])?>">
 <?php } else { ?>
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } ?>
 	<meta property="og:title" content="<?php print(htmlspecialchars($classified['title']))?>">
 	<meta property="og:description" content="<?php print(htmlspecialchars($classified['description']))?>">
@@ -57,7 +57,7 @@ Write us on info@pandemic.lv and become one of our team.
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
 
-	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?v2" />
 </head>
 <body>
 	<div id="preloader">
