@@ -386,8 +386,8 @@ Write us on info@pandemic.lv and become one of our team.
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
-	latitude = <?php print(json_encode($settings['latitude']))?>;
-	longitude = <?php print(json_encode($settings['longitude']))?>;
+	latitude = <?php print($settings['latitude'])?>;
+	longitude = <?php print($settings['longitude'])?>;
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
