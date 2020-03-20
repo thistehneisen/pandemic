@@ -133,9 +133,15 @@ Write us on info@pandemic.lv and become one of our team.
                 <span class="dd">
                     <a href="#">Categories</a>
                     <ul class="dropdown">
-                        <?php foreach($settings['categories'] as $key => $category) { ?><li><a href="<?php print($settings['fullAddress'])?>?category=<?php print($key)?>"><?php print($category)?><span></span></a></li><?php } ?>
+                        <?php foreach($settings['categories'] as $key => $category) { ?><li><a href="<?php print($settings['fullAddress'])?>?category=<?php print($key)?>"><span><?php print($category)?></span></a></li><?php } ?>
 					</ul>
                 </span>
+                <span class="dd">
+                    <a href="#">Settings</a>
+                    <ul class="dropdown">
+						<li><a href="#" onclick="return false;"><span></span> Show people</a></li>
+					</ul>
+				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
 				<span><a href="#" class="login-fb"><?php include('assets/images/ico/facebook-social-symbol.svg'); ?> Log in</a></span>
 				<?php } else { ?>
