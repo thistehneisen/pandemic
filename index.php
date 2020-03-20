@@ -75,7 +75,7 @@ Write us on info@pandemic.lv and become one of our team.
 		</div>
 
 		<div class="made-with-love">
-			In the time of crisis, you're not alone. We're the proof.<br/>
+			<strong>In the time of crisis, you're not alone. We're the proof.</strong><br/>
 			Platform is secured by <a href="https://seq.science/">Digital Security Alliance</a>
 		</div> 
 	</div>
