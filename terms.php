@@ -1,5 +1,5 @@
 	<h2>Terms of Service <em>&</em> Privacy Policy</h2>
-	<strong>Terms used:</strong>
+
 	<ul>
 		<li>"<em>Platform</em>" — The site that is either <a href="https://pandemic.lv">pandemic.lv</a>, <a href="https://pandemic.lt">pandemic.lt</a> or <a href="https://pandemic.ee">pandemic.ee</a>.
 	</ul>
@@ -15,4 +15,5 @@
 		<li>Upon authorization with <strong>Google Maps</strong> (<em>GeoLocation</em>): your current latitude, longitude and time.</li>
 		<li>We reserve the right to store extra data for the purposes of statistics, debugging and improving our <em>Platform</em></li>
 	</ul>
-	<p>Our platform has been secured and audited by <a href="https://seq.science/" target="_blank">Digital Security Alliance</a>. In case of any inquiries, contact us at <a href="mailto:info@pandemic.lv?subject=ToS inquiry">info@pandemic.lv</a></p>
+	<p>In any kind of unlawful or Terms of Usage violating acts, we reserve our rights to inform local authorities about such actions.</p>
+	<p>Our platform has been secured and audited by <a href="https://seq.science/" target="_blank">Digital Security Alliance</a>. In case of any inquiries, feel free to contact us at <a href="mailto:info@pandemic.lv?subject=ToS inquiry">info@pandemic.lv</a>.</p>
