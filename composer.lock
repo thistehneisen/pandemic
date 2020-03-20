@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8d446d9a48d39d08c78b2ad9f641006",
+    "content-hash": "e137bf2d2b4d059c94b846b92c6ecf96",
     "packages": [
         {
             "name": "facebook/graph-sdk",
@@ -275,40 +275,6 @@
                 "write"
             ],
             "time": "2020-03-17T15:15:35+00:00"
-        },
-        {
-            "name": "needim/noty",
-            "version": "v3.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/needim/noty.git",
-                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/needim/noty/zipball/77268c46b6db6a1eb7a920ed7c859fbc8de17993",
-                "reference": "77268c46b6db6a1eb7a920ed7c859fbc8de17993",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nedim Arabaci",
-                    "homepage": "http://ned.im",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Noty is a library that makes it easy to create alert - success - error - warning - information - confirmation messages as an alternative the standard alert dialog.",
-            "homepage": "http://ned.im/noty",
-            "keywords": [
-                "notification",
-                "noty"
-            ],
-            "time": "2017-12-13T20:36:34+00:00"
         },
         {
             "name": "psr/http-message",
