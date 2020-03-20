@@ -48,6 +48,7 @@ $(document).ready(function() {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
                 toastr.error('To use the chat and see available channels, you need to authorize with Facebook.');
+                $('.login-fb').click();
                 return false;
             } else {
 
