@@ -252,15 +252,6 @@ Write us on info@pandemic.lv and become one of our team.
 								<label for="description">Description <span>(max. 360 symbols)</span></label>
 								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="360"></textarea>
 							</div>
-
-							<div class="img-upload">
-								<label>Choose images</label>
-								<form id="img-upload" action="library/upload.php" class="dropzone" enctype="multipart/form-data">
-									<div class="fallback file">
-										<input name="file" type="file" />
-									</div>
-								</form>
-							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
