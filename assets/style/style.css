@@ -244,6 +244,7 @@ body {
 }
 
 #preloader h1 {
+  margin-top: 0;
   font-size: 35px;
   display: block;
   text-align: center;
