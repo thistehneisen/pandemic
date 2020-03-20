@@ -3,7 +3,7 @@
 
 $dwcSetting = [
     'compress'         => true,
-    'cache-folder'     => 'uploads/cache',
+    'cache-folder'     => '/var/www/vhosts/pandemic.lv/httpdocs/uploads/cache',
     'minify-css-files' => true,
     'minify-js-files'  => true,
 ];
