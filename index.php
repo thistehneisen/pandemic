@@ -356,9 +356,6 @@ Write us on info@pandemic.lv and become one of our team.
   </div>
 </div>
 <?php } ?>
-<footer>
-	<input type="text" id="chatbox" placeholder="Enter your message…" />
-</footer>
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
