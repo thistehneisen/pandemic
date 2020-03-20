@@ -355,6 +355,11 @@ Write us on info@pandemic.lv and become one of our team.
     </div>
   </div>
 </div>
+<script type="text/javascript">
+    // Chat
+    var chat = document.getElementById('chat');
+	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+</script>
 <?php } ?>
 <footer>
 	<input type="text" id="chatbox" placeholder="Enter your message…" />

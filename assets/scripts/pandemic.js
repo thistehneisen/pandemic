@@ -48,10 +48,6 @@ $(document).ready(function(){
         };
     },  'json');
 
-    // Chat
-    var chat = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-
     // Snakeoil
     $(document).on('click','.noty_bar',function(){$(this).remove();});
 
