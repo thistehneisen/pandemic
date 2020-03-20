@@ -53,7 +53,9 @@ if (!empty($_POST)) {
             $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
 
             $nameDetails = explode(" ", trim($userdata['name']));
+            var_dump($nameDetails);
             $namePut = $nameDetails[0].' '.substr($nameDetails[1], 0, 1).'.';
+            var_dump($namePut);
 
             $output[] = [
                 'id' => $location['fbid'],
