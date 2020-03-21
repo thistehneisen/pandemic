@@ -34,7 +34,7 @@ $contents = json_encode(array_reverse($contents));
 <script>
   const ctx = document.getElementById("mainChart").getContext("2d");
   const json = <?php print($contents)?>;
-  const labels = latestData.map(entry => entry.date);
+  const labels = json.map(entry => entry.date);
   const colors = {
     green: {
       fill: "#e0eadf",
