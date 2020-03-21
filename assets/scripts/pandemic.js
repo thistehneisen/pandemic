@@ -416,31 +416,12 @@ $(document).ready(function() {
                     }
                 }
             });
-            if (typeof openMarker !== 'undefined' && openMarker == marker.id) {
+
+            // Open the $_GET['id'] places
+            if (typeof openPlace !== 'undefined' && openPlace === marker.id) {
                 map.panTo(marker.getPosition());
                 info.open();
             }
-        }
-    });
-
-    GMaps.geolocate({
-        success: function(position) {
-            map.setCenter(position.coords.latitude, position.coords.longitude);
-            $.post(xhr, {
-                action: 'newlocation',
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            });
-        },
-        error: function(error) {
-            map.setZoom(9);
-        },
-        not_supported: function() {
-            toastr.error('Your browser doesn\'t support GeoLocation, please check whether an extension isn\'t blocking this feature.', 'GeoLocation');
-            map.setZoom(9);
-        },
-        options: {
-            enableHighAccuracy: true
         }
     });
 
@@ -450,7 +431,7 @@ $(document).ready(function() {
             FB.login(function(response) {
                 if (response.status === 'connected') {
                     FB.api('/me', function(response) {
-                        toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
+                        toastr.success('Welcome back, ' + response.name + '!', 'Authenticated');
                         fbId = response.id;
                         $.get('', function(response){
                             var header = $(response).find('header.header').html();
@@ -536,12 +517,35 @@ $('#save-location').on('click', function(e) {
         lat         : $(this).data('lat'),
         lng         : $(this).data('lng')
     }, function(r) {
-        if (r.result == 'success') { toastr.success('The selected location is now published with all of your specified information.', 'Place published'); }
-        else { toastr.error('We have some kind of technical difficulities, if the problem persists, please inform us!', 'Error'); }
+        if (r.result == 'success') { toastr.success('The selected location is now published with your specified information.', 'Place published'); }
+        else { toastr.error('We have some kind of technical difficulities, if the problem persists, please get in touch!', 'Error'); }
     }, 'json');
 });
 
 // Helpers
+function geoLocate() {
+    GMaps.geolocate({
+        success: function(position) {
+            map.setCenter(position.coords.latitude, position.coords.longitude);
+            $.post(xhr, {
+                a       : 'people',
+                m       : 'set',
+                lat     : position.coords.latitude,
+                lng     : position.coords.longitude
+            });
+        },
+        error: function(error) {
+            toastr.error('GeoLocation is sending us an error: ' + error, 'Error');
+            map.setZoom(9);
+        },
+        not_supported: function() {
+            toastr.error('This browser doesn\'t support GeoLocation. Please check extensions, or try with different browser.', 'Not supported');
+            map.setZoom(9);
+        },
+        options: { enableHighAccuracy: true }
+    });
+}
+
 function getIcon(fC = '00aeef', sColor = 222, sC = 1.2, fO = 0.65, url = undefined) {
     return {
         path            : 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',

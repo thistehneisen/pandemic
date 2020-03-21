@@ -320,65 +320,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <div class="center" id="chatbox">
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
-    <h2>
-      People <em>&</em> Groups
-    </h2>
+    <h2>Rooms</h2>
     <div class="contact">
       <div class="pic rogers"></div>
-      <div class="badge">
-        14
-      </div>
-      <div class="name">
-        Steve Rogers
-      </div>
-      <div class="message">
-        That is America's ass 🇺🇸🍑
-      </div>
-    </div>
-    <div class="contact">
-      <div class="pic stark"></div>
-      <div class="name">
-        Tony Stark
-      </div>
-      <div class="message">
-        Uh, he's from space, he came here to steal a necklace from a wizard.
-      </div>
-    </div>
-    <div class="contact">
-      <div class="pic banner"></div>
-      <div class="badge">
-        1
-      </div>
-      <div class="name">
-        Bruce Banner
-      </div>
-      <div class="message">
-        There's an Ant-Man *and* a Spider-Man?
-      </div>
-    </div>
-    <div class="contact">
-      <div class="pic thor"></div>
-      <div class="name">
-        Thor Odinson
-      </div>
-      <div class="badge">
-        3
-      </div>
-      <div class="message">
-        I like this one
-      </div>
-    </div>
-    <div class="contact">
-      <div class="pic danvers"></div>
-      <div class="badge">
-        2
-      </div>
-      <div class="name">
-        Carol Danvers
-      </div>
-      <div class="message">
-        Hey Peter Parker, you got something for me?
-      </div>
+      <div class="badge">0</div>
+      <div class="name">Alvis Zaldis</div>
+      <div class="message">Xyz ziņa viena divas</div>
     </div>
   </div>
   <div class="chat">
@@ -435,7 +382,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
-	openMarker = <?php print(!empty($place['id']) ? $place['id'] : '""')?>;
+	openPlace = <?php print($place['id'] ?? 'undefined')?>;
 	category = "<?php print($jscategory)?>";
 	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;

@@ -13,6 +13,7 @@ $actions[] = [
 $a          = $_POST['a']; // action
 $m          = $_POST['m']; // method
 $errors     = [];
+
 if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
 
     /* PLACES */
@@ -75,7 +76,10 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
                 $db->update('places', [
                     'latitude' => $_POST['lat'],
                     'longitude' => $_POST['lng']
-                ], [ 'id' => $_POST['place'], 'user' => $_SESSION['facebook']['id'] ];
+                ], [
+                    'id' => $_POST['place'],
+                    'user' => $_SESSION['facebook']['id']
+                ];
 
                 jD('result', 'success');
             } else {
@@ -106,6 +110,12 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
             }
 
             die(json_encode(array('locations' => $output)));
+        } else if ($m === 'set') {
+            $db->insert('locations', [
+                'fbid' => $_SESSION['facebook']['id'],
+                'latitude' => $_POST['lat'],
+                'longitude' => $_POST['lng']
+            ], true);
         }
     } else if ($action == 'retrieve') {
         $output = array();
@@ -143,12 +153,6 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
         }
 
         die(json_encode(array('places' => $output)));
-    } else if ($action == 'newlocation') {
-        $db->insert('locations', [
-            'fbid' => $_SESSION['facebook']['id'],
-            'latitude' => $_POST['lat'],
-            'longitude' => $_POST['lng']
-        ], true);
     } else {
 
         //my small world seperated from all other stuff
