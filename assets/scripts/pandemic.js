@@ -76,7 +76,6 @@ function pandemicData(action, sub, data) {
 
                         if (typeof item.latitude !== 'undefined' &&
                             typeof item.longitude !== 'undefined') {
-                                console.log('Nav undefined');
                             markerData.push({
                                 id          : item.id,
                                 title       : strip(item.name),
@@ -93,7 +92,7 @@ function pandemicData(action, sub, data) {
                         }
                     }
                 }
-                console.log(markerData);
+
                 pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'data' && settings.service.data === true) {
@@ -162,15 +161,6 @@ function pandemicData(action, sub, data) {
 
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
-    // Initialise the Maps
-    map = new GMaps({
-        div: '#map',
-        lat: latitude,
-        lng: longitude,
-        zoom: 9,
-        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
-    });
-
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
@@ -376,6 +366,15 @@ $(document).ready(function() {
                 info.open();
             }
         }
+    });
+
+    // Initialise the Maps
+    map = new GMaps({
+        div: '#map',
+        lat: latitude,
+        lng: longitude,
+        zoom: 9,
+        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
     });
 
     $(document).on('click', '.login-fb', function(e) {
