@@ -15,11 +15,45 @@ $m          = $_POST['m']; // method
 $errors     = [];
 
 if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
-
     /* PLACES */
     if ($a === 'places') {
+        /* Fetch all places */
+        if ($m === 'fetch') {
+            $output     = [];
+            $places     = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->table('places'));
+            $photopath  = $settings['fullAddress'].$settings['upload']['path']['images'];
+            $category   = $_POST['category'] ?? NULL;
+    
+            foreach ((array)$places as $place) {
+                if (!empty($category) && $category != $place['category'])
+                    continue;
+                
+                $place['photos'] = json_decode($place['photos']);
+                foreach ((array)$place['photos'] as $id => $photo) {
+                    if ($id === 0) { $place['icon'] = $photopath.$photo->name.'_c300.'.$photo->ext; }
+                    $gallery[] = '<a href="'.($photopath.$photo->name.'.'.$photo->ext).'"><img src="'.($photopath.$photo->name.'_c300.'.$photo->ext).'" alt="'.(htmlspecialchars($place['title'])).' #'.($id+1).'"></a>';
+                }
+    
+                if ($place['user'] === $_SESSION['facebook']['id'])
+                    $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$place['id'].'" onclick="return confirm(\'Sure?\');" style="color: red;">Remove from map</a></p>';
+    
+                $output[] = [
+                    'id'            => $place['id'],
+                    'title'         => $place['category'],
+                    'description'   => nl2br(htmlspecialchars($place['description'])).$delete,
+                    'subtitle'      => $place['title'],
+                    'gallery'       => join("", $gallery),
+                    'img'           => $place['icon'],
+                    'icon'          => $place['icon'],
+                    'latitude'      => $place['latitude'],
+                    'longitude'     => $place['longitude']
+                ];
+            }
+    
+            jD('places', $output);
+        }
         /* Create a new place */
-        if ($m === 'create') {
+        else if ($m === 'create') {
             if (empty($_SESSION['facebook']['id']))
                 $errors[] = 'You need to authorize first.';
             if (strlen($_POST['title']) > 25)
@@ -36,29 +70,27 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
                 $errors[] = 'Please choose a category which best suits you.';
 
             if (empty($errors)) {
-                $db->insert('places', array(
-                    'title' => $_POST['title'],
-                    'description' => $_POST['description'],
-                    'email' => $_POST['email'],
-                    'phone' => $_POST['phone'],
-                    'website' => $_POST['website'],
-                    'category' => $_POST['category'],
-                    'photos' => json_encode($_SESSION['images']),
-                    'user' => $_SESSION['facebook']['id'],
-                    'latitude' => $_POST['latitude'],
-                    'longitude' => $_POST['longitude']
-                ));
+                $db->insert('places', [
+                    'title'         => $_POST['title'],
+                    'description'   => $_POST['description'],
+                    'email'         => $_POST['email'],
+                    'phone'         => $_POST['phone'],
+                    'website'       => $_POST['website'],
+                    'category'      => $_POST['category'],
+                    'photos'        => json_encode($_SESSION['images']),
+                    'user'          => $_SESSION['facebook']['id'],
+                    'latitude'      => $_POST['latitude'],
+                    'longitude'     => $_POST['longitude']
+                ]);
 
                 unset($_SESSION['images']);
-
                 jD('id', $db->insertid);
             } else {
                 jD('errors', $errors);
             }
         }
-
         /* Set location for the newly created place */
-        if ($m === 'location') {
+        else if ($m === 'location') {
             if (empty($_POST['place']) || !is_numeric($_POST['place']))
                 $errors[] = 'Missing parameter.';
             if (empty($_POST['lat']) || empty($_POST['lng']))
@@ -79,7 +111,7 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
                 ], [
                     'id' => $_POST['place'],
                     'user' => $_SESSION['facebook']['id']
-                ];
+                ]);
 
                 jD('result', 'success');
             } else {
@@ -87,29 +119,31 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
             }
         }
     } else if ($a === 'people') {
+        /* Fetch peoples locations */
         if ($m === 'locations') {
-            $output = [];
-            $locations = $db->getRows("SELECT * FROM %s WHERE `fbid` != 0", $db->table('locations'));
+            $output     = [];
+            $locations  = $db->getRows("SELECT * FROM %s WHERE `fbid` != 0", $db->table('locations'));
 
             foreach ((array)$locations as $location) {
-                $userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
+                $userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $location['fbid']);
 
                 $nameDetails = explode(" ", trim($userdata['name']));
-                $namePut = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
+                $namePubulic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
 
                 $output[] = [
-                    'id' => $location['fbid'],
-                    'latitude' => $location['latitude'],
+                    'id'        => $location['fbid'],
+                    'latitude'  => $location['latitude'],
                     'longitude' => $location['longitude'],
-                    'img' => $userData['picture'],
-                    'name' => htmlspecialchars($userData['pseudo'] ?? $namePut),
-                    'status' => htmlspecialchars($userData['status']),
-                    'category' => $userData['category'],
-                    'seen' => $userData['lastlogin']
+                    'img'       => $userData['picture'],
+                    'name'      => htmlspecialchars($userData['pseudo'] ?? $namePublic),
+                    'status'    => htmlspecialchars($userData['status']),
+                    'category'  => $userData['category'],
+                    'seen'      => $userData['lastlogin']
                 ];
             }
 
-            die(json_encode(array('locations' => $output)));
+            jD('locations', $output);
+        /* Update visitors coordinates in database */
         } else if ($m === 'set') {
             $db->insert('locations', [
                 'fbid' => $_SESSION['facebook']['id'],
@@ -117,53 +151,12 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
                 'longitude' => $_POST['lng']
             ], true);
         }
-    } else if ($action == 'retrieve') {
-        $output = array();
-        $places = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->places);
-        $photopath = $settings['fullAddress'].$settings['upload']['path']['images'];
-        $category = (isset($_POST['category']) ? $_POST['category'] : '');
-
-        foreach ((array)$places as $place) {
-            if (!empty($category) && $category != $place['category'])
-                continue;
-            
-            $gallery = array();
-            $delete = '';
-            $place['photos'] = json_decode($place['photos']);
-            foreach ((array)$place['photos'] as $id => $photo) {
-                if ($id === 0)
-                    $place['icon'] = $photopath.$photo->name.'_c300.'.$photo->ext;
-                $gallery[] = '<a href="'.($photopath.$photo->name.'.'.$photo->ext).'"><img src="'.($photopath.$photo->name.'_c300.'.$photo->ext).'" alt="'.(htmlspecialchars($place['title'])).' #'.($id+1).'"></a>';
-            }
-
-            if ($place['user'] == $_SESSION['facebook']['id'])
-                $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$place['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
-
-            $output[] = array(
-                'id' => $place['id'],
-                'title' => $place['title'],
-                'description' => nl2br(htmlspecialchars($place['description'])).$delete,
-                'price' => $place['price'],
-                'subtitle' => 'E-mail: <a href="mailto:'.$place['email'].'">'.$place['email'].'</a>'.(!empty($place['phone']) ? '<br/>Phone: '.$place['phone'] : ''),
-                'gallery' => join("", $gallery),
-                'icon' => $place['icon'],
-                'latitude' => $place['latitude'],
-                'longitude' => $place['longitude']
-            );
-        }
-
-        die(json_encode(array('places' => $output)));
-    } else {
-
-        //my small world seperated from all other stuff
-        $response = array();
-
-        switch ($action) {
-            case 'chat':
-                
-                $response = ['status' => 1];
-
-                $channel = 'default';
+    /* Everything CHAT related start here */
+    } else if ($a === 'chat') {
+        switch ($m) {
+            case 'send':
+                $response   = ['status' => 1];
+                $channel    = 'default';
 
                 if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
                     $channel = $_POST['channel'];
@@ -177,27 +170,14 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
 
                 break;
 
-            case 'chat_items':
-
-                // chat_items
-                $response = ['status' => 1];
-
-                $channel = 'default';
-
+            case 'msgs':
+                $response   = ['status' => 1];
+                $channel    = 'default';
                 if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
                     $channel = $_POST['channel'];
                 }
-
                 $response['items'] = $db->getRows("SELECT * FROM %s WHERE channel = '%s'", "messages" , $channel);
-
-                break;
-            
-            default:
-                $response = array('errors' => 'Unknown action');
                 break;
         }
-
-
-        die(json_encode($response));
     }
 }

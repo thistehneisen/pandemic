@@ -16,7 +16,7 @@ settings.chat.refreshRate = 500; // ms
 
 pandemic = {};
 pandemic.markers = [];
-pandemic.firstLoad = true;
+pandemic.loaded = {};
 
 var xhr = 'library/ajax.php';
 
@@ -30,9 +30,7 @@ function pandemicSettings(action, sub, data) {
 }
 
 function pandemicData(action, sub, data) {
-    /*
-        Fetching data to front-end
-    */
+    /* Fetching data to front-end */
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
             $.post(xhr, {
@@ -58,7 +56,7 @@ function pandemicData(action, sub, data) {
                                 name: item.name,
                                 status: item.status,
                                 category: item.category,
-                                url: fullAddress + '?user=' + item.id
+                                url: fullAddress + '?people=' + item.id
                             });
                         }
                     }
@@ -67,6 +65,7 @@ function pandemicData(action, sub, data) {
                 pandemic.markers = map.addMarkers(markerData);
             }, 'json');
         } else if (sub === 'quarantines') {
+            $.post(xhr, {a: })
             $.get('json_data.php', function(results) {
                 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
                 const markers = results.map(item => ({
@@ -88,25 +87,24 @@ function pandemicData(action, sub, data) {
                 target: 'places',
                 category: category
             }, function(results) {
-                var items = [],
-                    markerData = [];
-                if (results.places.length > 0) {
+                var items = [], markerData = [];
+                if (typeof results.places != 'undefined' && results.places.length > 0) {
                     items = results.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
         
-                        if (item.latitude != undefined && item.longitude != undefined) {
+                        if (typeof item.latitude != 'undefined' &&
+                            typeof item.longitude != 'undefined') {
                             markerData.push({
-                                id: item.id,
-                                lat: item.latitude,
-                                lng: item.longitude,
-                                title: item.title,
-                                icon: getIcon(),
-                                description: item.description,
-                                price: item.price,
-                                gallery: item.gallery,
-                                subtitle: item.subtitle,
-                                url: fullAddress + '?id=' + item.id
+                                id          : item.id,
+                                lat         : item.latitude,
+                                lng         : item.longitude,
+                                title       : item.title,
+                                icon        : getIcon(),
+                                description : item.description,
+                                gallery     : item.gallery,
+                                subtitle    : item.subtitle,
+                                url         : fullAddress + '?id=' + item.id
                             });
                         }
                     }
