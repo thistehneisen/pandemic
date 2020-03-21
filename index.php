@@ -29,7 +29,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic Baltics (<?php print($settings['country'])?>) — In the time of crisis, you're not alone.">
-	<meta property="og:description" content="Connecting you with neighbors, volunteers and businesses. Providing you with the official information about the state of pandemics, Baltic-wise.">
+	<meta property="og:description" content="Connecting you with neighbors, volunteers and services. Providing you with the official information about the state of pandemics, Baltic-wise.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
@@ -140,8 +140,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                 <span class="dd">
                     <a href="#">Settings</a>
                     <ul class="dropdown">
-						<li><a href="#" onclick="return false;"><span><strong>&#10004;</strong> Show people</span></a></li>
-						<li><a href="#" onclick="return false;"><span><strong>&#10060;</strong> Show businesses</span></a></li>
+						<li><a href="#" onclick="settings('togglePeople', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
+						<li><a href="#" onclick="settings('toggleServices');"><span><strong>&#10060;</strong> Services</span></a></li>
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>

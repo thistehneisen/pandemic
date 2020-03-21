@@ -6,6 +6,18 @@ info@pandemic.lv
 settings = {};
 settings.noUsers = false;
 
+function settings(action, element) {
+    if (action == 'togglePeople') {
+        if (settings.noUsers === false) {
+            element.find('span strong').html('&#10004;');
+            settings.noUsers = true;
+        } else {
+            element.find('span strong').html('&#10060;');
+            settings.noUsers = false;
+        }
+    }
+}
+
 toastr.options = {
     "closeButton": false,
     "debug": false,
