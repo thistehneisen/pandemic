@@ -87,10 +87,10 @@ function pandemicData(action, sub, data) {
                                 lng: item.Long,
                                 title: item.Date,
                                 icon: getIcon('ff0000'),
-                                description: item.Province/State,
-                                subtitle: item.Country/Region
+                                description: item.State,
+                                subtitle: item.Country
                             });
-                            console.log('Added: ' + item.Country/Region);
+                            console.log('Added: ' + item.Country);
                         }
                     }
                 }
