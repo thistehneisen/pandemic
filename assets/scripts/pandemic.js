@@ -3,8 +3,6 @@
     info@pandemic.lv
 ***/
 
-const markerTemplate            = Handlebars.compile($('#marker-content-template').html());
-
 settings                        = {};
 settings.refreshRate            = 3000;
 settings.service                = {};
@@ -284,6 +282,8 @@ $(document).ready(function() {
         $('header').toggleClass('show_nav');
         $('.mask').toggleClass('show-mask');
     });
+
+    markerTemplate = Handlebars.compile($('#marker-content-template').html());
 
     map.on('marker_added', function(marker) {
         /* Marker created for the purpose of creating a new place. */
