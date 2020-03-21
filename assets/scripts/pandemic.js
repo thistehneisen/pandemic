@@ -43,17 +43,16 @@ function req(postData) {
         dataType    : 'json',
         async       : false,
         data        : postData,
-        success        : function (res) {
-                        if (typeof pandemic.loaded[m] === 'undefined' && 
+        success     : function (res) {
+                        if (typeof pandemic.loaded[a] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
-                            pandemic.init.includes(m)) {
-                                console.log('Ir');
-                                $('#preload-status strong').text(m);
-                                pandemic.loaded.push(m);
+                            pandemic.init.includes(a)) {
+                                $('#preload-status strong').text(a);
+                                pandemic.loaded.push(a);
                             }
                             if (pandemic.loaded.length === pandemic.init.length) { dismissPreloader(); }
                         },
-        fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
+        fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, m + ': ' + a);  } }
     }).responseJSON;
 
     return response;
