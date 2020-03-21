@@ -542,16 +542,13 @@ $('#post-the-ad').on('click', function(e) {
     });
 });
 
-$('#global-data').on('click', function(e) {
-    e.preventDefault()
-    $("#global-data").fancybox({
-        'width':'90%',
-        'height':'75%',
-        'autoSize':false,
-        'type':'iframe',
-        'src':'https://global.pandemic.lv/',
-        'caption':'https://global.pandemic.lv/'
-    });
+$("#global-data").fancybox({
+    'width':'90%',
+    'height':'75%',
+    'autoSize':false,
+    'type':'iframe',
+    'src':'https://global.pandemic.lv/',
+    'caption':'https://global.pandemic.lv/'
 });
 
 /* Location creation */
