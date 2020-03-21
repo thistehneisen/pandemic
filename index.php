@@ -92,8 +92,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
 		</div>
 
-		<div class="made-with-love">
-			Platform is secured by <a href="https://seq.science/">Digital Security Alliance</a><br/>
+		<div class="preloader-footer">
 			<strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>
 		</div>
 	</div>

@@ -253,7 +253,7 @@ body {
   font-weight: stronger;
 }
 
-.made-with-love {
+.preloader-footer {
   position: fixed;
   left: 0;
   width: 100%;
@@ -264,18 +264,18 @@ body {
   font-family: arial;
   color: #fff;
 }
-.made-with-love i {
+.preloader-footer i {
   font-style: normal;
   color: #F50057;
   font-size: 14px;
   position: relative;
   top: 2px;
 }
-.made-with-love a {
+.preloader-footer a {
   color: #fff;
   text-decoration: none;
 }
-.made-with-love a:hover {
+.preloader-footer a:hover {
   text-decoration: underline;
 }
 /* END OF PRELOADER */
