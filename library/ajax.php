@@ -14,7 +14,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
     if ($a === 'data') {
         /* Fetch all data */
         if ($m === 'fetch') {
-            $csv = Reader::createFromPath(dirname(__FILE__) . '/data.csv', 'r');
+            $csv = Reader::createFromPath('../data.csv', 'r');
             $csv->setHeaderOffset(0);
             jD('data', $csv);
         }
