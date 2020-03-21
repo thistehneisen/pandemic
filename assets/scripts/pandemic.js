@@ -41,6 +41,7 @@ function req(postData) {
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
+        async       : false,
         data        : postData,
         done        : function (res) {
                         JSON.parse(res);
