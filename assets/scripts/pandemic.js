@@ -5,16 +5,23 @@ info@pandemic.lv
 
 settings = {};
 settings.noUsers = false;
+settings.noServices = false;
 
 function pandemicSettings(action, element) {
     if (action == 'togglePeople') {
         if (settings.noUsers === false) {
             element.find('span strong').html('&#10004;');
-            settings.noUsers = true;
         } else {
             element.find('span strong').html('&#10060;');
-            settings.noUsers = false;
         }
+        settings.noUsers = !settings.noUsers;
+    } else if ($action == 'toggleServices') {
+        if (settings.noServices === false) {
+            element.find('span strong').html('&#10004;');
+        } else {
+            element.find('span strong').html('&#10060;');
+        }
+        settings.noServices = !settings.noServices;
     }
 }
 
