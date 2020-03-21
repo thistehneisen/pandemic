@@ -134,7 +134,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                 if (!empty($_POST['c']) && in_array($_POST['c'], array_keys($settings['categories'])) && $userData['category'] !== $_POST['c'])
                     continue;
 
-                $nameDetails = explode(" ", trim($userdata['name']));
+                $nameDetails = explode(" ", trim($userData['name']));
                 $namePubulic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
 
                 $output[] = [
@@ -142,7 +142,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'latitude'  => $location['latitude'],
                     'longitude' => $location['longitude'],
                     'img'       => $userData['picture'],
-                    'name'      => $namePublic,
+                    'name'      => $userData['pseudo'] ?? $namePublic,
                     'status'    => $userData['status'],
                     'category'  => $userData['category'],
                     'seen'      => $userData['lastlogin']
