@@ -376,7 +376,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 	map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/dark-v11',
+		style: 'mapbox://styles/mapbox/dark-v10',
 		zoom: 9,
 		center: [latitude, longitude]
 	});
