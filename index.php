@@ -29,14 +29,14 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and places. Providing you with the official information about the state of pandemics.">
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } else {
 	$image = json_decode($place['photos'], true);
 	if (!empty($image)) {
 ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($place['id'])?>">
 <?php } else { ?>
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
 <?php } ?>
 	<meta property="og:title" content="<?php print(htmlspecialchars($place['title']))?>">
 	<meta property="og:description" content="<?php print(htmlspecialchars($place['description']))?>">
@@ -55,6 +55,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
+
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
 		window.fbAsyncInit = () => {
@@ -77,11 +78,11 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?v2" />
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
 </head>
 <body>
 	<div id="preloader">
-		<h1>Pandemic <strong><?php print($settings['country'])?></strong></em></h1>
+		<h1>Pandemic <strong><?php print($settings['country'])?></strong></h1>
 		<div class="cube-wrapper">
 			<div class="cube-folding">
 				<span class="leaf1"></span>
@@ -91,26 +92,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			</div>
 			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
 		</div>
-
-		<div class="preloader-footer">
-			<strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>
-		</div>
+		<div class="preloader-footer"><strong><a href="#terms-and-conditions">Terms & Conditions</a></strong></div>
 	</div>
-	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
-		<section class="custom-content">
-			<h1 class="custom-header">
-				{{title}}
-				<small>{{{subtitle}}}</small>
-			</h1>
-			<div class="custom-body">{{{body}}}</div>
-			<div class="gallery">{{{gallery}}}</div>
-			<div class="unique-url text">
-				<h5>URL:</h5>
-				<input type="text" value="{{url}}" />
-			</div>
-		</section>
-	</script>
 
 	<header class="header preload-hide">
 		<div class="container">
@@ -308,6 +291,23 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 		<div id="lean-mask"></div>
 	</div>
+
+	<script id="marker-content-template" type="text/x-handlebars-template">
+		<div class="custom-img" style="background-image: url({{{img}}})"></div>
+		<section class="custom-content">
+			<h1 class="custom-header">
+				{{title}}
+				<small>{{{subtitle}}}</small>
+			</h1>
+			<div class="custom-body">{{{body}}}</div>
+			<div class="gallery">{{{gallery}}}</div>
+			<div class="unique-url text">
+				<h5>URL:</h5>
+				<input type="text" value="{{url}}" />
+			</div>
+		</section>
+	</script>
+
 	<div class="map-ct preload-hide">
 	<div id="map" class="preload-hide">
 		&nbsp;
