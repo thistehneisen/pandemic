@@ -295,7 +295,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						<a href="#" class="modal_close close-modal">×</a>
 					</div>
 					<div class="modal-content bodytext">
-						<object data="https://global.pandemic.lv/" style="width: 100%; height: 100%; overflow: hidden;"/>
+						<object data="https://global.pandemic.lv/" style="width: 100%; height: 100%; overflow: hidden;"></object>
 					</div>
 				</div>
 			</div>
