@@ -99,7 +99,7 @@ function pandemicData(action, sub, data) {
         } else if (sub === 'data' && settings.service.data === true) {
             req({a:sub,m:action}, function(res) {
                 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
-                const markers = res.map(item => ({
+                const markers = res.data.map(item => ({
                     id          : item.id,
                     lat         : item.selfCooLat * 1 + randomDisplacement(),
                     lng         : item.selfCooLng * 1 + randomDisplacement(),
