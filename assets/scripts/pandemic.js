@@ -8,6 +8,9 @@ settings.noUsers = false;
 settings.noServices = false;
 settings.userChannel = 'default';
 
+pandemic = {};
+pandemic.markers = [];
+
 function pandemicSettings(action, element) {
     if (action == 'togglePeople') {
         settings.noUsers = !settings.noUsers;
@@ -57,7 +60,7 @@ function pandemicData(action, sub, data) {
                         }
                     }
                 }
-                allMarkers = map.addMarkers(markers_data);
+                pandemic.markers = map.addMarkers(markers_data);
             }, 'json');
         }
     }
@@ -264,8 +267,6 @@ $(document).ready(function() {
         anchor: new google.maps.Point(12, 24)
     };
 
-    allMarkers = [];
-
     pandemicData('fetchUsers');
 
     $.post('library/ajax.php', {
@@ -295,7 +296,7 @@ $(document).ready(function() {
                 }
             }
         }
-        allMarkers = map.addMarkers(markers_data);
+        pandemic.markers = map.addMarkers(markers_data);
     }, 'json');
 
     $.get('json_data.php', function(results) {
@@ -307,13 +308,11 @@ $(document).ready(function() {
             title: item.label,
             icon: quarantineIcon,
             description: '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
-            price: undefined,
-            gallery: undefined,
             subtitle: item.origin,
             url: fullAddress + '?case=' + item.id
         }));
 
-        allMarkers = allMarkers.concat(map.addMarkers(markers));
+        pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
     }, 'json');
 
     map.on('marker_added', function(marker) {
@@ -521,30 +520,23 @@ $('#post-the-ad').on('click', function(e) {
 
 /* Facebook */
 function statusChangeCallback(response) {
-    /* do nothing */
+    if (response.status === 'connected') {
+        toastr.success('Authentication successful, welcome back!');
+    } else {
+        toastr.error('We had a problem autorizing you with Facebook. Please try again.');
+    }
 }
 
 /* Location creation */
-var addmarkerIcon = {
-    path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-    fillColor: '#29cc5a',
-    fillOpacity: 1,
-    scale: 2.5,
-    strokeColor: '#fff',
-    strokeWeight: 2,
-    anchor: new google.maps.Point(12, 24)
-};
-
 function makeLocation(claddid) {
     $('#save-location').data('classified', claddid);
-
     $('div.si-wrapper-top').hide();
     clearOverlays();
 
     classifiedmarker = map.addMarker({
         lat: latitude,
         lng: longitude,
-        icon: addmarkerIcon,
+        icon: getIcon('fff', '29cc5a'),
         draggable: true,
         setlocation: true,
         zIndex: 999999,
@@ -554,7 +546,7 @@ function makeLocation(claddid) {
             $('#save-location').data('lat', lat);
             $('#save-location').data('lng', lng);
         },
-        title: 'Click & drag, to confirm the location of your area!'
+        title: 'Click & drag to confirm the location!'
     });
 
     classifiedmarker.setZIndex(999999);
@@ -568,6 +560,7 @@ function makeLocation(claddid) {
     }, 600);
     map.panTo(classifiedmarker.getPosition());
 }
+
 $('#save-location').on('click', function(e) {
     e.preventDefault();
     $.post('library/ajax.php', {
@@ -582,13 +575,11 @@ $('#save-location').on('click', function(e) {
     }, 'json');
 });
 
-/* Custom functions */
+// Helpers
 function clearOverlays() {
-    if (typeof allMarkers != 'undefined') {
-        for (var i = 0; i < allMarkers.length; i++)
-            allMarkers[i].setMap(null);
-        allMarkers.length = 0;
-    }
+    for (var i = 0; i < allMarkers.length; i++)
+        pandemic.markers[i].setMap(null);
+    pandemic.markers.length = 0;
 }
 
 function strip(html) {
