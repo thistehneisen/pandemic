@@ -159,6 +159,7 @@ function pandemicData(action, sub, data) {
 // Initialising
 pandemic.init.forEach(service => pandemicData('fetch', service));
 
+Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialise the Maps
     map = new GMaps({
@@ -189,7 +190,6 @@ $(document).ready(function() {
     });
 
     /* Dropzone */
-    Dropzone.autoDiscover = false;
     $("#img-upload").dropzone({
         paramName: "file",
         maxFilesize: 10,
