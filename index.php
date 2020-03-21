@@ -145,13 +145,13 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                         <?php foreach($settings['categories'] as $key => $category) { ?><li><a href="<?php print($settings['fullAddress'])?>?category=<?php print($key)?>"><span><?php print($category)?></span></a></li><?php } ?>
 					</ul>
                 </span>
-                <span class="dd">
+                <?php /*<span class="dd">
                     <a href="#">Settings</a>
                     <ul class="dropdown">
 						<li><a href="#" onclick="pandemicSettings('toggle', 'people', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
 						<li><a href="#" onclick="pandemicSettings('toggle', 'places', $(this));"><span><strong>&#10004;</strong> Show places</span></a></li>
 					</ul>
-				</span>
+				</span>*/ ?>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
 				<span><a href="#" class="login-fb"><?php include('assets/images/ico/facebook-social-symbol.svg'); ?> Log In</a></span>
 				<?php } else { ?>
