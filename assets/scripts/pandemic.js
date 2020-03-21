@@ -541,7 +541,7 @@ function dismissPreloader() {
 }
 
 function clearOverlays() {
-    for (var i = 0; i < allMarkers.length; i++)
+    for (var i = 0; i < pandemic.markers.length; i++)
         pandemic.markers[i].setMap(null);
     pandemic.markers.length = 0;
 }
