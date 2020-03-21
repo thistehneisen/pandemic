@@ -4,8 +4,10 @@ info@pandemic.lv
 */
 
 settings = {};
-settings.noUsers = false;
-settings.noServices = false;
+settings.service = {};
+settings.service.people = true;
+settings.service.places = true;
+settings.chat = {}
 settings.chat.userChannel = 'default';
 settings.chat.refreshRate = 500; // ms
 
@@ -14,20 +16,11 @@ pandemic.markers = [];
 
 var xhr = 'library/ajax.php';
 
-function pandemicSettings(action, element) {
-    if (action == 'togglePeople') {
-        settings.noUsers = !settings.noUsers;
-        if (settings.noUsers === false) {
-            element.find('span strong').html('&#10004;');
-        } else {
-            element.find('span strong').html('&#10060;');
-        }
-    } else if (action == 'toggleServices') {
-        settings.noServices = !settings.noServices;
-        if (settings.noServices === false) {
-            element.find('span strong').html('&#10004;');
-        } else {
-            element.find('span strong').html('&#10060;');
+function pandemicSettings(action, sub, data) {
+    if (action === 'toggle') {
+        if (typeof settings.service[sub] !== 'undefined') {
+            settings.service[sub] = !settings.service[sub];
+            data.find('span strong').html(settings.service[sub] ? '&#10004;' : '&#10060;');
         }
     }
 }
@@ -37,7 +30,7 @@ function pandemicData(action, sub, data) {
         Fetching data to front-end
     */
     if (action === 'fetch') {
-        if (sub === 'users' && settings.noUsers !== true) {
+        if (sub === 'users' && settings.service.people !== true) {
             $.post(xhr, {
                 action: 'userlocations',
                 category: category
@@ -85,7 +78,7 @@ function pandemicData(action, sub, data) {
         
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             }, 'json');
-        } else if (sub === 'services' && settings.noServices !== true) {
+        } else if (sub === 'services' && settings.service.places !== true) {
             $.post(xhr, {
                 action: 'retrieve',
                 category: category
