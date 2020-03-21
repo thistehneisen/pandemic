@@ -222,7 +222,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 								<a class="button outline gray lg-1-1 close-modal" href="#"><span>Cancel</span></a>
 							</div>
 							<div class="input-col lg-1-2">
-								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create</span></a>
+								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create new service</span></a>
 							</div>
 						</div>
 					</div>

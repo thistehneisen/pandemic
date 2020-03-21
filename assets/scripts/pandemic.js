@@ -30,8 +30,11 @@ function pandemicSettings(action, element) {
 }
 
 function pandemicData(action, sub, data) {
-    if (action == 'fetchUsers') {
-        if (typeof sub === 'undefined' && settings.noUsers !== true) {
+    /*
+        Fetching data to front-end
+    */
+    if (action === 'fetch') {
+        if (sub === 'users' && settings.noUsers !== true) {
             $.post('library/ajax.php', {
                 action: 'userlocations',
                 category: category
@@ -51,7 +54,7 @@ function pandemicData(action, sub, data) {
                                 description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
                                 lat: item.latitude,
                                 lng: item.longitude,
-                                icon: getIcon('222', '00ff54'),
+                                icon: getIcon('00ff54'),
                                 name: item.name,
                                 status: item.status,
                                 category: item.category,
@@ -60,23 +63,75 @@ function pandemicData(action, sub, data) {
                         }
                     }
                 }
+
+                pandemic.markers = map.addMarkers(markers_data);
+            }, 'json');
+        } else if (sub === 'quarantines') {
+            $.get('json_data.php', function(results) {
+                const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
+                const markers = results.map(item => ({
+                    id: item.id,
+                    lat: item.selfCooLat * 1 + randomDisplacement(),
+                    lng: item.selfCooLng * 1 + randomDisplacement(),
+                    title: item.label,
+                    icon: getIcon('ff0000'),
+                    description: '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
+                    subtitle: item.origin,
+                    url: fullAddress + '?case=' + item.id
+                }));
+        
+                pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
+            }, 'json');
+        } else if (sub === 'services' && settings.noServices !== true) {
+            $.post('library/ajax.php', {
+                action: 'retrieve',
+                category: category
+            }, function(results) {
+                var items = [],
+                    markers_data = [];
+                if (results.classifieds.length > 0) {
+                    items = results.classifieds;
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+        
+                        if (item.latitude != undefined && item.longitude != undefined) {
+                            markers_data.push({
+                                id: item.id,
+                                lat: item.latitude,
+                                lng: item.longitude,
+                                title: item.title,
+                                icon: getIcon(),
+                                description: item.description,
+                                price: item.price,
+                                gallery: item.gallery,
+                                subtitle: item.subtitle,
+                                url: fullAddress + '?id=' + item.id
+                            });
+                        }
+                    }
+                }
+
                 pandemic.markers = map.addMarkers(markers_data);
             }, 'json');
         }
     }
 }
 
-function getIcon(stroke, fill, custom = false, scale = 1.5) {
+function getIcon(fill = '00aeef', stroke = 222, scale = 2.5, fillOpacity = 0.75) {
     return {
         path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
         fillColor: '#'+fill,
-        fillOpacity: 0.95,
+        fillOpacity: 0.75,
         scale: scale,
         strokeColor: '#'+stroke,
         strokeWeight: 2,
-        anchor: new google.maps.Point(12, 24)
+        anchor: new google.maps.Point(12, 12)
     };
 }
+
+pandemicData('fetch', 'quarantines');
+pandemicData('fetch', 'services');
+pandemicData('fetch', 'users');
 
 toastr.options = {
     "closeButton": false,
@@ -247,77 +302,9 @@ $(document).ready(function() {
         styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
     });
 
-    var markerIcon = {
-        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-        fillColor: '#00aeef',
-        fillOpacity: 0.95,
-        scale: 1.5,
-        strokeColor: '#222',
-        strokeWeight: 2,
-        anchor: new google.maps.Point(12, 24)
-    };
-
-    var quarantineIcon = {
-        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-        fillColor: '#ff0000',
-        fillOpacity: 0.95,
-        scale: 1.5,
-        strokeColor: '#222',
-        strokeWeight: 2,
-        anchor: new google.maps.Point(12, 24)
-    };
-
-    pandemicData('fetchUsers');
-
-    $.post('library/ajax.php', {
-        action: 'retrieve',
-        category: category
-    }, function(results) {
-        var items = [],
-            markers_data = [];
-        if (results.classifieds.length > 0) {
-            items = results.classifieds;
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
-
-                if (item.latitude != undefined && item.longitude != undefined) {
-                    markers_data.push({
-                        id: item.id,
-                        lat: item.latitude,
-                        lng: item.longitude,
-                        title: item.title,
-                        icon: markerIcon,
-                        description: item.description,
-                        price: item.price,
-                        gallery: item.gallery,
-                        subtitle: item.subtitle,
-                        url: fullAddress + '?id=' + item.id
-                    });
-                }
-            }
-        }
-        pandemic.markers = map.addMarkers(markers_data);
-    }, 'json');
-
-    $.get('json_data.php', function(results) {
-        const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
-        const markers = results.map(item => ({
-            id: item.id,
-            lat: item.selfCooLat * 1 + randomDisplacement(),
-            lng: item.selfCooLng * 1 + randomDisplacement(),
-            title: item.label,
-            icon: quarantineIcon,
-            description: '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
-            subtitle: item.origin,
-            url: fullAddress + '?case=' + item.id
-        }));
-
-        pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
-    }, 'json');
-
     map.on('marker_added', function(marker) {
         /*
-        Marker created for location setting purposes
+        Marker created for the purpose of creating a new service.
         */
         if (marker.setlocation == true) {
             var index = map.markers.indexOf(marker);
@@ -448,7 +435,7 @@ $(document).ready(function() {
             map.setZoom(9);
         },
         not_supported: function() {
-            toastr.error('Your browser doesn\'t support this function.', 'GeoLocation');
+            toastr.error('Your browser doesn\'t support GeoLocation, please check whether an extension isn\'t blocking this feature.', 'GeoLocation');
             map.setZoom(9);
         },
         options: {
@@ -461,6 +448,7 @@ $(document).ready(function() {
         try {
             FB.login(function(response) {
                 if (response.status === 'connected') {
+                    toastr.success('Authentication with Facebook is successful, redirecting…', 'Authorization');
                     window.location.reload();
                 } else if (response.status === 'not_authorized') {
                     toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
@@ -498,7 +486,7 @@ $(document).ready(function() {
 $('#post-the-ad').on('click', function(e) {
     e.preventDefault();
 
-    $('#post-the-ad span').text('Adding…');
+    $('#post-the-ad span').text('Creating…');
 
     $.post('library/ajax.php', {
         action: 'add',
@@ -510,8 +498,8 @@ $('#post-the-ad').on('click', function(e) {
         email: $('#email').val()
     }, function(response) {
         if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
-            $('#post-the-ad span').text('Create without errors');
-            alert('Whoops: ' + response.errors[0]);
+            $('#post-the-ad span').text('Create new service');
+            toastr.error(response.errors[0], 'Whoops!');
         } else {
             makeLocation(response.id);
         }
@@ -527,7 +515,7 @@ function makeLocation(claddid) {
     classifiedmarker = map.addMarker({
         lat: latitude,
         lng: longitude,
-        icon: getIcon('fff', '29cc5a'),
+        icon: getIcon('29cc5a', 'fff'),
         draggable: true,
         setlocation: true,
         zIndex: 999999,
