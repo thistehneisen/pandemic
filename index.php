@@ -84,10 +84,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		<h1>Pandemic <strong><?php print($settings['country'])?></strong></em></h1>
 		<div class="cube-wrapper">
 			<div class="cube-folding">
-				<span class="leaf1"></span>
-				<span class="leaf2"></span>
-				<span class="leaf3"></span>
-				<span class="leaf4"></span>
+				<img src="<?php print($settings['fullAddress'])?>assets/images/icon.png" alt="Pandemic Baltic" />
 			</div>
 			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
 		</div>
