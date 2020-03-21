@@ -413,7 +413,8 @@ $(document).ready(function() {
                 }, 300);
             };
 
-            /*var info = new SnazzyInfoWindow({
+            // Static tooltips above the markers
+            var tooltip = new SnazzyInfoWindow({
                 marker: marker,
                 position: 'top',
                 offset: {
@@ -428,9 +429,10 @@ $(document).ready(function() {
                 borderRadius: '0px',
                 shadow: false,
                 fontColor: '#fff',
-                fontSize: '13px'
+                fontSize: '13px',
+                panOnOpen: false
             });
-            info.open();*/
+            tooltip.open();
 
             info = new SnazzyInfoWindow({
                 marker: marker,
