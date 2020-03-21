@@ -5,3 +5,6 @@ wget 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6e2eYL_dsCeuT6IFKcw07PD1
 
 wget 'https://raw.githubusercontent.com/datasets/covid-19/master/time-series-19-covid-combined.csv' \
     -O combined.csv
+
+wget 'https://open-covid-19.github.io/data/world_latest.json' \
+    -O latest.json

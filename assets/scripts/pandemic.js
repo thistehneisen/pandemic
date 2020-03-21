@@ -284,6 +284,7 @@ Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialising
     pandemic.init.forEach(service => pandemicData('fetch', service));
+    geoLocate();
 
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
