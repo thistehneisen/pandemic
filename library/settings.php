@@ -102,6 +102,9 @@ if(in_array($_SERVER['REMOTE_ADDR'], array('localhost'))){
         } else if ($settings['country'] == 'Lithuania') {
             $settings['latitude']   = '55.256577354959624';
             $settings['longitude']  = '24.17143171484375';
+        } else if ($settings['country'] == 'Estonia') {
+            $settings['latitude']   = '58.87360554799449';
+            $settings['longitude']  = '25.542620551526547';
         }
     }
 }
