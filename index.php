@@ -58,12 +58,13 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
-		window.fbAsyncInit = function() {
+		window.fbAsyncInit = () => {
 			FB.init({
-				appId      : <?php print(json_encode($settings['facebook']['app']['id']))?>,
-				xfbml      : true,
-				cookie		 : true,
-				version    : 'v2.8'
+				appId:  <?php print(json_encode($settings['facebook']['app']['id']))?>,
+				cookie: true,
+				status: true,
+				xfbml: true,
+				version: 'v3.2'
 			});
 			FB.getLoginStatus();
 		};
