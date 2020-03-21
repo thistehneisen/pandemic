@@ -193,22 +193,29 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 								<div class="input-col lg-4-12">
 									<div class="text">
-										<label for="phone">Phone</label>
-										<input type="text" id="phone" name="phone" placeholder="Phone" value="" required="">
+										<label for="phone">Phone <small>(optional)</small></label>
+										<input type="text" id="phone" name="phone" placeholder="Phone number">
 									</div>
 								</div>
 
 								<div class="input-col lg-5-12">
 									<div class="text">
-										<label for="email">E-mail</label>
-										<input type="text" id="email" name="email" placeholder="E-mail" value="" required="">
+										<label for="email">E-mail <small>(optional)</small></label>
+										<input type="text" id="email" name="email" placeholder="E-mail address">
+									</div>
+								</div>
+
+								<div class="input-col lg-5-12">
+									<div class="text">
+										<label for="email">Website <small>(optional)</small></label>
+										<input type="text" id="website" name="website" placeholder="http://www.">
 									</div>
 								</div>
 							</div>
 
 							<div class="checkbox">
 								<div>
-									<input type="checkbox" id="signup-agree" name="signup-agree" value="1"><label for="signup-agree"><span></span>I accept the <a rel="leanModal" href="#terms-and-conditions">terms and conditions</a></label>
+									<input type="checkbox" id="signup-agree" name="signup-agree" value="1"><label for="signup-agree"><span></span>I have read and accept the <a rel="leanModal" href="#terms-and-conditions">Terms <em>&</em> Conditions</a></label>
 								</div>
 							</div>
 						</div>
