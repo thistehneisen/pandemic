@@ -91,7 +91,7 @@ function pandemicData(action, sub, data) {
                     }
                 }
 
-                pandemic.markers = map.addMarkers(markerData);
+                //pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'data' && settings.service.data === true) {
             req({a:sub,m:action}, function(res) {
@@ -107,7 +107,7 @@ function pandemicData(action, sub, data) {
                     url         : fullAddress + '?d=' + item.id
                 }));
         
-                pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
+                //pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             });
         } else if (sub === 'places' && settings.service.places === true) {
             req({a:sub,m:action,c:category}, function(res) {
@@ -134,7 +134,7 @@ function pandemicData(action, sub, data) {
                     }
                 }
 
-                pandemic.markers = map.addMarkers(markerData);
+                //pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'chat' && settings.service.chatbox === true) {
             req({a:sub,m:action}, function(res) {
@@ -156,15 +156,6 @@ function pandemicData(action, sub, data) {
         }
     }
 }
-
-// Initialise the Maps
-map = new GMaps({
-    div: '#map',
-    lat: latitude,
-    lng: longitude,
-    zoom: 9,
-    styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
-});
 
 Dropzone.autoDiscover = false;
 
@@ -284,102 +275,6 @@ $(document).ready(function() {
         $('.mask').toggleClass('show-mask');
     });
 
-    var template = Handlebars.compile($('#marker-content-template').html());
-
-    map.on('marker_added', function(marker) {
-        /* Marker created for the purpose of creating a new place. */
-        if (marker.setLocation === true) {
-            var index               = map.markers.indexOf(marker);
-            var info                = null;
-            var closeDelayed        = false;
-            var closeDelayHandler   = function() { $(info.getWrapper()).removeClass('active'); setTimeout(function() { closeDelayed = true; info.close(); }, 300); };
-
-            var info = new SnazzyInfoWindow({
-                marker          : marker,
-                position        : 'top',
-                offset          : {   top: '-55px' },
-                content         : '<div>' + marker.title + '</div>',
-                showCloseButton : false,
-                closeOnMapClick : false,
-                padding         : '7px 12px',
-                backgroundColor : '#29cc5a',
-                border          : false,
-                borderRadius    : '3px',
-                shadow          : false,
-                fontColor       : '#fff',
-                fontSize        : '15px'
-            });
-            info.open();
-            return false;
-        } else {
-        /* Markers coming from database or AJAX */
-            var index               = map.markers.indexOf(marker);
-            var info                = null;
-            var closeDelayed        = false;
-            var closeDelayHandler   = function() { $(info.getWrapper()).removeClass('active');
-                setTimeout(function() { closeDelayed = true; info.close(); }, 300);
-            };
-
-            var info = new SnazzyInfoWindow({
-                marker          : marker,
-                position        : 'top',
-                offset          : { top: '-33px' },
-                content         : '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
-                showCloseButton : false,
-                closeOnMapClick : false,
-                padding         : '5px 10px',
-                backgroundColor : 'rgba(0, 0, 0, 0.7)',
-                border          : false,
-                borderRadius    : '0px',
-                shadow          : false,
-                fontColor       : '#fff',
-                fontSize        : '13px'
-            });
-            info.open();
-
-                info = new SnazzyInfoWindow({
-                marker: marker,
-                wrapperClass: 'custom-window',
-                offset: { top: '-33px' },
-                edgeOffset: { top: 0, right: 0, bottom: 0},
-                border: false,
-                shadow: false,
-                closeButtonMarkup: '<button type="button" class="custom-close">&#215;</button>',
-                content: template({
-                    title       : marker.title,
-                    subtitle    : marker.subtitle,
-                    body        : marker.description,
-                    gallery     : marker.gallery,
-                    url         : marker.url
-                }),
-                callbacks: {
-                    open: function() { $(this.getWrapper()).addClass('open'); baguetteBox.run('.gallery'); },
-                    afterOpen: function() {
-                        var wrapper = $(this.getWrapper());
-                        wrapper.addClass('active');
-                        wrapper.find('.custom-close').on('click', closeDelayHandler);
-                    },
-                    beforeClose: function() {
-                        if (!closeDelayed) { closeDelayHandler(); return false; }
-                        return true;
-                    },
-                    afterClose: function() {
-                        var wrapper = $(this.getWrapper());
-                        wrapper.find('.custom-close').off();
-                        wrapper.removeClass('open');
-                        closeDelayed = false;
-                    }
-                }
-            });
-
-            // Open the i GET parameter
-            if (typeof openPlace !== 'undefined' && openPlace === marker.id) {
-                map.panTo(marker.getPosition());
-                info.open();
-            }
-        }
-    });
-
     $(document).on('click', '.login-fb', function(e) {
         e.preventDefault();
         try {
@@ -436,24 +331,6 @@ function makeLocation(placeId) {
     $('div.si-wrapper-top').hide();
 
     clearOverlays();
-
-    placeMarker = map.addMarker({
-        lat         : latitude,
-        lng         : longitude,
-        icon        : getIcon('29cc5a', 'fff'),
-        draggable   : true,
-        setLocation : true,
-        zIndex      : 999999,
-        dragend: function(e) {
-            var lat = e.latLng.lat();
-            var lng = e.latLng.lng();
-            $('#save-location').data('lat', lat);
-            $('#save-location').data('lng', lng);
-        },
-        title: 'Click & drag to set the location!'
-    });
-
-    placeMarker.setZIndex(999999);
 
     $('#save-location').show();
     $('.show-modal').addClass('out').removeClass('show-modal in');

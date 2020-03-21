@@ -48,12 +48,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta name="theme-color" content="#00aeef">
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
-	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel='stylesheet' href='//api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' />
 
-	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src='//api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
@@ -79,22 +79,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			js.src = "//connect.facebook.net/en_US/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-	</script>
-
-	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
-		<section class="custom-content">
-			<h1 class="custom-header">
-				{{title}}
-				<small>{{{subtitle}}}</small>
-			</h1>
-			<div class="custom-body">{{{body}}}</div>
-			<div class="gallery">{{{gallery}}}</div>
-			<div class="unique-url text">
-				<h5>URL:</h5>
-				<input type="text" value="{{url}}" />
-			</div>
-		</section>
 	</script>
 
 	<div id="preloader">
@@ -308,10 +292,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		<div id="lean-mask"></div>
 	</div>
 
-	<div class="map-ct preload-hide">
-	<div id="map" class="preload-hide">
-		&nbsp;
-	</div>
+	<div id="map" class="preload-hide">&nbsp;</div>
 	</div>
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
@@ -390,10 +371,20 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicGFuZGVtaWNiYWx0aWNzIiwiYSI6ImNrODFvNndsbDBoOXEzaG1zenppd2R5bW8ifQ.qIsJaYr0tGlBhkLVcJe-Pw';
+
+	map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/dark-v11',
+		zoom: 9,
+		center: [latitude, longitude]
+	});
+
+	map.addControl(new mapboxgl.NavigationControl());
+</script>
+
 <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.min.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
