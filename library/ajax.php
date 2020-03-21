@@ -135,7 +135,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     continue;
 
                 $nameDetails = explode(" ", trim($userData['name']));
-                $namePubulic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
+                $namePublic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
 
                 $output[] = [
                     'id'        => $location['fbid'],
