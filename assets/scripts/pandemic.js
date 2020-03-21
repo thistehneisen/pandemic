@@ -497,9 +497,11 @@ $(document).ready(function() {
                     FB.api('/me', function(response) {
                         toastr.success('Welcome back, ' + response.name + '!', 'Authenticated');
                         fbId = response.id;
-                        $.get('', function(response) {
+                        $.get(fullAddress, function(response) {
+                            console.log(response);
                             var header = $(response).find('header').html();
-                            $('header').fadeOut('fast').html(header);
+                            console.log(header);
+                            //$('header').fadeOut('fast').html(header);
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
                     });
