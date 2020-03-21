@@ -122,8 +122,8 @@ function pandemicData(action, sub, data) {
             });
         } else if (sub === 'global' && settings.service.global === true) {
             req({
-                a: 'data',
-                m: 'global'
+                //a: 'data',
+                //m: 'global'
             }, function(res) {
                 var items = [],
                     markerData = [];
