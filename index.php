@@ -1,5 +1,6 @@
 <?php
 require_once 'library/init.php';
+cleanImages();
 
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['delete']);
@@ -382,7 +383,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
-	openPlace = <?php print($place['i'] ?? 'undefined')?>;
+	openPlace = <?php print($place['id'] ?? 'undefined')?>;
 	category = "<?php print($jscategory)?>";
 	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;
