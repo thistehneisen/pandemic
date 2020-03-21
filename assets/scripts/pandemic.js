@@ -3,6 +3,8 @@ Interested in the code? We're looking for teammates & partnerships.
 info@pandemic.lv
 */
 
+const markerTemplate = Handlebars.compile($('#marker-content-template').html());
+
 settings = {};
 settings.refreshRate = 3000;
 settings.service = {};
@@ -115,9 +117,7 @@ function pandemicData(action, sub, data) {
         }
     }
 
-    /*
-        All of the CHAT AJAX functionality.
-    */
+    /* Chat XHR */
     else if (action === 'chat') {
         if (sub === 'send') {
             $.post(xhr, {
@@ -170,6 +170,15 @@ toastr.options = {
 
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
+    // Initialise the Maps
+    map = new GMaps({
+        div: '#map',
+        lat: latitude,
+        lng: longitude,
+        zoom: 9,
+        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+    });
+
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
@@ -189,32 +198,32 @@ $(document).ready(function() {
         }
     });
 
-    // Dropzone image upload
-    $("#img-upload").dropzone({
-        paramName: "file",
-        maxFilesize: 10,
-        uploadMultiple: true,
-        parallelUploads: 1,
-        maxFiles: 5,
-        createImageThumbnails: true,
-        thumbnailWidth: null,
-        thumbnailHeight: null,
-        clickable: true,
-        addRemoveLinks: true,
-        acceptedFiles: "image/*",
-        accept: function(file, done) {
-            done();
-        },
-        init: function() {
-            this.on("addedfile", function() {
-                // if (this.files[1]!=null){
-                // 	this.removeFile(this.files[0]);
-                // }
-            });
-        }
-    });
+/* Dropzone */
+$("#img-upload").dropzone({
+    paramName: "file",
+    maxFilesize: 10,
+    uploadMultiple: true,
+    parallelUploads: 1,
+    maxFiles: 5,
+    createImageThumbnails: true,
+    thumbnailWidth: null,
+    thumbnailHeight: null,
+    clickable: true,
+    addRemoveLinks: true,
+    acceptedFiles: "image/*",
+    accept: function(file, done) {
+        done();
+    },
+    init: function() {
+        this.on("addedfile", function() {
+            // if (this.files[1]!=null){
+            // 	this.removeFile(this.files[0]);
+            // }
+        });
+    }
+});
 
-    // - - - - - - - - - - -  Lean modal  - - - - - - - - - - -
+/* Modal windows for pages */
     $.fn.extend({
         leanModal: function() {
             var container = $('#modals');
@@ -269,7 +278,7 @@ $(document).ready(function() {
     });
     $("a[rel*=leanModal]").leanModal();
 
-    // - - - - - - - - - - -  Agree with terms  - - - - - - - - - - -
+    /* Terms Agreement */
     $(document).on('click', ".button.agree", function(e) {
         document.getElementById("signup-agree").checked = true;
         $('.button.confirm').removeClass('disabled');
@@ -282,7 +291,7 @@ $(document).ready(function() {
         this.checked ? $('.button.confirm').removeClass('disabled') : $('.button.confirm').addClass('disabled');
     });
 
-    // - - - - - - - - - - -  Mobile burger  - - - - - - - - - - -
+    /* Burger menu */
     $(document).on('click', "a.nav-toggle", function(e) {
         e.preventDefault();
         $(this).toggleClass('cross');
@@ -291,121 +300,79 @@ $(document).ready(function() {
         $('.mask').toggleClass('show-mask');
     });
 
-    // Set up handle bars
-    var template = Handlebars.compile($('#marker-content-template').html());
-
-    /* Map */
-    map = new GMaps({
-        div: '#map',
-        lat: latitude,
-        lng: longitude,
-        zoom: 9,
-        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
-    });
-
     map.on('marker_added', function(marker) {
-        /*
-        Marker created for the purpose of creating a new place.
-        */
-        if (marker.setlocation == true) {
-            var index = map.markers.indexOf(marker);
-            // Set up a close delay for CSS animations
-            var info = null;
-            var closeDelayed = false;
-            var closeDelayHandler = function() {
-                $(info.getWrapper()).removeClass('active');
-                setTimeout(function() {
-                    closeDelayed = true;
-                    info.close();
-                }, 300);
-            };
-            var info = new SnazzyInfoWindow({
-                marker: marker,
-                position: 'top',
-                offset: {
-                    top: '-55px'
-                },
-                content: '<div>' + marker.title + '</div>',
-                showCloseButton: false,
-                closeOnMapClick: false,
-                padding: '7px 12px',
-                backgroundColor: '#29cc5a',
-                border: false,
-                borderRadius: '3px',
-                shadow: false,
-                fontColor: '#fff',
-                fontSize: '15px'
-            });
-            info.open();
-            return false;
-        } else { // Marker coming from database
-            var index = map.markers.indexOf(marker);
-            // Set up a close delay for CSS animations
-            var info = null;
-            var closeDelayed = false;
-            var closeDelayHandler = function() {
-                $(info.getWrapper()).removeClass('active');
-                setTimeout(function() {
-                    closeDelayed = true;
-                    info.close();
-                }, 300);
-            };
-            var info = new SnazzyInfoWindow({
-                marker: marker,
-                position: 'top',
-                offset: {
-                    top: '-33px'
-                },
-                content: '<div><strong>' + strip(marker.title) + '</strong></div>' +
-                    '<div>' + marker.subtitle + '</div>',
-                showCloseButton: false,
-                closeOnMapClick: false,
-                padding: '5px 10px',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                border: false,
-                borderRadius: '0px',
-                shadow: false,
-                fontColor: '#fff',
-                fontSize: '13px'
-            });
-            info.open();
+        /* Marker created for the purpose of creating a new place. */
+        if (marker.setLocation === true) {
+            var index               = map.markers.indexOf(marker);
+            var info                = null;
+            var closeDelayed        = false;
+            var closeDelayHandler   = function() { $(info.getWrapper()).removeClass('active'); setTimeout(function() { closeDelayed = true; info.close(); }, 300); };
 
-            info = new SnazzyInfoWindow({
+            var info            = new SnazzyInfoWindow({
+                marker          : marker,
+                position        : 'top',
+                offset          : {   top: '-55px' },
+                content         : '<div>' + marker.title + '</div>',
+                showCloseButton : false,
+                closeOnMapClick : false,
+                padding         : '7px 12px',
+                backgroundColor : '#29cc5a',
+                border          : false,
+                borderRadius    : '3px',
+                shadow          : false,
+                fontColor       : '#fff',
+                fontSize        : '15px'
+            }).open();
+        } else {
+        /* Markers coming from database or AJAX */
+            var index               = map.markers.indexOf(marker);
+            var info                = null;
+            var closeDelayed        = false;
+            var closeDelayHandler   = function() { $(info.getWrapper()).removeClass('active');
+                setTimeout(function() { closeDelayed = true; info.close(); }, 300);
+            };
+
+            var info                = new SnazzyInfoWindow({
+                marker          : marker,
+                position        : 'top',
+                offset          : { top: '-33px' },
+                content         : '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
+                showCloseButton : false,
+                closeOnMapClick : false,
+                padding         : '5px 10px',
+                backgroundColor : 'rgba(0, 0, 0, 0.7)',
+                border          : false,
+                borderRadius    : '0px',
+                shadow          : false,
+                fontColor       : '#fff',
+                fontSize        : '13px'
+            }).open();
+
+                info                = new SnazzyInfoWindow({
                 marker: marker,
                 wrapperClass: 'custom-window',
-                offset: {
-                    top: '-33px'
-                },
-                edgeOffset: {
-                    top: 0,
-                    right: 0,
-                    bottom: 0
-                },
+                offset: { top: '-33px' },
+                edgeOffset: { top: 0, right: 0, bottom: 0},
                 border: false,
                 shadow: false,
                 closeButtonMarkup: '<button type="button" class="custom-close">&#215;</button>',
-                content: template({
-                    title: marker.title,
-                    subtitle: marker.subtitle,
-                    body: marker.description,
-                    gallery: marker.gallery,
-                    url: marker.url
+                content: markerTemplate({
+                    title       : marker.title,
+                    subtitle    : marker.subtitle,
+                    body        : marker.description,
+                    gallery     : marker.gallery,
+                    url         : marker.url,
+                    img         : marker.img
                 }),
                 callbacks: {
-                    open: function() {
-                        $(this.getWrapper()).addClass('open');
-                        baguetteBox.run('.gallery');
-                    },
+                    open: function() { $(this.getWrapper()).addClass('open'); baguetteBox.run('.gallery'); },
                     afterOpen: function() {
                         var wrapper = $(this.getWrapper());
                         wrapper.addClass('active');
                         wrapper.find('.custom-close').on('click', closeDelayHandler);
                     },
                     beforeClose: function() {
-                        if (!closeDelayed) {
-                            closeDelayHandler();
-                            return false;
-                        }
+                        if (!closeDelayed) { closeDelayHandler(); return false; }
                         return true;
                     },
                     afterClose: function() {
@@ -487,7 +454,7 @@ function makeLocation(placeId) {
         lng         : longitude,
         icon        : getIcon('29cc5a', 'fff'),
         draggable   : true,
-        setlocation : true,
+        setLocation : true,
         zIndex      : 999999,
         dragend: function(e) {
             var lat = e.latLng.lat();
