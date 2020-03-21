@@ -1,5 +1,5 @@
 <?php
-if (empty($_POST)) exit;
+if (empty($_POST)) die('NOT.');
 use \League\Csv\Reader;
 
 header('Content-Type: application/json');
@@ -198,4 +198,4 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             break;
         }
     }
-}
+} else die('NOT.');
