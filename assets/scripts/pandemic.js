@@ -413,7 +413,7 @@ $(document).ready(function() {
                 }, 300);
             };
 
-            var info = new SnazzyInfoWindow({
+            /*var info = new SnazzyInfoWindow({
                 marker: marker,
                 position: 'top',
                 offset: {
@@ -430,7 +430,7 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '13px'
             });
-            info.open();
+            info.open();*/
 
             info = new SnazzyInfoWindow({
                 marker: marker,
