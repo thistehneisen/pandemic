@@ -33,12 +33,13 @@ if (isset($_GET['logout'])) {
 
 if (!empty($response)) {
   $graphNode = $response->getGraphNode();
-  die(var_dump($graphNode));
+
   $db->insert('users', array(
     'id' => $graphNode['id'],
     'name' => $graphNode['name'],
     'picture' => $graphNode['picture']['url'],
     'lastlogin' => date("Y-m-d H:i:s"),
+    'access_token' => $accessToken,
     'ip' => $_SERVER['REMOTE_ADDR']
   ), true);
 
