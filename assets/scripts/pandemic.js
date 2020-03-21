@@ -418,18 +418,18 @@ $(document).ready(function() {
                 marker: marker,
                 position: 'top',
                 offset: {
-                    top: '-33px'
+                    top: '-15px'
                 },
                 content: '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 border: false,
                 borderRadius: '0px',
                 shadow: false,
                 fontColor: '#fff',
-                fontSize: '13px',
+                fontSize: '11px',
                 panOnOpen: false
             });
             tooltip.open();
