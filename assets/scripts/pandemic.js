@@ -4,7 +4,6 @@ info@pandemic.lv
 */
 
 const markerTemplate            = Handlebars.compile($('#marker-content-template').html());
-const Dropzone.autoDiscover     = false;
 
 settings                        = {};
 settings.refreshRate            = 3000;
@@ -165,6 +164,7 @@ $(document).ready(function() {
     });
 
     /* Dropzone */
+    Dropzone.autoDiscover = false;
     $("#img-upload").dropzone({
         paramName: "file",
         maxFilesize: 10,
