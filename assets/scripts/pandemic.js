@@ -368,7 +368,6 @@ $(document).ready(function() {
     var template = Handlebars.compile($('#marker-content-template').html());
 
     map.on('marker_added', function(marker) {
-        console.log(marker);
         /* Marker created for the purpose of creating a new place. */
         if (marker.setLocation === true) {
             var index = map.markers.indexOf(marker);
@@ -431,7 +430,6 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '13px'
             });
-            console.log(info);
             info.open();
 
             info = new SnazzyInfoWindow({
@@ -499,7 +497,6 @@ $(document).ready(function() {
                         fbId = response.id;
                         $.get('', function(response) {
                             var header = $(response).find('header').html();
-                            console.log(header);
                             $('header').fadeOut('fast').html(header);
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
