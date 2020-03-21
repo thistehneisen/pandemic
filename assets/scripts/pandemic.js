@@ -287,6 +287,7 @@ $(document).ready(function() {
     var template = Handlebars.compile($('#marker-content-template').html());
 
     map.on('marker_added', function(marker) {
+        console.log(marker);
         /* Marker created for the purpose of creating a new place. */
         if (marker.setLocation === true) {
             var index               = map.markers.indexOf(marker);
