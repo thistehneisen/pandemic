@@ -162,9 +162,6 @@ function pandemicData(action, sub, data) {
     }
 }
 
-// Initialising
-pandemic.init.forEach(service => pandemicData('fetch', service));
-
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialise the Maps
@@ -194,6 +191,9 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Initialising
+    pandemic.init.forEach(service => pandemicData('fetch', service));
 
     /* Dropzone */
     $("#img-upload").dropzone({
