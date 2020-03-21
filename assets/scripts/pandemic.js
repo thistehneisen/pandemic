@@ -35,27 +35,30 @@ function pandemicSettings(action, sub, data) {
 
 function req(postData) {
     var a = postData[a],
-        m = postData[m],
-        r = $.ajax({
+        m = postData[m];
+
+    $.ajax({
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
         data        : postData,
-        done        : function (msg) {
+        done        : function (res) {
+                        JSON.parse(res);
+                        console.log(res);
+                        console.log(m);
+                        console.log(a);
                         if (typeof pandemic.loaded[m] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
                             pandemic.init.includes(m)) {
+                                console.log('Ir');
                                 $('#preload-status strong').text(m);
                                 pandemic.loaded.push(m);
                             }
                             if (pandemic.loaded.length === pandemic.init.length) { dismissPreloader(); }
+                            return res;
                         },
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
-    }, function(res) { return res; });
-    
-    console.log('Response:');
-    console.log(r);
-    return r.responseJSON;
+    }).responseJSON;
 }
 
 function pandemicData(action, sub, data) {
