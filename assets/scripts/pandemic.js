@@ -78,12 +78,11 @@ function pandemicData(action, sub, data) {
                     items = res.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
-                        if (item.Country/Region != 'Lithuania' && item.Country/Region != 'Estonia')
-                            continue;
+                        console.log(item);
 
                         if (typeof item.Lat !== 'undefined' &&
                             typeof item.Long !== 'undefined' &&
-                            (item.Lat.length > 6 || item.Long.length > 6)) {
+                            (item.Lat.length > 5 || item.Long.length > 5)) {
                             markerData.push({
                                 lat: item.Lat,
                                 lng: item.Long,
