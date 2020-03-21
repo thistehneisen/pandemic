@@ -67,19 +67,16 @@ function pandemicData(action, sub, data) {
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
             req({a:sub,m:action,c:category}, function(res) {
-                console.log('IR');
                 var items = [],
                     markerData = [];
                 if (res.locations.length > 0) {
-                    console.log('IR');
                     items = res.locations;
                     for (var i = 0; i < items.length; i++) {
-                        console.log('IR');
                         var item = items[i];
 
                         if (typeof item.latitude !== 'undefined' &&
                             typeof item.longitude !== 'undefined') {
-                                console.log('IR');
+                                console.log('Nav undefined');
                             markerData.push({
                                 id          : item.id,
                                 title       : strip(item.name),
@@ -96,7 +93,7 @@ function pandemicData(action, sub, data) {
                         }
                     }
                 }
-                console.log('IR');
+                console.log(markerData);
                 pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'data' && settings.service.data === true) {
