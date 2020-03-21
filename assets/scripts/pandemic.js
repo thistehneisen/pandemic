@@ -187,14 +187,17 @@ $(document).ready(function() {
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
 
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13) { // Enter
             e.preventDefault();
             if (typeof fbId === 'undefined') {
                 toastr.error('To use the chat and see available channels, you need to authorize with Facebook.', 'Please authorize');
                 $('.login-fb').click();
                 return false;
-            } else if (elem.val().length > 0)
+            } else if (elem.val().length > 0) {
                 var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
+                if (r.result === 'success') {
+                    alert('Seeent!');
+                }
             }
         }
     });
