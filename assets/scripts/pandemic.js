@@ -33,7 +33,7 @@ function pandemicSettings(action, sub, data) {
     }
 }
 
-function req(postData = {}) {
+function req(postData) {
     var a = postData[a],
         m = postData[m];
 
@@ -41,7 +41,7 @@ function req(postData = {}) {
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
-        data        : { postData },
+        data        : postData,
         done        : function (res) {
                         if (typeof pandemic.loaded[a] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&

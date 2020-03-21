@@ -1,11 +1,9 @@
 <?php
-if (empty($_POST)) die('NOT.');
+if (empty($_POST)) exit;
 use \League\Csv\Reader;
 
 header('Content-Type: application/json');
 require_once 'init.php';
-
-var_dump($_POST);
 
 $a          = $_POST['a']; // action
 $m          = $_POST['m']; // method
