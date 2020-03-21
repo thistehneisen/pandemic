@@ -133,7 +133,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						?>
 					</ul>
 				</span>
-				<span><a data-fancybox="" data-type="iframe" href="https://global.pandemic.lv/" data-options='{"caption":"https://global.pandemic.lv/","autoSize":false}'>Global</a></span>
+				<span><a href="https://global.pandemic.lv/" id="global-data">Global data</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
 					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
 					<span><a rel="leanModal" href="#profile">Your profile</a></span>
