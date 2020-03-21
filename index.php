@@ -288,6 +288,19 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			</div>
 		</div>
 
+		<div class="lean-modal modal-lg" id="global">
+			<div class="modal-container">
+				<div class="modal-wrapper">
+					<div class="modal-header">
+						<a href="#" class="modal_close close-modal">×</a>
+					</div>
+					<div class="modal-content bodytext">
+						<object data="https://global.pandemic.lv/" style="width: 100%; height: 100%; overflow: hidden;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="lean-modal modal-lg" id="terms-and-conditions">
 			<div class="modal-container">
 				<div class="modal-wrapper">
