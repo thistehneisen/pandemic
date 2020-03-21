@@ -459,7 +459,7 @@ function makeLocation(placeId) {
 
 $('#save-location').on('click', function(e) {
     e.preventDefault();
-    req(
+    req({
         a           : 'places',
         m           : 'location',
         place       : $(this).data('place'),
