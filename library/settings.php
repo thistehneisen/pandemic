@@ -42,7 +42,7 @@ $settings = [
         'chat'      => ['fetch', 'send', 'ping', 'rooms'],
         'places'    => ['fetch', 'create'],
         'people'    => ['fetch'],
-        'data'      => ['fetch']
+        'data'      => ['fetch', 'global']
     ]
 ];
 

@@ -17,6 +17,10 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             $csv = Reader::createFromPath('../data.csv', 'r');
             $csv->setHeaderOffset(0);
             jD('data', $csv);
+        } else  if ($m === 'global') {
+            $csv = Reader::createFromPath('../combined.csv', 'r');
+            $csv->setHeaderOffset(0);
+            jD('data', $csv);
         }
     /* PLACES */
     } else if ($a === 'places') {

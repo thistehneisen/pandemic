@@ -6,6 +6,7 @@ settings = {};
 settings.refreshRate = 3000;
 settings.service = {};
 settings.service.data = true;
+settings.service.global = true;
 settings.service.people = true;
 settings.service.places = true;
 settings.service.chatbox = true;
@@ -15,7 +16,7 @@ settings.chat.refreshRate = 500;
 
 pandemic = {};
 pandemic.debug = false;
-pandemic.init = ['data', 'places', 'people', 'chat'];
+pandemic.init = ['global', 'data', 'places', 'people', 'chat'];
 pandemic.loaded = [];
 pandemic.markers = [];
 
@@ -118,6 +119,35 @@ function pandemicData(action, sub, data) {
                 }));
 
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
+            });
+        } else if (sub === 'global' && settings.service.global === true) {
+            req({
+                a: 'data',
+                m: 'global'
+            }, function(res) {
+                var items = [],
+                    markerData = [];
+                if (typeof res.places !== 'undefined' && res.places.length > 0) {
+                    items = res.places;
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+
+                        if (typeof item.Lat !== 'undefined' &&
+                            typeof item.Long !== 'undefined' &&
+                            (item.Lat.length > 6 || item.Long.length > 6)) {
+                            markerData.push({
+                                lat: item.Lat,
+                                lng: item.Long,
+                                title: item.Date,
+                                icon: getIcon('ff0000'),
+                                description: item.description,
+                                subtitle: item.State
+                            });
+                        }
+                    }
+                }
+
+                pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'places' && settings.service.places === true) {
             req({
