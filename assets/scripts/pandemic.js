@@ -543,8 +543,6 @@ $('#post-the-ad').on('click', function(e) {
 });
 
 $("#global-data").fancybox({
-    'width':'90%',
-    'height':'75%',
     'autoSize':false,
     'type':'iframe',
     'src':'https://global.pandemic.lv/',
