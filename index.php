@@ -56,6 +56,9 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
+</head>
+<body>
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
 		window.fbAsyncInit = () => {
@@ -78,9 +81,22 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
-</head>
-<body>
+	<script id="marker-content-template" type="text/x-handlebars-template">
+		<div class="custom-img" style="background-image: url({{{img}}})"></div>
+		<section class="custom-content">
+			<h1 class="custom-header">
+				{{title}}
+				<small>{{{subtitle}}}</small>
+			</h1>
+			<div class="custom-body">{{{body}}}</div>
+			<div class="gallery">{{{gallery}}}</div>
+			<div class="unique-url text">
+				<h5>URL:</h5>
+				<input type="text" value="{{url}}" />
+			</div>
+		</section>
+	</script>
+
 	<div id="preloader">
 		<h1>Pandemic <strong><?php print($settings['country'])?></strong></h1>
 		<div class="cube-wrapper">
@@ -129,22 +145,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			<a href="#" class="nav-toggle hidden-md hidden-lg"><hr><hr><hr></a>
 		</div>
 	</header>
-
-	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
-		<section class="custom-content">
-			<h1 class="custom-header">
-				{{title}}
-				<small>{{{subtitle}}}</small>
-			</h1>
-			<div class="custom-body">{{{body}}}</div>
-			<div class="gallery">{{{gallery}}}</div>
-			<div class="unique-url text">
-				<h5>URL:</h5>
-				<input type="text" value="{{url}}" />
-			</div>
-		</section>
-	</script>
 
 	<div id="modals">
 		<div class="lean-modal modal-sm" id="add-ad">
