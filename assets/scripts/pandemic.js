@@ -452,7 +452,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
                         fbId = response.id;
                         $.get(fullAddress, function(response){
-                            $('body').html($(response).find('body').html());
+                            $('body header').html($(response).find('body header').html());
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
                     });

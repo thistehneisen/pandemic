@@ -56,6 +56,26 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
+	<?php /* Facebook JS Connection */ ?>
+	<script type="text/javascript">
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : <?php print(json_encode($settings['facebook']['app']['id']))?>,
+				xfbml      : true,
+				cookie		 : true,
+				version    : 'v2.8'
+			});
+			FB.getLoginStatus();
+		};
+
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?v2" />
 </head>
@@ -77,26 +97,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			<strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>
 		</div>
 	</div>
-	<?php /* Facebook JS Connection */ ?>
-	<script type="text/javascript">
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId      : <?php print(json_encode($settings['facebook']['app']['id']))?>,
-				xfbml      : true,
-				cookie		 : true,
-				version    : 'v2.8'
-			});
-			FB.getLoginStatus();
-		};
-
-		(function(d, s, id){
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
 	<script id="marker-content-template" type="text/x-handlebars-template">
 		<div class="custom-img" style="background-image: url({{{img}}})"></div>
 		<section class="custom-content">
