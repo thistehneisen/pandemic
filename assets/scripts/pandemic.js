@@ -489,7 +489,7 @@ $(document).ready(function() {
 
         if (typeof fbId === 'undefined') {
             setTimeout(function() {
-                toastr.warning('Please authorize with Facebook & allow location access to access all of the platforms features.');
+                toastr.success('Please authorize with Facebook & allow location access to access all of the platforms features.');
             }, 3500);
         }
     }, 1000);
@@ -517,15 +517,6 @@ $('#post-the-ad').on('click', function(e) {
         }
     }, 'json');
 });
-
-/* Facebook */
-function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-        toastr.success('Authentication successful, welcome back!');
-    } else {
-        toastr.error('We had a problem autorizing you with Facebook. Please try again.');
-    }
-}
 
 /* Location creation */
 function makeLocation(claddid) {

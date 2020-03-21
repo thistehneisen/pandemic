@@ -86,11 +86,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				cookie		 : true,
 				version    : 'v2.8'
 			});
-
-			/* Facebook */
-			FB.getLoginStatus(function(response) {
-				statusChangeCallback(response);
-			});
+			FB.getLoginStatus();
 		};
 
 		(function(d, s, id){
