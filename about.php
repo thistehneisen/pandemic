@@ -24,6 +24,7 @@ foreach ($settings['hosts'] as $host => $country) {
 
 <canvas id="mainChart"></canvas>
 
+<h2>Analytics</h2> (<em>Descending</em>)
 <ol>
 <?php foreach ($contents as $entry) { print('<li><strong>' . $entry['date'] . '</strong>, ' . $entry['confirmed'] . ' confirmed with ' . $entry['deaths'] . ' deaths and ' . $entry['recovered'] . ' recoveries</li>'); } ?>
 </ol>
