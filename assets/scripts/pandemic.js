@@ -136,18 +136,6 @@ function pandemicData(action, sub, data) {
     }
 }
 
-function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65) {
-    return {
-        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
-        fillColor: '#'+fill,
-        fillOpacity: 0.75,
-        scale: scale,
-        strokeColor: '#'+stroke,
-        strokeWeight: 2,
-        anchor: new google.maps.Point(12, 12)
-    };
-}
-
 setTimeout(function(){
     pandemicData('fetch', 'quarantines');
     pandemicData('fetch', 'places');
@@ -177,7 +165,6 @@ toastr.options = {
   }
 
 Dropzone.autoDiscover = false;
-var map;
 $(document).ready(function() {
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
@@ -480,8 +467,6 @@ $(document).ready(function() {
             toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
         }
     });
-
-    byePreloader();
 });
 
 $('#post-the-ad').on('click', function(e) {
@@ -556,7 +541,20 @@ $('#save-location').on('click', function(e) {
 });
 
 // Helpers
-function byePreloader() {
+function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65) {
+    return {
+        path: 'M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z',
+        fillColor: '#'+fill,
+        fillOpacity: 0.75,
+        scale: scale,
+        strokeColor: '#'+stroke,
+        strokeWeight: 2,
+        anchor: new google.maps.Point(12, 12)
+    };
+}
+
+function dismissPreloader(progress) {
+    if (typeof progress !== 'undefined') { $('#preload-status strong').text(progress); return false;}
     map.setCenter({lat:latitude,lng:longitude});
     $('#preloader').remove();
     $('.preload-hide').show();
