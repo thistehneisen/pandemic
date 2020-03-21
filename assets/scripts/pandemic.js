@@ -459,7 +459,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
                         fbId = response.id;
                         $.get(fullAddress, function(response){
-                            $('body header').html($(response).find('body header').html());
+                            $('body header').remove().html($(response).find('body header').show().html());
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
                     });
@@ -487,12 +487,6 @@ $(document).ready(function() {
             'width': '100%',
             'height': '100%'
         });
-
-        if (typeof fbId === 'undefined') {
-            setTimeout(function() {
-                toastr.info('To enjoy all of the features that the platform has to offer — please, authorize with Facebook.');
-            }, 3500);
-        }
     }, 1000);
 });
 
