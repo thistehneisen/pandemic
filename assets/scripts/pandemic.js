@@ -98,7 +98,7 @@ function pandemicData(action, sub, data) {
                     }
                 }
 
-                //pandemic.markers = map.addMarkers(markerData);
+                pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'data' && settings.service.data === true) {
             req({

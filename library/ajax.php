@@ -25,7 +25,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             $output     = [];
             $places     = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->table('places'));
             $photopath  = $settings['fullAddress'].$settings['upload']['path']['images'];
-            $category   = $_POST['category'] ?? NULL;
+            $category   = $_POST['category'] ?: NULL;
     
             foreach ((array)$places as $place) {
                 if (!empty($category) && $category != $place['category'])
@@ -42,7 +42,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
     
                 $output[] = [
                     'id'            => $place['id'],
-                    'title'         => $place['category'],
+                    'title'         => $settings['categories'][$place['category']],
                     'description'   => nl2br(htmlspecialchars($place['description'])).$delete,
                     'subtitle'      => $place['title'],
                     'gallery'       => join("", $gallery),
