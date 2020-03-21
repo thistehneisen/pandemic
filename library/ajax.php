@@ -1,33 +1,35 @@
 <?php
+if (empty($_POST)) exit;
 require_once 'init.php';
+$actions = [
+    'chat' => ['send', 'msgs', 'rooms']
+]
 
-if (!empty($_POST)) {
-    $action = $_POST['action'];
-    $errors = array();
+if (in_array($_POST['a'], array_keys($actions)))
+    $errors = [];
 
     header('Content-Type: application/json');
-
+    
     if ($action == 'add') {
         if (empty($_SESSION['facebook']['id']))
-        $errors[] = 'Please, log in first.';
-        if (strlen($_POST['title']) > 80)
-        $errors[] = 'The title is too long.';
-        if (strlen($_POST['description']) > 360)
-        $errors[] = 'Description is too long.';
+            $errors[] = 'To do this action, you firstly need to authorize.';
+        if (strlen($_POST['title']) > 50)
+            $errors[] = 'The title is too long.';
+        if (strlen($_POST['description']) > 400)
+            $errors[] = 'Description is too long.';
         if (strlen($_POST['title']) < 4)
-        $errors[] = 'Title should have at least 4 symbols.';
+            $errors[] = 'Title should be at minimum 4 symbols long.';
         if (strlen($_POST['description']) < 10)
-        $errors[] = 'Description should have at least 10 symbols.';
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-        $errors[] = 'Specified e-mail address isn\'t valid.';
+            $errors[] = 'Description should consist from at least 10 symbols.';
+        if (!empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+            $errors[] = 'The specified e-mail address is invalid. P.S. E-mail is optional.';
         if (!in_array($_POST['category'], array_keys($settings['categories'])))
-        $errors[] = 'Please choose a category from the list.';
+            $errors[] = 'Please choose one category from the list.';
 
         if (empty($errors)) {
-            $db->insert('classifieds', array(
+            $db->insert('places', array(
                 'title' => $_POST['title'],
                 'description' => $_POST['description'],
-                'price' => str_replace(',', '.', $_POST['price']),
                 'email' => $_POST['email'],
                 'phone' => $_POST['phone'],
                 'category' => $_POST['category'],

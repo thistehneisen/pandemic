@@ -9,11 +9,12 @@ settings.service = {};
 settings.service.people = true;
 settings.service.places = true;
 settings.chat = {}
-settings.chat.userChannel = 'default';
+settings.chat.rooms = {};
 settings.chat.refreshRate = 500; // ms
 
 pandemic = {};
 pandemic.markers = [];
+pandemic.firstLoad = true;
 
 var xhr = 'library/ajax.php';
 
@@ -37,14 +38,14 @@ function pandemicData(action, sub, data) {
                 category: category
             }, function(results) {
                 var items = [],
-                    markers_data = [];
+                    markerData = [];
                 if (results.locations.length > 0) {
                     items = results.locations;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
 
                         if (item.latitude != undefined && item.longitude != undefined) {
-                            markers_data.push({
+                            markerData.push({
                                 id: item.id,
                                 title: strip(item.name),
                                 subtitle : item.status ? item.status : '',
@@ -61,7 +62,7 @@ function pandemicData(action, sub, data) {
                     }
                 }
 
-                pandemic.markers = map.addMarkers(markers_data);
+                pandemic.markers = map.addMarkers(markerData);
             }, 'json');
         } else if (sub === 'quarantines') {
             $.get('json_data.php', function(results) {
@@ -81,18 +82,19 @@ function pandemicData(action, sub, data) {
             }, 'json');
         } else if (sub === 'places' && settings.service.places === true) {
             $.post(xhr, {
-                action: 'retrieve',
+                action: 'fetch',
+                target: 'places',
                 category: category
             }, function(results) {
                 var items = [],
-                    markers_data = [];
-                if (results.classifieds.length > 0) {
-                    items = results.classifieds;
+                    markerData = [];
+                if (results.places.length > 0) {
+                    items = results.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
         
                         if (item.latitude != undefined && item.longitude != undefined) {
-                            markers_data.push({
+                            markerData.push({
                                 id: item.id,
                                 lat: item.latitude,
                                 lng: item.longitude,
@@ -108,7 +110,7 @@ function pandemicData(action, sub, data) {
                     }
                 }
 
-                pandemic.markers = map.addMarkers(markers_data);
+                pandemic.markers = map.addMarkers(markerData);
             }, 'json');
         }
     }
@@ -120,13 +122,15 @@ function pandemicData(action, sub, data) {
         if (sub === 'send') {
             $.post(xhr, {
                 action: 'chat',
+                method: 'send',
                 target: data.t,
                 message: data.m
             }, function(result) { return result; });
-        } else if (sub === 'items') {
+        } else if (sub === 'msgs') {
             $.post(xhr, {
-                action: 'chat_items',
-                channel: settings.chat.userChannel
+                action: 'chat',
+                method: 'msgs',
+                rooms: settings.chat.rooms
             }, function(results) {
                 for (var i = results.items.length - 1; i >= 0; i--) {
                     $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
@@ -478,13 +482,13 @@ $('#post-the-ad').on('click', function(e) {
         action: 'add',
         title: $('#title').val(),
         description: $('#description').val(),
-        price: $('#price').val(),
         category: $('#category').val(),
         phone: $('#phone').val(),
-        email: $('#email').val()
+        email: $('#email').val(),
+        website: $('#website').val()
     }, function(response) {
         if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
-            $('#post-the-ad span').text('Create new place');
+            $('#post-the-ad span').html('Continue with location &rarr;');
             toastr.error(response.errors[0], 'Whoops!');
         } else {
             makeLocation(response.id);

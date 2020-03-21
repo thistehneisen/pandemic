@@ -23,9 +23,14 @@ $settings = array(
         )
     ),
     'categories' => array(
-        'quarantine' => 'Quarantine',
-        'isolating' => 'Isolation',
-        'volunteer' => 'Volunteering',
+        'penpals' => 'Pen-pals',
+        'volunteer' => 'Ready to help',
+        'delivery' => 'Delivery',
+        'health' => 'Health',
+        'fitness' => 'Fitness',
+        'food' => 'Food',
+        'entertainment' => 'Entertainment',
+        'business' => 'Business',
         'services' => 'Services',
         'other' => 'Other'
     )

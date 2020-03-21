@@ -2,13 +2,13 @@
 require_once 'library/init.php';
 
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
-	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_GET['delete']);
+	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['delete']);
 	if ($remove['user'] == $_SESSION['facebook']['id']) {
-		$db->queryf("DELETE FROM %s WHERE `id`='%d' AND `user`='%d'", $db->classifieds, $_GET['delete'], $_SESSION['facebook']['id']);
+		$db->queryf("DELETE FROM %s WHERE `id`='%d' AND `user`='%d'", $db->table('places'), $_GET['delete'], $_SESSION['facebook']['id']);
 		header('Location: ' . $settings['fullAddress']);
 	}
 } else if (!empty($_GET['id']) && is_numeric($_GET['id']))
-	$classified = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_GET['id']);
+	$classified = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['id']);
 else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
     $jscategory = $_GET['category'];
 ?>
@@ -158,8 +158,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 					<div class="modal-content bodytext">
 						<div class="form">
 							<div class="text">
-								<label for="title">Title <span>(max. 80 symbols)</span></label>
-								<input type="text" id="title" name="title" placeholder="Title" maxlength="80" value="" required="">
+								<label for="title">Title <span>(max. 25 symbols)</span></label>
+								<input type="text" id="title" name="title" placeholder="Title" maxlength="25" value="" required="">
 							</div>
 
                             <div class="select">
@@ -171,12 +171,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 							</div>
 
 							<div class="input textarea">
-								<label for="description">Description <span>(max. 360 symbols)</span></label>
-								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="360"></textarea>
+								<label for="description">Description <span>(max. 400 symbols)</span></label>
+								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="400"></textarea>
 							</div>
 
 							<div class="img-upload">
-								<label>Choose images</label>
+								<label>Pick some pictures</label>
 								<form id="img-upload" action="library/upload.php" class="dropzone" enctype="multipart/form-data">
 									<div class="fallback file">
 										<input name="file" type="file" />
@@ -185,7 +185,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 							</div>
 
 							<div class="input-row">
-
 								<div class="input-col lg-4-12">
 									<div class="text">
 										<label for="phone">Phone <small>(optional)</small></label>
@@ -221,7 +220,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 								<a class="button outline gray lg-1-1 close-modal" href="#"><span>Cancel</span></a>
 							</div>
 							<div class="input-col lg-1-2">
-								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create new place</span></a>
+								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Continue with location &rarr;</span></a>
 							</div>
 						</div>
 					</div>
@@ -314,14 +313,15 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		&nbsp;
 	</div>
 	</div>
-<a class="button filled green" href="#" style="display: none;" id="save-location"><span>Ready!</span></a>
-<div class="mask">&nbsp;</div>
+	<a class="button filled green" href="#" style="display: none;" id="save-location"><span>Let's publish this!</span></a>
+	<div class="mask">&nbsp;</div>
+
 <?php if (isset($_GET['chat'])) { ?>
-	<div class="center">
+<div class="center" id="chatbox">
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
     <h2>
-      Contacts
+      People<br/><em>&</em> Groups
     </h2>
     <div class="contact">
       <div class="pic rogers"></div>

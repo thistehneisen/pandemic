@@ -4,7 +4,7 @@ require_once 'init.php';
 $images = (array)$_SESSION['images'];
 
 if (empty($_SESSION['facebook']['id']))
-  die(json_encode(array('error' => 'Must log in first.')));
+  die(json_encode(array('error' => 'You must authorize first.')));
 
 if (!empty($_FILES)) {
   if ($_FILES['file']['error'][0] > 0) {
@@ -44,6 +44,6 @@ if (!empty($_FILES)) {
     $images[] = array('name' => $filename, 'ext' => $ext);
     $_SESSION['images'] = $images;
   } else {
-    die(json_encode(array('error' => 'Not an image')));
+    die(json_encode(array('error' => 'This is not an image.')));
   }
 }

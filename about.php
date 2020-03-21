@@ -3,7 +3,7 @@
 <h2>Our idea</h2>
 <p>
 We want to create a platform that solves the most common issues for people in crisis situations.<br/>
-The best this platform offers is communication: with your neighbors, your city, your country and worldwide. This is solved by geo-location, and channels that anyone can join or create. We, humans, as social beings, need this as much as we need air.<br/>
+The best this platform offers is communication: with your neighbors, your city, your country and worldwide. This is solved by geo-location, and chat rooms that anyone can join or create. We, humans, as social beings, need this as much as we need air.<br/>
 Meanwhile, businesses can mark their service anywhere on the map. Whether they are providing fresh food, medical supplies or virtual guitar lessons — anyone can promote their service here. This is great for small businesses, like cafes, that are currently looking for any way possible to pay their employees. There is also the option to volunteer and help out those in need.<br/>
 Last, but not least: the filtered information. The platform itself automatically updates the officially approved information and publishes it. Meanwhile, the platform users can share their information regionally so anyone can take an in-depth look at any street, town, city or region.
 </p>
