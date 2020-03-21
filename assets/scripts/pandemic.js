@@ -531,7 +531,7 @@ $('#save-location').on('click', function(e) {
     e.preventDefault();
     $.post(xhr, {
         a           : 'places',
-        m           : 'location'
+        m           : 'location',
         place       : $(this).data('place'),
         lat         : $(this).data('lat'),
         lng         : $(this).data('lng')
