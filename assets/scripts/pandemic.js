@@ -34,6 +34,7 @@ function pandemicSettings(action, sub, data) {
 }
 
 function req(postData) {
+    console.log('Start');
     var a        = postData[a],
         m        = postData[m],
         response = $.ajax({
@@ -45,16 +46,15 @@ function req(postData) {
                         if (typeof pandemic.loaded[a] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
                             pandemic.init.includes(m)) {
-                                pandemic.loaded.push(m);
                                 $('#preload-status strong').text(m);
+                                pandemic.loaded.push(m);
                             }
-                            if (pandemic.loaded.length === pandemic.init.length) {
-                                dismissPreloader();
-                            }
+                            if (pandemic.loaded.length === pandemic.init.length) { dismissPreloader(); }
                         },
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
     }, function(res) { return res; });
     
+    console.log('Response');
     return response;
 }
 
