@@ -63,6 +63,7 @@ function pandemicData(action, sub, data) {
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
             req({a:sub,m:action,c:category}, function(res) {
+                console.log(res);
                 var items = [],
                     markerData = [];
                 if (res.locations.length > 0) {
