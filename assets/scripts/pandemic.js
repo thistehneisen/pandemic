@@ -307,7 +307,9 @@ $(document).ready(function() {
                 shadow          : false,
                 fontColor       : '#fff',
                 fontSize        : '15px'
-            }).open();
+            });
+
+            info.open();
         } else {
         /* Markers coming from database or AJAX */
             var index               = map.markers.indexOf(marker);
@@ -331,7 +333,9 @@ $(document).ready(function() {
                 shadow          : false,
                 fontColor       : '#fff',
                 fontSize        : '13px'
-            }).open();
+            });
+
+            info.open();
 
                 info                = new SnazzyInfoWindow({
                 marker: marker,
