@@ -17,7 +17,7 @@ $fb = new \Facebook\Facebook([
 $jsHelper = $fb->getJavaScriptHelper();
 try {
   $accessToken = $jsHelper->getAccessToken();
-  $response = $fb->get('/me?locale=lv_LV&fields=id,name,picture', $accessToken);
+  $response = $fb->get('/me?locale=lv_LV&fields=id,name,me?fields=id,name,picture.width(500)', $accessToken);
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
   // nasing
 } catch(Facebook\Exceptions\FacebookSDKException $e) {
