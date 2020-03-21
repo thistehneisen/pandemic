@@ -163,7 +163,7 @@ pandemic.init.forEach(service => pandemicData('fetch', service));
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialise the Maps
-    map = new GMaps({
+    window.map = new GMaps({
         div: '#map',
         lat: latitude,
         lng: longitude,
