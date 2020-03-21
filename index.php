@@ -140,8 +140,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                 <span class="dd">
                     <a href="#">Settings</a>
                     <ul class="dropdown">
-						<li><a href="#" onclick="settings('togglePeople', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
-						<li><a href="#" onclick="settings('toggleServices');"><span><strong>&#10060;</strong> Services</span></a></li>
+						<li><a href="#" onclick="pandemicSettings('togglePeople', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
+						<li><a href="#" onclick="pandemicSettings('toggleServices');"><span><strong>&#10060;</strong> Services</span></a></li>
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>

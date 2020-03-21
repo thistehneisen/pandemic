@@ -6,7 +6,7 @@ info@pandemic.lv
 settings = {};
 settings.noUsers = false;
 
-function settings(action, element) {
+function pandemicSettings(action, element) {
     if (action == 'togglePeople') {
         if (settings.noUsers === false) {
             element.find('span strong').html('&#10004;');
