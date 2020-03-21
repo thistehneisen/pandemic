@@ -34,8 +34,8 @@ function pandemicSettings(action, sub, data) {
 }
 
 function req(postData) {
-    var a = postData[a],
-        m = postData[m];
+    var a = postData.a,
+        m = postData.m;
 
     var response = $.ajax({
         url         : xhr,
