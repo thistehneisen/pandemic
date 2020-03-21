@@ -16,7 +16,7 @@ settings.chat.refreshRate = 500;
 
 pandemic = {};
 pandemic.debug = false;
-pandemic.init = ['global', 'data', 'places', 'people', 'chat'];
+pandemic.init = ['data', 'places', 'people', 'chat'];
 pandemic.loaded = [];
 pandemic.markers = [];
 
@@ -67,6 +67,38 @@ function req(postData, cb) {
 function pandemicData(action, sub, data) {
     /* Fetching data to front-end */
     if (action === 'fetch') {
+        if (sub === 'global' && settings.service.global === true) {
+            req({
+                a: 'data',
+                m: 'global'
+            }, function(res) {
+                var items = [],
+                    markerData = [];
+                if (typeof res.places !== 'undefined' && res.places.length > 0) {
+                    items = res.places;
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        if (item.Country/Region != 'Lithuania' && item.Country/Region != 'Estonia')
+                            continue;
+
+                        if (typeof item.Lat !== 'undefined' &&
+                            typeof item.Long !== 'undefined' &&
+                            (item.Lat.length > 6 || item.Long.length > 6)) {
+                            markerData.push({
+                                lat: item.Lat,
+                                lng: item.Long,
+                                title: item.Date,
+                                icon: getIcon('ff0000'),
+                                description: item.Province/State,
+                                subtitle: item.Country/Region
+                            });
+                        }
+                    }
+                }
+
+                pandemic.markers = map.addMarkers(markerData);
+            });
+        }
         if (sub === 'people' && settings.service.people === true) {
             req({
                 a: sub,
@@ -119,37 +151,6 @@ function pandemicData(action, sub, data) {
                 }));
 
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
-            });
-        } else if (sub === 'global' && settings.service.global === true) {
-            req({
-                //a: 'data',
-                //m: 'global'
-            }, function(res) {
-                var items = [],
-                    markerData = [];
-                if (typeof res.places !== 'undefined' && res.places.length > 0) {
-                    items = res.places;
-                    for (var i = 0; i < items.length; i++) {
-                        var item = items[i];
-                        if (item.Country/Region != 'Lithuania' && item.Country/Region != 'Estonia')
-                            continue;
-
-                        if (typeof item.Lat !== 'undefined' &&
-                            typeof item.Long !== 'undefined' &&
-                            (item.Lat.length > 6 || item.Long.length > 6)) {
-                            markerData.push({
-                                lat: item.Lat,
-                                lng: item.Long,
-                                title: item.Date,
-                                icon: getIcon('ff0000'),
-                                description: item.Province/State,
-                                subtitle: item.Country/Region
-                            });
-                        }
-                    }
-                }
-
-                pandemic.markers = map.addMarkers(markerData);
             });
         } else if (sub === 'places' && settings.service.places === true) {
             req({
