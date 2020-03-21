@@ -142,8 +142,8 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'latitude'  => $location['latitude'],
                     'longitude' => $location['longitude'],
                     'img'       => $userData['picture'],
-                    'name'      => htmlspecialchars($userData['pseudo'] ?? $namePublic),
-                    'status'    => htmlspecialchars($userData['status']),
+                    'name'      => $userData['pseudo'] ?? $namePublic,
+                    'status'    => $userData['status'],
                     'category'  => $userData['category'],
                     'seen'      => $userData['lastlogin']
                 ];

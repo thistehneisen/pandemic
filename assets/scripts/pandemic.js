@@ -649,15 +649,15 @@ function getIcon(fC = '00aeef', sColor = 222, sC = 1.2, fO = 0.65, url = undefin
 }
 
 function dismissPreloader() {
-    map.setCenter({
-        lat: latitude,
-        lng: longitude
-    });
-    $('#preloader').remove();
-    $('.preload-hide').show();
     $('#map').css({
         'width': '100%',
         'height': '100%'
+    });
+    $('#preloader').remove();
+    $('.preload-hide').show();
+    map.setCenter({
+        lat: latitude,
+        lng: longitude
     });
 }
 
