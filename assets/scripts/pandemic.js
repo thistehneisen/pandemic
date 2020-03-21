@@ -34,10 +34,9 @@ function pandemicSettings(action, sub, data) {
 }
 
 function req(postData) {
-    console.log('Start');
-    var a        = postData[a],
-        m        = postData[m],
-        response = $.ajax({
+    var a = postData[a],
+        m = postData[m],
+        r = $.ajax({
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
@@ -55,8 +54,8 @@ function req(postData) {
     }, function(res) { return res; });
     
     console.log('Response:');
-    console.log(response);
-    return $.parseJSON(response);
+    console.log(r.responseJSON);
+    return r.responseJSON;
 }
 
 function pandemicData(action, sub, data) {
