@@ -382,6 +382,9 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 <?php /* Settings */ ?>
 <script type="text/javascript">
+<?php if (isset($_GET['global'])) { ?>
+	$("#map").html('<object data="https://global.pandemic.lv/" />');
+<?php } ?>
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
 	openPlace = <?php print($place['id'] ?? 'undefined')?>;
 	category = "<?php print($jscategory)?>";
