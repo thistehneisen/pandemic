@@ -198,14 +198,14 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 									</div>
 								</div>
 
-								<div class="input-col lg-5-12">
+								<div class="input-col lg-4-12">
 									<div class="text">
 										<label for="email">E-mail <small>(optional)</small></label>
 										<input type="text" id="email" name="email" placeholder="E-mail address">
 									</div>
 								</div>
 
-								<div class="input-col lg-5-12">
+								<div class="input-col lg-4-12">
 									<div class="text">
 										<label for="email">Website <small>(optional)</small></label>
 										<input type="text" id="website" name="website" placeholder="http://www.">
