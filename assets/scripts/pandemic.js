@@ -54,7 +54,8 @@ function req(postData) {
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
     }, function(res) { return res; });
     
-    console.log('Response');
+    console.log('Response:');
+    console.log(response);
     return response;
 }
 
