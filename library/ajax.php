@@ -7,7 +7,8 @@ require_once 'init.php';
 $actions[] = [
                 'chat' => ['send', 'msgs', 'rooms'], 
                 'places' => ['create', 'location'],
-                'people' => ['locations']
+                'people' => ['locations'],
+                'data' => ['fetch']
             ];
 
 $a          = $_POST['a']; // action
@@ -15,8 +16,19 @@ $m          = $_POST['m']; // method
 $errors     = [];
 
 if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
+    /* DATA */
+    if ($a === 'data') {
+        /* Fetch all data */
+        if ($m === 'fetch') {
+            use \League\Csv\Reader;
+            
+                $csv = Reader::createFromPath(dirname(__FILE__) . '/data.csv', 'r');
+                $csv->setHeaderOffset(0);
+            
+                jD('quarantine', $csv);
+        }
     /* PLACES */
-    if ($a === 'places') {
+    } else if ($a === 'places') {
         /* Fetch all places */
         if ($m === 'fetch') {
             $output     = [];

@@ -196,32 +196,25 @@ $(document).ready(function() {
         }
     });
 
-/* Dropzone */
-$("#img-upload").dropzone({
-    paramName: "file",
-    maxFilesize: 10,
-    uploadMultiple: true,
-    parallelUploads: 1,
-    maxFiles: 5,
-    createImageThumbnails: true,
-    thumbnailWidth: null,
-    thumbnailHeight: null,
-    clickable: true,
-    addRemoveLinks: true,
-    acceptedFiles: "image/*",
-    accept: function(file, done) {
-        done();
-    },
-    init: function() {
-        this.on("addedfile", function() {
-            // if (this.files[1]!=null){
-            // 	this.removeFile(this.files[0]);
-            // }
-        });
-    }
-});
+    /* Dropzone */
+    $("#img-upload").dropzone({
+        paramName: "file",
+        maxFilesize: 10,
+        uploadMultiple: true,
+        parallelUploads: 5,
+        maxFiles: 5,
+        createImageThumbnails: true,
+        thumbnailWidth: null,
+        thumbnailHeight: null,
+        clickable: true,
+        addRemoveLinks: true,
+        acceptedFiles: "image/*",
+        accept: function(file, done) {
+            done();
+        }
+    });
 
-/* Modal windows for pages */
+    /* Modal windows for pages */
     $.fn.extend({
         leanModal: function() {
             var container = $('#modals');
