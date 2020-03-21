@@ -115,10 +115,9 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'id' => $_POST['place'],
                     'user' => $_SESSION['facebook']['id']
                 ]);
-                die('ir');
+
                 jD('result', 'success');
             } else {
-                die('nav');
                 jD('errors', $errors);
             }
         }
