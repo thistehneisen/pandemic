@@ -81,7 +81,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 </head>
 <body>
 	<div id="preloader">
-		<h1>Pandemic Baltics (<em><?php print($settings['country'])?></em>)</h1>
+		<h1>Pandemic <strong><?php print($settings['country'])?></strong></em></h1>
 		<div class="cube-wrapper">
 			<div class="cube-folding">
 				<span class="leaf1"></span>
@@ -89,7 +89,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span class="leaf3"></span>
 				<span class="leaf4"></span>
 			</div>
-			<span class="loading" data-name="Loading">Hold on, fetching the data…</span>
+			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
 		</div>
 
 		<div class="made-with-love">
@@ -438,9 +438,9 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
 	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
+	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;
 	longitude = <?php print($settings['longitude'])?>;
-	country = <?php print(json_encode($settings['country']))?>;
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 

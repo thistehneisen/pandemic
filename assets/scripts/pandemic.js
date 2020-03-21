@@ -481,20 +481,7 @@ $(document).ready(function() {
         }
     });
 
-    setTimeout(function() {
-        map.setCenter({
-            lat: latitude,
-            lng: longitude
-        });
-
-        $('#preloader').fadeOut();
-        $('.preload-hide').show();
-
-        $('#map').css({
-            'width': '100%',
-            'height': '100%'
-        });
-    }, 1000);
+    byePreloader();
 });
 
 $('#post-the-ad').on('click', function(e) {
@@ -569,6 +556,13 @@ $('#save-location').on('click', function(e) {
 });
 
 // Helpers
+function byePreloader() {
+    map.setCenter({lat:latitude,lng:longitude});
+    $('#preloader').remove();
+    $('.preload-hide').show();
+    $('#map').css({'width': '100%','height': '100%'});
+}
+
 function clearOverlays() {
     for (var i = 0; i < allMarkers.length; i++)
         pandemic.markers[i].setMap(null);
