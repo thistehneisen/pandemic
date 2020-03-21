@@ -533,8 +533,6 @@ $(document).ready(function() {
         });
 
         if (typeof fbId === 'undefined') {
-            toastr.info('Welcome to Pandemic Baltics — in the time of crisis, you\'re not alone. We\'re the proof.');
-
             setTimeout(function() {
                 toastr.warning('Please authorize with Facebook & allow location access to access all of the platforms features.');
             }, 3500);

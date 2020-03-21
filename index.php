@@ -439,6 +439,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	category = "<?php print($jscategory)?>";
 	latitude = <?php print($settings['latitude'])?>;
 	longitude = <?php print($settings['longitude'])?>;
+	country = <?php print(json_encode($settings['country']))?>;
 	<?php if (!empty($_SESSION['facebook']['id'])) { ?>fbId = <?php print($_SESSION['facebook']['id'])?>;<?php } ?>
 </script>
 
