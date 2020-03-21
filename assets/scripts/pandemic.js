@@ -5,18 +5,19 @@ info@pandemic.lv
 
 const markerTemplate = Handlebars.compile($('#marker-content-template').html());
 
-settings = {};
-settings.refreshRate = 3000;
-settings.service = {};
-settings.service.people = true;
-settings.service.places = true;
-settings.chat = {}
-settings.chat.rooms = {};
-settings.chat.refreshRate = 500; // ms
+settings                        = {};
+settings.refreshRate            = 3000;
+settings.service                = {};
+settings.service.people         = true;
+settings.service.places         = true;
+settings.chat                   = {}
+settings.chat.rooms             = {};
+settings.chat.refreshRate       = 500;
 
-pandemic = {};
-pandemic.markers = [];
-pandemic.loaded = {};
+pandemic                        = {};
+pandemic.init                   = ['static', 'places', 'people', 'chat'];
+pandemic.loaded                 = [];
+pandemic.markers                = [];
 
 var xhr = 'library/ajax.php';
 
@@ -34,9 +35,9 @@ function pandemicData(action, sub, data) {
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
             $.post(xhr, {
-                a: 'people',
-                m: 'locations',
-                c: category
+                a:'people',
+                m:'fetch',
+                c:category
             }, function(results) {
                 var items = [],
                     markerData = [];
@@ -87,18 +88,18 @@ function pandemicData(action, sub, data) {
             }, 'json');
         } else if (sub === 'places' && settings.service.places === true) {
             $.post(xhr, {
-                action: 'fetch',
-                target: 'places',
-                category: category
+                a:'places',
+                m:'fetch',
+                c:category
             }, function(results) {
                 var items = [], markerData = [];
-                if (typeof results.places != 'undefined' && results.places.length > 0) {
+                if (typeof results.places !== 'undefined' && results.places.length > 0) {
                     items = results.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
         
-                        if (typeof item.latitude != 'undefined' &&
-                            typeof item.longitude != 'undefined') {
+                        if (typeof item.latitude !== 'undefined' &&
+                            typeof item.longitude !== 'undefined') {
                             markerData.push({
                                 id          : item.id,
                                 lat         : item.latitude,
@@ -116,6 +117,15 @@ function pandemicData(action, sub, data) {
 
                 pandemic.markers = map.addMarkers(markerData);
             }, 'json');
+        } else if (sub === 'chat' && settings.service.chatbox === true) {
+            $.post(xhr, {
+                a:'chat',
+                m:'fetch'
+            }, function(res) {
+                for (var i = res.items.length - 1; i >= 0; i--) {
+                    $('#chat_holder').append('<span class="chat_item">' + res.items[i].message + '</span>');
+                };
+            }, 'json');
         }
     }
 
@@ -123,20 +133,19 @@ function pandemicData(action, sub, data) {
     else if (action === 'chat') {
         if (sub === 'send') {
             $.post(xhr, {
-                action: 'chat',
-                method: 'send',
-                target: data.t,
-                message: data.m
+                a:'chat',
+                m:'send',
+                t:data.t,
+                r:data.r,
+                msg:data.m
             }, function(result) { return result; });
-        } else if (sub === 'msgs') {
+        } else if (sub === 'ping') {
             $.post(xhr, {
-                action: 'chat',
-                method: 'msgs',
+                a:'chat',
+                m:'ping',
                 rooms: settings.chat.rooms
             }, function(results) {
-                for (var i = results.items.length - 1; i >= 0; i--) {
-                    $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
-                };
+                // PONG
             }, 'json');
         }
     }
@@ -146,10 +155,11 @@ setTimeout(function(){
     pandemicData('fetch', 'static');
     pandemicData('fetch', 'places');
     pandemicData('fetch', 'people');
+    pandemicData('fetch', 'chat');
 }, settings.refreshRate);
 
 setInterval(function(){
-    pandemicData('chat', 'items');
+    pandemicData('chat', 'ping');
 }, settings.chat.refreshRate);
 
 toastr.options = {

@@ -6,9 +6,9 @@ header('Content-Type: application/json');
 require_once 'init.php';
 
 $actions[] = [
-                'chat' => ['send', 'msgs', 'rooms'], 
-                'places' => ['create', 'location'],
-                'people' => ['locations'],
+                'chat' => ['send', 'fetch', 'ping', 'rooms'],
+                'places' => ['create', 'fetch'],
+                'people' => ['fetch'],
                 'data' => ['fetch']
             ];
 
@@ -130,7 +130,7 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
         }
     } else if ($a === 'people') {
         /* Fetch peoples locations */
-        if ($m === 'locations') {
+        if ($m === 'fetch') {
             $output     = [];
             $locations  = $db->getRows("SELECT * FROM %s WHERE `fbid` != 0", $db->table('locations'));
 
@@ -169,29 +169,38 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
     } else if ($a === 'chat') {
         switch ($m) {
             case 'send':
-                $response   = ['status' => 1];
-                $channel    = 'default';
+                // check if sender is not blocked by receiver, if private
+                // check if sender has joined the room where he's sending
+                // check if sender not banned from the room
+                $type = $_POST['t'];
 
-                if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
-                    $channel = $_POST['channel'];
+                if (!in_array($type, $settings['chatbox']['types']))
+                    jD('error', 'Bad Request.');
+                
+                $lastMessage = $db->getRow("SELECT * FROM %s WHERE `sender`='%d' ORDER BY `time` DESC LIMIT 1", $db->table('messages'), $_SESSION['facebook']['id']);
+                if ((strtotime("now") - strtotime($lastMessage['time']) / 1000) < $settings['chatbox']['antiFlood'][$type]) {
+                    jD('warning', "Please wait more time, before sending another message.");
                 }
 
                 $db->insert('messages', [
-                    'fbid' => $_SESSION['facebook']['id'],
-                    'message' => $_REQUEST['message'],
-                    'channel' => $channel
-                ], true);
+                    'sender' => $_SESSION['facebook']['id'],
+                    'receiver' => $_POST['r'],
+                    'message' => $_POST['msg'],
+                    'type' => $type
+                ]);
+            break;
 
-                break;
+            case 'rooms':
+                $output = [];
+                $output['rooms'] = $db->getRows("SELECT * FROM %s WHERE `private`='0'", $db->table('chatrooms'));
+                jD('rooms', $output['rooms']);
+            break;
 
-            case 'msgs':
-                $response   = ['status' => 1];
-                $channel    = 'default';
-                if (isset($_POST['channel']) && trim($_POST['channel']) != ''){
-                    $channel = $_POST['channel'];
-                }
-                $response['items'] = $db->getRows("SELECT * FROM %s WHERE channel = '%s'", "messages" , $channel);
-                break;
+            case 'fetch':
+                $output = [];
+                $output['msgs'] = $db->getRows("SELECT * FROM %s WHERE `receiver`='%d'", $db->table('messages'), $_SESSION['facebook']['id']);
+                jD('msgs', $output['msgs']);
+            break;
         }
     }
 }

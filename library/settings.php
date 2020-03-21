@@ -33,6 +33,10 @@ $settings = array(
         'business'      => 'Business',
         'services'      => 'Services',
         'other'         => 'Other'
+    ],
+    'chatbox' => [
+        'types'         => ['c', 'p', 'g'], // channel, private, group
+        'antiFlood'     => ['c' => 500, 'p' => 150, 'g' => 250]
     ]
 );
 
