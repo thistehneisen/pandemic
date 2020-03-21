@@ -30,14 +30,14 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and places. Providing you with the official information about the state of pandemics.">
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?covid">
 <?php } else {
 	$image = json_decode($place['photos'], true);
 	if (!empty($image)) {
 ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($place['id'])?>">
 <?php } else { ?>
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?covid">
 <?php } ?>
 	<meta property="og:title" content="<?php print(htmlspecialchars($place['title']))?>">
 	<meta property="og:description" content="<?php print(htmlspecialchars($place['description']))?>">
@@ -57,7 +57,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 
-	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?covid" />
 </head>
 <body>
 	<div id="preloader">
