@@ -34,10 +34,9 @@ function pandemicSettings(action, sub, data) {
 }
 
 function req(postData) {
-    var a = postData[a],
-        m = postData[m];
-
-    $.ajax({
+    var a        = postData[a],
+        m        = postData[m],
+        response = $.ajax({
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
@@ -55,6 +54,8 @@ function req(postData) {
                         },
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
     }, function(res) { return res; });
+    
+    return response;
 }
 
 function pandemicData(action, sub, data) {
