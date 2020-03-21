@@ -43,7 +43,7 @@ function req(postData) {
         dataType    : 'json',
         data        : postData,
         done        : function (msg) {
-                        if (typeof pandemic.loaded[a] === 'undefined' && 
+                        if (typeof pandemic.loaded[m] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
                             pandemic.init.includes(m)) {
                                 $('#preload-status strong').text(m);
@@ -55,8 +55,8 @@ function req(postData) {
     }, function(res) { return res; });
     
     console.log('Response:');
-    console.log(response);
-    return response;
+    console.log(response.res);
+    return response.res;
 }
 
 function pandemicData(action, sub, data) {
