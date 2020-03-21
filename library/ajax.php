@@ -5,6 +5,8 @@ use \League\Csv\Reader;
 header('Content-Type: application/json');
 require_once 'init.php';
 
+var_dump($_POST);
+
 $a          = $_POST['a']; // action
 $m          = $_POST['m']; // method
 $errors     = [];
@@ -198,4 +200,4 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             break;
         }
     }
-} else die('NOT.');
+}
