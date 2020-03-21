@@ -46,8 +46,7 @@ $settings = [
     ]
 ];
 
-if(in_array($_SERVER['REMOTE_ADDR'], array('localhost'))){
-    //localhost
+if($_SERVER['DOCUMENT_ROOT'] == "/var/www/public"){
     $settings = array(
         'hosts' => ['localhost' => 'Latvia', ],
         'host' => 'localhost',
