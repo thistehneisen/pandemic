@@ -44,10 +44,6 @@ function req(postData) {
         async       : false,
         data        : postData,
         success        : function (res) {
-                        JSON.parse(res);
-                        console.log(res);
-                        console.log(m);
-                        console.log(a);
                         if (typeof pandemic.loaded[m] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
                             pandemic.init.includes(m)) {
@@ -56,7 +52,6 @@ function req(postData) {
                                 pandemic.loaded.push(m);
                             }
                             if (pandemic.loaded.length === pandemic.init.length) { dismissPreloader(); }
-                            return res;
                         },
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
     }).responseJSON;
