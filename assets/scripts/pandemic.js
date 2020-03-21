@@ -34,8 +34,9 @@ function pandemicData(action, sub, data) {
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
             $.post(xhr, {
-                action: 'userlocations',
-                category: category
+                a: 'people',
+                m: 'locations',
+                c: category
             }, function(results) {
                 var items = [],
                     markerData = [];
@@ -44,19 +45,20 @@ function pandemicData(action, sub, data) {
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
 
-                        if (item.latitude != undefined && item.longitude != undefined) {
+                        if (typeof item.latitude !== 'undefined' &&
+                            typeof item.longitude !== 'undefined') {
                             markerData.push({
-                                id: item.id,
-                                title: strip(item.name),
-                                subtitle : item.status ? item.status : '',
-                                description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
-                                lat: item.latitude,
-                                lng: item.longitude,
-                                icon: getIcon('00ff54'),
-                                name: item.name,
-                                status: item.status,
-                                category: item.category,
-                                url: fullAddress + '?people=' + item.id
+                                id          : item.id,
+                                title       : strip(item.name),
+                                subtitle    : item.status ? item.status : '',
+                                description : '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
+                                lat         : item.latitude,
+                                lng         : item.longitude,
+                                icon        : item.img, // getIcon('00ff54')
+                                name        : item.name,
+                                status      : item.status,
+                                category    : item.category,
+                                url         : fullAddress + '?p=' + item.id
                             });
                         }
                     }
@@ -65,17 +67,20 @@ function pandemicData(action, sub, data) {
                 pandemic.markers = map.addMarkers(markerData);
             }, 'json');
         } else if (sub === 'static') {
-            $.post(xhr, {a:'data',m:'fetch'}, function(results){
+            $.post(xhr, {
+                a:'data',
+                m:'fetch'
+            }, function (res){
                 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
-                const markers = results.map(item => ({
-                    id      : item.id,
-                    lat     : item.selfCooLat * 1 + randomDisplacement(),
-                    lng     : item.selfCooLng * 1 + randomDisplacement(),
-                    title   : item.label,
-                    icon    : getIcon('ff0000'),
-                    description: '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
+                const markers = res.map(item => ({
+                    id          : item.id,
+                    lat         : item.selfCooLat * 1 + randomDisplacement(),
+                    lng         : item.selfCooLng * 1 + randomDisplacement(),
+                    title       : item.label,
+                    icon        : getIcon('ff0000'),
+                    description : '<strong>Notes:</strong></br>'+item.descriptionTitle+'<br/><strong>First contact in Latvia:</strong> '+item.dateOfFirstContactWithLatvia+'<br/><strong>Broadcasted:</strong> '+item.dateOfDiagnosisBroadcast+'<br/><strong>Sources:</strong><ol><li><a href="'+item.link+'" target="_blank">'+item.link+'</a></li>'+(item.extraLink1 ? '<li><a href="'+item.extraLink1+'" target="_blank">'+item.extraLink1+'</a></li>' : '')+''+(item.extraLink2 ? '<li><a href="'+item.extraLink2+'" target="_blank">'+item.extraLink2+'</a></li>' : '')+''+(item.extraLink3 ? '<li><a href="'+item.extraLink3+'" target="_blank">'+item.extraLink3+'</a></li>' : '')+'</ol>',
                     subtitle: item.origin,
-                    url     : fullAddress + '?case=' + item.id
+                    url         : fullAddress + '?d=' + item.id
                 }));
         
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
@@ -103,7 +108,7 @@ function pandemicData(action, sub, data) {
                                 description : item.description,
                                 gallery     : item.gallery,
                                 subtitle    : item.subtitle,
-                                url         : fullAddress + '?id=' + item.id
+                                url         : fullAddress + '?i=' + item.id
                             });
                         }
                     }

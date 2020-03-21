@@ -382,7 +382,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
-	openPlace = <?php print($place['id'] ?? 'undefined')?>;
+	openPlace = <?php print($place['i'] ?? 'undefined')?>;
 	category = "<?php print($jscategory)?>";
 	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;

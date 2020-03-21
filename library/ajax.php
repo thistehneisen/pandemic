@@ -1,5 +1,6 @@
 <?php
 if (empty($_POST)) exit;
+use \League\Csv\Reader;
 
 header('Content-Type: application/json');
 require_once 'init.php';
@@ -20,12 +21,9 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
     if ($a === 'data') {
         /* Fetch all data */
         if ($m === 'fetch') {
-            use \League\Csv\Reader;
-            
-                $csv = Reader::createFromPath(dirname(__FILE__) . '/data.csv', 'r');
-                $csv->setHeaderOffset(0);
-            
-                jD('quarantine', $csv);
+            $csv = Reader::createFromPath(dirname(__FILE__) . '/data.csv', 'r');
+            $csv->setHeaderOffset(0);
+            jD('data', $csv);
         }
     /* PLACES */
     } else if ($a === 'places') {
@@ -138,6 +136,10 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
 
             foreach ((array)$locations as $location) {
                 $userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $location['fbid']);
+
+                // If a category is set, filter out by it
+                if (!empty($_POST['c']) && in_array($_POST['c'], array_keys($settings['categories'])) && $userData['category'] !== $_POST['c'])
+                    continue;
 
                 $nameDetails = explode(" ", trim($userdata['name']));
                 $namePubulic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
