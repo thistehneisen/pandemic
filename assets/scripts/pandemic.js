@@ -78,6 +78,8 @@ function pandemicData(action, sub, data) {
                     items = res.global;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
+                        if (item.Country != 'Lithuania' && item.Country != 'Estonia')
+                            continue;
 
                         if (typeof item.Lat !== 'undefined' &&
                             typeof item.Long !== 'undefined' &&
