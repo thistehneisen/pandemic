@@ -328,7 +328,7 @@ $(document).ready(function() {
 
     allMarkers = [];
 
-    pandemicAction('fetchUsers');
+    pandemicData('fetchUsers');
 
     $.post('library/ajax.php', {
         action: 'retrieve',
