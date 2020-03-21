@@ -124,11 +124,11 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span class="dd">
 					<a href="#">Baltics</a>
 					<ul class="dropdown">
-						<span><a href="#"><?php print($settings['country'])?></span>
+						<li><a href="#"><?php print($settings['country'])?></li>
 						<?php
 						foreach ($settings['hosts'] as $host => $country) {
 							if ($country === $settings['country']) continue;
-							print('<span><a href="https://'.$host.'/" title="Pandemics '.$country.'">'.$country.'</a></span>');
+							print('<li><a href="https://'.$host.'/" title="Pandemics '.$country.'">'.$country.'</a></li>');
 						}
 						?>
 					</ul>
