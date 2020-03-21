@@ -130,6 +130,22 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		</div>
 	</header>
 
+	<script id="marker-content-template" type="text/x-handlebars-template">
+		<div class="custom-img" style="background-image: url({{{img}}})"></div>
+		<section class="custom-content">
+			<h1 class="custom-header">
+				{{title}}
+				<small>{{{subtitle}}}</small>
+			</h1>
+			<div class="custom-body">{{{body}}}</div>
+			<div class="gallery">{{{gallery}}}</div>
+			<div class="unique-url text">
+				<h5>URL:</h5>
+				<input type="text" value="{{url}}" />
+			</div>
+		</section>
+	</script>
+
 	<div id="modals">
 		<div class="lean-modal modal-sm" id="add-ad">
 			<div class="modal-container">
@@ -291,22 +307,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 		<div id="lean-mask"></div>
 	</div>
-
-	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
-		<section class="custom-content">
-			<h1 class="custom-header">
-				{{title}}
-				<small>{{{subtitle}}}</small>
-			</h1>
-			<div class="custom-body">{{{body}}}</div>
-			<div class="gallery">{{{gallery}}}</div>
-			<div class="unique-url text">
-				<h5>URL:</h5>
-				<input type="text" value="{{url}}" />
-			</div>
-		</section>
-	</script>
 
 	<div class="map-ct preload-hide">
 	<div id="map" class="preload-hide">
