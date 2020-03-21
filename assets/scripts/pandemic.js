@@ -39,7 +39,7 @@ function req(postData, cb) {
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
-        async       : false,
+        async       : true,
         data        : postData,
         success     : function (res) {
                         if (typeof cb === 'function') cb.call(this,res);
@@ -167,6 +167,8 @@ map = new GMaps({
 });
 
 Dropzone.autoDiscover = false;
+markerTemplate = Handlebars.compile($('#marker-content-template').html());
+
 $(document).ready(function() {
     // Initialising
     pandemic.init.forEach(service => pandemicData('fetch', service));
@@ -282,8 +284,6 @@ $(document).ready(function() {
         $('header').toggleClass('show_nav');
         $('.mask').toggleClass('show-mask');
     });
-
-    markerTemplate = Handlebars.compile($('#marker-content-template').html());
 
     map.on('marker_added', function(marker) {
         /* Marker created for the purpose of creating a new place. */
