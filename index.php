@@ -76,7 +76,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		<div class="made-with-love">
 			<strong>In the time of crisis, you're not alone. We're the proof.</strong><br/>
 			Platform is secured by <a href="https://seq.science/">Digital Security Alliance</a><br/>
-			By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>
+			<strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>
 		</div> 
 	</div>
 	<?php /* Facebook JS Connection */ ?>
