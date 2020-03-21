@@ -131,6 +131,8 @@ function pandemicData(action, sub, data) {
                     items = res.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
+                        if (item.Country/Region != 'Lithuania' && item.Country/Region != 'Estonia')
+                            continue;
 
                         if (typeof item.Lat !== 'undefined' &&
                             typeof item.Long !== 'undefined' &&
@@ -140,8 +142,8 @@ function pandemicData(action, sub, data) {
                                 lng: item.Long,
                                 title: item.Date,
                                 icon: getIcon('ff0000'),
-                                description: item.description,
-                                subtitle: item.State
+                                description: item.Province/State,
+                                subtitle: item.Country/Region
                             });
                         }
                     }
