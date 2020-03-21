@@ -124,7 +124,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span class="dd">
 					<a href="#">Baltics</a>
 					<ul class="dropdown">
-						<li><a href="#"><?php print($settings['country'])?></li>
+						<li><a href="<?php print($fullAddress)?>"><?php print($settings['country'])?></a></li>
 						<?php
 						foreach ($settings['hosts'] as $host => $country) {
 							if ($country === $settings['country']) continue;
@@ -133,7 +133,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						?>
 					</ul>
 				</span>
-				<span><a data-fancybox="" data-type="iframe" href="https://global.pandemic.lv/">Global</a></span>
+				<span><a data-fancybox="" data-type="iframe" href="https://global.pandemic.lv/" data-options='{"caption" : "https://global.pandemic.lv/"}'>Global</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
 					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
 					<span><a rel="leanModal" href="#profile">Your profile</a></span>
