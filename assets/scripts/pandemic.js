@@ -335,6 +335,7 @@ $(document).ready(function() {
                 fontColor       : '#fff',
                 fontSize        : '13px'
             });
+            console.log(info);
             info.open();
 
                 info = new SnazzyInfoWindow({
