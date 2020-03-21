@@ -4,13 +4,11 @@ if (empty($_POST)) exit;
 header('Content-Type: application/json');
 require_once 'init.php';
 
-function jsonDie($type, $data) { die(json_encode([$type => $data]); }
-
-$actions = [
-    'chat' => ['send', 'msgs', 'rooms'],
-    'places' => ['create', 'location'],
-    'people' => ['locations']
-];
+$actions[] = [
+                'chat' => ['send', 'msgs', 'rooms'], 
+                'places' => ['create', 'location'],
+                'people' => ['locations']
+            ];
 
 $a          = $_POST['a']; // action
 $m          = $_POST['m']; // method
