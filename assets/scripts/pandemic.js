@@ -78,7 +78,7 @@ function pandemicData(action, sub, data) {
         
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             }, 'json');
-        } else if (sub === 'services' && settings.service.places !== true) {
+        } else if (sub === 'places' && settings.service.places !== true) {
             $.post(xhr, {
                 action: 'retrieve',
                 category: category
@@ -148,7 +148,8 @@ function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65)
 }
 
 setInterval(function(){
-
+    pandemicData('fetch', 'quarantines');
+    pandemicData('fetch', 'places');
 });
 
 setInterval(function(){
@@ -311,7 +312,7 @@ $(document).ready(function() {
 
     map.on('marker_added', function(marker) {
         /*
-        Marker created for the purpose of creating a new service.
+        Marker created for the purpose of creating a new place.
         */
         if (marker.setlocation == true) {
             var index = map.markers.indexOf(marker);
@@ -459,7 +460,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
                         fbId = response.id;
                         $.get('', function(response){
-                            var header = $(response).find('header').removeClass('preload-hide').html();
+                            var header = $(response).find('header.header').html();
                             console.log(header);
                             $('header').fadeOut('fast').html(header);
                         });
@@ -509,7 +510,7 @@ $('#post-the-ad').on('click', function(e) {
         email: $('#email').val()
     }, function(response) {
         if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
-            $('#post-the-ad span').text('Create new service');
+            $('#post-the-ad span').text('Create new place');
             toastr.error(response.errors[0], 'Whoops!');
         } else {
             makeLocation(response.id);

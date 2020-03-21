@@ -23,12 +23,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<title>Pandemic <?php print($settings['country'])?> — Connecting you with neighbors, volunteers and information.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
-	<meta name="description" content="In the time of crisis, you're not alone. Pandemic <?php print($settings['country'])?> is connecting you with neighbors, volunteers and information.">
+	<meta name="description" content="In the time of crisis, you're not alone. Pandemic <?php print($settings['country'])?> is connecting you with neighbors, volunteers and places.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
-	<meta property="og:description" content="Connecting you with neighbors, volunteers and services. Providing you with the official information about the state of pandemics.">
+	<meta property="og:description" content="Connecting you with neighbors, volunteers and places. Providing you with the official information about the state of pandemics.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } else {
 	$image = json_decode($classified['photos'], true);
@@ -134,8 +134,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                 <span class="dd">
                     <a href="#">Settings</a>
                     <ul class="dropdown">
-						<li><a href="#" onclick="pandemicSettings('togglePeople', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
-						<li><a href="#" onclick="pandemicSettings('toggleServices', $(this));"><span><strong>&#10004;</strong> Show Services</span></a></li>
+						<li><a href="#" onclick="pandemicSettings('toggle', 'people', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
+						<li><a href="#" onclick="pandemicSettings('toggle', 'places', $(this));"><span><strong>&#10004;</strong> Show places</span></a></li>
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
@@ -222,7 +222,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 								<a class="button outline gray lg-1-1 close-modal" href="#"><span>Cancel</span></a>
 							</div>
 							<div class="input-col lg-1-2">
-								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create new service</span></a>
+								<a class="button filled blue disabled confirm lg-1-1" id="post-the-ad" href="#"><span>Create new place</span></a>
 							</div>
 						</div>
 					</div>
