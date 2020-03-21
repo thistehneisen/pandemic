@@ -157,17 +157,7 @@ function pandemicData(action, sub, data) {
     }
 }
 
-// Initialise the Maps
-map = new GMaps({
-    div: '#map',
-    lat: latitude,
-    lng: longitude,
-    zoom: 9,
-    styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
-});
-
 Dropzone.autoDiscover = false;
-markerTemplate = Handlebars.compile($('#marker-content-template').html());
 
 $(document).ready(function() {
     // Initialising
@@ -285,6 +275,17 @@ $(document).ready(function() {
         $('.mask').toggleClass('show-mask');
     });
 
+    var template = Handlebars.compile($('#marker-content-template').html());
+
+    // Initialise the Maps
+    map = new GMaps({
+        div: '#map',
+        lat: latitude,
+        lng: longitude,
+        zoom: 9,
+        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+    });
+
     map.on('marker_added', function(marker) {
         /* Marker created for the purpose of creating a new place. */
         if (marker.setLocation === true) {
@@ -344,7 +345,7 @@ $(document).ready(function() {
                 border: false,
                 shadow: false,
                 closeButtonMarkup: '<button type="button" class="custom-close">&#215;</button>',
-                content: markerTemplate({
+                content: template({
                     title       : marker.title,
                     subtitle    : marker.subtitle,
                     body        : marker.description,
