@@ -386,7 +386,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '!', 'Authenticated');
                         fbId = response.id;
                         $.get('', function(response){
-                            var header = $(response).find('header.header').html();
+                            var header = $(response).find('header .header').html();
                             console.log(header);
                             $('header').fadeOut('fast').html(header);
                         });
