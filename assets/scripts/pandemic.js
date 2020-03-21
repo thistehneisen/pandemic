@@ -449,10 +449,13 @@ $(document).ready(function() {
             FB.login(function(response) {
                 if (response.status === 'connected') {
                     FB.api('/me', function(response) {
-                        toastr.success('Welcome back, ' + response.name + '!', 'Logged in');
-                        console.log(response);
+                        toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
+                        fbId = response.id;
+                        $.get(fullAddress, function(response){
+                            $('body').html(response.find('body').html());
+                        });
+                        //setTimeout(function(){ window.location.reload(); }, 500);
                     });
-                    //window.location.reload();
                 } else if (response.status === 'not_authorized') {
                     toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
                 } else {
