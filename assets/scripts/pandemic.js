@@ -3,6 +3,9 @@ Interested in the code? We're open for co-operations.
 info@pandemic.lv
 */
 
+settings = {};
+settings.noUsers = false;
+
 toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -280,37 +283,39 @@ $(document).ready(function() {
 
     allMarkers = [];
 
-    $.post('library/ajax.php', {
-        action: 'userlocations',
-        category: category
-    }, function(results) {
-        var items = [],
-            markers_data = [];
-        if (results.locations.length > 0) {
-            items = results.locations;
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
+    if (settings.noUsers !== true) {
+        $.post('library/ajax.php', {
+            action: 'userlocations',
+            category: category
+        }, function(results) {
+            var items = [],
+                markers_data = [];
+            if (results.locations.length > 0) {
+                items = results.locations;
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
 
-                if (item.latitude != undefined && item.longitude != undefined) {
-                    markers_data.push({
-                        id: item.id,
-                        title: strip(item.name),
-                        subtitle : item.status ? item.status : '',
-                        description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
-                        lat: item.latitude,
-                        lng: item.longitude,
-                        img: item.img,
-                        icon: activeIcon,
-                        name: item.name,
-                        status: item.status,
-                        category: item.category,
-                        url: fullAddress + '?user=' + item.id
-                    });
+                    if (item.latitude != undefined && item.longitude != undefined) {
+                        markers_data.push({
+                            id: item.id,
+                            title: strip(item.name),
+                            subtitle : item.status ? item.status : '',
+                            description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
+                            lat: item.latitude,
+                            lng: item.longitude,
+                            img: item.img,
+                            icon: activeIcon,
+                            name: item.name,
+                            status: item.status,
+                            category: item.category,
+                            url: fullAddress + '?user=' + item.id
+                        });
+                    }
                 }
             }
-        }
-        allMarkers = map.addMarkers(markers_data);
-    }, 'json');
+            allMarkers = map.addMarkers(markers_data);
+        }, 'json');
+    }
 
     $.post('library/ajax.php', {
         action: 'retrieve',
