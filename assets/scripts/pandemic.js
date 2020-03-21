@@ -184,10 +184,10 @@ $(document).ready(function() {
                 $('.login-fb').click();
                 return false;
             } else if (elem.val().length > 0) {
-                var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
+                /*var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
                 if (r.result === 'success') {
                     alert('Seeent!');
-                }
+                }*/
             }
         }
     });
@@ -293,7 +293,7 @@ $(document).ready(function() {
             var closeDelayed        = false;
             var closeDelayHandler   = function() { $(info.getWrapper()).removeClass('active'); setTimeout(function() { closeDelayed = true; info.close(); }, 300); };
 
-            var info            = new SnazzyInfoWindow({
+            var info = new SnazzyInfoWindow({
                 marker          : marker,
                 position        : 'top',
                 offset          : {   top: '-55px' },
@@ -308,8 +308,8 @@ $(document).ready(function() {
                 fontColor       : '#fff',
                 fontSize        : '15px'
             });
-
             info.open();
+            return false;
         } else {
         /* Markers coming from database or AJAX */
             var index               = map.markers.indexOf(marker);
@@ -319,7 +319,7 @@ $(document).ready(function() {
                 setTimeout(function() { closeDelayed = true; info.close(); }, 300);
             };
 
-            var info                = new SnazzyInfoWindow({
+            var info = new SnazzyInfoWindow({
                 marker          : marker,
                 position        : 'top',
                 offset          : { top: '-33px' },
@@ -334,10 +334,9 @@ $(document).ready(function() {
                 fontColor       : '#fff',
                 fontSize        : '13px'
             });
-
             info.open();
 
-                info                = new SnazzyInfoWindow({
+                info = new SnazzyInfoWindow({
                 marker: marker,
                 wrapperClass: 'custom-window',
                 offset: { top: '-33px' },
@@ -350,8 +349,7 @@ $(document).ready(function() {
                     subtitle    : marker.subtitle,
                     body        : marker.description,
                     gallery     : marker.gallery,
-                    url         : marker.url,
-                    img         : marker.img
+                    url         : marker.url
                 }),
                 callbacks: {
                     open: function() { $(this.getWrapper()).addClass('open'); baguetteBox.run('.gallery'); },
