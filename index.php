@@ -143,7 +143,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
-				<span><a href="#" class="login-fb"><?php include('assets/images/ico/facebook-social-symbol.svg'); ?> Log in</a></span>
+				<span><a href="#" class="login-fb"><?php include('assets/images/ico/facebook-social-symbol.svg'); ?> Log In</a></span>
 				<?php } else { ?>
 				<span><a href="?logout" onclick="FB.logout();">Log out</a></span>
 				<?php } ?>

@@ -26,6 +26,43 @@ function pandemicSettings(action, element) {
     }
 }
 
+function pandemicData(action, sub, data) {
+    if (action == 'fetchUsers') {
+        if (typeof sub === 'undefined' && settings.noUsers !== true) {
+            $.post('library/ajax.php', {
+                action: 'userlocations',
+                category: category
+            }, function(results) {
+                var items = [],
+                    markers_data = [];
+                if (results.locations.length > 0) {
+                    items = results.locations;
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+
+                        if (item.latitude != undefined && item.longitude != undefined) {
+                            markers_data.push({
+                                id: item.id,
+                                title: strip(item.name),
+                                subtitle : item.status ? item.status : '',
+                                description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
+                                lat: item.latitude,
+                                lng: item.longitude,
+                                icon: activeIcon,
+                                name: item.name,
+                                status: item.status,
+                                category: item.category,
+                                url: fullAddress + '?user=' + item.id
+                            });
+                        }
+                    }
+                }
+                allMarkers = map.addMarkers(markers_data);
+            }, 'json');
+        }
+    }
+}
+
 toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -68,7 +105,6 @@ $(document).ready(function() {
                 $('.login-fb').click();
                 return false;
             } else {
-
                 if (elem.val().length > 0) {
                     $.post('library/ajax.php', {
                         action: 'chat',
@@ -82,7 +118,7 @@ $(document).ready(function() {
         }
     });
 
-    // IMG UPLOAD
+    // Dropzone image upload
     $("#img-upload").dropzone({
         paramName: "file",
         maxFilesize: 10,
@@ -292,39 +328,7 @@ $(document).ready(function() {
 
     allMarkers = [];
 
-    if (settings.noUsers !== true) {
-        $.post('library/ajax.php', {
-            action: 'userlocations',
-            category: category
-        }, function(results) {
-            var items = [],
-                markers_data = [];
-            if (results.locations.length > 0) {
-                items = results.locations;
-                for (var i = 0; i < items.length; i++) {
-                    var item = items[i];
-
-                    if (item.latitude != undefined && item.longitude != undefined) {
-                        markers_data.push({
-                            id: item.id,
-                            title: strip(item.name),
-                            subtitle : item.status ? item.status : '',
-                            description: '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
-                            lat: item.latitude,
-                            lng: item.longitude,
-                            img: item.img,
-                            icon: activeIcon,
-                            name: item.name,
-                            status: item.status,
-                            category: item.category,
-                            url: fullAddress + '?user=' + item.id
-                        });
-                    }
-                }
-            }
-            allMarkers = map.addMarkers(markers_data);
-        }, 'json');
-    }
+    pandemicAction('fetchUsers');
 
     $.post('library/ajax.php', {
         action: 'retrieve',
