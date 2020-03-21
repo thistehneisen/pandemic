@@ -39,7 +39,7 @@ function req(postData, cb) {
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
-        async       : true,
+        async       : false,
         data        : postData,
         success     : function (res) {
                         if (typeof cb === 'function') cb.call(this,res);
