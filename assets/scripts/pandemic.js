@@ -425,8 +425,8 @@ $('#post-the-ad').on('click', function(e) {
     }, function(res) {
         if (typeof res.errors !== 'undefined' && res.errors.length > 0) {
             $('#post-the-ad span').html('Ready to publish &rarr;');
-            toastr.error(response.errors[0], 'Whoops!');
-        } else { makeLocation(response.id); }
+            toastr.error(res.errors[0], 'Whoops!');
+        } else { makeLocation(res.id); }
     });
 });
 
