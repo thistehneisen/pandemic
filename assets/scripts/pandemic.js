@@ -6,10 +6,13 @@ info@pandemic.lv
 settings = {};
 settings.noUsers = false;
 settings.noServices = false;
-settings.userChannel = 'default';
+settings.chat.userChannel = 'default';
+settings.chat.refreshRate = 500; // ms
 
 pandemic = {};
 pandemic.markers = [];
+
+var xhr = 'library/ajax.php';
 
 function pandemicSettings(action, element) {
     if (action == 'togglePeople') {
@@ -35,7 +38,7 @@ function pandemicData(action, sub, data) {
     */
     if (action === 'fetch') {
         if (sub === 'users' && settings.noUsers !== true) {
-            $.post('library/ajax.php', {
+            $.post(xhr, {
                 action: 'userlocations',
                 category: category
             }, function(results) {
@@ -83,7 +86,7 @@ function pandemicData(action, sub, data) {
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             }, 'json');
         } else if (sub === 'services' && settings.noServices !== true) {
-            $.post('library/ajax.php', {
+            $.post(xhr, {
                 action: 'retrieve',
                 category: category
             }, function(results) {
@@ -115,6 +118,28 @@ function pandemicData(action, sub, data) {
             }, 'json');
         }
     }
+
+    /*
+        All of the CHAT AJAX functionality.
+    */
+    else if (action === 'chat') {
+        if (sub === 'send') {
+            $.post(xhr, {
+                action: 'chat',
+                target: data.t,
+                message: data.m
+            }, function(result) { return result; });
+        } else if (sub === 'items') {
+            $.post(xhr, {
+                action: 'chat_items',
+                channel: settings.chat.userChannel
+            }, function(results) {
+                for (var i = results.items.length - 1; i >= 0; i--) {
+                    $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
+                };
+            }, 'json');
+        }
+    }
 }
 
 function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65) {
@@ -129,9 +154,13 @@ function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65)
     };
 }
 
-pandemicData('fetch', 'quarantines');
-pandemicData('fetch', 'services');
-pandemicData('fetch', 'users');
+setInterval(function(){
+
+});
+
+setInterval(function(){
+    pandemicData('chat', 'items');
+}, settings.chat.refreshRate);
 
 toastr.options = {
     "closeButton": false,
@@ -154,36 +183,18 @@ toastr.options = {
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function() {
-    $.post('library/ajax.php', {
-        action: 'chat_items',
-        channel: settings.userChannel
-    }, function(results) {
-        for (var i = results.items.length - 1; i >= 0; i--) {
-            $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
-        };
-    }, 'json');
-
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
 
-        /* ENTER PRESSED */
         if (e.keyCode == 13) {
             e.preventDefault();
             if (typeof fbId === 'undefined') {
-                toastr.error('To use the chat and see available channels, you need to authorize with Facebook.');
+                toastr.error('To use the chat and see available channels, you need to authorize with Facebook.', 'Please authorize');
                 $('.login-fb').click();
                 return false;
-            } else {
-                if (elem.val().length > 0) {
-                    $.post('library/ajax.php', {
-                        action: 'chat',
-                        channel: settings.userChannel,
-                        message: elem.val()
-                    }, function(results) {
-                        elem.val('');
-                    });
-                }
+            } else if (elem.val().length > 0)
+                var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
             }
         }
     });
@@ -425,7 +436,7 @@ $(document).ready(function() {
     GMaps.geolocate({
         success: function(position) {
             map.setCenter(position.coords.latitude, position.coords.longitude);
-            $.post('library/ajax.php', {
+            $.post(xhr, {
                 action: 'newlocation',
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -483,7 +494,7 @@ $(document).ready(function() {
 
         if (typeof fbId === 'undefined') {
             setTimeout(function() {
-                toastr.success('Please authorize with Facebook & allow location access to access all of the platforms features.');
+                toastr.info('To enjoy all of the features that the platform has to offer — please, authorize with Facebook.');
             }, 3500);
         }
     }, 1000);
@@ -494,7 +505,7 @@ $('#post-the-ad').on('click', function(e) {
 
     $('#post-the-ad span').text('Creating…');
 
-    $.post('library/ajax.php', {
+    $.post(xhr, {
         action: 'add',
         title: $('#title').val(),
         description: $('#description').val(),
@@ -548,7 +559,7 @@ function makeLocation(claddid) {
 
 $('#save-location').on('click', function(e) {
     e.preventDefault();
-    $.post('library/ajax.php', {
+    $.post(xhr, {
         action: 'location',
         classified: $(this).data('classified'),
         lat: $(this).data('lat'),
