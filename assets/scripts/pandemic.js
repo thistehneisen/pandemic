@@ -74,11 +74,10 @@ function pandemicData(action, sub, data) {
             }, function(res) {
                 var items = [],
                     markerData = [];
-                if (typeof res.places !== 'undefined' && res.places.length > 0) {
-                    items = res.places;
+                if (typeof res.global !== 'undefined' && res.global.length > 0) {
+                    items = res.global;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
-                        console.log(item);
 
                         if (typeof item.Lat !== 'undefined' &&
                             typeof item.Long !== 'undefined' &&
@@ -91,6 +90,7 @@ function pandemicData(action, sub, data) {
                                 description: item.Province/State,
                                 subtitle: item.Country/Region
                             });
+                            console.log('Added: ' + item.Country/Region);
                         }
                     }
                 }
