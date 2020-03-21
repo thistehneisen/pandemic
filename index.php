@@ -52,10 +52,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
+	<script type='text/javascript' src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?covid" />
 </head>
@@ -119,6 +121,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span><?php print($settings['host'])?></span>
 			</a>
 			<nav>
+				<span><a data-fancybox="" data-type="iframe" href="https://global.pandemic.lv/">Global</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
 					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
 					<span><a rel="leanModal" href="#profile">Your profile</a></span>
