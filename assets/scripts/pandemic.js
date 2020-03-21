@@ -475,72 +475,69 @@ $(document).ready(function() {
 
 $('#post-the-ad').on('click', function(e) {
     e.preventDefault();
-
-    $('#post-the-ad span').text('Creating…');
+    $('#post-the-ad span').text('Sending…');
 
     $.post(xhr, {
-        action: 'add',
-        title: $('#title').val(),
-        description: $('#description').val(),
-        category: $('#category').val(),
-        phone: $('#phone').val(),
-        email: $('#email').val(),
-        website: $('#website').val()
+        a               : 'places',
+        m               : 'create',
+        title           : $('#title').val(),
+        description     : $('#description').val(),
+        category        : $('#category').val(),
+        phone           : $('#phone').val(),
+        email           : $('#email').val(),
+        website         : $('#website').val()
     }, function(response) {
         if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
-            $('#post-the-ad span').html('Continue with location &rarr;');
+            $('#post-the-ad span').html('Ready to publish &rarr;');
             toastr.error(response.errors[0], 'Whoops!');
-        } else {
-            makeLocation(response.id);
-        }
+        } else { makeLocation(response.id); }
     }, 'json');
 });
 
 /* Location creation */
-function makeLocation(claddid) {
-    $('#save-location').data('classified', claddid);
+function makeLocation(placeId) {
+    $('#save-location').data('place', placeId);
     $('div.si-wrapper-top').hide();
+
     clearOverlays();
 
-    classifiedmarker = map.addMarker({
-        lat: latitude,
-        lng: longitude,
-        icon: getIcon('29cc5a', 'fff'),
-        draggable: true,
-        setlocation: true,
-        zIndex: 999999,
-        dragend: function(event) {
-            var lat = event.latLng.lat();
-            var lng = event.latLng.lng();
+    placeMarker = map.addMarker({
+        lat         : latitude,
+        lng         : longitude,
+        icon        : getIcon('29cc5a', 'fff'),
+        draggable   : true,
+        setlocation : true,
+        zIndex      : 999999,
+        dragend: function(e) {
+            var lat = e.latLng.lat();
+            var lng = e.latLng.lng();
             $('#save-location').data('lat', lat);
             $('#save-location').data('lng', lng);
         },
-        title: 'Click & drag to confirm the location!'
+        title: 'Click & drag to set the location!'
     });
 
-    classifiedmarker.setZIndex(999999);
+    placeMarker.setZIndex(999999);
 
     $('#save-location').show();
     $('.show-modal').addClass('out').removeClass('show-modal in');
     $('#modals').removeClass('show-modals');
 
-    setTimeout(function() {
-        $('.lean-modal').removeClass('out');
-    }, 600);
-    map.panTo(classifiedmarker.getPosition());
+    setTimeout(function() { $('.lean-modal').removeClass('out'); }, 600);
+    map.panTo(placeMarker.getPosition());
 }
 
 $('#save-location').on('click', function(e) {
     e.preventDefault();
     $.post(xhr, {
-        action: 'location',
-        classified: $(this).data('classified'),
-        lat: $(this).data('lat'),
-        lng: $(this).data('lng')
-    }, function(response) {
-        if (response.result == 'success') {
-            window.location.href = fullAddress;
-        }
+        a           : 'places',
+        m           : 'location'
+        place       : $(this).data('place'),
+        lat         : $(this).data('lat'),
+        lng         : $(this).data('lng')
+    }, function(r) {
+        if (r.result == 'success') { toastr.success('The selected location is now published with all of your specified information.', 'Place published'); }
+        else { toastr.error('We have some kind of technical difficulities, if the problem persists, please inform us!', 'Error'); }
     }, 'json');
 });
 

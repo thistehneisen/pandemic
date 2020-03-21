@@ -8,7 +8,7 @@ if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 		header('Location: ' . $settings['fullAddress']);
 	}
 } else if (!empty($_GET['id']) && is_numeric($_GET['id']))
-	$classified = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['id']);
+	$place = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['id']);
 else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
     $jscategory = $_GET['category'];
 ?>
@@ -25,21 +25,21 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
 	<meta name="description" content="In the time of crisis, you're not alone. Pandemic <?php print($settings['country'])?> is connecting you with neighbors, volunteers and places.">
 	<meta property="og:type" content="website">
-<?php if (empty($classified)) { ?>
+<?php if (empty($place)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and places. Providing you with the official information about the state of pandemics.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } else {
-	$image = json_decode($classified['photos'], true);
+	$image = json_decode($place['photos'], true);
 	if (!empty($image)) {
 ?>
-	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($classified['id'])?>">
+	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($place['id'])?>">
 <?php } else { ?>
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } ?>
-	<meta property="og:title" content="<?php print(htmlspecialchars($classified['title']))?>">
-	<meta property="og:description" content="<?php print(htmlspecialchars($classified['description']))?>">
+	<meta property="og:title" content="<?php print(htmlspecialchars($place['title']))?>">
+	<meta property="og:description" content="<?php print(htmlspecialchars($place['description']))?>">
 	<meta property="og:image" content="<?php print($settings['fullAddress'].$settings['upload']['path']['images'].$image[0]['name'].'.'.$image[0]['ext'])?>">
 <?php } ?>
 	<meta property="fb:app_id" content="<?php print($settings['facebook']['app']['id'])?>">
@@ -238,8 +238,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 					<div class="modal-content bodytext">
 						<div class="form">
 							<div class="text">
-								<label for="nickname">Nickname <span>(max. 12 symbols)</span></label>
-								<input type="text" id="nickname" name="nickname" placeholder="Nickname" maxlength="12" value="" required="">
+								<label for="nickname">Pseudonym <span>(max. 12 symbols)</span></label>
+								<input type="text" id="nickname" name="nickname" placeholder="Choose a nickname" maxlength="12" value="" required="">
 							</div>
 
 							<div class="text">
@@ -313,7 +313,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		&nbsp;
 	</div>
 	</div>
-	<a class="button filled green" href="#" style="display: none;" id="save-location"><span>Let's publish this!</span></a>
+	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
 
 <?php if (isset($_GET['chat'])) { ?>
@@ -321,7 +321,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
     <h2>
-      People<br/><em>&</em> Groups
+      People <em>&</em> Groups
     </h2>
     <div class="contact">
       <div class="pic rogers"></div>
@@ -435,7 +435,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
-	openMarker = <?php print(!empty($classified['id']) ? $classified['id'] : '""')?>;
+	openMarker = <?php print(!empty($place['id']) ? $place['id'] : '""')?>;
 	category = "<?php print($jscategory)?>";
 	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;

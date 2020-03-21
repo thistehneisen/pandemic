@@ -11,7 +11,7 @@ require_once $settings['documentRoot'].'/vendor/autoload.php';
 $fb = new \Facebook\Facebook([
   'app_id' => $settings['facebook']['app']['id'],
   'app_secret' => $settings['facebook']['app']['secret'],
-  'default_graph_version' => 'v2.8'
+  'default_graph_version' => 'v3.2'
 ]);
 
 $jsHelper = $fb->getJavaScriptHelper();

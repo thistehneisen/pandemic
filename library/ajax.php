@@ -1,136 +1,150 @@
 <?php
 if (empty($_POST)) exit;
+
+header('Content-Type: application/json');
 require_once 'init.php';
+
+function jsonDie($type, $data) { die(json_encode([$type => $data]); }
+
 $actions = [
-    'chat' => ['send', 'msgs', 'rooms']
-]
+    'chat' => ['send', 'msgs', 'rooms'],
+    'places' => ['create', 'location'],
+    'people' => ['locations']
+];
 
-if (in_array($_POST['a'], array_keys($actions)))
-    $errors = [];
+$a          = $_POST['a']; // action
+$m          = $_POST['m']; // method
+$errors     = [];
+if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
 
-    header('Content-Type: application/json');
-    
-    if ($action == 'add') {
-        if (empty($_SESSION['facebook']['id']))
-            $errors[] = 'To do this action, you firstly need to authorize.';
-        if (strlen($_POST['title']) > 50)
-            $errors[] = 'The title is too long.';
-        if (strlen($_POST['description']) > 400)
-            $errors[] = 'Description is too long.';
-        if (strlen($_POST['title']) < 4)
-            $errors[] = 'Title should be at minimum 4 symbols long.';
-        if (strlen($_POST['description']) < 10)
-            $errors[] = 'Description should consist from at least 10 symbols.';
-        if (!empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-            $errors[] = 'The specified e-mail address is invalid. P.S. E-mail is optional.';
-        if (!in_array($_POST['category'], array_keys($settings['categories'])))
-            $errors[] = 'Please choose one category from the list.';
+    /* PLACES */
+    if ($a === 'places') {
+        /* Create a new place */
+        if ($m === 'create') {
+            if (empty($_SESSION['facebook']['id']))
+                $errors[] = 'You need to authorize first.';
+            if (strlen($_POST['title']) > 25)
+                $errors[] = 'Your title is too long, should be no more than 25 symbols.';
+            if (strlen($_POST['description']) > 400)
+                $errors[] = 'Description is too long.';
+            if (strlen($_POST['title']) < 4)
+                $errors[] = 'Title should consist from at least 4 symbols.';
+            if (strlen($_POST['description']) < 10)
+                $errors[] = 'Description should consist from at least 10 symbols.';
+            if (!empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+                $errors[] = 'The specified e-mail address is invalid. P.S. E-mail is optional.';
+            if (!in_array($_POST['category'], array_keys($settings['categories'])))
+                $errors[] = 'Please choose a category which best suits you.';
 
-        if (empty($errors)) {
-            $db->insert('places', array(
-                'title' => $_POST['title'],
-                'description' => $_POST['description'],
-                'email' => $_POST['email'],
-                'phone' => $_POST['phone'],
-                'category' => $_POST['category'],
-                'photos' => json_encode($_SESSION['images']),
-                'user' => $_SESSION['facebook']['id'],
-                'latitude' => $_POST['latitude'],
-                'longitude' => $_POST['longitude']
-            ));
+            if (empty($errors)) {
+                $db->insert('places', array(
+                    'title' => $_POST['title'],
+                    'description' => $_POST['description'],
+                    'email' => $_POST['email'],
+                    'phone' => $_POST['phone'],
+                    'website' => $_POST['website'],
+                    'category' => $_POST['category'],
+                    'photos' => json_encode($_SESSION['images']),
+                    'user' => $_SESSION['facebook']['id'],
+                    'latitude' => $_POST['latitude'],
+                    'longitude' => $_POST['longitude']
+                ));
 
-            unset($_SESSION['images']);
+                unset($_SESSION['images']);
 
-            die(json_encode(array('id' => $db->insertid)));
-        } else {
-            die(json_encode(array('errors' => $errors)));
-        }
-    } else if ($action == 'userlocations') {
-        $output = array();
-        $locations = $db->getRows("SELECT * FROM %s", $db->locations);
-        foreach ((array)$locations as $location) {
-            if (empty($location['fbid']))
-                continue;
-            
-            $userdata = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
-            $nameDetails = explode(" ", trim($userdata['name']));
-            $namePut = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
-
-            $output[] = [
-                'id' => $location['fbid'],
-                'latitude' => $location['latitude'],
-                'longitude' => $location['longitude'],
-                'img' => $userdata['picture'],
-                'name' => $namePut,
-                'status' => NULL,
-                'category' => 'isolating'
-            ];
+                jD('id', $db->insertid);
+            } else {
+                jD('errors', $errors);
+            }
         }
 
-        die(json_encode(array('locations' => $output)));
+        /* Set location for the newly created place */
+        if ($m === 'location') {
+            if (empty($_POST['place']) || !is_numeric($_POST['place']))
+                $errors[] = 'Missing parameter.';
+            if (empty($_POST['lat']) || empty($_POST['lng']))
+                $errors[] = 'Not quite catching those coordinates.';
+            if (empty($_SESSION['facebook']['id']))
+                $errors[] = 'You need to authorize first.';
+
+            $place = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_POST['place']);
+            if (empty($place))
+                $errors[] = 'This place is unavailable, or has never existed.';
+            if ($place['user'] != $_SESSION['facebook']['id'])
+                $errors[] = 'Are you trying to h4ck? Hit us up @ info@pandemic.lv, we like those who break stuff.';
+
+            if (empty($errors)) {
+                $db->update('places', [
+                    'latitude' => $_POST['lat'],
+                    'longitude' => $_POST['lng']
+                ], [ 'id' => $_POST['place'], 'user' => $_SESSION['facebook']['id'] ];
+
+                jD('result', 'success');
+            } else {
+                jD('errors', $errors);
+            }
+        }
+    } else if ($a === 'people') {
+        if ($m === 'locations') {
+            $output = [];
+            $locations = $db->getRows("SELECT * FROM %s WHERE `fbid` != 0", $db->table('locations'));
+
+            foreach ((array)$locations as $location) {
+                $userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->users, $location['fbid']);
+
+                $nameDetails = explode(" ", trim($userdata['name']));
+                $namePut = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
+
+                $output[] = [
+                    'id' => $location['fbid'],
+                    'latitude' => $location['latitude'],
+                    'longitude' => $location['longitude'],
+                    'img' => $userData['picture'],
+                    'name' => htmlspecialchars($userData['pseudo'] ?? $namePut),
+                    'status' => htmlspecialchars($userData['status']),
+                    'category' => $userData['category'],
+                    'seen' => $userData['lastlogin']
+                ];
+            }
+
+            die(json_encode(array('locations' => $output)));
+        }
     } else if ($action == 'retrieve') {
         $output = array();
-        $classifieds = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->classifieds);
+        $places = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->places);
         $photopath = $settings['fullAddress'].$settings['upload']['path']['images'];
         $category = (isset($_POST['category']) ? $_POST['category'] : '');
 
-        foreach ((array)$classifieds as $classified) {
-            if (!empty($category) && $category != $classified['category'])
+        foreach ((array)$places as $place) {
+            if (!empty($category) && $category != $place['category'])
                 continue;
             
             $gallery = array();
             $delete = '';
-            $classified['photos'] = json_decode($classified['photos']);
-            foreach ((array)$classified['photos'] as $id => $photo) {
+            $place['photos'] = json_decode($place['photos']);
+            foreach ((array)$place['photos'] as $id => $photo) {
                 if ($id === 0)
-                    $classified['icon'] = $photopath.$photo->name.'_c300.'.$photo->ext;
-                $gallery[] = '<a href="'.($photopath.$photo->name.'.'.$photo->ext).'"><img src="'.($photopath.$photo->name.'_c300.'.$photo->ext).'" alt="'.(htmlspecialchars($classified['title'])).' #'.($id+1).'"></a>';
+                    $place['icon'] = $photopath.$photo->name.'_c300.'.$photo->ext;
+                $gallery[] = '<a href="'.($photopath.$photo->name.'.'.$photo->ext).'"><img src="'.($photopath.$photo->name.'_c300.'.$photo->ext).'" alt="'.(htmlspecialchars($place['title'])).' #'.($id+1).'"></a>';
             }
 
-            if ($classified['user'] == $_SESSION['facebook']['id'])
-                $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$classified['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
+            if ($place['user'] == $_SESSION['facebook']['id'])
+                $delete = '<br/><p><a href="'.$settings['fullAddress'].'?delete='.$place['id'].'" onclick="return confirm(\'Are you sure you want to remove this area? This action cannot be undone..\');" style="color: red;">Delete area</a></p>';
 
             $output[] = array(
-                'id' => $classified['id'],
-                'title' => $classified['title'],
-                'description' => nl2br(htmlspecialchars($classified['description'])).$delete,
-                'price' => $classified['price'],
-                'subtitle' => 'E-mail: <a href="mailto:'.$classified['email'].'">'.$classified['email'].'</a>'.(!empty($classified['phone']) ? '<br/>Phone: '.$classified['phone'] : ''),
+                'id' => $place['id'],
+                'title' => $place['title'],
+                'description' => nl2br(htmlspecialchars($place['description'])).$delete,
+                'price' => $place['price'],
+                'subtitle' => 'E-mail: <a href="mailto:'.$place['email'].'">'.$place['email'].'</a>'.(!empty($place['phone']) ? '<br/>Phone: '.$place['phone'] : ''),
                 'gallery' => join("", $gallery),
-                'icon' => $classified['icon'],
-                'latitude' => $classified['latitude'],
-                'longitude' => $classified['longitude']
+                'icon' => $place['icon'],
+                'latitude' => $place['latitude'],
+                'longitude' => $place['longitude']
             );
         }
 
-        die(json_encode(array('classifieds' => $output)));
-    } else if ($action == 'location') {
-        if (empty($_POST['classified']) || !is_numeric($_POST['classified']))
-        $errors[] = 'Can\'t identify the specified classified.';
-        if (empty($_POST['lat']) || empty($_POST['lng']))
-        $errors[] = 'Specified location has incorrect format.';
-        if (empty($_SESSION['facebook']['id']))
-        $errors[] = 'Please, log in first.';
-
-        $classified = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_POST['classified']);
-        if (empty($classified))
-        $errors[] = 'No classified with such ID.';
-        if ($classified['user'] != $_SESSION['facebook']['id'])
-        $errors[] = 'Not your classified. Developer/hacker? Write to us info@pandemic.lv';
-
-        if (empty($errors)) {
-            $db->update('classifieds', array(
-                'latitude' => $_POST['lat'],
-                'longitude' => $_POST['lng']
-            ), array(
-                'id' => $_POST['classified'],
-                'user' => $_SESSION['facebook']['id']
-            ));
-
-            die(json_encode(array('result' => 'success')));
-        } else {
-            die(json_encode(array('errors' => $errors)));
-        }
+        die(json_encode(array('places' => $output)));
     } else if ($action == 'newlocation') {
         $db->insert('locations', [
             'fbid' => $_SESSION['facebook']['id'],
