@@ -17,7 +17,7 @@ $fb = new \Facebook\Facebook([
 $jsHelper = $fb->getJavaScriptHelper();
 try {
   $accessToken = $jsHelper->getAccessToken();
-  $response = $fb->get('/me?locale=lv_LV&fields=id,name,email,picture', $accessToken);
+  $response = $fb->get('/me?locale=lv_LV&fields=id,name,picture', $accessToken);
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
   // nasing
 } catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -33,7 +33,7 @@ if (isset($_GET['logout'])) {
 
 if (!empty($response)) {
   $graphNode = $response->getGraphNode();
-
+  die(var_dump($graphNode));
   $db->insert('users', array(
     'id' => $graphNode['id'],
     'name' => $graphNode['name'],

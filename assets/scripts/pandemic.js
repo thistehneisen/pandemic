@@ -1,11 +1,12 @@
 /*
-Interested in the code? We're open for co-operations.
+Interested in the code? We're looking for teammates & partnerships.
 info@pandemic.lv
 */
 
 settings = {};
 settings.noUsers = false;
 settings.noServices = false;
+settings.userChannel = 'default';
 
 function pandemicSettings(action, element) {
     if (action == 'togglePeople') {
@@ -46,14 +47,9 @@ toastr.options = {
 Dropzone.autoDiscover = false;
 var map;
 $(document).ready(function() {
-
-    if (typeof userChannel == 'undefined') {
-        userChannel = 'default';
-    }
-
     $.post('library/ajax.php', {
         action: 'chat_items',
-        channel: userChannel
+        channel: settings.userChannel
     }, function(results) {
         for (var i = results.items.length - 1; i >= 0; i--) {
             $('#chat_holder').append('<span class="chat_item">' + results.items[i].message + '</span>');
@@ -74,16 +70,10 @@ $(document).ready(function() {
             } else {
 
                 if (elem.val().length > 0) {
-
-                    if (typeof userChannel == 'undefined') {
-                        userChannel = 'default';
-                    }
-
                     $.post('library/ajax.php', {
                         action: 'chat',
-                        channel: userChannel,
+                        channel: settings.userChannel,
                         message: elem.val()
-
                     }, function(results) {
                         elem.val('');
                     });
