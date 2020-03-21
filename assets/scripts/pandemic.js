@@ -459,7 +459,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
                         fbId = response.id;
                         $.get('', function(response){
-                            $('body header').children().remove().append($(response).find('body header').show().children().html());
+                            $('body header').children().remove().append($(response).find('body header').removeClass('preload-hide').children().fadeIn().html());
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
                     });
