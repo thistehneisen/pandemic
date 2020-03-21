@@ -459,7 +459,9 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '! Redirecting in a moment…', 'Logged in');
                         fbId = response.id;
                         $.get('', function(response){
-                            $('body header').html($(response).find('body header').removeClass('preload-hide').children().html());
+                            var header = $(response).find('header').removeClass('preload-hide').html();
+                            console.log(header);
+                            $('header').fadeOut('fast').html(header);
                         });
                         //setTimeout(function(){ window.location.reload(); }, 500);
                     });
@@ -481,8 +483,10 @@ $(document).ready(function() {
             lat: latitude,
             lng: longitude
         });
+
         $('#preloader').fadeOut();
         $('.preload-hide').show();
+
         $('#map').css({
             'width': '100%',
             'height': '100%'

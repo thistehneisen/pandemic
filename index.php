@@ -1,16 +1,15 @@
 <?php
 require_once 'library/init.php';
-cleanImages();
+
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_GET['delete']);
 	if ($remove['user'] == $_SESSION['facebook']['id']) {
 		$db->queryf("DELETE FROM %s WHERE `id`='%d' AND `user`='%d'", $db->classifieds, $_GET['delete'], $_SESSION['facebook']['id']);
 		header('Location: ' . $settings['fullAddress']);
 	}
-}
-if (!empty($_GET['id']) && is_numeric($_GET['id']))
+} else if (!empty($_GET['id']) && is_numeric($_GET['id']))
 	$classified = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->classifieds, $_GET['id']);
-if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
+else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
     $jscategory = $_GET['category'];
 ?>
 <!DOCTYPE html>
@@ -21,15 +20,15 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 -->
 <head>
 	<meta charset="UTF-8" />
-	<title>Pandemic Baltics (<?php print($settings['country'])?>) — Connecting you with neighbors, volunteers and information.</title>
+	<title>Pandemic <?php print($settings['country'])?> — Connecting you with neighbors, volunteers and information.</title>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<meta name="keywords" content="pandemic, corona, covid, covid-19, covid19, kovid, baltics, latvia, lithuania, estonia">
-	<meta name="description" content="In the time of crisis, you're not alone. Pandemic Baltics is connecting you with neighbors, volunteers and information.">
+	<meta name="description" content="In the time of crisis, you're not alone. Pandemic <?php print($settings['country'])?> is connecting you with neighbors, volunteers and information.">
 	<meta property="og:type" content="website">
 <?php if (empty($classified)) { ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
-	<meta property="og:title" content="Pandemic Baltics (<?php print($settings['country'])?>) — In the time of crisis, you're not alone.">
-	<meta property="og:description" content="Connecting you with neighbors, volunteers and services. Providing you with the official information about the state of pandemics, Baltic-wise.">
+	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
+	<meta property="og:description" content="Connecting you with neighbors, volunteers and services. Providing you with the official information about the state of pandemics.">
 	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?v2">
 <?php } else {
 	$image = json_decode($classified['photos'], true);

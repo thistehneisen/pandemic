@@ -24,8 +24,9 @@ try {
   // nasing
 }
 
+cleanImages();
+
 if (isset($_GET['logout'])) {
-  cleanImages();
   session_destroy();
   header('Location: '.$settings['fullAddress']);
   exit;
