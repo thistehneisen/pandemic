@@ -148,7 +148,7 @@ function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65)
     };
 }
 
-setInterval(function(){
+setTimeout(function(){
     pandemicData('fetch', 'quarantines');
     pandemicData('fetch', 'places');
     pandemicData('fetch', 'people');
