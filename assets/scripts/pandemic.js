@@ -33,29 +33,33 @@ function pandemicSettings(action, sub, data) {
     }
 }
 
-function req(postData) {
+function req(postData, cb) {
     var a = postData.a,
         m = postData.m;
 
-    var response = $.ajax({
+    $.ajax({
         url         : xhr,
         method      : 'POST',
         dataType    : 'json',
         async       : false,
         data        : postData,
         success     : function (res) {
-                        if (typeof pandemic.loaded[a] === 'undefined' && 
-                            pandemic.loaded.length < pandemic.init.length &&
-                            pandemic.init.includes(a)) {
+                        if (typeof cb === 'function') cb.call(this,res);
+                        if (m === 'fetch') {
+                            if (typeof pandemic.loaded[a] === 'undefined' &&
+                                pandemic.loaded.length < pandemic.init.length &&
+                                pandemic.init.includes(a)) {
                                 $('#preload-status strong').text(a);
                                 pandemic.loaded.push(a);
                             }
-                            if (pandemic.loaded.length === pandemic.init.length) { dismissPreloader(); }
+                            if (pandemic.loaded.length === pandemic.init.length) {
+                                dismissPreloader();
+                            }
+                        }
                         },
         fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, m + ': ' + a);  } }
-    }).responseJSON;
+    });
 
-    return response;
 }
 
 function pandemicData(action, sub, data) {
