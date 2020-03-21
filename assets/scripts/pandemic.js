@@ -42,12 +42,12 @@ function req(postData) {
         method      : 'POST',
         dataType    : 'json',
         data        : postData,
-        done        : function (res) {
+        done        : function (msg) {
                         if (typeof pandemic.loaded[a] === 'undefined' && 
                             pandemic.loaded.length < pandemic.init.length &&
-                            pandemic.init.includes(a)) {
-                                pandemic.loaded.push(a);
-                                $('#preload-status strong').text(a);
+                            pandemic.init.includes(m)) {
+                                pandemic.loaded.push(m);
+                                $('#preload-status strong').text(m);
                             }
                             if (pandemic.loaded.length === pandemic.init.length) {
                                 dismissPreloader();
