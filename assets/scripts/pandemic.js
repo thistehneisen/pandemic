@@ -81,7 +81,7 @@ function pandemicData(action, sub, data) {
                                 description : '<img src="'+item.img+'" alt="'+strip(item.name)+'" style="width: 50px; height: 50px;">',
                                 lat         : item.latitude,
                                 lng         : item.longitude,
-                                icon        : item.img, // getIcon('00ff54')
+                                icon        : getIcon('00ff54'),
                                 name        : item.name,
                                 status      : item.status,
                                 category    : item.category,
@@ -386,7 +386,7 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '!', 'Authenticated');
                         fbId = response.id;
                         $.get('', function(response){
-                            var header = $(response).find('header .header').html();
+                            var header = $(response).find('header').html();
                             console.log(header);
                             $('header').fadeOut('fast').html(header);
                         });
