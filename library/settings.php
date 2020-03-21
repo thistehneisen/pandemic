@@ -36,7 +36,7 @@ $settings = array(
     )
 );
 
-if(!in_array($_SERVER['REMOTE_ADDR'], array('pandemic.lv' , 'pandemic.lv' , 'pandemic.ee'))){
+if(in_array($_SERVER['REMOTE_ADDR'], array('localhost'))){
     //localhost
     $settings = array(
         'hosts' => ['localhost' => 'Latvia', ],
