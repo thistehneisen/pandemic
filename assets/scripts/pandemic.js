@@ -17,7 +17,7 @@ settings.chat.rooms             = {};
 settings.chat.refreshRate       = 500;
 
 pandemic                        = {};
-pandemic.debug                  = false;
+pandemic.debug                  = true;
 pandemic.init                   = ['data', 'places', 'people', 'chat'];
 pandemic.loaded                 = [];
 pandemic.markers                = [];
