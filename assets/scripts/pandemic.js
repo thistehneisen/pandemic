@@ -141,9 +141,7 @@ function pandemicData(action, sub, data) {
             });
         } else if (sub === 'chat' && settings.service.chatbox === true) {
             req({a:sub,m:action}, function(res) {
-                for (var i = res.items.length - 1; i >= 0; i--) {
-                    //$('#chat_holder').append('<span class="chat_item">' + res.items[i].message + '</span>');
-                };
+                // res.msgs coming out here
             });
         }
     }
