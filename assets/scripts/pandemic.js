@@ -54,7 +54,7 @@ function req(postData) {
     }, function(res) { return res; });
     
     console.log('Response:');
-    console.log(r.responseJSON);
+    console.log(r);
     return r.responseJSON;
 }
 
