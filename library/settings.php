@@ -1,6 +1,6 @@
 
 <?php
-$settings = array(
+$settings = [
     'hosts'         => ['pandemic.lv' => 'Latvia', 'pandemic.lt' => 'Lithuania', 'pandemic.ee' => 'Estonia'],
     'host'          => 'pandemic.lv',
     'fullAddress'   => 'https://pandemic.lv/',
@@ -37,8 +37,14 @@ $settings = array(
     'chatbox' => [
         'types'         => ['c', 'p', 'g'], // channel, private, group
         'antiFlood'     => ['c' => 500, 'p' => 150, 'g' => 250]
+    ],
+    'xhr' => [
+        'chat'      => ['fetch', 'send', 'ping', 'rooms'],
+        'places'    => ['fetch', 'create'],
+        'people'    => ['fetch'],
+        'data'      => ['fetch']
     ]
-);
+];
 
 if(in_array($_SERVER['REMOTE_ADDR'], array('localhost'))){
     //localhost

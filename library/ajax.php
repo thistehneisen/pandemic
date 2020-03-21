@@ -5,18 +5,11 @@ use \League\Csv\Reader;
 header('Content-Type: application/json');
 require_once 'init.php';
 
-$actions[] = [
-                'chat' => ['send', 'fetch', 'ping', 'rooms'],
-                'places' => ['create', 'fetch'],
-                'people' => ['fetch'],
-                'data' => ['fetch']
-            ];
-
 $a          = $_POST['a']; // action
 $m          = $_POST['m']; // method
 $errors     = [];
 
-if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
+if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][$a])) {
     /* DATA */
     if ($a === 'data') {
         /* Fetch all data */

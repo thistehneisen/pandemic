@@ -1,7 +1,7 @@
-/*
-Interested in the code? We're looking for teammates & partnerships.
-info@pandemic.lv
-*/
+/***
+    Interested in the code? We're looking for teammates & partnerships.
+    info@pandemic.lv
+***/
 
 const markerTemplate            = Handlebars.compile($('#marker-content-template').html());
 
@@ -17,11 +17,12 @@ settings.chat.rooms             = {};
 settings.chat.refreshRate       = 500;
 
 pandemic                        = {};
+pandemic.debug                  = false;
 pandemic.init                   = ['data', 'places', 'people', 'chat'];
 pandemic.loaded                 = [];
 pandemic.markers                = [];
 
-var xhr = 'library/ajax.php';
+var xhr                         = 'library/ajax.php';
 
 function pandemicSettings(action, sub, data) {
     if (action === 'toggle') {
@@ -32,11 +33,35 @@ function pandemicSettings(action, sub, data) {
     }
 }
 
+function req(postData = {}) {
+    const a = postData[a];
+    const b = postData[m];
+
+    $.ajax({
+        url         : xhr,
+        method      : 'POST',
+        dataType    : 'json',
+        data        : { postData },
+        done        : function (res) {
+                        if (typeof pandemic.loaded[a] === 'undefined' && 
+                            pandemic.loaded.length < pandemic.init.length &&
+                            pandemic.init.includes(a)) {
+                                pandemic.loaded.push(a);
+                                $('#preload-status strong').text(a);
+                            }
+                            if (pandemic.loaded.length === pandemic.init.length) {
+                                dismissPreloader();
+                            }
+                        },
+        fail        : function (reason, xhr) { if (pandemic.debug === true) { toastr.error(reason + ' XHR: ' + xhr, a + ': ' + m);  } }
+    }, function(res) { return res; });
+}
+
 function pandemicData(action, sub, data) {
     /* Fetching data to front-end */
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
-            $.post(xhr, {a:sub,m:action,c:category}, function(res) {
+            req({a:sub,m:action,c:category}, function(res) {
                 var items = [],
                     markerData = [];
                 if (res.locations.length > 0) {
@@ -64,9 +89,9 @@ function pandemicData(action, sub, data) {
                 }
 
                 pandemic.markers = map.addMarkers(markerData);
-            }, 'json');
+            });
         } else if (sub === 'data' && settings.service.data === true) {
-            $.ajax(xhr, {data:{a:sub,m:action},type:"POST",success:alert('Done.')},function(res){
+            req({a:sub,m:action}, function(res) {
                 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
                 const markers = res.map(item => ({
                     id          : item.id,
@@ -80,9 +105,9 @@ function pandemicData(action, sub, data) {
                 }));
         
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
-            }, 'json');
+            });
         } else if (sub === 'places' && settings.service.places === true) {
-            $.post(xhr, {a:sub,m:action,c:category}, function(res) {
+            req({a:sub,m:action,c:category}, function(res) {
                 var items = [], markerData = [];
                 if (typeof res.places !== 'undefined' && res.places.length > 0) {
                     items = res.places;
@@ -107,32 +132,32 @@ function pandemicData(action, sub, data) {
                 }
 
                 pandemic.markers = map.addMarkers(markerData);
-            }, 'json');
+            });
         } else if (sub === 'chat' && settings.service.chatbox === true) {
-            $.post(xhr, {a:sub,m:action}, function(res) {
+            req({a:sub,m:action}, function(res) {
                 for (var i = res.items.length - 1; i >= 0; i--) {
                     //$('#chat_holder').append('<span class="chat_item">' + res.items[i].message + '</span>');
                 };
-            }, 'json');
+            });
         }
     }
 
     /* Chat XHR */
     else if (action === 'chat') {
         if (sub === 'send') {
-            $.post(xhr, {a:action,m:sub,t:data.t,r:data.r,msg:data.m}, function(res) {
+            req({a:action,m:sub,t:data.t,r:data.r,msg:data.m}, function(res) {
                 //
             });
         } else if (sub === 'ping') {
-            $.post(xhr, {a:action,m:sub}, function(res) {
+            req({a:action,m:sub}, function(res) {
                 // PONG
-            }, 'json');
+            });
         }
     }
 }
 
 // Initialising
-pandemic.init.forEach(service => pandemicData('fetch', service, {init:true}));
+pandemic.init.forEach(service => pandemicData('fetch', service));
 
 $(document).ready(function() {
     // Initialise the Maps
@@ -382,7 +407,7 @@ $('#post-the-ad').on('click', function(e) {
     e.preventDefault();
     $('#post-the-ad span').text('Sending…');
 
-    $.post(xhr, {
+    req({
         a               : 'places',
         m               : 'create',
         title           : $('#title').val(),
@@ -391,12 +416,12 @@ $('#post-the-ad').on('click', function(e) {
         phone           : $('#phone').val(),
         email           : $('#email').val(),
         website         : $('#website').val()
-    }, function(response) {
-        if (typeof response.errors !== 'undefined' && response.errors.length > 0) {
+    }, function(res) {
+        if (typeof res.errors !== 'undefined' && res.errors.length > 0) {
             $('#post-the-ad span').html('Ready to publish &rarr;');
             toastr.error(response.errors[0], 'Whoops!');
         } else { makeLocation(response.id); }
-    }, 'json');
+    });
 });
 
 /* Location creation */
@@ -434,7 +459,7 @@ function makeLocation(placeId) {
 
 $('#save-location').on('click', function(e) {
     e.preventDefault();
-    $.post(xhr, {
+    req(
         a           : 'places',
         m           : 'location',
         place       : $(this).data('place'),
@@ -443,7 +468,7 @@ $('#save-location').on('click', function(e) {
     }, function(r) {
         if (r.result == 'success') { toastr.success('The selected location is now published with your specified information.', 'Place published'); }
         else { toastr.error('We have some kind of technical difficulities, if the problem persists, please get in touch!', 'Error'); }
-    }, 'json');
+    });
 });
 
 // Other settings
@@ -470,7 +495,7 @@ function geoLocate() {
     GMaps.geolocate({
         success: function(position) {
             map.setCenter(position.coords.latitude, position.coords.longitude);
-            $.post(xhr, {
+            req({
                 a       : 'people',
                 m       : 'set',
                 lat     : position.coords.latitude,
@@ -502,8 +527,7 @@ function getIcon(fC = '00aeef', sColor = 222, sC = 1.2, fO = 0.65, url = undefin
     };
 }
 
-function dismissPreloader(progress) {
-    if (typeof progress !== 'undefined') { $('#preload-status strong').text(progress); return false;}
+function dismissPreloader() {
     map.setCenter({lat:latitude,lng:longitude});
     $('#preloader').remove();
     $('.preload-hide').show();
