@@ -159,8 +159,20 @@ function pandemicData(action, sub, data) {
     }
 }
 
+// Initialise the Maps
+map = new GMaps({
+    div: '#map',
+    lat: latitude,
+    lng: longitude,
+    zoom: 9,
+    styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+});
+
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
+    // Initialising
+    pandemic.init.forEach(service => pandemicData('fetch', service));
+
     // Chatbox
     $('input#chatbox').on("keypress", function(e) {
         var elem = $(this);
@@ -271,15 +283,6 @@ $(document).ready(function() {
         $('body').toggleClass('noscroll');
         $('header').toggleClass('show_nav');
         $('.mask').toggleClass('show-mask');
-    });
-
-    // Initialise the Maps
-    map = new GMaps({
-        div: '#map',
-        lat: latitude,
-        lng: longitude,
-        zoom: 9,
-        styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
     });
 
     map.on('marker_added', function(marker) {
@@ -528,7 +531,7 @@ function getIcon(fC = '00aeef', sColor = 222, sC = 1.2, fO = 0.65, url = undefin
 }
 
 function dismissPreloader() {
-    //map.setCenter({lat:latitude,lng:longitude});
+    map.setCenter({lat:latitude,lng:longitude});
     $('#preloader').remove();
     $('.preload-hide').show();
     $('#map').css({'width': '100%','height': '100%'});
@@ -545,6 +548,3 @@ function strip(html) {
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
 }
-
-// Initialising
-pandemic.init.forEach(service => pandemicData('fetch', service));
