@@ -4,6 +4,7 @@ info@pandemic.lv
 */
 
 settings = {};
+settings.refreshRate = 3000;
 settings.service = {};
 settings.service.people = true;
 settings.service.places = true;
@@ -30,7 +31,7 @@ function pandemicData(action, sub, data) {
         Fetching data to front-end
     */
     if (action === 'fetch') {
-        if (sub === 'users' && settings.service.people !== true) {
+        if (sub === 'people' && settings.service.people === true) {
             $.post(xhr, {
                 action: 'userlocations',
                 category: category
@@ -78,7 +79,7 @@ function pandemicData(action, sub, data) {
         
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             }, 'json');
-        } else if (sub === 'places' && settings.service.places !== true) {
+        } else if (sub === 'places' && settings.service.places === true) {
             $.post(xhr, {
                 action: 'retrieve',
                 category: category
@@ -150,7 +151,8 @@ function getIcon(fill = '00aeef', stroke = 222, scale = 1.2, fillOpacity = 0.65)
 setInterval(function(){
     pandemicData('fetch', 'quarantines');
     pandemicData('fetch', 'places');
-});
+    pandemicData('fetch', 'people');
+}, settings.refreshRate);
 
 setInterval(function(){
     pandemicData('chat', 'items');
