@@ -55,8 +55,8 @@ function req(postData) {
     }, function(res) { return res; });
     
     console.log('Response:');
-    console.log(response.res);
-    return response.res;
+    console.log($.parseJSON(response));
+    return $.parseJSON(response);
 }
 
 function pandemicData(action, sub, data) {
