@@ -163,7 +163,7 @@ pandemic.init.forEach(service => pandemicData('fetch', service));
 Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialise the Maps
-    window.map = new GMaps({
+    map = new GMaps({
         div: '#map',
         lat: latitude,
         lng: longitude,
@@ -529,7 +529,7 @@ function getIcon(fC = '00aeef', sColor = 222, sC = 1.2, fO = 0.65, url = undefin
 }
 
 function dismissPreloader() {
-    map.setCenter({lat:latitude,lng:longitude});
+    //map.setCenter({lat:latitude,lng:longitude});
     $('#preloader').remove();
     $('.preload-hide').show();
     $('#map').css({'width': '100%','height': '100%'});
