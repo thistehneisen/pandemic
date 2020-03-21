@@ -121,6 +121,18 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span><?php print($settings['host'])?></span>
 			</a>
 			<nav>
+				<span class="dd">
+					<a href="#">Baltics</a>
+					<ul class="dropdown">
+						<span><a href="#"><?php print($settings['country'])?></span>
+						<?php
+						foreach ($settings['hosts'] as $host => $country) {
+							if ($country === $settings['country']) continue;
+							print('<span><a href="https://'.$host.'/" title="Pandemics '.$country.'">'.$country.'</a></span>');
+						}
+						?>
+					</ul>
+				</span>
 				<span><a data-fancybox="" data-type="iframe" href="https://global.pandemic.lv/">Global</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
 					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
