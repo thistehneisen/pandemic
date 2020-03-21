@@ -188,6 +188,8 @@ if (in_array($a, array_keys($actions)) && in_array($m, $actions[$a])) {
                     'message' => $_POST['msg'],
                     'type' => $type
                 ]);
+
+                jD('success', time());
             break;
 
             case 'rooms':

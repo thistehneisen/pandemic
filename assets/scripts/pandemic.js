@@ -3,19 +3,22 @@ Interested in the code? We're looking for teammates & partnerships.
 info@pandemic.lv
 */
 
-const markerTemplate = Handlebars.compile($('#marker-content-template').html());
+const markerTemplate            = Handlebars.compile($('#marker-content-template').html());
+const Dropzone.autoDiscover     = false;
 
 settings                        = {};
 settings.refreshRate            = 3000;
 settings.service                = {};
+settings.service.data           = true;
 settings.service.people         = true;
 settings.service.places         = true;
+settings.service.chatbox        = true;
 settings.chat                   = {}
 settings.chat.rooms             = {};
 settings.chat.refreshRate       = 500;
 
 pandemic                        = {};
-pandemic.init                   = ['static', 'places', 'people', 'chat'];
+pandemic.init                   = ['data', 'places', 'people', 'chat'];
 pandemic.loaded                 = [];
 pandemic.markers                = [];
 
@@ -34,15 +37,11 @@ function pandemicData(action, sub, data) {
     /* Fetching data to front-end */
     if (action === 'fetch') {
         if (sub === 'people' && settings.service.people === true) {
-            $.post(xhr, {
-                a:'people',
-                m:'fetch',
-                c:category
-            }, function(results) {
+            $.post(xhr, {a:sub,m:action,c:category}, function(res) {
                 var items = [],
                     markerData = [];
-                if (results.locations.length > 0) {
-                    items = results.locations;
+                if (res.locations.length > 0) {
+                    items = res.locations;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
 
@@ -67,11 +66,8 @@ function pandemicData(action, sub, data) {
 
                 pandemic.markers = map.addMarkers(markerData);
             }, 'json');
-        } else if (sub === 'static') {
-            $.post(xhr, {
-                a:'data',
-                m:'fetch'
-            }, function (res){
+        } else if (sub === 'data' && settings.service.data === true) {
+            $.ajax(xhr, {data:{a:sub,m:action},type:"POST",success:alert('Done.')},function(res){
                 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
                 const markers = res.map(item => ({
                     id          : item.id,
@@ -87,14 +83,10 @@ function pandemicData(action, sub, data) {
                 pandemic.markers = pandemic.markers.concat(map.addMarkers(markers));
             }, 'json');
         } else if (sub === 'places' && settings.service.places === true) {
-            $.post(xhr, {
-                a:'places',
-                m:'fetch',
-                c:category
-            }, function(results) {
+            $.post(xhr, {a:sub,m:action,c:category}, function(res) {
                 var items = [], markerData = [];
-                if (typeof results.places !== 'undefined' && results.places.length > 0) {
-                    items = results.places;
+                if (typeof res.places !== 'undefined' && res.places.length > 0) {
+                    items = res.places;
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
         
@@ -118,12 +110,9 @@ function pandemicData(action, sub, data) {
                 pandemic.markers = map.addMarkers(markerData);
             }, 'json');
         } else if (sub === 'chat' && settings.service.chatbox === true) {
-            $.post(xhr, {
-                a:'chat',
-                m:'fetch'
-            }, function(res) {
+            $.post(xhr, {a:sub,m:action}, function(res) {
                 for (var i = res.items.length - 1; i >= 0; i--) {
-                    $('#chat_holder').append('<span class="chat_item">' + res.items[i].message + '</span>');
+                    //$('#chat_holder').append('<span class="chat_item">' + res.items[i].message + '</span>');
                 };
             }, 'json');
         }
@@ -132,55 +121,20 @@ function pandemicData(action, sub, data) {
     /* Chat XHR */
     else if (action === 'chat') {
         if (sub === 'send') {
-            $.post(xhr, {
-                a:'chat',
-                m:'send',
-                t:data.t,
-                r:data.r,
-                msg:data.m
-            }, function(result) { return result; });
+            $.post(xhr, {a:action,m:sub,t:data.t,r:data.r,msg:data.m}, function(res) {
+                //
+            });
         } else if (sub === 'ping') {
-            $.post(xhr, {
-                a:'chat',
-                m:'ping',
-                rooms: settings.chat.rooms
-            }, function(results) {
+            $.post(xhr, {a:action,m:sub}, function(res) {
                 // PONG
             }, 'json');
         }
     }
 }
 
-setTimeout(function(){
-    pandemicData('fetch', 'static');
-    pandemicData('fetch', 'places');
-    pandemicData('fetch', 'people');
-    pandemicData('fetch', 'chat');
-}, settings.refreshRate);
+// Initialising
+pandemic.init.forEach(service => pandemicData('fetch', service, {init:true}));
 
-setInterval(function(){
-    pandemicData('chat', 'ping');
-}, settings.chat.refreshRate);
-
-toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": true,
-    "progressBar": false,
-    "positionClass": "toast-bottom-right",
-    "preventDuplicates": true,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "20000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }
-
-Dropzone.autoDiscover = false;
 $(document).ready(function() {
     // Initialise the Maps
     map = new GMaps({
@@ -223,9 +177,7 @@ $(document).ready(function() {
         clickable: true,
         addRemoveLinks: true,
         acceptedFiles: "image/*",
-        accept: function(file, done) {
-            done();
-        }
+        accept: function(file, done) { done(); }
     });
 
     /* Modal windows for pages */
@@ -389,7 +341,7 @@ $(document).ready(function() {
                 }
             });
 
-            // Open the $_GET['id'] places
+            // Open the i GET parameter
             if (typeof openPlace !== 'undefined' && openPlace === marker.id) {
                 map.panTo(marker.getPosition());
                 info.open();
@@ -493,6 +445,25 @@ $('#save-location').on('click', function(e) {
         else { toastr.error('We have some kind of technical difficulities, if the problem persists, please get in touch!', 'Error'); }
     }, 'json');
 });
+
+// Other settings
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "20000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 
 // Helpers
 function geoLocate() {
