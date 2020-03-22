@@ -80,8 +80,20 @@ if($_SERVER['DOCUMENT_ROOT'] == "/var/www/public"){
             'business' => 'Business',
             'services' => 'Services',
             'other' => 'Other'
-        )
+        )  ,
+
+        'chatbox' => [
+            'types'         => ['c', 'p', 'g'], // channel, private, group
+            'antiFlood'     => ['c' => 500, 'p' => 150, 'g' => 250]
+        ],
+        'xhr' => [
+            'chat'      => ['fetch', 'send', 'ping', 'rooms'],
+            'places'    => ['fetch', 'create'],
+            'people'    => ['fetch'],
+            'data'      => ['fetch', 'global']
+        ]
     );
+
 
     $settings['latitude'] = '56.946618';
     $settings['longitude'] = '24.097274'; 
