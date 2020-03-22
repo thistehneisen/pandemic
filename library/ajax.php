@@ -17,6 +17,10 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             $csv = Reader::createFromPath('../data.csv', 'r');
             $csv->setHeaderOffset(0);
             jD('data', $csv);
+        } else if ($m === 'global') {
+            $csv = Reader::createFromPath('../combined.csv', 'r');
+            $csv->setHeaderOffset(0);
+            jD('global', $csv);
         }
     /* PLACES */
     } else if ($a === 'places') {
@@ -25,7 +29,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             $output     = [];
             $places     = $db->getRows("SELECT * FROM %s WHERE `latitude`!='' AND `longitude`!=''", $db->table('places'));
             $photopath  = $settings['fullAddress'].$settings['upload']['path']['images'];
-            $category   = $_POST['category'] ?? NULL;
+            $category   = $_POST['category'] ?: NULL;
     
             foreach ((array)$places as $place) {
                 if (!empty($category) && $category != $place['category'])
@@ -42,7 +46,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
     
                 $output[] = [
                     'id'            => $place['id'],
-                    'title'         => $place['category'],
+                    'title'         => $settings['categories'][$place['category']],
                     'description'   => nl2br(htmlspecialchars($place['description'])).$delete,
                     'subtitle'      => $place['title'],
                     'gallery'       => join("", $gallery),
@@ -115,10 +119,9 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'id' => $_POST['place'],
                     'user' => $_SESSION['facebook']['id']
                 ]);
-                die('ir');
+
                 jD('result', 'success');
             } else {
-                die('nav');
                 jD('errors', $errors);
             }
         }
@@ -135,16 +138,16 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                 if (!empty($_POST['c']) && in_array($_POST['c'], array_keys($settings['categories'])) && $userData['category'] !== $_POST['c'])
                     continue;
 
-                $nameDetails = explode(" ", trim($userdata['name']));
-                $namePubulic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
+                $nameDetails = explode(" ", trim($userData['name']));
+                $namePublic = $nameDetails[0].'&nbsp;'.mb_substr((string)$nameDetails[1],0,1,"UTF-8").'.';
 
                 $output[] = [
                     'id'        => $location['fbid'],
                     'latitude'  => $location['latitude'],
                     'longitude' => $location['longitude'],
                     'img'       => $userData['picture'],
-                    'name'      => htmlspecialchars($userData['pseudo'] ?? $namePublic),
-                    'status'    => htmlspecialchars($userData['status']),
+                    'name'      => $userData['pseudo'] ?: $namePublic,
+                    'status'    => $userData['status'],
                     'category'  => $userData['category'],
                     'seen'      => $userData['lastlogin']
                 ];

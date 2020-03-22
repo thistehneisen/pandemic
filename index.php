@@ -1,5 +1,6 @@
 <?php
 require_once 'library/init.php';
+cleanImages();
 
 if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 	$remove = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['delete']);
@@ -29,14 +30,14 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>">
 	<meta property="og:title" content="Pandemic <?php print($settings['country'])?>">
 	<meta property="og:description" content="Connecting you with neighbors, volunteers and places. Providing you with the official information about the state of pandemics.">
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?covid">
 <?php } else {
 	$image = json_decode($place['photos'], true);
 	if (!empty($image)) {
 ?>
 	<meta property="og:url" content="<?php print($settings['fullAddress'])?>?id=<?php print($place['id'])?>">
 <?php } else { ?>
-	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png">
+	<meta property="og:image" content="<?php print($settings['fullAddress'])?>assets/images/share.png?covid">
 <?php } ?>
 	<meta property="og:title" content="<?php print(htmlspecialchars($place['title']))?>">
 	<meta property="og:description" content="<?php print(htmlspecialchars($place['description']))?>">
@@ -51,10 +52,29 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
 	<script type="text/javascript" src="//maps.google.com/maps/api/js?libraries=geometry&amp;key=AIzaSyAFvIwqQmwrhlPhxG_el4wxikwbVbplSXo"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
+	<script type='text/javascript' src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?covid" />
+</head>
+<body>
+	<div id="preloader">
+		<h1>Pandemic <strong><?php print($settings['country'])?></strong></h1>
+		<div class="cube-wrapper">
+			<div class="cube-folding">
+				<span class="leaf1"></span>
+				<span class="leaf2"></span>
+				<span class="leaf3"></span>
+				<span class="leaf4"></span>
+			</div>
+			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
+		</div>
+		<div class="preloader-footer"><strong><a href="#terms-and-conditions">Terms & Conditions</a></strong></div>
+	</div>
 
 	<?php /* Facebook JS Connection */ ?>
 	<script type="text/javascript">
@@ -78,22 +98,21 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
-	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png" />
-</head>
-<body>
-	<div id="preloader">
-		<h1>Pandemic <strong><?php print($settings['country'])?></strong></h1>
-		<div class="cube-wrapper">
-			<div class="cube-folding">
-				<span class="leaf1"></span>
-				<span class="leaf2"></span>
-				<span class="leaf3"></span>
-				<span class="leaf4"></span>
+	<script id="marker-content-template" type="text/x-handlebars-template">
+		<div class="custom-img" style="background-image: url({{{img}}})"></div>
+		<section class="custom-content">
+			<h1 class="custom-header">
+				{{title}}
+				<small>{{{subtitle}}}</small>
+			</h1>
+			<div class="custom-body">{{{body}}}</div>
+			<div class="gallery">{{{gallery}}}</div>
+			<div class="unique-url text">
+				<h5>URL:</h5>
+				<input type="text" value="{{url}}" />
 			</div>
-			<span class="loading" id="preload-status">Fetching <strong>all</strong> data…</span>
-		</div>
-		<div class="preloader-footer"><strong><a href="#terms-and-conditions">Terms & Conditions</a></strong></div>
-	</div>
+		</section>
+	</script>
 
 	<header class="header preload-hide">
 		<div class="container">
@@ -102,6 +121,19 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				<span><?php print($settings['host'])?></span>
 			</a>
 			<nav>
+				<span class="dd">
+					<a href="#">Baltics</a>
+					<ul class="dropdown">
+						<li><a href="<?php print($fullAddress)?>"><?php print($settings['country'])?></a></li>
+						<?php
+						foreach ($settings['hosts'] as $host => $country) {
+							if ($country === $settings['country']) continue;
+							print('<li><a href="https://'.$host.'/" title="Pandemics '.$country.'">'.$country.'</a></li>');
+						}
+						?>
+					</ul>
+				</span>
+				<span><a href="https://global.pandemic.lv/" id="global-data">Global data</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
 					<span><a rel="leanModal" href="#add-ad">Add your service</a></span>
 					<span><a rel="leanModal" href="#profile">Your profile</a></span>
@@ -113,13 +145,13 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                         <?php foreach($settings['categories'] as $key => $category) { ?><li><a href="<?php print($settings['fullAddress'])?>?category=<?php print($key)?>"><span><?php print($category)?></span></a></li><?php } ?>
 					</ul>
                 </span>
-                <span class="dd">
+                <?php /*<span class="dd">
                     <a href="#">Settings</a>
                     <ul class="dropdown">
 						<li><a href="#" onclick="pandemicSettings('toggle', 'people', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
 						<li><a href="#" onclick="pandemicSettings('toggle', 'places', $(this));"><span><strong>&#10004;</strong> Show places</span></a></li>
 					</ul>
-				</span>
+				</span>*/ ?>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
 				<span><a href="#" class="login-fb"><?php include('assets/images/ico/facebook-social-symbol.svg'); ?> Log In</a></span>
 				<?php } else { ?>
@@ -292,22 +324,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		<div id="lean-mask"></div>
 	</div>
 
-	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
-		<section class="custom-content">
-			<h1 class="custom-header">
-				{{title}}
-				<small>{{{subtitle}}}</small>
-			</h1>
-			<div class="custom-body">{{{body}}}</div>
-			<div class="gallery">{{{gallery}}}</div>
-			<div class="unique-url text">
-				<h5>URL:</h5>
-				<input type="text" value="{{url}}" />
-			</div>
-		</section>
-	</script>
-
 	<div class="map-ct preload-hide">
 	<div id="map" class="preload-hide">
 		&nbsp;
@@ -401,7 +417,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <?php /* Settings */ ?>
 <script type="text/javascript">
 	fullAddress = <?php print(json_encode($settings['fullAddress']))?>;
-	openPlace = <?php print($place['i'] ?? 'undefined')?>;
+	openPlace = <?php print($place['id'] ?? 'undefined')?>;
 	category = "<?php print($jscategory)?>";
 	country = <?php print(json_encode($settings['country']))?>;
 	latitude = <?php print($settings['latitude'])?>;
@@ -412,7 +428,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/gmaps.min.js"></script>
-<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/info-window.min.js"></script>
+<script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/snazzy-info-window.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
 <script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
