@@ -317,6 +317,38 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<div class="mask">&nbsp;</div>
 
 <?php if (isset($_GET['chat'])) { ?>
+
+<!-- add chat loader details -->
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+
+		var input = document.getElementById("chatholder");
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) {
+		  // Number 13 is the "Enter" key on the keyboard
+		  if (event.keyCode === 13) {
+			  	req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {
+			  		$('#subholder').append('<div class="message senderMe">'+ $('#chatholder').val() +'</div>');
+			  		$('#chatholder').val("");
+		    	});
+		  }
+		});
+
+		//$( ".message" ).on( "click", function() {
+	        req({a:'chat',m:'fetch', t:'p',r:'1',msg:'Vitals'}, function(res) {
+	        	if (res.msgs){
+		        	for (var i = res.msgs.length - 1; i >= 0; i--) {
+		        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
+		        		console.log(res.msgs[i].sender);
+		        	};
+	        	}
+	    	});
+		//});
+	});
+</script>
+
+
 <div class="center" id="chatbox">
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
@@ -331,32 +363,19 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
   <div class="chat">
     <div class="contact bar">
       <div class="pic stark"></div>
-      <div class="name">
-        Tony Stark
+      <div class="name" id="contact_source_name">
+        
       </div>
-      <div class="seen">
-        Today at 12:56
+      <div class="seen" id="contact_source_time">
+        Today
       </div>
     </div>
     <div class="messages" id="chat">
       <div class="time">
-        Today at 11:41
+        Time seperator for good look
       </div>
-      <div class="message parker">
-        Hey, man! What's up, Mr Stark? 👋
-      </div>
-      <div class="message stark">
-        Kid, where'd you come from? 
-      </div>
-      <div class="message parker">
-        Field trip! 🤣
-      </div>
-      <div class="message parker">
-        Uh, what is this guy's problem, Mr. Stark? 🤔
-      </div>
-      <div class="message stark">
-        Uh, he's from space, he came here to steal a necklace from a wizard.
-      </div>
+      <span id="subholder">
+	  </span>
       <div class="message stark">
         <div class="typing typing-1"></div>
         <div class="typing typing-2"></div>
@@ -364,7 +383,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
       </div>
     </div>
     <div class="input">
-      <i class="fas fa-camera"></i><i class="far fa-laugh-beam"></i><input placeholder="Type your message here!" type="text" /><i class="fas fa-microphone"></i>
+      <i class="fas fa-camera"></i><i class="far fa-laugh-beam"></i><input id="chatholder" placeholder="Type your message here!" type="text" /><i class="fas fa-microphone"></i>
     </div>
   </div>
 </div>
