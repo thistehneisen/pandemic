@@ -488,7 +488,8 @@ $(document).ready(function() {
                     subtitle: marker.subtitle,
                     body: marker.description,
                     gallery: marker.gallery,
-                    url: marker.url
+                    url: marker.url,
+                    person_id: marker.id
                 }),
                 callbacks: {
                     open: function() {

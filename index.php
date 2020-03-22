@@ -99,7 +99,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	</script>
 
 	<script id="marker-content-template" type="text/x-handlebars-template">
-		<div class="custom-img" style="background-image: url({{{img}}})"></div>
+		<div class="custom-img" person_id="{{{person_id}}}" style="background-image: url({{{img}}})"></div>
 		<section class="custom-content">
 			<h1 class="custom-header">
 				{{title}}
@@ -337,6 +337,19 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 <!-- add chat loader details -->
 
 <script type="text/javascript">
+
+	function loadMessages(){
+		req({a:'chat',m:'fetch', t:'p',r:'1'}, function(res) {
+        	$('#subholder').html('');
+        	if (res.msgs){
+	        	for (var i = res.msgs.length - 1; i >= 0; i--) {
+	        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
+	        		console.log(res.msgs[i].sender);
+	        	};
+        	}
+    	});
+	}
+
 	$( document ).ready(function() {
 
 		var input = document.getElementById("chatholder");
@@ -346,21 +359,26 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		  if (event.keyCode === 13) {
 			  	req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {
 			  		$('#subholder').append('<div class="message senderMe">'+ $('#chatholder').val() +'</div>');
+			  		$('.typing-1').center();
 			  		$('#chatholder').val("");
 		    	});
 		  }
 		});
 
-		//$( ".message" ).on( "click", function() {
-	        req({a:'chat',m:'fetch', t:'p',r:'1',msg:'Vitals'}, function(res) {
-	        	if (res.msgs){
-		        	for (var i = res.msgs.length - 1; i >= 0; i--) {
-		        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
-		        		console.log(res.msgs[i].sender);
-		        	};
-	        	}
-	    	});
-		//});
+		loadMessages();
+
+		setInterval(function(){
+			$('.custom-content').unbind();
+			$('.custom-content').on( "click", function() {
+				console.log($(this).parent().find('.custom-img').attr('person_id'));
+				//loadMessages($(this).find('.custom-img').attr('person_id'));
+			});
+		}, 1000);
+
+
+		$( ".message" ).on( "click", function() {
+			loadMessages();
+		});
 	});
 </script>
 
