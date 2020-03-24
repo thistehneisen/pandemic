@@ -7058,3 +7058,26 @@ footer #chatbox {
   max-height : 80%;
   margin: 0;
 }
+
+#mapLegend {
+  background: #fdfdfd;
+  color: #3c4750;
+  padding: 0 10px 0 10px;
+  margin: 10px;
+  font-weight: bold;
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+  border: 2px solid #000;
+}
+#mapLegend div {
+  height: 40px;
+  line-height: 25px;
+  font-size: 1.2em;
+}
+#mapLegend div img {
+  float: left;
+  margin-right: 10px;
+}
+#mapLegend h2 {
+  text-align: center
+}
