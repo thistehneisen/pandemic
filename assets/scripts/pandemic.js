@@ -309,14 +309,12 @@ $(document).ready(function() {
     var legend = document.getElementById('mapLegend');
 
     var div = document.createElement('div');
-    div.innerHTML = '<span>'+getIcon('00ff54')+' Platform user</span>';
+    div.innerHTML = '<span>Green icon: Platform user</span>';
     legend.appendChild(div);
 
     var div = document.createElement('div');
-    div.innerHTML = '<span>'+getIcon('ff0000')+' Verified quarantine origin</span>';
+    div.innerHTML = '<span>Red icon: Verified quarantine origin</span>';
     legend.appendChild(div);
-
-    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
 
     /* Dropzone */
     $("#img-upload").dropzone({
