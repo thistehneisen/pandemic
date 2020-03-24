@@ -154,8 +154,8 @@ function pandemicData(action, sub, data) {
                             typeof item.selfCooLng !== 'undefined') {
                             markerData.push({
                                 id: item.id,
-                                lat: item.originCooLat * 1 + randomDisplacement(),
-                                lng: item.originCooLng * 1 + randomDisplacement(),
+                                lat: item.selfCooLat * 1 + randomDisplacement(),
+                                lng: item.selfCooLng * 1 + randomDisplacement(),
                                 title: item.label,
                                 icon: getIcon('ff0000'),
                                 description: '<strong>Notes:</strong></br>' + item.descriptionTitle + '<br/><strong>First contact in Latvia:</strong> ' + item.dateOfFirstContactWithLatvia + '<br/><strong>Broadcasted:</strong> ' + item.dateOfDiagnosisBroadcast + '<br/><strong>Sources:</strong><ol><li><a href="' + item.link + '" target="_blank">' + item.link + '</a></li>' + (item.extraLink1 ? '<li><a href="' + item.extraLink1 + '" target="_blank">' + item.extraLink1 + '</a></li>' : '') + '' + (item.extraLink2 ? '<li><a href="' + item.extraLink2 + '" target="_blank">' + item.extraLink2 + '</a></li>' : '') + '' + (item.extraLink3 ? '<li><a href="' + item.extraLink3 + '" target="_blank">' + item.extraLink3 + '</a></li>' : '') + '</ol>',
