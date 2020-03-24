@@ -305,17 +305,6 @@ $(document).ready(function() {
         }
     });
 
-    // Creating map legend
-    var legend = document.getElementById('mapLegend');
-
-    var div = document.createElement('div');
-    div.innerHTML = '<span>Green icon: Platform user</span>';
-    legend.appendChild(div);
-
-    var div = document.createElement('div');
-    div.innerHTML = '<span>Red icon: Verified quarantine origin</span>';
-    legend.appendChild(div);
-
     /* Dropzone */
     $("#img-upload").dropzone({
         paramName: "file",

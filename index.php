@@ -328,9 +328,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		<div id="map" class="preload-hide">
 			&nbsp;
 		</div>
-		<div id="mapLegend">
-    		<h2>Legend</h2>
-  		</div>
 	</div>
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
