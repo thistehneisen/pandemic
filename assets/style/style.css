@@ -7060,6 +7060,8 @@ footer #chatbox {
 }
 
 #mapLegend {
+  width: 15%;
+  float: right;
   background: #fdfdfd;
   color: #3c4750;
   padding: 0 10px 0 10px;
@@ -7072,7 +7074,7 @@ footer #chatbox {
 #mapLegend div {
   height: 40px;
   line-height: 25px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 #mapLegend div img {
   float: left;
