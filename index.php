@@ -163,6 +163,10 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	</header>
 
 	<div id="modals">
+<?php
+if (!empty($_SESSION['facebook']['id'])) {
+	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
+?>
 		<div class="lean-modal modal-sm" id="add-ad">
 			<div class="modal-container">
 				<div class="modal-wrapper">
@@ -243,10 +247,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			</div>
 		</div>
 
-<?php
-if (!empty($_SESSION['facebook']['id'])) {
-	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
-?>
 		<div class="lean-modal modal-sm" id="profile">
 			<div class="modal-container">
 				<div class="modal-wrapper">
