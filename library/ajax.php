@@ -163,7 +163,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                 $userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $location['fbid']);
 
                 // If a category is set, filter out by it
-                if (!$userData['display'] !== 1)
+                if (!$userData['display'] !== '1')
                     continue;
                 else if (!empty($_POST['c']) && in_array($_POST['c'], array_keys($settings['categories'])) && $userData['category'] !== $_POST['c'])
                     continue;
