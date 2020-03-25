@@ -30,6 +30,8 @@ function pandemicSettings(action, sub, data) {
         if (typeof settings.service[sub] !== 'undefined') {
             settings.service[sub] = !settings.service[sub];
             data.find('span strong').html(settings.service[sub] ? '&#10004;' : '&#10060;');
+            clearOverlays();
+            pandemic.init.forEach(service => pandemicData('fetch', service));
         }
     }
 }
@@ -632,7 +634,6 @@ $("#global-data").fancybox({
 /* Location creation */
 function makeLocation(placeId) {
     $('#save-location').data('place', placeId);
-    $('div.si-wrapper-top').hide();
 
     clearOverlays();
 
@@ -753,8 +754,11 @@ function dismissPreloader() {
 }
 
 function clearOverlays() {
+    $('div.si-wrapper-top').remove();
+
     for (var i = 0; i < pandemic.markers.length; i++)
         pandemic.markers[i].setMap(null);
+
     pandemic.markers.length = 0;
 }
 
