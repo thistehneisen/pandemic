@@ -277,8 +277,8 @@ if (!empty($_SESSION['facebook']['id'])) {
                             <div class="select">
 								<label for="mapdisplay">Display</label>
                                 <select name="mapdisplay" id="mapdisplay">
-                                    <option value="1"<?php if ($userData['display'] === 1) print(' selected')?>>Yes, show me on map</option>
-									<option value="0"<?php if ($userData['display'] === 0) print(' selected')?>>No, hide me from the map</option>
+                                    <option value="1"<?php if ($userData['display'] === '1') print(' selected')?>>Yes, show me on map</option>
+									<option value="0"<?php if ($userData['display'] === '0') print(' selected')?>>No, hide me from the map</option>
                                 </select>
 							</div>
 
