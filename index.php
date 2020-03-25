@@ -270,15 +270,15 @@ if (!empty($_SESSION['facebook']['id'])) {
 								<label for="profilecat">Category</label>
                                 <select name="profilecat" id="profilecat">
                                     <option>Choose one</option>
-                                    <?php foreach ($settings['categories'] as $key => $category) { ?><option value="<?php print($key)?>"><?php print($category)?></option><?php } ?>
+                                    <?php foreach ($settings['categories'] as $key => $category) { ?><option value="<?php print($key)?>"<?php if ($userData['category'] === $key) print(' selected')?>><?php print($category)?></option><?php } ?>
                                 </select>
 							</div>
 
                             <div class="select">
 								<label for="mapdisplay">Display</label>
                                 <select name="mapdisplay" id="mapdisplay">
-                                    <option value="1">Yes, show me on map</option>
-									<option value="0">No, hide me from the map</option>
+                                    <option value="1"<?php if ($userData['display'] === 1) print(' selected')?>>Yes, show me on map</option>
+									<option value="0"<?php if ($userData['display'] === 0) print(' selected')?>>No, hide me from the map</option>
                                 </select>
 							</div>
 

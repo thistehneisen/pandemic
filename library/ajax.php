@@ -28,8 +28,8 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
         /* Save a profile */
             if (empty($_SESSION['facebook']['id']))
                 $errors[] = 'You need to authorize first.';
-            if (strlen($_POST['status']) > 25)
-                $errors[] = 'Your status is too long, should be no more than 25 symbols.';
+            if (strlen($_POST['status']) > 40)
+                $errors[] = 'Your status is too long, should be no more than 40 symbols.';
             if (strlen($_POST['description']) > 400)
                 $errors[] = 'Description is too long.';
             if (!in_array($_POST['category'], array_keys($settings['categories'])))
