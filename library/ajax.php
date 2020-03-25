@@ -85,8 +85,10 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'latitude'      => $place['latitude'],
                     'longitude'     => $place['longitude']
                 ];
+
+                unset($gallery);
             }
-    
+
             jD('places', $output);
         }
         /* Create a new place */
