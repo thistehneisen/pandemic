@@ -124,7 +124,7 @@ function pandemicData(action, sub, data) {
                                 id: item.id,
                                 title: strip(item.name),
                                 subtitle: item.status ? item.status : '',
-                                description: '<img src="' + item.img + '" alt="' + strip(item.name) + '" style="width: 50px; height: 50px;"> ' + strip(item.description),
+                                description: '<img src="' + item.img + '" alt="' + strip(item.name) + '" style="width: 50px; height: 50px;"> ' + strip(item.description) + '<br/><br/><a href="#" id="send-message-user" style="font-weight: bolder;">Send a message</a>',
                                 lat: item.latitude,
                                 lng: item.longitude,
                                 icon: getIcon('00ff54'),
