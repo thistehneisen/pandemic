@@ -164,32 +164,19 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	</header>
 
 	<div id="modals">
-		<div class="lean-modal modal-lg" id="notice">
+		<div class="lean-modal modal-lg" id="legends">
 			<div class="modal-container">
 				<div class="modal-wrapper">
 					<div class="modal-header">
 						<a href="#" class="modal_close close-modal">×</a>
 					</div>
 					<div class="modal-content bodytext">
-						<h1>Notice from the author</h1>
-						<p>
-							During these days, we've had many interpretations ongoing about this project. <strong>Many of them are absolutely wrong.</strong><br/>
-							We're not able to reply to all of them, as we're a very small team trying to do their best in order to help society during crisis.
-						</p>
-						<p>
-							<strong>This platform is not a witch-hunt!</strong> To clear things up, here's the legend of the markers found on map:
-						</p>
+						<h1>Meanings of Points</h1>
 						<ul>
 							<li><span style="color: #ff0000; font-weight: bolder; text-transform: uppercase;">Red markers</span> are data that are defining where someone that's been positive, has originated from. Not their current or actual location.</li>
 							<li><span style="color: #00ff54; font-weight: bolder; text-transform: uppercase;">Green markers</span> are just people that are using this platform. It's anyone that has authorized their Facebook profile, and shared with their location. It can be even you. It's not defining their status at all. You can choose your status, or even to be shown on map or not — in the "<em>Profile</em>" section, once logged in.</li>
-							<li><span style="color: #29cc5a; font-weight: bolder; text-transform: uppercase;">Blue markers</span> are services, volunteers, anything that every authorized platforms user can publish on the map using "<em>Add service</em>" section.</li>
+							<li><span style="color: #00aeef; font-weight: bolder; text-transform: uppercase;">Blue markers</span> are services, volunteers, anything that every authorized platforms user can publish on the map using "<em>Add service</em>" section.</li>
 						</ul>
-						<p>Our target of this platform is to make life easier for those, who are self-isolating or in search of helpful hands, around them. And we're trying to do our best.</p>
-						<p>
-							With regards,<br/>
-							"<em>Pandemic Baltics</em>" author,<br/>
-							<a href="https://twitter.com/putninsnils">Nils Putnins</a>
-						</p>
 					</div>
 				</div>
 			</div>
