@@ -320,6 +320,10 @@ $(document).ready(function() {
         }
     });
 
+    if (typeof fbId === 'undefined') {
+        toastr.info('Welcome to Pandemic Baltics, where you can help others and find help yourself during crisis. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
+    }
+
     /* Dropzone */
     $("#img-upload").dropzone({
         paramName: "file",
