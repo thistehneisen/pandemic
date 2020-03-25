@@ -545,7 +545,6 @@ $(document).ready(function() {
         // Notices
         if (typeof fbId === 'undefined') {
             toastr.info('Welcome to Pandemic Baltics, where you can give & get. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
-            open_modal('legends');
         }
     });
 
