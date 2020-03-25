@@ -279,8 +279,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 							</div>
 
 							<div class="input textarea">
-								<label for="description">Description <span>(max. 360 symbols)</span></label>
-								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="360"></textarea>
+								<label for="profiledesc">Description <span>(max. 360 symbols)</span></label>
+								<textarea id="profiledesc" name="profiledesc" rows="5" placeholder="Description" maxlength="360"></textarea>
 							</div>
 						</div>
 					</div>
