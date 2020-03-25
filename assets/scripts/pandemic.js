@@ -95,7 +95,7 @@ function pandemicData(action, sub, data) {
                                 description: item.State,
                                 subtitle: item.Country
                             });
-                            console.log('Added: ' + item.Country);
+                            //console.log('Added: ' + item.Country);
                         }
                     }
                 }
@@ -549,12 +549,12 @@ $(document).ready(function() {
                         toastr.success('Welcome back, ' + response.name + '!', 'Authenticated');
                         fbId = response.id;
                         $.get(fullAddress, function(response) {
-                            console.log(response);
+                            //console.log(response);
                             var header = $(response).find('header').html();
-                            console.log(header);
+                            //console.log(header);
                             //$('header').fadeOut('fast').html(header);
                         });
-                        //setTimeout(function(){ window.location.reload(); }, 500);
+                        setTimeout(function(){ window.location.reload(); }, 500);
                     });
                 } else if (response.status === 'not_authorized') {
                     toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
