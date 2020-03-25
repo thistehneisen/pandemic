@@ -243,6 +243,10 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 			</div>
 		</div>
 
+<?php
+if (!empty($_SESSION['facebook']['id'])) {
+	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
+?>
 		<div class="lean-modal modal-sm" id="profile">
 			<div class="modal-container">
 				<div class="modal-wrapper">
@@ -254,12 +258,12 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						<div class="form">
 							<div class="text">
 								<label for="nickname">Pseudonym <span>(max. 12 symbols)</span></label>
-								<input type="text" id="nickname" name="nickname" placeholder="Choose a nickname" maxlength="12" value="" required="">
+								<input type="text" id="nickname" name="nickname" placeholder="Choose a nickname" maxlength="12" value="<?php print(htmlspecialchars($userData['pseudo']))?>">
 							</div>
 
 							<div class="text">
 								<label for="status">Status message <span>(max. 40 symbols)</span></label>
-								<input type="text" id="status" name="status" placeholder="Let us know…" maxlength="40" value="" required="">
+								<input type="text" id="status" name="status" placeholder="Let us know…" maxlength="40" value="<?php print(htmlspecialchars($userData['status']))?>">
 							</div>
 
                             <div class="select">
@@ -280,7 +284,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 
 							<div class="input textarea">
 								<label for="profiledesc">Description <span>(max. 360 symbols)</span></label>
-								<textarea id="profiledesc" name="profiledesc" rows="5" placeholder="Description" maxlength="360"></textarea>
+								<textarea id="profiledesc" name="profiledesc" rows="5" placeholder="Description" maxlength="360"><?php print(htmlspecialchars($userData['description']))?></textarea>
 							</div>
 						</div>
 					</div>
@@ -297,6 +301,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				</div>
 			</div>
 		</div>
+<?php } ?>
 
 		<div class="lean-modal modal-lg" id="about">
 			<div class="modal-container">
