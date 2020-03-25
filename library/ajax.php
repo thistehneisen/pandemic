@@ -36,7 +36,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                 $errors[] = 'Your status is too long, should be no more than 40 symbols.';
             if (strlen($_POST['description']) > 400)
                 $errors[] = 'Description is too long, should consist of 400 symbols and no more.';
-            if (!in_array($_POST['category'], array_keys($settings['categories'])))
+            if (!empty($_POST['category']) && !in_array($_POST['category'], array_keys($settings['categories'])))
                 $errors[] = 'Please choose a category which best suits you.';
 
             if (empty($errors)) {
