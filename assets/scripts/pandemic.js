@@ -153,7 +153,8 @@ function pandemicData(action, sub, data) {
                         var item = items[i];
 
                         if (typeof item.selfCooLat !== 'undefined' &&
-                            typeof item.selfCooLng !== 'undefined') {
+                            typeof item.selfCooLng !== 'undefined' &&
+                            item.selfCooLat != '' && item.selfCooLng != '') {
                             markerData.push({
                                 id: item.id,
                                 lat: item.selfCooLat * 1 + randomDisplacement(),
