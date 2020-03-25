@@ -385,6 +385,7 @@ if (!empty($_SESSION['facebook']['id'])) {
 			$('.custom-content').unbind();
 			$('.custom-content').on( "click", function() {
 				console.log($(this).parent().find('.custom-img').attr('person_id'));
+				window.location.replace("/?chat=" + $(this).parent().find('.custom-img').attr('person_id'));
 				//loadMessages($(this).find('.custom-img').attr('person_id'));
 			});
 		}, 1000);
