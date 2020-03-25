@@ -135,8 +135,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 				</span>
 				<span><a href="https://global.pandemic.lv/" id="global-data">Global</a></span>
 				<?php if (!empty($_SESSION['facebook']['id'])) { ?>
-					<span><a rel="leanModal" href="#add-ad">Add service</a></span>
-					<span><a rel="leanModal" href="#profile">Your profile</a></span>
+					<span><a rel="leanModal" href="#add-ad">Create service</a></span>
+					<span><a rel="leanModal" href="#profile">Profile</a></span>
 				<?php } ?>
 				<span><a rel="leanModal" href="#about">About</a></span>
                 <span class="dd">
