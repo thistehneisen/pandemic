@@ -28,6 +28,9 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
     } else if ($a === 'profile') {
         if ($m === 'save') {
         /* Save a profile */
+            if ($_POST['category'] === 'Choose one')
+                unset($_POST['category']);
+
             if (empty($_SESSION['facebook']['id']))
                 $errors[] = 'You need to authorize first.';
             if (strlen($_POST['pseudo']) > 12)
