@@ -47,7 +47,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="msapplication-TileColor" content="#00aeef">
 	<meta name="theme-color" content="#00aeef">
-	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css" />
+	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css?v2" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
@@ -483,6 +483,6 @@ if (!empty($_SESSION['facebook']['id'])) {
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/snazzy-info-window.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/dropzone.min.js"></script>
 <script type="text/javascript" src="<?php print($settings['fullAddress'])?>assets/scripts/baguetteBox.min.js"></script>
-<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js"></script>
+<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/pandemic.js?v2"></script>
 </body>
 </html>
