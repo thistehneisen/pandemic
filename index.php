@@ -222,7 +222,7 @@ if (!empty($_SESSION['facebook']['id'])) {
 								<div class="input-col lg-4-12">
 									<div class="text">
 										<label for="email">Website <small>(optional)</small></label>
-										<input type="text" id="website" name="website" placeholder="http://www.">
+										<input type="text" id="website" name="website" placeholder="https://www.">
 									</div>
 								</div>
 							</div>
