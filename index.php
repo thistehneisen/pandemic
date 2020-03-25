@@ -164,7 +164,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	</header>
 
 	<div id="modals">
-		<div class="lean-modal modal-lg" id="legends">
+		<div class="lean-modal modal-sm" id="legends">
 			<div class="modal-container">
 				<div class="modal-wrapper">
 					<div class="modal-header">
