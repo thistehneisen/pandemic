@@ -163,6 +163,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 		</div>
 	</header>
 
+	<a rel="leanModal" href="#legends" id="openLegends" style="display: none;">&nbsp;</a>
 	<div id="modals">
 		<div class="lean-modal modal-sm" id="legends">
 			<div class="modal-container">
