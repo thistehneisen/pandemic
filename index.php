@@ -174,7 +174,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 					<div class="modal-content bodytext">
 						<h2>Point meanings</h2>
 						<ul>
-							<li><img src="<?php print($fullAddress)?>assets/images/markers/red.png" alt="Red locations" style="width: 15px;" /> <span style="color: #ff0000; font-weight: bold;">Red locations</span> are data defining where someone that's tested COVID-19 positive, has originated from. Not their current or actual location.</li>
+							<li><img src="<?php print($fullAddress)?>assets/images/markers/red.png" alt="Red locations" style="width: 15px;" /> <span style="color: #ff0000; font-weight: bold;">Red locations</span> are data defining where someone that's tested COVID-19 positive, has originated from. Not their current or actual location. <strong>Data Source:</strong> <a href="http://latvijaskoronakarte.online" target="_blank">latvijaskoronakarte.online</a></li>
 							<li><img src="<?php print($fullAddress)?>assets/images/markers/green.png" alt="Green locations" style="width: 15px;" /> <span style="color: #00ff54; font-weight: bold;">Green locations</span> are people that are using this platform — anyone that has authorized their Facebook profile, and shared their location. These points are not defining their health status. You can change your profiles information in "<em>Profile</em>" section, once authorized.</li>
 							<li><img src="<?php print($fullAddress)?>assets/images/markers/blue.png" alt="Blue locations" style="width: 15px;" /> <span style="color: #00aeef; font-weight: bold;">Blue locations</span> are services, volunteers, anything that every authorized user can publish on the map using the "<em>Create service</em>" section.</li>
 						</ul>
