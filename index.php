@@ -263,8 +263,8 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 							</div>
 
                             <div class="select">
-								<label for="category">Category</label>
-                                <select name="category" id="category">
+								<label for="profilecat">Category</label>
+                                <select name="profilecat" id="profilecat">
                                     <option>Choose one</option>
                                     <?php foreach ($settings['categories'] as $key => $category) { ?><option value="<?php print($key)?>"><?php print($category)?></option><?php } ?>
                                 </select>

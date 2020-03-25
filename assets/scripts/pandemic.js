@@ -570,6 +570,30 @@ $(document).ready(function() {
     });
 });
 
+// Saving the profile functionality
+$('#save-profile').on('click', function(e) {
+    e.preventDefault();
+    $('#save-profile').text('Saving…');
+
+    req({
+        a: 'profile',
+        m: 'save',
+        pseudo: $('#nickname').val(),
+        status: $('#status').val(),
+        category: $('#profilecat').val(),
+        display: $('#mapdisplay').val(),
+        description: $('#profiledesc').val()
+    }, function(res) {
+        if (typeof res.errors !== 'undefined' && res.errors.length > 0) {
+            $('#post-the-ad span').html('Save profile &rarr;');
+            toastr.error(res.errors[0], 'Whoops!');
+        } else {
+            toastr.success('Your profile has been updated.', 'Success');
+        }
+    });
+});
+
+// Posting new service functionality
 $('#post-the-ad').on('click', function(e) {
     e.preventDefault();
     $('#post-the-ad span').text('Sending…');

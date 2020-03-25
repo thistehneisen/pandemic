@@ -22,6 +22,34 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             $csv->setHeaderOffset(0);
             jD('global', $csv);
         }
+    /* PROFILES */
+    } else if ($a === 'profile') {
+        if ($m === 'save') {
+        /* Save a profile */
+            if (empty($_SESSION['facebook']['id']))
+                $errors[] = 'You need to authorize first.';
+            if (strlen($_POST['status']) > 25)
+                $errors[] = 'Your status is too long, should be no more than 25 symbols.';
+            if (strlen($_POST['description']) > 400)
+                $errors[] = 'Description is too long.';
+            if (!in_array($_POST['category'], array_keys($settings['categories'])))
+                $errors[] = 'Please choose a category which best suits you.';
+
+            if (empty($errors)) {
+                $db->update('users', [
+                    'pseudo' => $_POST['pseudo'],
+                    'status' => $_POST['status'],
+                    'category' => $_POST['category'],
+                    'display' => $_POST['display'],
+                    'description' => $_POST['description']
+                ], ['id' => $_SESSION['facebook']['id']]);
+
+                unset($_SESSION['images']);
+                jD('id', $db->insertid);
+            } else {
+                jD('errors', $errors);
+            }
+        }
     /* PLACES */
     } else if ($a === 'places') {
         /* Fetch all places */
