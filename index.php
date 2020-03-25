@@ -270,6 +270,14 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
                                 </select>
 							</div>
 
+                            <div class="select">
+								<label for="mapdisplay">Display</label>
+                                <select name="mapdisplay" id="mapdisplay">
+                                    <option value="1">Yes, show me on map</option>
+									<option value="0">No, hide me from the map</option>
+                                </select>
+							</div>
+
 							<div class="input textarea">
 								<label for="description">Description <span>(max. 360 symbols)</span></label>
 								<textarea id="description" name="description" rows="5" placeholder="Description" maxlength="360"></textarea>
