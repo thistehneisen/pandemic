@@ -165,8 +165,6 @@ function pandemicData(action, sub, data) {
                                 subtitle: item.origin,
                                 url: fullAddress + '?d=' + item.id
                             });
-
-                            console.log(item);
                         }
                     }
                 }
