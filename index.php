@@ -383,9 +383,9 @@ if (!empty($_SESSION['facebook']['id'])) {
 
 		setInterval(function(){
 			$('.custom-content').unbind();
-			$('.custom-content').on( "click", function() {
-				console.log($(this).parent().find('.custom-img').attr('person_id'));
-				window.location.replace("/?chat=" + $(this).parent().find('.custom-img').attr('person_id'));
+			$('.custom-content').find('.send-message-user').on( "click", function() {
+				console.log($(this).parent().parent().parent().find('.custom-img').attr('person_id'));
+				window.location.replace("/?chat=" + $(this).parent().parent().parent().find('.custom-img').attr('person_id'));
 				//loadMessages($(this).find('.custom-img').attr('person_id'));
 			});
 		}, 1000);
