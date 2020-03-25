@@ -573,7 +573,7 @@ $(document).ready(function() {
 // Saving the profile functionality
 $('#save-profile').on('click', function(e) {
     e.preventDefault();
-    $('#save-profile').text('Saving…');
+    $('#save-profile span').text('Saving…');
 
     req({
         a: 'profile',
@@ -589,6 +589,7 @@ $('#save-profile').on('click', function(e) {
             toastr.error(res.errors[0], 'Whoops!');
         } else {
             toastr.success('Your profile has been updated.', 'Success');
+            $('#save-profile span').text('Profile saved');
         }
     });
 });
