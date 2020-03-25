@@ -174,9 +174,9 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 					<div class="modal-content bodytext">
 						<h1>Point meanings</h1>
 						<ul>
-							<li><span style="color: #ff0000; font-weight: bolder; text-transform: uppercase;">Red points</span> are data that are defining where someone that's been positive, has originated from. Not their current or actual location.</li>
-							<li><span style="color: #00ff54; font-weight: bolder; text-transform: uppercase;">Green points</span> are just people that are using this platform. It's anyone that has authorized their Facebook profile, and shared with their location. It can be even you. It's not defining their health status at all. You can change these settings "<em>Profile</em>" section, once authorized.</li>
-							<li><span style="color: #00aeef; font-weight: bolder; text-transform: uppercase;">Blue points</span> are services, volunteers, anything that every authorized platforms user can publish on the map using "<em>Add service</em>" section.</li>
+							<li><span style="color: #ff0000; font-weight: bolder; text-transform: uppercase;">Red points</span> are data that are defining where someone that's been COVID-19 positive, has originated from. Not their current or actual location.</li>
+							<li><span style="color: #00ff54; font-weight: bolder; text-transform: uppercase;">Green points</span> are just people that are using this platform. It's anyone that has authorized their Facebook profile, and shared their location. It can be even you. These points are not defining their health status at any way. You can change your information in "<em>Profile</em>" section, once authorized.</li>
+							<li><span style="color: #00aeef; font-weight: bolder; text-transform: uppercase;">Blue points</span> are services, volunteers, anything that every authorized user can publish on the map using the "<em>Add service</em>" section.</li>
 						</ul>
 					</div>
 				</div>
