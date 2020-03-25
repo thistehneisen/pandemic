@@ -323,6 +323,10 @@ $(document).ready(function() {
         }
     });
 
+    if (typeof fbId === 'undefined') {
+        toastr.info('Welcome to Pandemic Baltics, where you can give & get. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
+    }
+
     /* Dropzone */
     $("#img-upload").dropzone({
         paramName: "file",
@@ -395,12 +399,6 @@ $(document).ready(function() {
         }
     });
     $("a[rel*=leanModal]").leanModal();
-
-    // Notices
-    if (typeof fbId === 'undefined') {
-        toastr.info('Welcome to Pandemic Baltics, where you can give & get. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
-        $('#openLegends').click();
-    }
 
     /* Terms Agreement */
     $(document).on('click', ".button.agree", function(e) {
