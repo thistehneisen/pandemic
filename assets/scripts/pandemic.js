@@ -396,6 +396,12 @@ $(document).ready(function() {
     });
     $("a[rel*=leanModal]").leanModal();
 
+    // Notices
+    if (typeof fbId === 'undefined') {
+        toastr.info('Welcome to Pandemic Baltics, where you can give & get. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
+        $('#openLegends').click();
+    }
+
     /* Terms Agreement */
     $(document).on('click', ".button.agree", function(e) {
         document.getElementById("signup-agree").checked = true;
@@ -571,12 +577,6 @@ $(document).ready(function() {
             toastr.error('We had an error authorising you on Facebook. Make sure all blocking extensions are disabled. If the problem persists, contact us via info@pandemic.lv', 'Facebook Authorization');
         }
     });
-
-    // Notices
-    if (typeof fbId === 'undefined') {
-        toastr.info('Welcome to Pandemic Baltics, where you can give & get. By using the platform, you agree to our <strong><a href="#terms-and-conditions">Terms & Conditions</a></strong>.');
-        $('#openLegends').click();
-    }
 });
 
 // Saving the profile functionality
