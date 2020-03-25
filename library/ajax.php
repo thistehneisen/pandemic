@@ -178,6 +178,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'img'       => $userData['picture'],
                     'name'      => $userData['pseudo'] ?: $namePublic,
                     'status'    => $userData['status'],
+                    'description'  => $userData['description'],
                     'category'  => $userData['category'],
                     'seen'      => $userData['lastlogin']
                 ];
