@@ -3,14 +3,6 @@ fc('grupo');
 $usr = $GLOBALS["user"];
 $loadgroup = '';
 
-if (empty($_SESSION['facebook']['id']))
-    exit;
-else {
-    gr_login([
-        'nickname' => $_SESSION['facebook']['id']
-    ]);
-}
-
 if (!$GLOBALS["logged"]) {
     if (isset($_POST['act'])) {
         $data[0] = new stdClass();
@@ -23,6 +15,15 @@ if (!$GLOBALS["logged"]) {
 }
 
 grupofns();
+
+if (empty($_SESSION['facebook']['id']))
+    exit;
+else {
+    gr_login([
+        'nickname' => $_SESSION['facebook']['id']
+    ]);
+}
+
 gr_unverified();
 gr_profile('ustatus', 'online');
 gr_usip('add');
