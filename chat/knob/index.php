@@ -12,6 +12,7 @@ if (!$GLOBALS["logged"]) {
         rt('signin');
     }
 }
+die(var_dump($GLOBALS));
 grupofns();
 gr_unverified();
 gr_profile('ustatus', 'online');
