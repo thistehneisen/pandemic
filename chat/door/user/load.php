@@ -17,20 +17,16 @@ function usr() {
             $rl = vc($arg[5], 'num');
         }
         if (!empty($d) && !empty($i) && !empty($e) && !empty($p)) {
-            if (preg_match('/[A-Za-z]/', $i)) {
-                if (!usr($d, 'exist', $i)) {
-                    if (!usr($d, 'exist', $e)) {
-                        $p = en($p);
-                        $r[1] = db($d, 'i', 'users', 'name,email,pass,mask,depict,role,created,altered', $i, $e, $p['pass'], $p['mask'], $p['type'], $rl, dt(), dt());
-                        $r[0] = true;
-                    } else {
-                        $r[1] = 'emailexist';
-                    }
+            if (!usr($d, 'exist', $i)) {
+                if (!usr($d, 'exist', $e)) {
+                    $p = en($p);
+                    $r[1] = db($d, 'i', 'users', 'name,email,pass,mask,depict,role,created,altered', $i, $e, $p['pass'], $p['mask'], $p['type'], $rl, dt(), dt());
+                    $r[0] = true;
                 } else {
-                    $r[1] = 'usernameexist';
+                    $r[1] = 'emailexist';
                 }
             } else {
-                $r[1] = 'usernamecondition';
+                $r[1] = 'usernameexist';
             }
         } else {
             $r[1] = 'invalid';
