@@ -205,7 +205,7 @@ function fc() {
     }
 }
 function sfn($sf, $fn) {
-    require_once(cnf()["door"]."/".$fn."/".$sf);
+    require_once('/var/www/vhosts/pandemic.lv/httpdocs/chat/'.cnf()["door"]."/".$fn."/".$sf);
 }
 function mf($r = "") {
     return url().cnf()["gem"]."/ore/".vc($r);
