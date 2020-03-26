@@ -3,26 +3,26 @@
 function cnf($v = "cnf") {
     $cnf["cnf"] = array(
         "mode" => 1,
-        "name" => "Grupo - Baevox Framework",
-        "tag" => "Something Beyond Limits",
-        "poet" => "Baevox",
-        "url" => "http://localhost/grupo/",
-        "region" => "Asia/Kolkata",
+        "name" => "Pandemic Chat",
+        "tag" => "Chat",
+        "poet" => "Pandemic",
+        "url" => "https://pandemic.lv/chat/",
+        "region" => "Europe/Riga",
         "knob" => "knob",
         "door" => "door",
         "gem" => "gem",
         "bit" => "s7V9pz",
         "chief" => "admin",
-        "codeword" => "pass",
+        "codeword" => "P@ND3M11C1337$$",
         "ext" => "css,js,xml",
         "global" => "1",
         "appversion" => 1,
     );
 $cnf["Grupo"] = array(
                 'host' => 'localhost',
-                'db' => 'grupo',
-                'user' => 'root',
-                'pass' => 'pass',
+                'db' => 'pandemic_chat',
+                'user' => 'pandemic_chat',
+                'pass' => '1pSsq8_7$1pSsq8_7',
                 'prefix' => 'gr_'
                 );
 if ($v == "all") {
