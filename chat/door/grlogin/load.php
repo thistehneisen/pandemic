@@ -1,7 +1,7 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
 $_SESSION['utrack'] = 'on';
 function gr_register($do) {
-    if ($GLOBALS["default"]['userreg'] == 'enable') {
+    if (1 === 1 || $GLOBALS["default"]['userreg'] == 'enable') {
         if (!empty($do["g-recaptcha-response"]) && gr_captcha($do["g-recaptcha-response"]) || $GLOBALS["default"]['recaptcha'] != 'enable') {
             if (gr_usip('check')) {
                 gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
