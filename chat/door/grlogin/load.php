@@ -91,8 +91,8 @@ function gr_login($do) {
                 usr('Grupo', 'forcelogin', $usrn);
                 $_SESSION['grcreset'] = 1;
             }
-            gr_prnt('window.location.href = "";');
-            exit;
+            //gr_prnt('window.location.href = "";');
+            //exit;
         } else {
             $login = usr('Grupo', 'login', $do["sign"], $do["pass"], $GLOBALS["default"]['max_login_attempts'], $do["rmbr"]);
             if ($login[0]) {
