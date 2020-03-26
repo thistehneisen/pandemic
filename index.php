@@ -25,7 +25,7 @@ else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 		'fname' => $userData['name'],
 		'pass' => $_SESSION['facebook']['id']
 	]));
-	exit;
+	die('Done.');
 }
 ?>
 <!DOCTYPE html>
