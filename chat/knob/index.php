@@ -6,8 +6,9 @@ $loadgroup = '';
 if (empty($_SESSION['facebook']['id']))
     exit;
 else {
-    $GLOBALS['logged'] = true;
-    $GLOBALS['user'] = ['active' => true, 'id' => 5];
+    gr_login([
+        'nickname' => $_SESSION['facebook']['id']
+    ]);
 }
 
 if (!$GLOBALS["logged"]) {

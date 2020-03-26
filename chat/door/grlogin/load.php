@@ -7,7 +7,7 @@ function gr_register($do) {
                 gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
                 exit;
             }
-            print('IR.');
+
             $do["email"] = vc($do["email"], 'email');
             $do["name"] = vc($do["name"], 'alphanum');
             $do["fname"] = vc($do["fname"], 'strip');
