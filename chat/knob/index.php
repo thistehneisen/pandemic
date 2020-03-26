@@ -1,9 +1,6 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
 fc('grupo');
 $usr = $GLOBALS["user"];
-var_dump($usr);
-var_dump($_SESSION);
-exit;
 $loadgroup = '';
 if (!$GLOBALS["logged"]) {
     if (isset($_POST['act'])) {
@@ -33,8 +30,6 @@ if (isset($_SESSION['grviewgroup']) && !empty($_SESSION['grviewgroup'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no shrink-to-fit=no">
     <title><?php gec($GLOBALS["default"]['sitename'].' - '.$GLOBALS["default"]['siteslogan']); ?></title>
     <meta name="description" content="<?php gec($GLOBALS["default"]['sitedesc']); ?>">
-    <meta name="author" content="BaeVox">
-    <meta name="generator" content="Grupo - Powered by BaeVox">
     <link rel="shortcut icon" type="image/png" href="<?php gec(mf("grupo/global/favicon.png")); ?>" />
     <?php
     css("riches/kit/bootstrap/bootstrap.min");

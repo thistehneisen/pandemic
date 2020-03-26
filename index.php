@@ -12,16 +12,10 @@ if (!empty($_GET['delete']) && is_numeric($_GET['delete'])) {
 	$place = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('places'), $_GET['id']);
 else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($settings['categories'])))
 	$jscategory = $_GET['category'];
-else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
+
+if (!empty($_SESSION['facebook']['id'])) {
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
-	var_dump($userData);
-	var_dump(gr_register([
-		'email' => 'chat_'.$_SESSION['facebook']['id'].'@pandemic.lv',
-		'name' => 'testuser',
-		'fname' => $userData['name'],
-		'pass' => $_SESSION['facebook']['id']
-	]));
-	die('Done.');
+	$_SESSION['userData'] = $userData;
 }
 ?>
 <!DOCTYPE html>
