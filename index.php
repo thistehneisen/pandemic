@@ -15,7 +15,7 @@ else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($se
 else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 	error_reporting(E_ALL);
 	define('s7V9pz', true);
-	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/index.php';
+	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/key/open.php';
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
 	var_dump($userData);
 	var_dump(gr_register([
