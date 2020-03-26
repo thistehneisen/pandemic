@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'ClementePDai';
+    src:url('ClementePDai-Regular.ttf.woff') format('woff'),
+        url('ClementePDai-Regular.ttf.svg#ClementePDai-Regular') format('svg'),
+        url('ClementePDai-Regular.ttf.eot'),
+        url('ClementePDai-Regular.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ClementePDai';
+    src:url('ClementePDak-SemiBold.ttf.woff') format('woff'),
+        url('ClementePDak-SemiBold.ttf.svg#ClementePDai-SemiBold') format('svg'),
+        url('ClementePDak-SemiBold.ttf.eot'),
+        url('ClementePDak-SemiBold.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ClementePDai';
+    src:url('ClementePDam-Bold.ttf.woff') format('woff'),
+        url('ClementePDam-Bold.ttf.svg#ClementePDai-Bold') format('svg'),
+        url('ClementePDam-Bold.ttf.eot'),
+        url('ClementePDam-Bold.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: 700;
+    font-style: normal;
+}
+body{ 
+   font-family: 'ClementePDai';
+}
