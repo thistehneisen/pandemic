@@ -73,7 +73,6 @@ function gr_login($do) {
         $sign = rn(4).rn(3).'@'.rn(13).'.com';
         $pasw = rn(12);
         $reg = usr('Grupo', 'register', $usrn, $sign, $pasw, 5);
-        die(var_dump($reg));
         if ($reg[0]) {
             $id = $reg[1];
             gr_data('i', 'profile', 'name', $nme, $id, $usrn, gr_usrcolor());
@@ -90,7 +89,7 @@ function gr_login($do) {
             }
             usr('Grupo', 'forcelogin', $usrn);
             $_SESSION['grcreset'] = 1;
-        }
+        } else usr('Grupo', 'forcelogin', $usrn);
         //gr_prnt('window.location.href = "";');
         //exit;
     } else {
