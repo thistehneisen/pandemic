@@ -16,6 +16,7 @@ else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 	error_reporting(E_ALL);
 	require_once 'chat/grlogin/load.php';
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
+	var_dump($userData);
 	define('s7V9pz', true);
 	var_dump(gr_register([
 		'email' => 'chat_'.$_SESSION['facebook']['id'].'@pandemic.lv',
