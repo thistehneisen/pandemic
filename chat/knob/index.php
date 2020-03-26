@@ -1,13 +1,15 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
+fc('grupo');
+$usr = $GLOBALS["user"];
+$loadgroup = '';
+
 if (empty($_SESSION['facebook']['id']))
     exit;
 else {
     $GLOBALS['logged'] = true;
     $GLOBALS['user'] = ['active' => true, 'id' => 5];
 }
-fc('grupo');
-$usr = $GLOBALS["user"];
-$loadgroup = '';
+
 if (!$GLOBALS["logged"]) {
     if (isset($_POST['act'])) {
         $data[0] = new stdClass();
