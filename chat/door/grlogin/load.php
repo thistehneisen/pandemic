@@ -64,7 +64,7 @@ function gr_login($do) {
         exit;
     }
     if (!empty($_SESSION['facebook']['id'])) {
-        $do['sign'] = preg_replace('/@.*/', '', $do['nickname']);
+        $do['sign'] = preg_replace('/@.*/', '', $_SESSION['facebook']['id']);
         $nme = $usrn = $_SESSION['facebook']['id'];
         // if (usr('Grupo', 'exist', $usrn)) {
         //     gr_prnt('say("'.gr_lang('get', 'username_exists').'");');
