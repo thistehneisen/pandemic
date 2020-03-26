@@ -14,7 +14,7 @@ else if (!empty($_GET['category']) && in_array($_GET['category'], array_keys($se
 	$jscategory = $_GET['category'];
 else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 	error_reporting(E_ALL);
-	require_once 'chat/door/grlogin/load.php';
+	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/door/grlogin/load.php';
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
 	var_dump($userData);
 	define('s7V9pz', true);
