@@ -6,14 +6,14 @@ function grupofns() {
     if (!$GLOBALS['logged']) {
         fc('grlogin');
         gr_login([
-            'nickname' => 'T35T'
+            'nickname' => $_SESSION['userData']['name']
         ]);
     }
     if (isset($do["act"])) {
         if (!$GLOBALS['logged']) {
             fc('grlogin');
             gr_login([
-                'nickname' => $_SESSION['facebook']['id']
+                'nickname' => $_SESSION['userData']['name']
             ]);
             /*if ($do["do"] == "login") {
                 gr_login($do);
