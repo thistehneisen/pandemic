@@ -2,12 +2,7 @@
 fc('guard', 'db', 'user', 'dir', 'grglobals');
 function grupofns() {
     $do = get();
-    if (file_exists('knob/install.php')) {
-        fc('grinstall');
-        gr_install($do);
-    } else {
-        gr_iplook();
-    }
+    gr_iplook();
     if (isset($do["act"])) {
         if (!$GLOBALS["logged"]) {
             fc('grlogin');
