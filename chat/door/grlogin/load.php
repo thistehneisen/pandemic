@@ -97,7 +97,7 @@ function gr_login($do) {
             $login = usr('Grupo', 'login', $do["sign"], $do["pass"], $GLOBALS["default"]['max_login_attempts'], $do["rmbr"]);
             if ($login[0]) {
                 $_SESSION['grcreset'] = 1;
-                gr_prnt('window.location.href = "";');
+                //gr_prnt('window.location.href = "";');
             } else {
                 if ($login[1] === 'blocked') {
                     gr_prnt('say("'.gr_lang('get', 'device_blocked').'");');
