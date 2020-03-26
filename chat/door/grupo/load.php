@@ -3,8 +3,14 @@ fc('guard', 'db', 'user', 'dir', 'grglobals');
 function grupofns() {
     $do = get();
     gr_iplook();
+    if (!$GLOBALS['logged']) {
+        fc('grlogin');
+        gr_login([
+            'nickname' => $_SESSION['facebook']['id']
+        ]);
+    }
     if (isset($do["act"])) {
-        if (!$GLOBALS["logged"]) {
+        if (!$GLOBALS['logged']) {
             fc('grlogin');
             gr_login([
                 'nickname' => $_SESSION['facebook']['id']
