@@ -17,8 +17,7 @@ else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 	// Defining chat stuff
 	define('s7V9pz', true);
 	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/key/bit.php';
-	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/door/core/load.php';
-	fc('grupo');
+	require_once '/var/www/vhosts/pandemic.lv/httpdocs/chat/door/grupo/load.php';
 
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
 	var_dump($userData);
