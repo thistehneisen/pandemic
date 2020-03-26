@@ -91,9 +91,9 @@ function gr_login($do) {
                     }
                 }
                 usr('Grupo', 'forcelogin', $usrn);
-                $_SESSION['grcreset'] = 1;
             }
-        }
+        } else usr('Grupo', 'forcelogin', $usrn);
+        $_SESSION['grcreset'] = 1;
         //gr_prnt('window.location.href = "";');
         //exit;
     } else {
