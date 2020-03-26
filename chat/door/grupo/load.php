@@ -5,9 +5,8 @@ function grupofns() {
     gr_iplook();
     if (!$GLOBALS['logged']) {
         fc('grlogin');
-        die(var_dump($_SESSION['userData']));
         gr_login([
-            'nickname' => $_SESSION['userData']['name']
+            'nickname' => $_SESSION['userData']['pseudo'] ?: $_SESSION['userData']['name']
         ]);
     }
     if (isset($do["act"])) {
