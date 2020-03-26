@@ -201,7 +201,7 @@ function pg($v = 0) {
 }
 function fc() {
     foreach (func_get_args() as $param) {
-        include(cnf()["door"]."/".$param."/load.php");
+        include('/var/www/vhosts/pandemic.lv/httpdocs/chat/'.cnf()["door"]."/".$param."/load.php");
     }
 }
 function sfn($sf, $fn) {
@@ -379,7 +379,7 @@ function req() {
         $inc[$key] = stripslashes(str_replace($p, "", $value));
     }
     foreach (func_get_args() as $f) {
-        $fn = '/var/www/vhosts/pandemic.lv/httpdocs/chat/'.cnf()['door'].$f.'load.php';
+        $fn = cnf()['door'].$f.'load.php';
         if (!in_array($fn, $inc)) {
             fc($f);
         }
