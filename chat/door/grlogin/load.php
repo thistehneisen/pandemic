@@ -59,55 +59,52 @@ function gr_register($do) {
 }
 
 function gr_login($do) {
-    if ($GLOBALS["default"]['recaptcha'] != 'enable' || !empty($do["g-recaptcha-response"]) && gr_captcha($do["g-recaptcha-response"])) {
-        if (gr_usip('check')) {
-            gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
+    if (gr_usip('check')) {
+        gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
+        exit;
+    }
+    if (!empty($do['nickname']) && $GLOBALS["default"]['guest_login'] == 'enable') {
+        $do['sign'] = preg_replace('/@.*/', '', $do['nickname']);
+        $nme = $usrn = $do['nickname'];
+        if (usr('Grupo', 'exist', $usrn)) {
+            gr_prnt('say("'.gr_lang('get', 'username_exists').'");');
             exit;
         }
-        if (!empty($do["nickname"]) && $GLOBALS["default"]['guest_login'] == 'enable') {
-            $do['sign'] = preg_replace('/@.*/', '', $do['nickname']);
-            $nme = $usrn = $do['nickname'];
-            if (usr('Grupo', 'exist', $usrn)) {
-                gr_prnt('say("'.gr_lang('get', 'username_exists').'");');
-                exit;
-            }
-            $sign = rn(4).rn(3).'@'.rn(13).'.com';
-            $pasw = rn(12);
-            $reg = usr('Grupo', 'register', $usrn, $sign, $pasw, 5);
-            if ($reg[0]) {
-                $id = $reg[1];
-                gr_data('i', 'profile', 'name', $nme, $id, $usrn, gr_usrcolor());
-                $grjoin = $GLOBALS["default"]['autogroupjoin'];
-                if (!empty($grjoin)) {
-                    $cr = gr_group('valid', $grjoin);
-                    if ($cr[0]) {
-                        gr_data('i', 'gruser', $grjoin, $id, 0);
-                        $dt = array();
-                        $dt['id'] = $grjoin;
-                        $dt['msg'] = 'joined_group';
-                        gr_group('sendmsg', $dt, 1, 1, $id);
-                    }
+        $sign = rn(4).rn(3).'@'.rn(13).'.com';
+        $pasw = rn(12);
+        $reg = usr('Grupo', 'register', $usrn, $sign, $pasw, 5);
+        die(var_dump($reg));
+        if ($reg[0]) {
+            $id = $reg[1];
+            gr_data('i', 'profile', 'name', $nme, $id, $usrn, gr_usrcolor());
+            $grjoin = $GLOBALS["default"]['autogroupjoin'];
+            if (!empty($grjoin)) {
+                $cr = gr_group('valid', $grjoin);
+                if ($cr[0]) {
+                    gr_data('i', 'gruser', $grjoin, $id, 0);
+                    $dt = array();
+                    $dt['id'] = $grjoin;
+                    $dt['msg'] = 'joined_group';
+                    gr_group('sendmsg', $dt, 1, 1, $id);
                 }
-                usr('Grupo', 'forcelogin', $usrn);
-                $_SESSION['grcreset'] = 1;
             }
+            usr('Grupo', 'forcelogin', $usrn);
+            $_SESSION['grcreset'] = 1;
+        }
+        //gr_prnt('window.location.href = "";');
+        //exit;
+    } else {
+        $login = usr('Grupo', 'login', $do["sign"], $do["pass"], $GLOBALS["default"]['max_login_attempts'], $do["rmbr"]);
+        if ($login[0]) {
+            $_SESSION['grcreset'] = 1;
             //gr_prnt('window.location.href = "";');
-            //exit;
         } else {
-            $login = usr('Grupo', 'login', $do["sign"], $do["pass"], $GLOBALS["default"]['max_login_attempts'], $do["rmbr"]);
-            if ($login[0]) {
-                $_SESSION['grcreset'] = 1;
-                //gr_prnt('window.location.href = "";');
+            if ($login[1] === 'blocked') {
+                gr_prnt('say("'.gr_lang('get', 'device_blocked').'");');
             } else {
-                if ($login[1] === 'blocked') {
-                    gr_prnt('say("'.gr_lang('get', 'device_blocked').'");');
-                } else {
-                    gr_prnt('say("'.gr_lang('get', 'invalid_login').'");');
-                }
+                gr_prnt('say("'.gr_lang('get', 'invalid_login').'");');
             }
         }
-    } else {
-        gr_prnt('say("'.gr_lang('get', 'invalid_captcha').'");');
     }
 }
 

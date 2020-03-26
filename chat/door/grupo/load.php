@@ -13,7 +13,7 @@ function grupofns() {
         if (!$GLOBALS['logged']) {
             fc('grlogin');
             gr_login([
-                'nickname' => $_SESSION['userData']['name']
+                'nickname' => $_SESSION['userData']['pseudo'] ?: $_SESSION['userData']['name']
             ]);
             /*if ($do["do"] == "login") {
                 gr_login($do);
