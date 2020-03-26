@@ -15,15 +15,6 @@ if (!$GLOBALS["logged"]) {
 }
 
 grupofns();
-
-if (empty($_SESSION['facebook']['id']))
-    exit;
-else {
-    gr_login([
-        'nickname' => $_SESSION['facebook']['id']
-    ]);
-}
-
 gr_unverified();
 gr_profile('ustatus', 'online');
 gr_usip('add');
