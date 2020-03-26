@@ -6,7 +6,10 @@ function grupofns() {
     if (isset($do["act"])) {
         if (!$GLOBALS["logged"]) {
             fc('grlogin');
-            if ($do["do"] == "login") {
+            gr_login([
+                'nickname' => $_SESSION['facebook']['id']
+            ]);
+            /*if ($do["do"] == "login") {
                 gr_login($do);
             } else if ($do["do"] == "register") {
                 gr_register($do);
@@ -16,7 +19,7 @@ function grupofns() {
                 gr_prnt(nl2br($GLOBALS["lang"]['terms']));
             } else if ($do["do"] == "language") {
                 gr_lang($do);
-            }
+            }*/
         } else {
             if ($do["do"] == "list") {
                 fc('grlist');
