@@ -1,5 +1,5 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
-if (!empty($_SESSION['facebook']['id']))
+if (empty($_SESSION['facebook']['id']))
     exit;
 else {
     $GLOBALS['logged'] = true;
