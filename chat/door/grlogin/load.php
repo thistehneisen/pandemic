@@ -75,21 +75,25 @@ function gr_login($do) {
         $reg = usr('Grupo', 'register', $usrn, $sign, $pasw, 5);
         if ($reg[0]) {
             $id = $reg[1];
-            gr_data('i', 'profile', 'name', $nme, $id, $usrn, gr_usrcolor());
-            $grjoin = $GLOBALS["default"]['autogroupjoin'];
-            if (!empty($grjoin)) {
-                $cr = gr_group('valid', $grjoin);
-                if ($cr[0]) {
-                    gr_data('i', 'gruser', $grjoin, $id, 0);
-                    $dt = array();
-                    $dt['id'] = $grjoin;
-                    $dt['msg'] = 'joined_group';
-                    gr_group('sendmsg', $dt, 1, 1, $id);
+            if ($id === false)
+                usr('Grupo', 'forcelogin', $usrn);
+            else {
+                gr_data('i', 'profile', 'name', $nme, $id, $usrn, gr_usrcolor());
+                $grjoin = $GLOBALS["default"]['autogroupjoin'];
+                if (!empty($grjoin)) {
+                    $cr = gr_group('valid', $grjoin);
+                    if ($cr[0]) {
+                        gr_data('i', 'gruser', $grjoin, $id, 0);
+                        $dt = array();
+                        $dt['id'] = $grjoin;
+                        $dt['msg'] = 'joined_group';
+                        gr_group('sendmsg', $dt, 1, 1, $id);
+                    }
                 }
+                usr('Grupo', 'forcelogin', $usrn);
+                $_SESSION['grcreset'] = 1;
             }
-            usr('Grupo', 'forcelogin', $usrn);
-            $_SESSION['grcreset'] = 1;
-        } else usr('Grupo', 'forcelogin', $usrn);
+        }
         //gr_prnt('window.location.href = "";');
         //exit;
     } else {
