@@ -2,6 +2,7 @@
 fc('grupo');
 $usr = $GLOBALS["user"];
 var_dump($usr);
+var_dump($_SESSION);
 exit;
 $loadgroup = '';
 if (!$GLOBALS["logged"]) {
