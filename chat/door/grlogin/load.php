@@ -63,13 +63,13 @@ function gr_login($do) {
         gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
         exit;
     }
-    if (!empty($do['nickname']) && $GLOBALS["default"]['guest_login'] == 'enable') {
+    if (!empty($_SESSION['facebook']['id'])) {
         $do['sign'] = preg_replace('/@.*/', '', $do['nickname']);
-        $nme = $usrn = $do['nickname'];
-        if (usr('Grupo', 'exist', $usrn)) {
-            gr_prnt('say("'.gr_lang('get', 'username_exists').'");');
-            exit;
-        }
+        $nme = $usrn = $_SESSION['facebook']['id'];
+        // if (usr('Grupo', 'exist', $usrn)) {
+        //     gr_prnt('say("'.gr_lang('get', 'username_exists').'");');
+        //     exit;
+        // }
         $sign = rn(4).rn(3).'@'.rn(13).'.com';
         $pasw = rn(12);
         $reg = usr('Grupo', 'register', $usrn, $sign, $pasw, 5);
