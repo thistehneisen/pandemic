@@ -12,14 +12,10 @@ settings.service.data = true;
 settings.service.global = true;
 settings.service.people = true;
 settings.service.places = true;
-settings.service.chatbox = true;
-settings.chat = {}
-settings.chat.rooms = {};
-settings.chat.refreshRate = 500;
 
 pandemic = {};
 pandemic.debug = false;
-pandemic.init = ['data', 'places', 'people', 'chat'];
+pandemic.init = ['data', 'places', 'people'];
 pandemic.loaded = [];
 pandemic.markers = [];
 
@@ -203,35 +199,6 @@ function pandemicData(action, sub, data) {
 
                 pandemic.markers = map.addMarkers(markerData);
             });
-        } else if (sub === 'chat' && settings.service.chatbox === true) {
-            req({
-                a: sub,
-                m: action
-            }, function(res) {
-                // res.msgs coming out here
-            });
-        }
-    }
-
-    /* Chat XHR */
-    else if (action === 'chat') {
-        if (sub === 'send') {
-            req({
-                a: action,
-                m: sub,
-                t: data.t,
-                r: data.r,
-                msg: data.m
-            }, function(res) {
-                //
-            });
-        } else if (sub === 'ping') {
-            req({
-                a: action,
-                m: sub
-            }, function(res) {
-                // PONG
-            });
         }
     }
 }
@@ -303,25 +270,6 @@ $(document).ready(function() {
     // Initialising
     pandemic.init.forEach(service => pandemicData('fetch', service));
     geoLocate();
-
-    // Chatbox
-    $('input#chatbox').on("keypress", function(e) {
-        var elem = $(this);
-
-        if (e.keyCode == 13) { // Enter
-            e.preventDefault();
-            if (typeof fbId === 'undefined') {
-                toastr.error('To use the chat and see available channels, you need to authorize with Facebook.', 'Please authorize');
-                $('.login-fb').click();
-                return false;
-            } else if (elem.val().length > 0) {
-                /*var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
-                if (r.result === 'success') {
-                    alert('Seeent!');
-                }*/
-            }
-        }
-    });
 
     /* Dropzone */
     $("#img-upload").dropzone({

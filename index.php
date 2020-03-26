@@ -48,7 +48,6 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<meta name="msapplication-TileColor" content="#00aeef">
 	<meta name="theme-color" content="#00aeef">
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css?v2" />
-	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -365,106 +364,9 @@ if (!empty($_SESSION['facebook']['id'])) {
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
 
-<?php if (isset($_GET['chat'])) { ?>
-
-<!-- add chat loader details -->
-
-<script type="text/javascript">
-
-	function loadMessages(){
-		req({a:'chat',m:'fetch', t:'p',r:'1'}, function(res) {
-        	$('#subholder').html('');
-        	if (res.msgs){
-	        	for (var i = res.msgs.length - 1; i >= 0; i--) {
-	        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
-	        		console.log(res.msgs[i].sender);
-	        	};
-        	}
-    	});
-	}
-
-	$( document ).ready(function() {
-
-		var input = document.getElementById("chatholder");
-		// Execute a function when the user releases a key on the keyboard
-		input.addEventListener("keyup", function(event) {
-		  // Number 13 is the "Enter" key on the keyboard
-		  if (event.keyCode === 13) {
-			  	req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {
-			  		$('#subholder').append('<div class="message senderMe">'+ $('#chatholder').val() +'</div>');
-			  		$('.typing-1').center();
-			  		$('#chatholder').val("");
-		    	});
-		  }
-		});
-
-		loadMessages();
-
-		setInterval(function(){
-			$('.custom-content').unbind();
-			$('.custom-content').find('.send-message-user').on( "click", function() {
-				console.log($(this).parent().parent().parent().find('.custom-img').attr('person_id'));
-				window.location.replace("/?chat=" + $(this).parent().parent().parent().find('.custom-img').attr('person_id'));
-				//loadMessages($(this).find('.custom-img').attr('person_id'));
-			});
-		}, 1000);
-
-
-		$( ".message" ).on( "click", function() {
-			loadMessages();
-		});
-	});
-</script>
-
-
-<div class="center" id="chatbox">
-  <div class="contacts">
-    <i class="fas fa-bars fa-2x"></i>
-    <h2>Rooms</h2>
-    <div class="contact">
-      <div class="pic rogers"></div>
-      <div class="badge">0</div>
-      <div class="name">Alvis Zaldis</div>
-      <div class="message">Xyz ziņa viena divas</div>
-    </div>
-  </div>
-  <div class="chat">
-    <div class="contact bar">
-      <div class="pic stark"></div>
-      <div class="name" id="contact_source_name">
-        
-      </div>
-      <div class="seen" id="contact_source_time">
-        Today
-      </div>
-    </div>
-    <div class="messages" id="chat">
-      <div class="time">
-        Time seperator for good look
-      </div>
-      <span id="subholder">
-	  </span>
-      <div class="message stark">
-        <div class="typing typing-1"></div>
-        <div class="typing typing-2"></div>
-        <div class="typing typing-3"></div>
-      </div>
-    </div>
-    <div class="input">
-      <i class="fas fa-camera"></i><i class="far fa-laugh-beam"></i><input id="chatholder" placeholder="Type your message here!" type="text" /><i class="fas fa-microphone"></i>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-    // Chat
-    var chat = document.getElementById('chat');
-	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
-</script>
-<?php } ?>
-
-<footer class="preload-hide">
-	<input type="text" id="chatbox" placeholder="Enter your message…" />
-</footer>
+	<footer class="preload-hide">
+		<input type="text" id="chatbox" placeholder="Enter your message…" />
+	</footer>
 
 <?php /* Settings */ ?>
 <script type="text/javascript">
