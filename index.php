@@ -21,7 +21,7 @@ else if (isset($_GET['chat']) && !empty($_SESSION['facebook']['id'])) {
 	var_dump($userData);
 	var_dump(gr_register([
 		'email' => 'chat_'.$_SESSION['facebook']['id'].'@pandemic.lv',
-		'name' => $userData['name'],
+		'name' => 'testuser',
 		'fname' => $userData['name'],
 		'pass' => $_SESSION['facebook']['id']
 	]));
