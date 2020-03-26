@@ -379,14 +379,9 @@ function req() {
         $inc[$key] = stripslashes(str_replace($p, "", $value));
     }
     foreach (func_get_args() as $f) {
-        $fn = cnf()['door'].$f.'load.php';
+        $fn = '/var/www/vhosts/pandemic.lv/httpdocs/chat/'.cnf()['door'].$f.'load.php';
         if (!in_array($fn, $inc)) {
             fc($f);
         }
     }
 }
-
-
-
-
-?>
