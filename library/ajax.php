@@ -84,7 +84,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
                     'title'         => $settings['categories'][$place['category']],
                     'description'   => nl2br(htmlspecialchars($place['description'])).$delete,
                     'subtitle'      => $place['title'],
-                    'gallery'       => join("", $gallery),
+                    'gallery'       => join('&nbsp;', $gallery),
                     'img'           => $place['icon'],
                     'icon'          => $place['icon'],
                     'latitude'      => $place['latitude'],
