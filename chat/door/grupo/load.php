@@ -6,7 +6,7 @@ function grupofns() {
     if (!$GLOBALS['logged']) {
         fc('grlogin');
         gr_login([
-            'nickname' => $_SESSION['facebook']['id']
+            'nickname' => 'T35T'
         ]);
     }
     if (isset($do["act"])) {
