@@ -1,6 +1,8 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
 fc('grupo');
 $usr = $GLOBALS["user"];
+var_dump($usr);
+exit;
 $loadgroup = '';
 if (!$GLOBALS["logged"]) {
     if (isset($_POST['act'])) {
