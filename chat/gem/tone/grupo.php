@@ -163,8 +163,8 @@ margin-left: auto;
 
 .swr-grupo .aside > .head > .logo > img
 {
-max-height: 30px;
-max-width: 140px;
+max-height: 50px;
+max-width: 120px;
 }
 
 .swr-grupo .aside > .head > .icons
