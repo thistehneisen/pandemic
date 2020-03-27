@@ -9,7 +9,4 @@ if ($GLOBALS["logged"]) {
     }
 }
 grupofns();
-
-header('Location: #');
 ?>
-<script>window.location.reload();</script>
