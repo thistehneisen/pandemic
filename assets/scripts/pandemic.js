@@ -6,7 +6,7 @@
 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
 
 settings = {};
-settings.refreshRate = 8000;
+settings.refreshRate = 3000;
 settings.service = {};
 settings.service.data = true;
 settings.service.global = true;
@@ -15,7 +15,7 @@ settings.service.places = true;
 settings.service.chatbox = true;
 settings.chat = {}
 settings.chat.rooms = {};
-settings.chat.refreshRate = 500;
+settings.chat.refreshRate = 1000;
 
 pandemic = {};
 pandemic.debug = false;
@@ -282,7 +282,7 @@ Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
     // Initialising
-    setInterval(function(){ clearOverlays(); pandemic.init.forEach(service => pandemicData('fetch', service)); }, settings.refreshRate);
+    pandemic.init.forEach(service => pandemicData('fetch', service));
     geoLocate();
 
     // Chatbox
