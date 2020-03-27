@@ -19,6 +19,9 @@ if (!empty($_SESSION['facebook']['id'])) {
 }
 
 if (isset($_GET['chat'])) {
+	if (empty($userData)) {
+		die('Please authorize with Facebook first.');
+	}
 	//$chatUser = $cdb->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $userData['id']);
 	$cdb->insert('users', [
 		'id' => $userData['id'],
