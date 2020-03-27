@@ -17,8 +17,6 @@ grupofns();
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no shrink-to-fit=no">
     <title><?php gec($GLOBALS["default"]['sitename']); ?></title>
     <meta name="description" content="<?php gec($GLOBALS["default"]['sitedesc']); ?>">
-    <meta name="author" content="BaeVox">
-    <meta name="generator" content="Grupo - Powered by BaeVox">
     <link rel="shortcut icon" type="image/png" href="<?php gec(mf("grupo/global/favicon.png")); ?>" />
     <?php
     css("riches/kit/bootstrap/bootstrap.min");
@@ -34,6 +32,7 @@ grupofns();
         <?php pr(gr_lang('list', 2)) ?>
     </div>
     <section>
+        PENIS.
         <div>
             <div>
                 <div class='box<?php gec(' '.$GLOBALS["lang"]['core_align']) ?>'>
