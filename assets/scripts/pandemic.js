@@ -210,7 +210,6 @@ function pandemicData(action, sub, data) {
             }, function(res) {
                 var msgs = res.msgs;
                 for (let i in msgs) {
-                    console.log(msgs[i]);
                     $('#tt-' + msgs[i].sender).text(msgs[i].message);
                 }
             });
