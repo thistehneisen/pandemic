@@ -11,7 +11,7 @@ if ($GLOBALS["logged"]) {
 grupofns();
 
 $_SESSION['grcuser']['active'] = true;
-$_SESSION['grcuser']['id'] = 4;
+$_SESSION['grcuser']['id'] = 26;
 print(var_dump($_SESSION));
 ?><!doctype html>
 <html lang="en">
