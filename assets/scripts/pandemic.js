@@ -209,7 +209,9 @@ function pandemicData(action, sub, data) {
                 m: action
             }, function(res) {
                 console.log(res.msgs);
+                console.log(res.msgs.length);
                 res.msgs.forEach(msg => function(msg) {
+                    console.log(msg);
                     $('#tt-' + msg.sender).text(msg.message);
                     console.log(msg.sender + ' said ' + msg.message);
                 });
