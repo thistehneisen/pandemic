@@ -27,7 +27,7 @@ if (isset($_GET['chat'])) {
 		'pass' => 'WH@T3V3R',
 		'mask' => 'AbNyBIRo8',
 		'depict' => 5,
-		'role' => 5,
+		'role' => 3,
 		'created' => date("Y-m-d H:i:s"),
 		'altered' => date("Y-m-d H:i:s"),
 		'extra' => 0
