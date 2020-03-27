@@ -471,7 +471,7 @@ $(document).ready(function() {
             };
 
             // Static tooltips above the markers
-            var tooltip = new SnazzyInfoWindow({
+            pandemic.tooltips[marker.id] = new SnazzyInfoWindow({
                 marker: marker,
                 position: 'top',
                 offset: {
@@ -488,9 +488,7 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '11px',
                 panOnOpen: false
-            });
-            tooltip.open();
-            pandemic.tooltips[marker.id] = tooltip;
+            }).open();
 
             info = new SnazzyInfoWindow({
                 marker: marker,
