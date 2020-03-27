@@ -22,7 +22,6 @@ pandemic.debug = false;
 pandemic.init = ['data', 'places', 'people', 'chat'];
 pandemic.loaded = [];
 pandemic.markers = [];
-pandemic.tooltips = [];
 
 var xhr = 'library/ajax.php';
 
@@ -321,7 +320,7 @@ $(document).ready(function() {
                     msg: elem.val()
                 }, function(res) {
                     if (typeof res.success !== 'undefined') {
-                        alert('Seeent!');
+                        $('#tt-' + fbId).text(msg);
                     }
                 });
             }
@@ -471,13 +470,13 @@ $(document).ready(function() {
             };
 
             // Static tooltips above the markers
-            pandemic.tooltips[marker.id] = new SnazzyInfoWindow({
+            new SnazzyInfoWindow({
                 marker: marker,
                 position: 'top',
                 offset: {
                     top: '-15px'
                 },
-                content: '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
+                content: '<div id="tt-'+marker.id+'"><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
