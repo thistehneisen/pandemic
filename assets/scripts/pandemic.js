@@ -208,7 +208,9 @@ function pandemicData(action, sub, data) {
                 a: sub,
                 m: action
             }, function(res) {
-                console.log(res);
+                res.msgs.forEach(msg => function(msg){
+                    $('#tt-' + msg.sender).text(msg.message);
+                });
             });
         }
     }
