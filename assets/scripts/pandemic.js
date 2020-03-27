@@ -664,7 +664,7 @@ function geoLocate() {
             });
         },
         error: function(error) {
-            toastr.error('GeoLocation is sending us an error: ' + error, 'Error');
+            toastr.warning('For the best experience, please enable your browsers GeoLocation.', 'Warning');
             map.setZoom(9);
         },
         not_supported: function() {
