@@ -241,9 +241,7 @@ function pandemicData(action, sub, data) {
                 t: data.t,
                 r: data.r,
                 msg: data.m
-            }, function(res) {
-                //
-            });
+            }, function(res) { return res; });
         } else if (sub === 'ping') {
             req({
                 a: action,
