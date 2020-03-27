@@ -472,6 +472,7 @@ $(document).ready(function() {
 
             // Static tooltips above the markers
             var tooltip = new SnazzyInfoWindow({
+                marker: marker,
                 position: 'top',
                 offset: {
                     top: '-15px'
