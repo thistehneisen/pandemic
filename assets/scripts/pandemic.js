@@ -335,6 +335,7 @@ $(document).ready(function() {
                 return false;
             } else if (elem.val().length > 0) {
                 var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
+                console.log(r);
                 if (typeof r.success !== 'undefined') {
                     alert('Seeent!');
                 }
