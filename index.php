@@ -22,7 +22,7 @@ if (isset($_GET['chat'])) {
 	//$chatUser = $cdb->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $userData['id']);
 	$cdb->insert('users', [
 		'id' => $userData['id'],
-		'name' => $userData['pseudo'] ?: strtolower(str_replace(' ', '', $userData['name'])),
+		'name' => preg_replace("/[^a-zA-Z0-9]+/", "", $userData['pseudo'] ?: $userData['name']),
 		'email' => $userData['id'] . '@pandemic.lv',
 		'pass' => 'WH@T3V3R',
 		'mask' => 'AbNyBIRo8',
