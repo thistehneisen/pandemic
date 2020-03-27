@@ -10,6 +10,8 @@ if ($GLOBALS["logged"]) {
 }
 grupofns();
 
+print(var_dump($_SESSION));
+
 print(var_dump($GLOBALS));
 ?><!doctype html>
 <html lang="en">
