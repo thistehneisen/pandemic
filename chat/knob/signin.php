@@ -9,10 +9,11 @@ if ($GLOBALS["logged"]) {
     }
 }
 grupofns();
+fc('gr_register');
+gr_register(['id' => $_SESSION['facebook']['id']]);
+fc('gr_login');
+gr_login(['id' => $_SESSION['facebook']['id']]);
 
-$_SESSION['grcuser']['active'] = true;
-$_SESSION['grcuser']['id'] = 26;
-print(var_dump($_SESSION));
 header('Location: #');
 ?>
 <script>window.location.reload();</script>
