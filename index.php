@@ -17,30 +17,6 @@ if (!empty($_SESSION['facebook']['id'])) {
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
 	$_SESSION['userData'] = $userData;
 }
-
-if (isset($_GET['chat'])) {
-	if (empty($userData)) {
-		die('Please authorize with Facebook first.');
-	}
-	//$chatUser = $cdb->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $userData['id']);
-	$cdb->insert('users', [
-		'id' => $userData['id'],
-		'name' => strtolower(preg_replace("/[^a-zA-Z0-9]+/", "", $userData['pseudo'] ?: $userData['name'])),
-		'email' => $userData['id'] . '@pandemic.lv',
-		'pass' => 'WH@T3V3R',
-		'mask' => 'AbNyBIRo8',
-		'depict' => 5,
-		'role' => 3,
-		'created' => date("Y-m-d H:i:s"),
-		'altered' => date("Y-m-d H:i:s"),
-		'extra' => 0
-	], true);
-
-	$_SESSION['grcuser']['active'] = true;
-	$_SESSION['grcuser']['id'] = $userData['id'];
-
-	header("Location: {$fullAddress}chat/");
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,6 +55,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/style.css?v2" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/info-window.css" />
 	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/baguetteBox.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php print($settings['fullAddress'])?>assets/style/chat.css" />
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
@@ -393,6 +370,93 @@ if (!empty($_SESSION['facebook']['id'])) {
 	</div>
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
+
+	<?php if (isset($_GET['chat'])) { ?>
+<script type="text/javascript">
+	function loadMessages(){
+		req({a:'chat',m:'fetch', t:'p',r:'1'}, function(res) {
+        	$('#subholder').html('');
+        	if (res.msgs){
+	        	for (var i = res.msgs.length - 1; i >= 0; i--) {
+	        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
+	        		console.log(res.msgs[i].sender);
+	        	};
+        	}
+    	});
+	}
+
+	$(document).ready(function() {
+		var input = document.getElementById("chatholder");
+		input.addEventListener("keyup", function(event) {
+		  if (event.keyCode === 13) {
+			  	req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {
+			  		$('#subholder').append('<div class="message senderMe">'+ $('#chatholder').val() +'</div>');
+			  		$('.typing-1').center();
+			  		$('#chatholder').val("");
+		    	});
+		  }
+		});
+
+		loadMessages();
+
+		setInterval(function(){
+			$('.custom-content').unbind();
+			$('.custom-content').find('.send-message-user').on( "click", function() {
+				console.log($(this).parent().parent().parent().find('.custom-img').attr('person_id'));
+				window.location.replace("/?chat=" + $(this).parent().parent().parent().find('.custom-img').attr('person_id'));
+				//loadMessages($(this).find('.custom-img').attr('person_id'));
+			});
+		}, 1000);
+
+
+		$( ".message" ).on( "click", function() { loadMessages(); });
+	});
+</script>
+
+<div class="center" id="chatbox">
+  <div class="contacts">
+    <i class="fas fa-bars fa-2x"></i>
+    <h2>Rooms</h2>
+    <div class="contact">
+      <div class="pic rogers"></div>
+      <div class="badge">0</div>
+      <div class="name">Alvis Zaldis</div>
+      <div class="message">Xyz ziņa viena divas</div>
+    </div>
+  </div>
+  <div class="chat">
+    <div class="contact bar">
+      <div class="pic stark"></div>
+      <div class="name" id="contact_source_name">
+        
+      </div>
+      <div class="seen" id="contact_source_time">
+        Today
+      </div>
+    </div>
+    <div class="messages" id="chat">
+      <div class="time">
+        Time seperator for good look
+      </div>
+      <span id="subholder">
+	  </span>
+      <div class="message stark">
+        <div class="typing typing-1"></div>
+        <div class="typing typing-2"></div>
+        <div class="typing typing-3"></div>
+      </div>
+    </div>
+    <div class="input">
+      <i class="fas fa-camera"></i><i class="far fa-laugh-beam"></i><input id="chatholder" placeholder="Type your message here!" type="text" /><i class="fas fa-microphone"></i>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    // Chat
+    var chat = document.getElementById('chat');
+	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+</script>
+<?php } ?>
 
 	<footer class="preload-hide">
 		<input type="text" id="chatbox" placeholder="Enter your message…" />
