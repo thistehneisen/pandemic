@@ -2,20 +2,16 @@
 fc('guard', 'db', 'user', 'dir', 'grglobals');
 function grupofns() {
     $do = get();
-    gr_iplook();
-    if (!$GLOBALS['logged']) {
-        fc('grlogin');
-        gr_login([
-            'nickname' => $_SESSION['userData']['pseudo'] ?: $_SESSION['userData']['name']
-        ]);
+    if (file_exists('knob/install.php')) {
+        fc('grinstall');
+        gr_install($do);
+    } else {
+        gr_iplook();
     }
     if (isset($do["act"])) {
-        if (!$GLOBALS['logged']) {
+        if (!$GLOBALS["logged"]) {
             fc('grlogin');
-            gr_login([
-                'nickname' => $_SESSION['userData']['pseudo'] ?: $_SESSION['userData']['name']
-            ]);
-            /*if ($do["do"] == "login") {
+            if ($do["do"] == "login") {
                 gr_login($do);
             } else if ($do["do"] == "register") {
                 gr_register($do);
@@ -25,7 +21,7 @@ function grupofns() {
                 gr_prnt(nl2br($GLOBALS["lang"]['terms']));
             } else if ($do["do"] == "language") {
                 gr_lang($do);
-            }*/
+            }
         } else {
             if ($do["do"] == "list") {
                 fc('grlist');
@@ -1970,6 +1966,3 @@ function gr_data() {
     }
 
 }
-
-
-?>

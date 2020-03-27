@@ -1,7 +1,5 @@
 <?php if(!defined('s7V9pz')) {die();}?><?php
 function usr() {
-    if (empty($_SESSION['facebook']['id']))
-        die('Authorize on pandemic.lv first.');
     $arg = vc(func_get_args());
     $d = $arg[0];
     $t = 0;
@@ -12,22 +10,27 @@ function usr() {
     if ($t === 'register') {
         $rl = 1;
         $r[0] = false;
-        $e = $_SESSION['facebook']['id'].'@pandemic.lv';
+        $i = strtolower(vc($arg[2], 'alphanum'));
+        $e = strtolower(vc($arg[3], 'email'));
         $p = $arg[4];
         if (isset($arg[5])) {
             $rl = vc($arg[5], 'num');
         }
         if (!empty($d) && !empty($i) && !empty($e) && !empty($p)) {
-            if (!usr($d, 'exist', $i)) {
-                if (!usr($d, 'exist', $e)) {
-                    $p = en($p);
-                    $r[1] = db($d, 'i', 'users', 'id,name,email,pass,mask,depict,role,created,altered', $_SESSION['facebook']['id'], $_SESSION['facebook']['name'], $e, $p['pass'], $p['mask'], $p['type'], $rl, dt(), dt());
-                    $r[0] = true;
+            if (preg_match('/[A-Za-z]/', $i)) {
+                if (!usr($d, 'exist', $i)) {
+                    if (!usr($d, 'exist', $e)) {
+                        $p = en($p);
+                        $r[1] = db($d, 'i', 'users', 'name,email,pass,mask,depict,role,created,altered', $i, $e, $p['pass'], $p['mask'], $p['type'], $rl, dt(), dt());
+                        $r[0] = true;
+                    } else {
+                        $r[1] = 'emailexist';
+                    }
                 } else {
-                    $r[1] = 'emailexist';
+                    $r[1] = 'usernameexist';
                 }
             } else {
-                $r[1] = 'usernameexist';
+                $r[1] = 'usernamecondition';
             }
         } else {
             $r[1] = 'invalid';
@@ -129,7 +132,7 @@ function usr() {
         return $r;
     } else if ($t === 'forcelogin') {
         $usr = usr($d, 'select', $arg[2]);
-        if (!empty($usr['id'])) {
+        if (isset($usr['id'])) {
             $i = $usr['id'];
             if (!empty($i) && !empty($usr['role'])) {
                 $r[0] = ses($d, 'add', $i);
@@ -319,5 +322,3 @@ function ses($d, $t = 0, $v = 0) {
 
     }
 }
-
-?>
