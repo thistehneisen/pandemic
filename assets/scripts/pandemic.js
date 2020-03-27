@@ -209,15 +209,9 @@ function pandemicData(action, sub, data) {
                 m: action
             }, function(res) {
                 var msgs = res.msgs;
-                console.log(msgs);
-                for (let key in msgs) {
-                    console.log(key);
+                for (let i in msgs) {
+                    $('#tt-' + msgs[i].sender).text(msgs[i].message);
                 }
-                msgs.forEach(msg => function(msg) {
-                    console.log(msg);
-                    $('#tt-' + msg.sender).text(msg.message);
-                    console.log(msg.sender + ' said ' + msg.message);
-                });
             });
         }
     }
