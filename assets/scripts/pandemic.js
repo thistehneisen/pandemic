@@ -316,7 +316,7 @@ $(document).ready(function() {
                     a: 'chat',
                     m: 'send',
                     t: elem.data('t'),
-                    r: 'global',
+                    r: elem.data('r'),
                     msg: elem.val()
                 }, function(res) {
                     if (typeof res.success !== 'undefined') {

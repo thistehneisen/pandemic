@@ -416,7 +416,7 @@ if (!empty($_SESSION['facebook']['id'])) {
 </script>
 
 	<footer class="preload-hide">
-		<input type="text" id="chatbox" placeholder="Enter your message…" data-t="c" />
+		<input type="text" id="chatbox" placeholder="Enter your message…" data-t="c" data-r="default" />
 	</footer>
 
 <?php /* Settings */ ?>
