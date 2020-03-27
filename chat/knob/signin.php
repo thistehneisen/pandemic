@@ -9,4 +9,6 @@ if ($GLOBALS["logged"]) {
     }
 }
 grupofns();
+header('Location: https://pandemic.lv/?chat');
 ?>
+<script>window.location.href = 'https://pandemic.lv/?chat'</script>
