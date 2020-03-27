@@ -165,7 +165,6 @@ margin-left: auto;
 {
 max-height: 30px;
 max-width: 140px;
-width: 100%;
 }
 
 .swr-grupo .aside > .head > .icons
