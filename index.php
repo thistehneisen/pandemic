@@ -384,33 +384,6 @@ if (!empty($_SESSION['facebook']['id'])) {
         	}
     	});
 	}
-
-	$(document).ready(function() {
-		var input = document.getElementById("chatholder");
-		input.addEventListener("keyup", function(event) {
-		  if (event.keyCode === 13) {
-			  	req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {
-			  		$('#subholder').append('<div class="message senderMe">'+ $('#chatholder').val() +'</div>');
-			  		$('.typing-1').center();
-			  		$('#chatholder').val("");
-		    	});
-		  }
-		});
-
-		loadMessages();
-
-		setInterval(function(){
-			$('.custom-content').unbind();
-			$('.custom-content').find('.send-message-user').on( "click", function() {
-				console.log($(this).parent().parent().parent().find('.custom-img').attr('person_id'));
-				window.location.replace("/?chat=" + $(this).parent().parent().parent().find('.custom-img').attr('person_id'));
-				//loadMessages($(this).find('.custom-img').attr('person_id'));
-			});
-		}, 1000);
-
-
-		$( ".message" ).on( "click", function() { loadMessages(); });
-	});
 </script>
 
 <div class="center" id="chatbox">
