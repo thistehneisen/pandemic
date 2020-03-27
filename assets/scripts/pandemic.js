@@ -282,7 +282,7 @@ Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
     // Initialising
-    setInterval(function(){ pandemic.init.forEach(service => pandemicData('fetch', service)); }, settings.refreshRate);
+    setInterval(function(){ clearOverlays(); pandemic.init.forEach(service => pandemicData('fetch', service)); }, settings.refreshRate);
     geoLocate();
 
     // Chatbox
