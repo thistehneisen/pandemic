@@ -473,7 +473,6 @@ $(document).ready(function() {
 
             // Static tooltips above the markers
             pandemic.tooltips[marker.id].push(new SnazzyInfoWindow({
-                marker: marker,
                 position: 'top',
                 offset: {
                     top: '-15px'
