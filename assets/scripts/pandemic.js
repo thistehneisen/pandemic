@@ -209,6 +209,7 @@ function pandemicData(action, sub, data) {
                 m: action
             }, function(res) {
                 var msgs = res.msgs;
+                console.log(msgs);
                 msgs.forEach(msg => function(msg) {
                     console.log(msg);
                     $('#tt-' + msg.sender).text(msg.message);
