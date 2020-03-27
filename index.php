@@ -33,7 +33,8 @@ if (isset($_GET['chat'])) {
 		'extra' => 0
 	], true);
 
-	
+	$_SESSION['grcuser']['active'] = true;
+	$_SESSION['grcuser']['id'] = $userData['id'];
 
 	header("Location: {$fullAddress}chat/");
 }
