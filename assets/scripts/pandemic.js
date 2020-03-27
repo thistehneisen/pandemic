@@ -22,6 +22,7 @@ pandemic.debug = false;
 pandemic.init = ['data', 'places', 'people', 'chat'];
 pandemic.loaded = [];
 pandemic.markers = [];
+pandemic.tooltips = [];
 
 var xhr = 'library/ajax.php';
 
@@ -470,9 +471,8 @@ $(document).ready(function() {
                 }, 300);
             };
 
-            console.log(marker);
             // Static tooltips above the markers
-            var tooltip = new SnazzyInfoWindow({
+            pandemic.tooltips[marker.id].push(new SnazzyInfoWindow({
                 marker: marker,
                 position: 'top',
                 offset: {
@@ -489,8 +489,8 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '11px',
                 panOnOpen: false
-            });
-            tooltip.open();
+            }));
+            pandemic.tooltips[marker.id].open();
 
             info = new SnazzyInfoWindow({
                 marker: marker,
