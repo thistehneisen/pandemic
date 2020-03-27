@@ -6,7 +6,7 @@
 const randomDisplacement = () => Math.round(Math.random() * 1000 - 500) / 100000;
 
 settings = {};
-settings.refreshRate = 3000;
+settings.refreshRate = 8000;
 settings.service = {};
 settings.service.data = true;
 settings.service.global = true;
