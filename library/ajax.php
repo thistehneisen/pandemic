@@ -14,11 +14,11 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
     if ($a === 'data') {
         /* Fetch all data */
         if ($m === 'fetch') {
-            // $csv = Reader::createFromPath('../data.csv', 'r');
-            // $csv->setHeaderOffset(0);
-            $json = json_decode(file_get_contents('../data.json'), true);
-            $json = $json['JSON'];
-            jD('data', $json);
+            $csv = Reader::createFromPath('../data.csv', 'r');
+            $csv->setHeaderOffset(0);
+            //$json = json_decode(file_get_contents('../data.json'), true);
+            //$json = $json['JSON'];
+            jD('data', $csv);
         } else if ($m === 'global') {
             $csv = Reader::createFromPath('../combined.csv', 'r');
             $csv->setHeaderOffset(0);
