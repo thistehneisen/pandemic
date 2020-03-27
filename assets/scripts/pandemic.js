@@ -470,6 +470,7 @@ $(document).ready(function() {
                 }, 300);
             };
 
+            console.log(marker);
             // Static tooltips above the markers
             var tooltip = new SnazzyInfoWindow({
                 marker: marker,
