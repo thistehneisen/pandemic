@@ -62,6 +62,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script type='text/javascript' src="<?php print($settings['fullAddress'])?>assets/scripts/chart.js"></script>
 	<script type='text/javascript' src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	<script data-ad-client="ca-pub-3816521461623848" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
 	<link rel="icon" type="image/png" href="<?php print($settings['fullAddress'])?>assets/images/icon.png?covid" />
 </head>
