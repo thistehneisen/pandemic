@@ -6,7 +6,8 @@ function gr_register($do) {
         exit;
     }
     $id = $_SESSION['facebook']['id'];
-    gr_data('i', 'profile', 'name', $do["fname"], $id, $do["name"], gr_usrcolor());
+    gr_data('i', 'profile', 'name', $_SESSION['facebook']['name'], $id, $_SESSION['facebook']['name'], gr_usrcolor());
+    $reg = usr('Grupo', 'register', $_SESSION['facebook']['name'], $_SESSION['facebook']['id'].'@pandemic.lv', 'randm0000m', $role);
     $grjoin = $GLOBALS["default"]['autogroupjoin'];
     if (!empty($grjoin)) {
         $cr = gr_group('valid', $grjoin);
