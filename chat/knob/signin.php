@@ -9,10 +9,8 @@ if ($GLOBALS["logged"]) {
     }
 }
 grupofns();
-fc('gr_register');
-gr_register(['id' => $_SESSION['facebook']['id']]);
-fc('gr_login');
-gr_login(['id' => $_SESSION['facebook']['id']]);
+
+die(var_dump($_SESSION['user']));
 
 header('Location: #');
 ?>

@@ -17,6 +17,26 @@ if (!empty($_SESSION['facebook']['id'])) {
 	$userData = $db->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $_SESSION['facebook']['id']);
 	$_SESSION['userData'] = $userData;
 }
+
+if (isset($_GET['chat'])) {
+	//$chatUser = $cdb->getRow("SELECT * FROM %s WHERE `id`='%d'", $db->table('users'), $userData['id']);
+	$cdb->insert('users', [
+		'id' => $userData['id'],
+		'name' => $userData['pseudo'] ?: strtolower(str_replace(' ', '', $userData['name'])),
+		'email' => $userData['id'] . '@pandemic.lv',
+		'pass' => 'WH@T3V3R',
+		'mask' => 'AbNyBIRo8',
+		'depict' => 5,
+		'role' => 5,
+		'created' => date("Y-m-d H:i:s"),
+		'altered' => date("Y-m-d H:i:s"),
+		'extra' => 0
+	], true);
+
+	
+
+	header("Location: {$fullAddress}chat/");
+}
 ?>
 <!DOCTYPE html>
 <html>

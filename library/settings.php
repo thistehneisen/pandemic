@@ -16,6 +16,12 @@ $settings = [
         'password' => 'qQd4q6$3qQd4q6$3',
         'database' => 'pandemic'
     ),
+    'chatdb' => array(
+        'hostname' => 'localhost',
+        'username' => 'pandemic_chat',
+        'password' => '1pSsq8_7$1pSsq8_7',
+        'database' => 'pandemic_chat'
+    ),
     'facebook' => array(
         'app' => array(
             'id' => '1978506749088526',
