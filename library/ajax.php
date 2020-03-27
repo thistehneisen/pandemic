@@ -238,8 +238,7 @@ if (in_array($a, array_keys($settings['xhr'])) && in_array($m, $settings['xhr'][
             case 'fetch':
                 $output = [];
                 $output['msgs'] = $db->getRows("SELECT * FROM %s WHERE `receiver`='%s' ORDER BY `time` DESC LIMIT 100", $db->table('messages'), 'default');
-                jD(var_dump($output['msgs']));
-                jD('msgs', $output['msgs']);
+                jD('msgs', array_values($output['msgs']));
             break;
         }
     }
