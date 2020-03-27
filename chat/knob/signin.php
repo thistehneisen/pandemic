@@ -10,9 +10,9 @@ if ($GLOBALS["logged"]) {
 }
 grupofns();
 
+//$_SESSION['grcuser']['active'] = true;
+//$_SESSION['grcuser']['id'] = 4;
 print(var_dump($_SESSION));
-
-print(var_dump($GLOBALS));
 ?><!doctype html>
 <html lang="en">
 <head>
