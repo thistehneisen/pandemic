@@ -231,26 +231,6 @@ function pandemicData(action, sub, data) {
             });
         }
     }
-
-    /* Chat XHR */
-    else if (action === 'chat') {
-        if (sub === 'send') {
-            req({
-                a: action,
-                m: sub,
-                t: data.t,
-                r: data.r,
-                msg: data.m
-            }, function(res) { return res; });
-        } else if (sub === 'ping') {
-            req({
-                a: action,
-                m: sub
-            }, function(res) {
-                // PONG
-            });
-        }
-    }
 }
 
 // Initialise the Maps
@@ -332,11 +312,17 @@ $(document).ready(function() {
                 $('.login-fb').click();
                 return false;
             } else if (elem.val().length > 0) {
-                var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
-                console.log(r);
-                if (typeof r.success !== 'undefined') {
-                    alert('Seeent!');
-                }
+                req({
+                    a: 'chat',
+                    m: 'send',
+                    t: elem.data('t'),
+                    r: 'global',
+                    msg: elem.val()
+                }, function(res) {
+                    if (typeof res.success !== 'undefined') {
+                        alert('Seeent!');
+                    }
+                });
             }
         }
     });
