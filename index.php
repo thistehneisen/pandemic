@@ -394,7 +394,7 @@ if (!empty($_SESSION['facebook']['id'])) {
     </div>
     <div class="messages" id="chat">
       <div class="time">
-        Time seperator for good look
+        03:36
       </div>
       <span id="subholder">
 	  </span>

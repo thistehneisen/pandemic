@@ -210,6 +210,7 @@ function pandemicData(action, sub, data) {
                 var msgs = res.msgs;
                 for (let i in msgs) {
                     $('#tt-' + msgs[i].sender).text(msgs[i].message);
+                    $('#subholder').append('<div class="message senderMe">'+msgs[i].message+'</div>');
                 }
             });
         }
