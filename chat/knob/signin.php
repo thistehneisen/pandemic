@@ -9,6 +9,8 @@ if ($GLOBALS["logged"]) {
     }
 }
 grupofns();
+
+print(var_dump($GLOBALS));
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -32,7 +34,6 @@ grupofns();
         <?php pr(gr_lang('list', 2)) ?>
     </div>
     <section>
-        PENIS.
         <div>
             <div>
                 <div class='box<?php gec(' '.$GLOBALS["lang"]['core_align']) ?>'>
