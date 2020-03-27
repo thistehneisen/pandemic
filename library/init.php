@@ -5,7 +5,6 @@ require_once 'settings.php';
 require_once 'functions.php';
 require_once 'idatabase.class.php';
 $db = new iDataBase($settings['database']['hostname'], $settings['database']['username'], $settings['database']['password'], $settings['database']['database'], '');
-$cdb = new iDataBase($settings['chatdb']['hostname'], $settings['chatdb']['username'], $settings['chatdb']['password'], $settings['chatdb']['database'], 'gr_');
 
 require_once $settings['documentRoot'].'/vendor/autoload.php';
 
