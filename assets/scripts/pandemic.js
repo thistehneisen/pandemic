@@ -104,8 +104,7 @@ function pandemicData(action, sub, data) {
 
                 pandemic.markers = map.addMarkers(markerData);
             });
-        }
-        if (sub === 'people' && settings.service.people === true) {
+        } else if (sub === 'people' && settings.service.people === true) {
             req({
                 a: sub,
                 m: action,
