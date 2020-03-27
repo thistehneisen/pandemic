@@ -208,7 +208,7 @@ function pandemicData(action, sub, data) {
                 a: sub,
                 m: action
             }, function(res) {
-                var input = document.getElementById("chatholder");
+                var input = document.getElementById('chatholder');
                 input.addEventListener("keyup", function(event) {
                   if (event.keyCode === 13) {
                           req({a:'chat',m:'send', t:'p',r:'1',msg:$('#chatholder').val()}, function(res) {

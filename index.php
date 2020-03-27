@@ -371,7 +371,6 @@ if (!empty($_SESSION['facebook']['id'])) {
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
 
-	<?php if (isset($_GET['chat'])) { ?>
 <script type="text/javascript">
 	function loadMessages(){
 		req({a:'chat',m:'fetch', t:'p',r:'1'}, function(res) {
@@ -386,7 +385,7 @@ if (!empty($_SESSION['facebook']['id'])) {
 	}
 </script>
 
-<div class="center" id="chatbox">
+<div class="center" id="chatbox"<?php if (!isset($_GET['chat'])) {?> style="display: none;"<?php } ?>>
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>
     <h2>Rooms</h2>
@@ -429,7 +428,6 @@ if (!empty($_SESSION['facebook']['id'])) {
     var chat = document.getElementById('chat');
 	chat.scrollTop = chat.scrollHeight - chat.clientHeight;
 </script>
-<?php } ?>
 
 	<footer class="preload-hide">
 		<input type="text" id="chatbox" placeholder="Enter your message…" />
