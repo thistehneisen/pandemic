@@ -488,8 +488,7 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '11px',
                 panOnOpen: false
-            });
-            pandemic.tooltips[marker.id].open();
+            }).open();
 
             info = new SnazzyInfoWindow({
                 marker: marker,
