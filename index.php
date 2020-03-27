@@ -371,20 +371,6 @@ if (!empty($_SESSION['facebook']['id'])) {
 	<a class="button filled green" href="#" style="display: none;" id="save-location"><span><strong>Ready</strong> to publish!</span></a>
 	<div class="mask">&nbsp;</div>
 
-<script type="text/javascript">
-	function loadMessages(){
-		req({a:'chat',m:'fetch', t:'p',r:'1'}, function(res) {
-        	$('#subholder').html('');
-        	if (res.msgs){
-	        	for (var i = res.msgs.length - 1; i >= 0; i--) {
-	        		$('#subholder').prepend('<div class="message sender'+ res.msgs[i].sender +'">'+ res.msgs[i].message +'</div>');
-	        		console.log(res.msgs[i].sender);
-	        	};
-        	}
-    	});
-	}
-</script>
-
 <div class="center" id="chatbox"<?php if (!isset($_GET['chat'])) {?> style="display: none;"<?php } ?>>
   <div class="contacts">
     <i class="fas fa-bars fa-2x"></i>

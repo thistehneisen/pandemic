@@ -334,10 +334,10 @@ $(document).ready(function() {
                 $('.login-fb').click();
                 return false;
             } else if (elem.val().length > 0) {
-                /*var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
+                var r = pandemicData('chat', 'send', {t:elem.data('t'),m:elem.val()});
                 if (r.result === 'success') {
                     alert('Seeent!');
-                }*/
+                }
             }
         }
     });
