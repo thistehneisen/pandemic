@@ -10,7 +10,7 @@ if ($GLOBALS["logged"]) {
 }
 grupofns();
 
-die(var_dump($_SESSION['user']));
+die(var_dump($_SESSION));
 
 header('Location: #');
 ?>
