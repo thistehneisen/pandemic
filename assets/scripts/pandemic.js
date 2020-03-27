@@ -460,7 +460,6 @@ $(document).ready(function() {
             return false;
         } else {
             /* Markers coming from database or AJAX */
-            var index = map.markers.indexOf(marker);
             var info = null;
             var closeDelayed = false;
             var closeDelayHandler = function() {
@@ -472,7 +471,7 @@ $(document).ready(function() {
             };
 
             // Static tooltips above the markers
-            pandemic.tooltips[marker.id] = new SnazzyInfoWindow({
+            var tooltip = new SnazzyInfoWindow({
                 position: 'top',
                 offset: {
                     top: '-15px'
@@ -488,7 +487,9 @@ $(document).ready(function() {
                 fontColor: '#fff',
                 fontSize: '11px',
                 panOnOpen: false
-            }).open();
+            });
+            tooltip.open();
+            pandemic.tooltips[marker.id] = tooltip;
 
             info = new SnazzyInfoWindow({
                 marker: marker,
