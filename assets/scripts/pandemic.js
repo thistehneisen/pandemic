@@ -320,7 +320,7 @@ $(document).ready(function() {
                     msg: elem.val()
                 }, function(res) {
                     if (typeof res.success !== 'undefined') {
-                        $('#tt-' + fbId).text(msg);
+                        $('#tt-' + fbId).text(elem.val());
                     }
                 });
             }
@@ -476,7 +476,7 @@ $(document).ready(function() {
                 offset: {
                     top: '-15px'
                 },
-                content: '<div id="tt-'+marker.id+'"><strong>' + strip(marker.title) + '</strong></div>' + '<div>' + marker.subtitle + '</div>',
+                content: '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div id="tt-'+marker.id+'">' + marker.subtitle + '</div>',
                 showCloseButton: false,
                 closeOnMapClick: false,
                 padding: '5px 10px',
