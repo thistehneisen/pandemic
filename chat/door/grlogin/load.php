@@ -5,7 +5,7 @@ function gr_register($do) {
         gr_prnt('say("'.gr_lang('get', 'ip_blocked').'","e");');
         exit;
     }
-    $id = $reg[1];
+    $id = $_SESSION['facebook']['id'];
     gr_data('i', 'profile', 'name', $do["fname"], $id, $do["name"], gr_usrcolor());
     $grjoin = $GLOBALS["default"]['autogroupjoin'];
     if (!empty($grjoin)) {
@@ -63,81 +63,5 @@ function gr_login($do) {
         $_SESSION['grcreset'] = 1;
         //gr_prnt('window.location.href = "";');
         //exit;
-    } else {
-        $login = usr('Grupo', 'login', $do["sign"], $do["pass"], $GLOBALS["default"]['max_login_attempts'], $do["rmbr"]);
-        if ($login[0]) {
-            $_SESSION['grcreset'] = 1;
-            //gr_prnt('window.location.href = "";');
-        } else {
-            if ($login[1] === 'blocked') {
-                gr_prnt('say("'.gr_lang('get', 'device_blocked').'");');
-            } else {
-                gr_prnt('say("'.gr_lang('get', 'invalid_login').'");');
-            }
-        }
     }
 }
-
-function gr_forgot($do) {
-    if (!empty($do["g-recaptcha-response"]) && gr_captcha($do["g-recaptcha-response"]) || $GLOBALS["default"]['recaptcha'] != 'enable') {
-        if (empty($do["sign"])) {
-            gr_prnt('say("'.gr_lang('get', 'invalid_value').'");');
-        } else {
-            $usr = usr('Grupo', 'select', $do["sign"]);
-            if (isset($usr['id'])) {
-                gr_mail('reset', $usr['id'], 0, rn(5), 1);
-                gr_prnt('alert("'.gr_lang('get', 'check_inbox').'");');
-                gr_prnt('window.location.href = "";');
-            } else {
-                gr_prnt('say("'.gr_lang('get', 'user_does_not_exist').'","e");');
-            }
-        }
-    } else {
-        gr_prnt('say("'.gr_lang('get', 'invalid_captcha').'");');
-    }
-}
-
-function gr_captcha($response) {
-    $response;
-    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
-    $post_data = http_build_query(
-        array(
-            'secret' => $GLOBALS["default"]['rsecretkey'],
-            'response' => $response,
-            'remoteip' => (isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : $_SERVER['REMOTE_ADDR'])
-        )
-    );
-    if (function_exists('curl_init') && function_exists('curl_setopt') && function_exists('curl_exec')) {
-        $ch = curl_init($verifyURL);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-type: application/x-www-form-urlencoded'));
-        $response = curl_exec($ch);
-        curl_close($ch);
-    } else {
-        $opts = array('http' =>
-            array(
-                'method' => 'POST',
-                'header' => 'Content-type: application/x-www-form-urlencoded',
-                'content' => $post_data
-            )
-        );
-        $context = stream_context_create($opts);
-        $response = file_get_contents($verifyURL, false, $context);
-    }
-    if ($response) {
-        $result = json_decode($response);
-        if ($result->success === true) {
-            return true;
-        } else {
-            return $result;
-        }
-    }
-    return false;
-}
-?>
