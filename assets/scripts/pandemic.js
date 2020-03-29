@@ -13,7 +13,6 @@ settings.service.global = true;
 settings.service.people = true;
 settings.service.places = true;
 settings.service.chatbox = true;
-settings.service.tooltips = false;
 settings.chat = {}
 settings.chat.rooms = {};
 settings.chat.refreshRate = 1000;
@@ -456,26 +455,24 @@ $(document).ready(function() {
             };
 
             // Static tooltips above the markers
-            if (settings.service.tooltips === false) {
-                new SnazzyInfoWindow({
-                    marker: marker,
-                    position: 'top',
-                    offset: {
-                        top: '-15px'
-                    },
-                    content: '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div id="tt-'+marker.id+'">' + marker.subtitle + '</div>',
-                    showCloseButton: false,
-                    closeOnMapClick: false,
-                    padding: '5px 10px',
-                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                    border: false,
-                    borderRadius: '0px',
-                    shadow: false,
-                    fontColor: '#fff',
-                    fontSize: '11px',
-                    panOnOpen: false
-                }).open();
-            }
+            new SnazzyInfoWindow({
+                marker: marker,
+                position: 'top',
+                offset: {
+                    top: '-15px'
+                },
+                content: '<div><strong>' + strip(marker.title) + '</strong></div>' + '<div id="tt-'+marker.id+'">' + marker.subtitle + '</div>',
+                showCloseButton: false,
+                closeOnMapClick: false,
+                padding: '5px 10px',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                border: false,
+                borderRadius: '0px',
+                shadow: false,
+                fontColor: '#fff',
+                fontSize: '11px',
+                panOnOpen: false
+            }).open();
 
             info = new SnazzyInfoWindow({
                 marker: marker,
