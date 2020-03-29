@@ -157,6 +157,7 @@ Write us on info@<?php print($settings['host'])?> and become one of our team.
 						<li><a href="#" onclick="pandemicSettings('toggle', 'data', $(this));"><span><strong>&#10004;</strong> Display quarantines</span></a></li>
 						<li><a href="#" onclick="pandemicSettings('toggle', 'people', $(this));"><span><strong>&#10004;</strong> People locations</span></a></li>
 						<li><a href="#" onclick="pandemicSettings('toggle', 'places', $(this));"><span><strong>&#10004;</strong> Show places</span></a></li>
+						<li><a href="#" onclick="pandemicSettings('toggle', 'hideTooltips', $(this));"><span><strong>&#10004;</strong> Show tooltips</span></a></li>
 					</ul>
 				</span>
 				<?php if (empty($_SESSION['facebook']['id'])) { ?>
